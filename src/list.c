@@ -250,12 +250,8 @@ int isListEmpty( list l ) {
 */
 void copyListInto( list src, list tgt ) {
   if(src == NULL) return;
-  listNode* it = src->begin;
-  while(it != src->end) {
-    if(it!=NULL) {
-      pushBackList(tgt, it->value);
-    }
-    ++it;
+  loop_list(src, it) {
+    pushBackList(tgt, it->value);
   }
 }
 
