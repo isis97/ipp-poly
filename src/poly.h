@@ -3,7 +3,7 @@
 
    @author Jakub Pawlewicz <pan@mimuw.edu.pl>, TODO
    @copyright Uniwersytet Warszawski
-   @date 2017-04-09, TODO
+   @date 2017-04-24, TODO
 */
 
 #ifndef __POLY_H__
@@ -11,6 +11,8 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
+#include "list.h"
 
 /** Typ współczynników wielomianu */
 typedef long poly_coeff_t;
@@ -22,9 +24,9 @@ typedef int poly_exp_t;
  * Struktura przechowująca wielomian
  * TODO
  */
-typedef struct Poly
-{
-    /* TODO */
+typedef struct Poly {
+  int c;
+  list monos;
 } Poly;
 
 /**
@@ -35,8 +37,8 @@ typedef struct Poly
   */
 typedef struct Mono
 {
-    Poly p; ///< współczynnik
-    poly_exp_t exp; ///< wykładnik
+    poly_exp_t exp;
+    Poly p;
 } Mono;
 
 /**
@@ -44,46 +46,36 @@ typedef struct Mono
  * @param[in] c : wartość współczynnika
  * @return wielomian
  */
-static inline Poly PolyFromCoeff(poly_coeff_t c) {
-    /* TODO */
-}
+static inline Poly PolyFromCoeff(poly_coeff_t c);
 
 /**
  * Tworzy wielomian tożsamościowo równy zeru.
  * @return wielomian
  */
-static inline Poly PolyZero() {
-    /* TODO */
-}
+static inline Poly PolyZero();
 
 /**
  * Tworzy jednomian `p * x^e`.
- * Tworzony jednomian przejmuje na własność (kopiuje) wielomian @p p.
+ * Przejmuje na własność zawartość struktury wskazywanej przez @p p.
  * @param[in] p : wielomian - współczynnik jednomianu
  * @param[in] e : wykładnik
  * @return jednomian `p * x^e`
  */
-static inline Mono MonoFromPoly(Poly *p, poly_exp_t e) {
-    return (Mono) {.p = *p, .exp = e};
-}
+static inline Mono MonoFromPoly(const Poly *p, poly_exp_t e);
 
 /**
  * Sprawdza, czy wielomian jest współczynnikiem.
  * @param[in] p : wielomian
  * @return Czy wielomian jest współczynnikiem?
  */
-static inline bool PolyIsCoeff(const Poly *p) {
-    /* TODO */
-}
+static inline bool PolyIsCoeff(const Poly *p);
 
 /**
  * Sprawdza, czy wielomian jest tożsamościowo równy zeru.
  * @param[in] p : wielomian
  * @return Czy wielomian jest równy zero?
  */
-static inline bool PolyIsZero(const Poly *p) {
-    /* TODO */
-}
+static inline bool PolyIsZero(const Poly *p);
 
 /**
  * Usuwa wielomian z pamięci.
@@ -95,25 +87,21 @@ void PolyDestroy(Poly *p);
  * Usuwa jednomian z pamięci.
  * @param[in] m : jednomian
  */
-static inline void MonoDestroy(Mono *m) {
-    /* TODO */
-}
+static inline void MonoDestroy(Mono *m);
 
 /**
- * Robi pełną kopię wielomianu.
+ * Robi pełną, głęboką kopię wielomianu.
  * @param[in] p : wielomian
  * @return skopiowany wielomian
  */
 Poly PolyClone(const Poly *p);
 
 /**
- * Robi pełną kopię jednomianu.
+ * Robi pełną, głęboką kopię jednomianu.
  * @param[in] m : jednomian
  * @return skopiowany jednomian
  */
-static inline Mono MonoClone(const Mono *m) {
-    /* TODO */
-}
+static inline Mono MonoClone(const Mono *m);
 
 /**
  * Dodaje dwa wielomiany.
@@ -125,6 +113,7 @@ Poly PolyAdd(const Poly *p, const Poly *q);
 
 /**
  * Sumuje listę jednomianów i tworzy z nich wielomian.
+ * Przejmuje na własność zawartość tablicy @p monos.
  * @param[in] count : liczba jednomianów
  * @param[in] monos : tablica jednomianów
  * @return wielomian będący sumą jednomianów
@@ -194,5 +183,11 @@ bool PolyIsEq(const Poly *p, const Poly *q);
  * @return @f$p(x, x_0, x_1, \ldots)@f$
  */
 Poly PolyAt(const Poly *p, poly_coeff_t x);
+
+/**
+ * Wypisuje wielomian p na standardowe wyjście
+ * @param[in] p
+ */
+ void PolyPrint(const Poly *p);
 
 #endif /* __POLY_H__ */
