@@ -1,3 +1,0 @@
-F:/Projects/projects/My Projects/Development/Temporary/IPP/student-work-polys/IPP-ps386038/release/CMakeFiles/test_poly.dir
-F:/Projects/projects/My Projects/Development/Temporary/IPP/student-work-polys/IPP-ps386038/release/CMakeFiles/edit_cache.dir
-F:/Projects/projects/My Projects/Development/Temporary/IPP/student-work-polys/IPP-ps386038/release/CMakeFiles/rebuild_cache.dir
