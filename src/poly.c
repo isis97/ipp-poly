@@ -145,9 +145,64 @@ Poly PolyAdd(const Poly *p, const Poly *q)
   return (Poly) { .c = p->c + q->c, .monos = result };
 }
 
+int PolyExtractConstTermsRec(Poly* p)
+{
+  if(Lists.empty(p->monos)) {
+    const int result = p->c;
+    p->c = 0;
+    return result;
+  }
+  Mono* fst = (Mono*) Lists.first(p->monos);
+  if(fst->exp != 0) {
+    const int result = p->c;
+    p->c = 0;
+    return result + PolyExtractConstTermsRec(&(fst->p));
+  }
+  return 0;
+}
+
+void PolyNormalizeConstTerms(Poly* p) {
+  const int topTerm = PolyExtractConstTermsRec(p);
+  p->c = topTerm;
+}
+
+void PolyInsertMono(Poly* p, Mono* newMono)
+{
+  if(newMono->exp == 0) {
+    p->c = PolyExtractConstTermsRec(&(newMono->p));
+    Lists.pushFront(p->monos, newMono);
+    return;
+  }
+  if(Lists.empty(p->monos)) {
+    Lists.pushBack(p->monos, newMono);
+    return;
+  }
+  loop_list(p->monos, i) {
+    listIterator next = Lists.next(i);
+    Mono* m = (Mono*) Lists.getValue(i);
+    if(m->exp == newMono->exp) {
+      m->p = PolyAdd(&(m->p), &(newMono->p));
+      return;
+    } else if(m->exp > newMono->exp) {
+      if(next == NULL) {
+        Lists.pushBack(p->monos, newMono);
+        return;
+      } else if(m->exp < ((Mono*)Lists.getValue(next))->exp) {
+        Lists.insertElementAt(p->monos, next, newMono);
+        return;
+      }
+    }
+  }
+  Lists.pushBack(p->monos, newMono);
+}
+
 Poly PolyAddMonos(unsigned count, const Mono monos[])
 {
-
+  Poly p = PolyFromCoeff(0);
+  for(unsigned int i=0;i<count;++i) {
+    PolyInsertMono(&p, (Mono*)(&monos[i]));
+  };
+  return p;
 }
 
 Poly PolyMul(const Poly *p, const Poly *q)
@@ -185,18 +240,32 @@ Poly PolyAt(const Poly *p, poly_coeff_t x)
 
 }
 
+char* PolyTranslateVarID(int varid)
+{
+  char* str = malloc(sizeof(char)*3);
+  for(int i=0;i<3;++i) str[i]='\0';
+  for(int i=0;i<3;++i) {
+    str[i] = (varid % ('z'-'a')) + 'a';
+    varid /= ('z'-'a');
+    if(varid == 0) break;
+  }
+  return str;
+}
+
 void PolyPrintSingleExp(char** wordAccumulator, int varid, poly_exp_t exp)
 {
+  char* varname = PolyTranslateVarID(varid);
   if(exp == 0) {
     //DO NOTHING
   } else if(exp == 1) {
-    *wordAccumulator += sprintf(*wordAccumulator, "[%d]", varid);
+    *wordAccumulator += sprintf(*wordAccumulator, "%s", varname);
   } else {
-    *wordAccumulator += sprintf(*wordAccumulator, "[%d]^%d", varid, (int)exp);
+    *wordAccumulator += sprintf(*wordAccumulator, "%s^%d", varname, (int)exp);
   }
+  free(varname);
 }
 
-void PolyPrintSingleWord(char** wordAccumulator, int varid, poly_exp_t exp, poly_coeff_t coeffAccumulator)
+void PolyPrintSingleWord(char** wordAccumulatorBeg, char** wordAccumulator, int varid, poly_exp_t exp, poly_coeff_t coeffAccumulator)
 {
 
   if(coeffAccumulator == 0) {
@@ -204,28 +273,37 @@ void PolyPrintSingleWord(char** wordAccumulator, int varid, poly_exp_t exp, poly
   } else if(coeffAccumulator == 1) {
     PolyPrintSingleExp(wordAccumulator, varid, exp);
   } else if(coeffAccumulator < 0) {
-    *wordAccumulator += sprintf(*wordAccumulator, "-%d", -coeffAccumulator);
+    if(*wordAccumulatorBeg != *wordAccumulator) {
+      *wordAccumulator += sprintf(*wordAccumulator, " - ");
+    } else {
+      *wordAccumulator += sprintf(*wordAccumulator, "-");
+    }
+    *wordAccumulator += sprintf(*wordAccumulator, "%d", -coeffAccumulator);
     PolyPrintSingleExp(wordAccumulator, varid, exp);
   } else {
-    *wordAccumulator += sprintf(*wordAccumulator, "+%d", coeffAccumulator);
+    if(*wordAccumulatorBeg != *wordAccumulator) {
+      *wordAccumulator += sprintf(*wordAccumulator, " + ");
+    }
+    *wordAccumulator += sprintf(*wordAccumulator, "%d", coeffAccumulator);
     PolyPrintSingleExp(wordAccumulator, varid, exp);
   }
 }
 
-void PolyPrintRec(char** accumulator, char** wordAccumulatorBeg, char** wordAccumulator, poly_coeff_t coeffAccumulator, const Poly *p, int varid)
+void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumulatorBeg, char** wordAccumulator, poly_coeff_t coeffAccumulator, const Poly *p, int varid)
 {
   if(p==NULL) return;
   if(PolyIsCoeff(p)) {
-    PolyPrintSingleWord( wordAccumulator, varid, 0, coeffAccumulator*PolyGetConstTerm(p) );
+    PolyPrintSingleWord( accumulatorBeg, accumulator, varid, 0, coeffAccumulator*PolyGetConstTerm(p) );
     *accumulator += sprintf(*accumulator, "%s", *wordAccumulatorBeg);
   } else {
     loop_list(p->monos, i) {
       const Mono* m = (Mono*) Lists.getValue(i);
       char* wordAccumulatorCp = (char*) malloc(100*sizeof(char));
       char* wordAccumulatorCpBegin = wordAccumulatorCp;
-      for(int i=0;i<100;++i) wordAccumulatorCp[i] = '\0';
+      for(int i=0;i<100;++i) wordAccumulatorCpBegin[i] = (*wordAccumulatorBeg)[i];
+      wordAccumulatorCp += (*wordAccumulator-*wordAccumulatorBeg);
       PolyPrintSingleExp(&wordAccumulatorCp, varid, m->exp);
-      PolyPrintRec(accumulator, &wordAccumulatorCpBegin, &wordAccumulatorCp, coeffAccumulator, &(m->p), varid+1);
+      PolyPrintRec(accumulatorBeg, accumulator, &wordAccumulatorCpBegin, &wordAccumulatorCp, coeffAccumulator, &(m->p), varid+1);
       free(wordAccumulatorCpBegin);
     }
   }
@@ -239,7 +317,7 @@ void PolyPrintRec(char** accumulator, char** wordAccumulatorBeg, char** wordAccu
    char* accumulatorBegin = accumulator;
    for(int i=0;i<100;++i) accumulator[i] = '\0';
    for(int i=0;i<100;++i) wordAccumulator[i] = '\0';
-   PolyPrintRec(&accumulator, &wordAccumulatorBegin, &wordAccumulator, (poly_coeff_t)1, p, 0);
+   PolyPrintRec(&accumulatorBegin, &accumulator, &wordAccumulatorBegin, &wordAccumulator, (poly_coeff_t)1, p, 0);
    free(wordAccumulatorBegin);
    return accumulatorBegin;
  }
