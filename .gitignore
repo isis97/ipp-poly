@@ -1,4 +1,4 @@
-./release
-./**/*.json
-./**/*.gch
-./**/*.exe
+release
+.gcc-flags.json
+**.gch
+**.exe
