@@ -37,14 +37,8 @@ typedef struct Poly {
   */
 typedef struct Mono
 {
-<<<<<<< HEAD
-    poly_exp_t exp;
-    Poly p;
-=======
-    Poly p; ///< współczynnik
-    poly_exp_t exp; ///< wykładnik
-    /* TODO */
->>>>>>> refs/remotes/origin/template/part1
+  Poly p; ///< współczynnik
+  poly_exp_t exp; ///< wykładnik
 } Mono;
 
 /**
@@ -52,27 +46,13 @@ typedef struct Mono
  * @param[in] c : wartość współczynnika
  * @return wielomian
  */
-<<<<<<< HEAD
 static inline Poly PolyFromCoeff(poly_coeff_t c);
-=======
-static inline Poly PolyFromCoeff(poly_coeff_t c)
-{
-    /* TODO */
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Tworzy wielomian tożsamościowo równy zeru.
  * @return wielomian
  */
-<<<<<<< HEAD
 static inline Poly PolyZero();
-=======
-static inline Poly PolyZero()
-{
-    /* TODO */
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Tworzy jednomian `p * x^e`.
@@ -81,42 +61,21 @@ static inline Poly PolyZero()
  * @param[in] e : wykładnik
  * @return jednomian `p * x^e`
  */
-<<<<<<< HEAD
 static inline Mono MonoFromPoly(const Poly *p, poly_exp_t e);
-=======
-static inline Mono MonoFromPoly(const Poly *p, poly_exp_t e)
-{
-    return (Mono) {.p = *p, .exp = e};
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Sprawdza, czy wielomian jest współczynnikiem.
  * @param[in] p : wielomian
  * @return Czy wielomian jest współczynnikiem?
  */
-<<<<<<< HEAD
 static inline bool PolyIsCoeff(const Poly *p);
-=======
-static inline bool PolyIsCoeff(const Poly *p)
-{
-    /* TODO */
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Sprawdza, czy wielomian jest tożsamościowo równy zeru.
  * @param[in] p : wielomian
  * @return Czy wielomian jest równy zero?
  */
-<<<<<<< HEAD
 static inline bool PolyIsZero(const Poly *p);
-=======
-static inline bool PolyIsZero(const Poly *p)
-{
-    /* TODO */
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Usuwa wielomian z pamięci.
@@ -128,14 +87,7 @@ void PolyDestroy(Poly *p);
  * Usuwa jednomian z pamięci.
  * @param[in] m : jednomian
  */
-<<<<<<< HEAD
 static inline void MonoDestroy(Mono *m);
-=======
-static inline void MonoDestroy(Mono *m)
-{
-    /* TODO */
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Robi pełną, głęboką kopię wielomianu.
@@ -149,14 +101,7 @@ Poly PolyClone(const Poly *p);
  * @param[in] m : jednomian
  * @return skopiowany jednomian
  */
-<<<<<<< HEAD
 static inline Mono MonoClone(const Mono *m);
-=======
-static inline Mono MonoClone(const Mono *m)
-{
-    /* TODO */
-}
->>>>>>> refs/remotes/origin/template/part1
 
 /**
  * Dodaje dwa wielomiany.

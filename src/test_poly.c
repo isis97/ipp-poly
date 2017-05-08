@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include "poly.h"
-<<<<<<< HEAD
+
+/*
 #include "list.h"
 #include "poly.c"
 #include "list.c"
@@ -8,9 +8,8 @@
 int main() {
 
   printf("Hello test.\n");
-  /*
-    4a + 2a^2 + 4a^2*b + 6a^2*b^2
-  */
+
+  // 4a + 2a^2 + 4a^2*b + 6a^2*b^2
   Poly a = PolyAddMonos(2, (Mono[2]) {
     {
       .exp = 1,
@@ -39,9 +38,8 @@ int main() {
   Poly temp2 = PolyAt(&temp, 0);
   PolyPrintln(&temp);
   PolyPrintln(&temp2);
-  /*
-   4a^3 + (2b^3 + 4b^4)*a^2 + 2a
-  */
+
+  // 4a^3 + (2b^3 + 4b^4)*a^2 + 2a
   Poly b = PolyAddMonos(3, (Mono[3]) {
     {
       .exp = 3,
@@ -68,11 +66,11 @@ int main() {
   PolyPrintln(&b);
   Poly c = PolyMul(&a, &b);
   PolyPrintln(&c);
-  //Poly b = PolyFromCoeff(4);
   printf(":)\n");
 
   return 0;
-=======
+*/
+
 #include "const_arr.h"
 #include <limits.h>
 #include <stdio.h>
@@ -994,7 +992,6 @@ bool AddTest1()
     free(exp_list);
     free(poly_coef_res_arr);
     return good;
->>>>>>> refs/remotes/origin/template/part1
 }
 
 /**
@@ -1167,7 +1164,7 @@ bool SubTest2()
 }
 
 /**
- * Funkcja pomocnicza do tworzenie wyników mnożenia wielomianow 
+ * Funkcja pomocnicza do tworzenie wyników mnożenia wielomianow
  * @param size1 długość danych w arr_1
  * @param arr_1 tablica wspolczynnikow pierwszego wielomiannu
  * @param size2 długość danych w arr_2
@@ -1742,6 +1739,3 @@ bool OverflowTest()
     res &= TestAt(P(P(C(1), 1), 64), 2, C(0));
     return res;
 }
-
-
-

@@ -21,7 +21,7 @@ set(CMAKE_C_FLAGS "-std=c11 -Wall -Wextra")
 
 # Wskazujemy pliki źródłowe.
 # src/test_poly.c
-FILE(GLOB SOURCE_FILES src/test_poly.c)
+FILE(GLOB SOURCE_FILES src/**/*.c src/**/*.h)
 
 # Wskazujemy plik wykonywalny.
 add_executable(test_poly ${SOURCE_FILES})
