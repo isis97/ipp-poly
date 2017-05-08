@@ -33,7 +33,11 @@ int main() {
       })
     }
   });
-  PolyPrint(&a);
+  PolyPrintln(&a);
+  Poly temp = PolyAt(&a, 3);
+  Poly temp2 = PolyAt(&temp, 0);
+  PolyPrintln(&temp);
+  PolyPrintln(&temp2);
   /*
    4a^3 + (2b^3 + 4b^4)*a^2 + 2a
   */
@@ -60,10 +64,9 @@ int main() {
       .p = PolyFromCoeff(2)
     }
   });
-  PolyPrint(&b);
+  PolyPrintln(&b);
   Poly c = PolyMul(&a, &b);
-  printf("MUL DONE\n");fflush(stdout);
-  PolyPrint(&c);
+  PolyPrintln(&c);
   //Poly b = PolyFromCoeff(4);
   printf(":)\n");
 

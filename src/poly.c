@@ -173,7 +173,7 @@ void PolyNormalizeConstTerms(Poly* p) {
 void PolyInsertMono(Poly* p, Mono* newMono)
 {
   if(newMono->exp == 0) {
-    p->c = PolyExtractConstTermsRec(&(newMono->p));
+    p->c += PolyExtractConstTermsRec(&(newMono->p));
     Lists.pushFront(p->monos, newMono);
     return;
   }
@@ -211,12 +211,9 @@ void PolyInsertMonoValue(Poly* p, Mono newMono)
 Poly PolyAddMonos(unsigned count, const Mono monos[])
 {
   Poly p = PolyFromCoeff(0);
-  printf("\nIMPORT:\n");
   for(unsigned int i=0;i<count;++i) {
     PolyInsertMono(&p, (Mono*)(&monos[i]));
-    printf("ADD MONOS -> %s\n", PolyToString(&p));
   };
-  printf("IMPORTED\n\n");
   return p;
 }
 
@@ -238,75 +235,140 @@ Poly PolyMul(const Poly *p, const Poly *q)
 
   Poly result = PolyFromCoeff(0);
 
-  printf("MUL #1 ASYM\n");fflush(stdout);
   if(q->c != 0) {
     loop_list(p->monos, pIter) {
       Mono* partialResult = MonoClonePtr( (Mono*)Lists.getValue(pIter) );
       PolyScaleConst(&(partialResult->p), q->c);
-      printf("Result push :=> %s x^%d\n", PolyToString(&(partialResult->p)), partialResult->exp);
       PolyInsertMono(&result, partialResult);
     }
   }
 
-  printf("MUL #2 ASYM\n");fflush(stdout);
   if(p->c != 0) {
     loop_list(q->monos, qIter) {
       Mono* partialResult = MonoClonePtr( (Mono*)Lists.getValue(qIter) );
       PolyScaleConst(&(partialResult->p), p->c);
-      printf("Result push :=> %s x^%d\n", PolyToString(&(partialResult->p)), partialResult->exp);
       PolyInsertMono(&result, partialResult);
     }
   }
 
-  printf("MUL SYM\n");fflush(stdout);
   loop_list(p->monos, pIter) {
     loop_list(q->monos, qIter) {
       Mono mp = *((Mono*) Lists.getValue(pIter));
       Mono mq = *((Mono*) Lists.getValue(qIter));
       Poly* factPartialResult = malloc(sizeof(Poly));
-      printf("ALLOCATED PARTIAL\n");fflush(stdout);
       *factPartialResult = PolyMul(&(mp.p), &(mq.p));
-      printf("SUBMUL PERFORMED\n");fflush(stdout);
       Mono partialResult = MonoFromPoly(factPartialResult, mp.exp + mq.exp);
-      printf("PARTIAL RESULT GENERATED\n");fflush(stdout);
       PolyInsertMonoValue(&result, partialResult);
     }
   }
 
-  printf("CONFIGURE CONST TERM\n");fflush(stdout);
   result.c += q->c * p->c;
 
   return result;
 }
 
+void PolyNegRec(Poly *p)
+{
+  p->c *= -1;
+  loop_list(p->monos, i) {
+    Mono* m = (Mono*) Lists.getValue(i);
+    PolyNegRec(&(m->p));
+  }
+}
+
 Poly PolyNeg(const Poly *p)
 {
-
+  Poly ret = PolyClone(p);
+  PolyNegRec(&ret);
+  return ret;
 }
 
 Poly PolySub(const Poly *p, const Poly *q)
 {
+  Poly qNeg = PolyNeg(q);
+  return PolyAdd(p, &qNeg);
+}
 
+poly_exp_t PolyDegByRec(const Poly *p, unsigned var_idcur, unsigned var_idx)
+{
+  poly_exp_t ret = -1;
+  if(p->c != 0) ret = 0;
+  loop_list(p->monos, i) {
+    Mono* m = (Mono*) Lists.getValue(i);
+    poly_exp_t temp = PolyDegByRec(&(m->p), var_idcur+1, var_idx);
+    if(var_idcur == var_idx) {
+      temp += m->exp;
+    }
+    if(temp > ret) {
+      ret = temp;
+    }
+  }
+  return ret;
 }
 
 poly_exp_t PolyDegBy(const Poly *p, unsigned var_idx)
 {
-
+  return PolyDegByRec(p, 0, var_idx);
 }
 
 poly_exp_t PolyDeg(const Poly *p)
 {
+  return PolyDegByRec(p, 0, 0);
+}
 
+bool PolyIsEqRec(const Poly *p, const Poly *q)
+{
+  if(p->c != q->c) return false;
+  listIterator iq = Lists.begin(q->monos);
+  loop_list(p->monos, ip) {
+    Mono* mp = (Mono*) Lists.getValue(ip);
+    Mono* mq = (Mono*) Lists.getValue(iq);
+    if(mp->exp != mq->exp) return false;
+    if(!PolyIsEqRec(&(mp->p), &(mq->p))) {
+      return false;
+    }
+    iq = Lists.next(iq);
+  }
+  return true;
 }
 
 bool PolyIsEq(const Poly *p, const Poly *q)
 {
+  return PolyIsEqRec(p, q);
+}
 
+poly_coeff_t expCoeff(poly_coeff_t coeff, poly_exp_t exp)
+{
+  poly_coeff_t result = 1;
+  for(poly_exp_t i = 0; i < exp; ++i) {
+    result *= coeff;
+  }
+  return result;
 }
 
 Poly PolyAt(const Poly *p, poly_coeff_t x)
 {
 
+  assert(p!=NULL);
+
+  Poly result = PolyFromCoeff(0);
+  result.c += p->c;
+
+  loop_list(p->monos, i) {
+    Mono* m = (Mono*) Lists.getValue(i);
+    poly_coeff_t factValue = expCoeff(x, m->exp);
+    Poly partialResult = PolyClone(&(m->p));
+    PolyScaleConst(&partialResult, factValue);
+    result.c += partialResult.c;
+    loop_list(partialResult.monos, j) {
+      Mono* submono = (Mono*) Lists.getValue(j);
+      Mono cln = MonoClone(submono);
+      PolyInsertMonoValue(&result, cln);
+    }
+    PolyDestroy(&partialResult);
+  }
+
+  return result;
 }
 
 char* PolyTranslateVarID(int varid)
@@ -407,9 +469,9 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumula
    return accumulatorBegin;
  }
 
-void PolyPrint(const Poly* p)
+void PolyPrintln(const Poly* p)
 {
   char* str = PolyToString(p);
-  printf("Poly> %s\n", str);
+  printf("%s\n", str);
   free(str);
 }
