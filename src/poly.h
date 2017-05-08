@@ -37,8 +37,8 @@ typedef struct Poly {
   */
 typedef struct Mono
 {
-    poly_exp_t exp;
-    Poly p;
+  Poly p; ///< współczynnik
+  poly_exp_t exp; ///< wykładnik
 } Mono;
 
 /**
@@ -184,10 +184,24 @@ bool PolyIsEq(const Poly *p, const Poly *q);
  */
 Poly PolyAt(const Poly *p, poly_coeff_t x);
 
+ /**
+  * Wypisuje wielomian p na standardowe wyjście
+  * @param[in] p
+  */
+void PolyPrint(const Poly* p);
+
+ /**
+  * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
+  * @param[in] p
+  */
+void PolySprintf(char* dest, const Poly *p);
+
 /**
- * Wypisuje wielomian p na standardowe wyjście
+ * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
  * @param[in] p
  */
- void PolyPrint(const Poly *p);
+char* PolyToString(const Poly *p);
+
+void PolyPrintlnCard(const Poly *p);
 
 #endif /* __POLY_H__ */
