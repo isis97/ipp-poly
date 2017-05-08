@@ -413,6 +413,7 @@ bool LongPolynomialTest()
     Poly p = PolyFromCoeff(1);
     for (int poly_deg = 10; poly_deg < 90011 && res; poly_deg += 1000)
     {
+        printf("Next poly_deg = %d\n", poly_deg); fflush(stdout);
         Mono *m =
             calloc((size_t)poly_deg + 1, sizeof(Mono)); // +1 bo wyraz wolny
         for (int i = 0; i <= poly_deg; i++)
@@ -420,9 +421,12 @@ bool LongPolynomialTest()
             Poly tmp = PolyClone(&p);
             m[i] = MonoFromPoly(&tmp, i);
         }
+        printf("Add monos ...\n"); fflush(stdout);
         Poly long_p = PolyAddMonos((unsigned)poly_deg + 1, m);
+        printf("Add monos DONE\n"); fflush(stdout);
         // long_p ma postać 1 + x + x^2 + ...
         free(m);
+        printf("Test deg ...\n"); fflush(stdout);
         if (PolyDeg(&long_p) != poly_deg)
         {
             fprintf(stderr,
@@ -430,30 +434,39 @@ bool LongPolynomialTest()
                     poly_deg);
             res = false;
         }
+        printf("Test at ...\n"); fflush(stdout);
         Poly mono_sum = PolyAt(&long_p, 1);
+        printf("Test isCoeef ...\n"); fflush(stdout);
         if (!PolyIsCoeff(&mono_sum))
         {
             fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [1]\n"); fflush(stderr); fflush(stdout);
             res = false;
         }
+        printf("Test sum poly #1 ...\n"); fflush(stdout);
         Poly mono_sum_poly = PolyFromCoeff(poly_deg + 1);
+        printf("Test isEq #1 ...\n"); fflush(stdout);
         if (!PolyIsEq(&mono_sum, &mono_sum_poly))
         {
             fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [2]\n"); fflush(stderr); fflush(stdout);
             res = false;
         }
         PolyDestroy(&mono_sum);
+        printf("Test sum poly #2 ...\n"); fflush(stdout);
         mono_sum = PolyAt(&long_p, -1);
+        printf("Test isEq #2 ...\n"); fflush(stdout);
         if (!PolyIsEq(&mono_sum, &p))
         {
             fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [3]\n"); fflush(stderr); fflush(stdout);
             res = false;
         }
+        printf("Destroy ...\n"); fflush(stdout);
         PolyDestroy(&mono_sum);
         PolyDestroy(&long_p);
+        printf("Push next test >\n"); fflush(stdout);
     }
 
     PolyDestroy(&p);
+    printf("Long poly test DONE.\n"); fflush(stdout);
     return res;
 }
 
@@ -622,7 +635,7 @@ bool SimpleAtTest2()
 bool AtTest()
 {
     const size_t poly_size = 6;
-    const int poly_depth = 3;
+    const int poly_depth = 1;
     const int upper_size = 5;
     bool result = true;
     Poly p = PolyFromCoeff(1);
@@ -640,7 +653,10 @@ bool AtTest()
 
     }
     Poly p_upper_size = PolyFromCoeff(upper_size);
+    printf("#1 p_upper_size = ");PolyPrintlnCard(&p_upper_size); fflush(stderr); fflush(stdout);
+    printf("#2 p = ");PolyPrintlnCard(&p); fflush(stderr); fflush(stdout);
     Poly p2 = PolyMul(&p_upper_size, &p);
+    printf("#3 p2 = ");PolyPrintlnCard(&p2); fflush(stderr); fflush(stdout);
     free(m);
     m = calloc(upper_size, sizeof(Mono));
     for (int i = 0; i < upper_size; i++)
@@ -650,8 +666,12 @@ bool AtTest()
     }
     PolyDestroy(&p);
     p = PolyAddMonos(upper_size, m);
-
+    printf("#4 p = ");PolyPrintlnCard(&p); fflush(stderr); fflush(stdout);
     Poly p3 = PolyAt(&p, 1);
+
+    printf("AtTest details:\n"); fflush(stderr); fflush(stdout);
+    printf("#5 p3 = ");PolyPrintlnCard(&p3); fflush(stderr); fflush(stdout);
+    printf("#6 p2 = ");PolyPrintlnCard(&p2);fflush(stderr); fflush(stdout);
 
     if (!PolyIsEq(&p3, &p2))
     {

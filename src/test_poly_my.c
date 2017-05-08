@@ -43,30 +43,14 @@ int main() {
 
   printf("Hello test.\n");
 
-  // 4a + 2a^2 + 4a^2*b + 6a^2*b^2
-  Poly a = P(C(1), 1);
-  PolyPrintlnCard(&a);
-  PolyPrintln(&a);
-
-  Poly b = P(C(-1), 1);
-  PolyPrintlnCard(&b);
-  PolyPrintln(&b);
-
-  Poly c = PolyAdd(&a, &b);
-  PolyPrintlnCard(&c);
-  PolyPrintln(&c);
-
-  Poly good = C(0);
-  PolyPrintlnCard(&good);
-  PolyPrintln(&good);
-
-  Poly one = C(1);
-  PolyPrintlnCard(&one);
-
-  Poly zero = PolySub(&one, &one);
-  PolyPrintlnCard(&zero);
-
-
+  Poly p = P(C(5), 0, P(C(2), 0, C(5), 2), 1, P(C(6), 0, C(6), 5, C(7), 7), 2);
+  PolyPrintln(&p);
+  Poly p2 = PolyAt(&p, 3);
+  PolyPrintln(&p2);
+  Poly p3 = PolyAt(&p2, 1);
+  PolyPrintln(&p3);
+  Poly p4 = PolyAt(&p3, 0);
+  PolyPrintln(&p4);
   printf(":)\n");
 
   return 0;

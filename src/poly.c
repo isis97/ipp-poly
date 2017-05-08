@@ -177,27 +177,37 @@ void PolyNormalizeConstTerms(Poly* p) {
 void PolyInsertMono(Poly* p, Mono* newMono)
 {
   if(newMono->exp == 0) {
+
     p->c += PolyExtractConstTermsRec(&(newMono->p));
     if(!PolyIsCoeff(&(newMono->p))) {
       Lists.pushFront(p->monos, newMono);
     }
+    //TODO: This was good the below coe may not work but is FASTER
+    //p->c += PolyGetConstTerm(&(newMono->p));
     return;
   }
   if(Lists.empty(p->monos)) {
     Lists.pushBack(p->monos, newMono);
     return;
   }
+  if(((Mono*)Lists.last(p->monos))->exp < newMono->exp) {
+    Lists.pushBack(p->monos, newMono);
+    return;
+  }
+  if(((Mono*)Lists.first(p->monos))->exp > newMono->exp) {
+    Lists.pushFront(p->monos, newMono);
+    return;
+  }
+
   loop_list(p->monos, i) {
     listIterator next = Lists.next(i);
     Mono* m = (Mono*) Lists.getValue(i);
     if(m->exp == newMono->exp) {
       m->p = PolyAdd(&(m->p), &(newMono->p));
-
       if(PolyIsCoeff(&(m->p)) && PolyGetConstTerm(&(m->p))==0) {
         Lists.detachElement(p->monos, i);
         free(m);
       }
-
       return;
     } else if(newMono->exp > m->exp) {
       if(next == NULL) {
@@ -224,9 +234,7 @@ Poly PolyAddMonos(unsigned count, const Mono monos[])
 {
   Poly p = PolyFromCoeff(0);
   for(unsigned int i=0;i<count;++i) {
-    Mono* m = (Mono*)malloc(sizeof(Mono));
-    *m = monos[i];
-    PolyInsertMono(&p, m);
+    PolyInsertMonoValue(&p, monos[i]);
   };
   return p;
 }
@@ -234,6 +242,7 @@ Poly PolyAddMonos(unsigned count, const Mono monos[])
 void PolyScaleConst(Poly *p, const poly_coeff_t c)
 {
   assert(p!=NULL);
+  if(c == 1) return;
   (p->c) *= c;
   loop_list(p->monos, iter) {
     Mono* m = (Mono*) Lists.getValue(iter);
@@ -254,6 +263,8 @@ Poly PolyMul(const Poly *p, const Poly *q)
       Mono* partialResult = MonoClonePtr( (Mono*)Lists.getValue(pIter) );
       PolyScaleConst(&(partialResult->p), q->c);
       PolyInsertMono(&result, partialResult);
+      DBG {printf(">1MUL PUSH FREE TERM : ");PolyPrintlnCard(&(partialResult->p));fflush(stdout);}
+      DBG {printf("> AFTER PUSH         = ");PolyPrintlnCard(&result);fflush(stdout);}
     }
   }
 
@@ -262,6 +273,8 @@ Poly PolyMul(const Poly *p, const Poly *q)
       Mono* partialResult = MonoClonePtr( (Mono*)Lists.getValue(qIter) );
       PolyScaleConst(&(partialResult->p), p->c);
       PolyInsertMono(&result, partialResult);
+      DBG {printf(">2MUL PUSH FREE TERM : ");PolyPrintlnCard(&(partialResult->p));fflush(stdout);}
+      DBG {printf("> AFTER PUSH         = ");PolyPrintlnCard(&result);fflush(stdout);}
     }
   }
 
@@ -273,11 +286,14 @@ Poly PolyMul(const Poly *p, const Poly *q)
       *factPartialResult = PolyMul(&(mp.p), &(mq.p));
       Mono partialResult = MonoFromPoly(factPartialResult, mp.exp + mq.exp);
       PolyInsertMonoValue(&result, partialResult);
+      DBG {printf(">3MUL PUSH MUL  TERM : ");PolyPrintlnCard(&(partialResult.p));fflush(stdout);}
+      DBG {printf("> AFTER PUSH         = ");PolyPrintlnCard(&result);fflush(stdout);}
     }
   }
 
   result.c += q->c * p->c;
 
+  DBG {printf("> FINAL                  = ");PolyPrintlnCard(&result);fflush(stdout);}
   return result;
 }
 
@@ -337,21 +353,24 @@ bool PolyIsEqRec(const Poly *p, const Poly *q)
     DBG printf("Quit: invalid free terms {%d} and {%d}\n", p->c, q->c);
     return false;
   }
-  if(Lists.size(p->monos) != Lists.size(q->monos)) {
-    DBG printf("Quit: invalid lengths.\n");
-    return false;
-  }
+  if(p==q) return true;
   listIterator iq = Lists.begin(q->monos);
   loop_list(p->monos, ip) {
     Mono* mp = (Mono*) Lists.getValue(ip);
     Mono* mq = (Mono*) Lists.getValue(iq);
-    if(mp->exp != mq->exp) {
-      DBG printf("Quit: invalid powers {%d} and {%d}\n", mp->exp, mq->exp);
-      return false;
-    }
-    if(!PolyIsEqRec(&(mp->p), &(mq->p))) {
-      DBG printf("Quit: BOTTOM\n");
-      return false;
+    if(mp!=mq) {
+      if((ip == NULL && iq != NULL) || (ip != NULL && iq == NULL)) {
+        DBG printf("Quit: invalid lengths\n", p->c, q->c);
+        return false;
+      }
+      if(mp->exp != mq->exp) {
+        DBG printf("Quit: invalid powers {%d} and {%d}\n", mp->exp, mq->exp);
+        return false;
+      }
+      if(!PolyIsEqRec(&(mp->p), &(mq->p))) {
+        DBG printf("Quit: BOTTOM\n");
+        return false;
+      }
     }
     iq = Lists.next(iq);
   }
@@ -366,6 +385,14 @@ bool PolyIsEq(const Poly *p, const Poly *q)
 
 poly_coeff_t expCoeff(poly_coeff_t coeff, poly_exp_t exp)
 {
+  if(exp == 0) return 1;
+  if(exp == 1) return coeff;
+  if(coeff == 0) return 0;
+  if(coeff == 1) return 1;
+  if(coeff == -1) {
+    if(exp % 2 == 0) return 1;
+    return -1;
+  }
   poly_coeff_t result = 1;
   for(poly_exp_t i = 0; i < exp; ++i) {
     result *= coeff;
@@ -390,10 +417,11 @@ Poly PolyAt(const Poly *p, poly_coeff_t x)
     partialResult.c = 0;
     loop_list(partialResult.monos, j) {
       Mono* submono = (Mono*) Lists.getValue(j);
-      Mono cln = MonoClone(submono);
-      PolyInsertMonoValue(&result, cln);
+      DBG {printf("AT EVAL PUSH a^%d : ", submono->exp);PolyPrintlnCard(&(submono->p));fflush(stdout);}
+      PolyInsertMono(&result, submono);
+      DBG {printf("AT EVAL ACC       = ");PolyPrintlnCard(&result);fflush(stdout);}
     }
-    PolyDestroy(&partialResult);
+    Lists.free(partialResult.monos);
   }
 
   return result;
@@ -491,14 +519,17 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumula
   }
 }
 
- char* PolyToString(const Poly *p)
- {
+void PolySprintf(char* dest, const Poly *p)
+{
    char* wordAccumulator = (char*) malloc(POLY_TO_STRING_BUF_SIZE*sizeof(char));
    char* wordAccumulatorBegin = wordAccumulator;
-   char* accumulator = (char*) malloc(POLY_TO_STRING_BUF_SIZE*sizeof(char));
-   char* accumulatorBegin = accumulator;
-   for(int i=0;i<POLY_TO_STRING_BUF_SIZE;++i) accumulator[i] = '\0';
-   for(int i=0;i<POLY_TO_STRING_BUF_SIZE;++i) wordAccumulator[i] = '\0';
+
+   char* accumulator = dest;
+   char* accumulatorBegin = dest;
+
+   accumulator[0] = '\0';
+   wordAccumulator[0] = '\0';
+
    //wordAccumulator[0]=' ';
    //wordAccumulator++;
    PolyPrintRec(&accumulatorBegin, &accumulator, &wordAccumulatorBegin, &wordAccumulator, (poly_coeff_t)1, p, 0);
@@ -506,8 +537,14 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumula
      sprintf(accumulatorBegin, "0");
    }
    free(wordAccumulatorBegin);
-   return accumulatorBegin;
- }
+   //return accumulatorBegin;
+}
+
+char* PolyToString(const Poly* p) {
+  char* str = (char*) malloc(POLY_TO_STRING_BUF_SIZE*sizeof(char));
+  PolySprintf(str, p);
+  return str;
+}
 
 void PolyPrintlnCardRec(const Poly *p)
 {

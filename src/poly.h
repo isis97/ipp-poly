@@ -188,12 +188,20 @@ Poly PolyAt(const Poly *p, poly_coeff_t x);
   * Wypisuje wielomian p na standardowe wyjście
   * @param[in] p
   */
- void PolyPrint(const Poly* p);
+void PolyPrint(const Poly* p);
 
  /**
   * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
   * @param[in] p
   */
- char* PolyToString(const Poly *p);
+void PolySprintf(char* dest, const Poly *p);
+
+/**
+ * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
+ * @param[in] p
+ */
+char* PolyToString(const Poly *p);
+
+void PolyPrintlnCard(const Poly *p);
 
 #endif /* __POLY_H__ */
