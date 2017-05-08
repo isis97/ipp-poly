@@ -1792,8 +1792,6 @@ bool OverflowTest()
     res &= TestAt(P(P(C(1), 1), 64), 2, C(0));
     return res;
 }
-<<<<<<< HEAD
-=======
 
 void MemoryTest()
 {
@@ -1812,4 +1810,3 @@ void MemoryTest()
     PolyDestroy(&p3);
     PolyDestroy(&p4);
 }
->>>>>>> refs/remotes/origin/template/part1
