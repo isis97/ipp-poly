@@ -2,9 +2,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-void PolyPrint(const Poly* p);
-char* PolyToString(const Poly *p);
-
 
 static inline Poly PolyFromCoeff(poly_coeff_t c)
 {

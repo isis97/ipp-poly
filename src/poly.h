@@ -184,10 +184,16 @@ bool PolyIsEq(const Poly *p, const Poly *q);
  */
 Poly PolyAt(const Poly *p, poly_coeff_t x);
 
-/**
- * Wypisuje wielomian p na standardowe wyjście
- * @param[in] p
- */
- void PolyPrint(const Poly *p);
+ /**
+  * Wypisuje wielomian p na standardowe wyjście
+  * @param[in] p
+  */
+ void PolyPrint(const Poly* p);
+
+ /**
+  * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
+  * @param[in] p
+  */
+ char* PolyToString(const Poly *p);
 
 #endif /* __POLY_H__ */
