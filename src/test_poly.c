@@ -1,5 +1,3 @@
-#include "poly.h"
-
 /*
 #include "list.h"
 #include "poly.c"
@@ -70,6 +68,11 @@ int main() {
 
   return 0;
 */
+//include "poly.h"
+//include "list.h"
+//include "poly.c"
+#include "poly.c"
+
 
 #include "const_arr.h"
 #include <limits.h>
