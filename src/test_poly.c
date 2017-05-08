@@ -650,7 +650,9 @@ bool AtTest()
     }
     PolyDestroy(&p);
     p = PolyAddMonos(upper_size, m);
+
     Poly p3 = PolyAt(&p, 1);
+
     if (!PolyIsEq(&p3, &p2))
     {
         fprintf(stderr, "[AtTest] fail\n"); fflush(stderr); fflush(stdout);

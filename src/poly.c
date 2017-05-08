@@ -33,7 +33,7 @@ static inline bool PolyIsZero(const Poly *p)
 {
   assert(p!=NULL);
   if(!PolyIsCoeff(p)) return false;
-  return p->c;
+  return p->c == 0;
 }
 
 static inline poly_coeff_t PolyGetConstTerm(const Poly* p)
@@ -387,6 +387,7 @@ Poly PolyAt(const Poly *p, poly_coeff_t x)
     Poly partialResult = PolyClone(&(m->p));
     PolyScaleConst(&partialResult, factValue);
     result.c += partialResult.c;
+    partialResult.c = 0;
     loop_list(partialResult.monos, j) {
       Mono* submono = (Mono*) Lists.getValue(j);
       Mono cln = MonoClone(submono);

@@ -60,12 +60,12 @@ int main() {
   PolyPrintlnCard(&good);
   PolyPrintln(&good);
 
-  Poly p = P(P(C(1), 1, C(1), 10), 1, P(C(1), 1, C(1), 2), 2);
-  PolyPrintlnCard(&p);
-  PolyPrintln(&p);
-  printf("deg = %d\n", PolyDeg(&p));
+  Poly one = C(1);
+  PolyPrintlnCard(&one);
 
-  printf("%d\n", PolyIsEq(&c, &good));
+  Poly zero = PolySub(&one, &one);
+  PolyPrintlnCard(&zero);
+
 
   printf(":)\n");
 
