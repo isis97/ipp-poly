@@ -79,6 +79,7 @@ int main() {
 
 
 #include "const_arr.h"
+#include <assert.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -161,6 +162,8 @@ bool OverflowTest();
 
 void MemoryThiefTest();
 
+void MemoryTest();
+
 void PrintHelp(char *);
 
 int main(int argc, char **argv)
@@ -173,6 +176,7 @@ int main(int argc, char **argv)
     if (strcmp(argv[1], MEMORY) == 0)
     {
         MemoryThiefTest();
+        MemoryTest();
     }
     else if (strcmp(argv[1], SIMPLE_ARITHMETIC) == 0)
     {
@@ -272,6 +276,7 @@ int main(int argc, char **argv)
         res += SimpleArithmeticTest();
         res += LongPolynomialTest();
         MemoryThiefTest();
+        MemoryTest();
         res += DegreeOpChangeTest();
         res += DegTest();
         res += SimpleAtTest2();
@@ -530,8 +535,8 @@ bool DegreeOpChangeTest()
             p2 = PolyClone(&p_one);
             m[i] = MonoFromPoly(&p2, i);
         }
-        p2 = PolyAddMonos(poly_len, m);
         Mono m2 = MonoClone(&m[poly_len - 1]);
+        p2 = PolyAddMonos(poly_len, m);
         Poly p3 = PolyAddMonos(1, &m2);
         p_res = PolySub(&p2, &p3); // (1 + x + ... + x^n) - x^n
         if (PolyDeg(&p_res) != poly_len - 2)
@@ -553,11 +558,11 @@ bool DegreeOpChangeTest()
         }
         p2 = PolyClone(&p_one);
         m[poly_len - 1] = MonoFromPoly(&p2, poly_len);
-        p2 = PolyAddMonos(poly_len, m);
-
         Mono m2[2];
-        Poly p3;
         m2[0] = MonoClone(&m[poly_len - 1]);
+
+        p2 = PolyAddMonos(poly_len, m);
+        Poly p3;
         p3 = PolyClone(&p_one);
         m2[1] = MonoFromPoly(&p3, poly_len - 1);
 
@@ -1786,4 +1791,22 @@ bool OverflowTest()
     res &= TestAt(P(C(1), 0, C(1), 64), 2, C(1));
     res &= TestAt(P(P(C(1), 1), 64), 2, C(0));
     return res;
+}
+
+void MemoryTest()
+{
+    Poly * p = malloc(sizeof(struct Poly));
+    *p = PolyFromCoeff(5);
+    Mono m = MonoFromPoly(p, 4);
+    *p = PolyFromCoeff(3);
+    free(p); // To nie jest Destroy, to tylko zwalnia malloca
+    Poly p2 = PolyAddMonos(1, &m);
+    Poly p3 = PolyAt(&p2, 2);
+    Poly p4 = PolyFromCoeff(80);
+    if (!PolyIsEq(&p4, &p3)){
+        fprintf(stderr, "[MemoryTest] error");
+    }
+    PolyDestroy(&p2);
+    PolyDestroy(&p3);
+    PolyDestroy(&p4);
 }
