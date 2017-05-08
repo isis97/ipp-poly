@@ -171,7 +171,9 @@ void PolyInsertMono(Poly* p, Mono* newMono)
 {
   if(newMono->exp == 0) {
     p->c += PolyExtractConstTermsRec(&(newMono->p));
-    Lists.pushFront(p->monos, newMono);
+    if(!PolyIsCoeff(&(newMono->p))) {
+      Lists.pushFront(p->monos, newMono);
+    }
     return;
   }
   if(Lists.empty(p->monos)) {
@@ -209,7 +211,9 @@ Poly PolyAddMonos(unsigned count, const Mono monos[])
 {
   Poly p = PolyFromCoeff(0);
   for(unsigned int i=0;i<count;++i) {
-    PolyInsertMono(&p, (Mono*)(&monos[i]));
+    Mono* m = (Mono*)malloc(sizeof(Mono));
+    *m = monos[i];
+    PolyInsertMono(&p, m);
   };
   return p;
 }
@@ -315,17 +319,30 @@ poly_exp_t PolyDeg(const Poly *p)
 
 bool PolyIsEqRec(const Poly *p, const Poly *q)
 {
-  if(p->c != q->c) return false;
+  printf("Compare {%s} and {%s}\n", PolyToString(p), PolyToString(q));
+  if(p->c != q->c) {
+    printf("Quit: invalid free terms {%d} and {%d}\n", p->c, q->c);
+    return false;
+  }
+  if(Lists.size(p->monos) != Lists.size(q->monos)) {
+    printf("Quit: invalid lengths.\n");
+    return false;
+  }
   listIterator iq = Lists.begin(q->monos);
   loop_list(p->monos, ip) {
     Mono* mp = (Mono*) Lists.getValue(ip);
     Mono* mq = (Mono*) Lists.getValue(iq);
-    if(mp->exp != mq->exp) return false;
+    if(mp->exp != mq->exp) {
+      printf("Quit: invalid powers {%d} and {%d}\n", mp->exp, mq->exp);
+      return false;
+    }
     if(!PolyIsEqRec(&(mp->p), &(mq->p))) {
+      printf("Quit: BOTTOM\n");
       return false;
     }
     iq = Lists.next(iq);
   }
+  printf("Quit: OK :)\n");
   return true;
 }
 
@@ -385,6 +402,12 @@ void PolyPrintSingleExp(char** wordAccumulatorBeg, char** wordAccumulator, int v
   char* varname = PolyTranslateVarID(varid);
   if(exp == 0) {
     //DO NOTHING
+    /*
+    if(*wordAccumulatorBeg != *wordAccumulator) {
+      *wordAccumulator += sprintf(*wordAccumulator, "*");
+    }
+    *wordAccumulator += sprintf(*wordAccumulator, "%s^0", varname);
+    */
   } else if(exp == 1) {
     if(*wordAccumulatorBeg != *wordAccumulator) {
       *wordAccumulator += sprintf(*wordAccumulator, "*");
@@ -458,6 +481,8 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumula
    char* accumulatorBegin = accumulator;
    for(int i=0;i<POLY_TO_STRING_BUF_SIZE;++i) accumulator[i] = '\0';
    for(int i=0;i<POLY_TO_STRING_BUF_SIZE;++i) wordAccumulator[i] = '\0';
+   //wordAccumulator[0]=' ';
+   //wordAccumulator++;
    PolyPrintRec(&accumulatorBegin, &accumulator, &wordAccumulatorBegin, &wordAccumulator, (poly_coeff_t)1, p, 0);
    if(accumulatorBegin == accumulator) {
      sprintf(accumulatorBegin, "0");
@@ -465,6 +490,33 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumula
    free(wordAccumulatorBegin);
    return accumulatorBegin;
  }
+
+void PolyPrintlnCardRec(const Poly *p)
+{
+  if(!Lists.empty(p->monos)) printf("P(");
+  int wsth = 0;
+  if(p->c != 0) {
+    wsth = 1;
+    printf("C(%d)", p->c);
+    if(!Lists.empty(p->monos)) printf(", 0");
+  } else if(Lists.empty(p->monos)) {
+    printf("C(0)");
+  }
+  loop_list(p->monos, i) {
+    Mono* m = (Mono*) Lists.getValue(i);
+    if(wsth) { printf(", "); }
+    PolyPrintlnCardRec(&(m->p));
+    printf(", %d", m->exp);
+    wsth = 1;
+  }
+  if(!Lists.empty(p->monos)) printf(")");
+}
+
+void PolyPrintlnCard(const Poly *p) {
+  printf("Poly p = ");
+  PolyPrintlnCardRec(p);
+  printf(";\n");
+}
 
 void PolyPrintln(const Poly* p)
 {
