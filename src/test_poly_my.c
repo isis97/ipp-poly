@@ -46,15 +46,24 @@ int main() {
   // 4a + 2a^2 + 4a^2*b + 6a^2*b^2
   Poly a = P(C(1), 1);
   PolyPrintlnCard(&a);
+  PolyPrintln(&a);
 
   Poly b = P(C(-1), 1);
   PolyPrintlnCard(&b);
+  PolyPrintln(&b);
 
   Poly c = PolyAdd(&a, &b);
   PolyPrintlnCard(&c);
+  PolyPrintln(&c);
 
   Poly good = C(0);
   PolyPrintlnCard(&good);
+  PolyPrintln(&good);
+
+  Poly p = P(P(C(1), 1, C(1), 10), 1, P(C(1), 1, C(1), 2), 2);
+  PolyPrintlnCard(&p);
+  PolyPrintln(&p);
+  printf("deg = %d\n", PolyDeg(&p));
 
   printf("%d\n", PolyIsEq(&c, &good));
 
