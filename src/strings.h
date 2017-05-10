@@ -26,6 +26,6 @@ struct strings {
 * Lists interface object
 * All functions should be accessed using Lists object
 */
-const struct strings Strings;
+extern const struct strings Strings;
 
 #endif

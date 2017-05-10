@@ -1,9 +1,10 @@
-#include "list.h"
-#include "poly.h"
-#include "poly.c"
-#include "list.c"
+//include <src/list.h>
+//include <src/poly.h>
+//include <src/poly.c>
+//include <src/list.c>
 #include <stdarg.h>
-
+#include <src/poly.h>
+#include <assert.h>
 
 #define C PolyFromCoeff
 Poly MakePolyHelper(int dummy, ...)

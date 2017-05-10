@@ -8,40 +8,40 @@ void PolyPrintCard(const Poly *p);
 
 
 
-static inline Poly PolyFromCoeff(poly_coeff_t c)
+inline Poly PolyFromCoeff(poly_coeff_t c)
 {
     return (Poly){ .c = c, .monos = Lists.new() };
 }
 
-static inline Poly PolyZero()
+inline Poly PolyZero()
 {
     return PolyFromCoeff(0);
 }
 
-static inline Mono MonoFromCoeff(poly_coeff_t c, poly_exp_t e)
+inline Mono MonoFromCoeff(poly_coeff_t c, poly_exp_t e)
 {
     return (Mono) { .exp = e, .p = PolyFromCoeff(c) };
 }
 
-static inline Mono MonoFromPoly(const Poly *p, poly_exp_t e)
+inline Mono MonoFromPoly(const Poly *p, poly_exp_t e)
 {
     return (Mono) { .exp = e, .p = *p };
 }
 
-static inline bool PolyIsCoeff(const Poly *p)
+inline bool PolyIsCoeff(const Poly *p)
 {
   assert(p != NULL);
   return Lists.empty(&(p->monos));
 }
 
-static inline bool PolyIsZero(const Poly *p)
+inline bool PolyIsZero(const Poly *p)
 {
   assert(p!=NULL);
   if(!PolyIsCoeff(p)) return false;
   return p->c == 0;
 }
 
-static inline poly_coeff_t PolyGetConstTerm(const Poly* p)
+inline poly_coeff_t PolyGetConstTerm(const Poly* p)
 {
   return p->c;
 }
@@ -61,7 +61,7 @@ void PolyDestroy(Poly *p)
   Lists.free(&(p->monos));
 }
 
-static inline void MonoDestroy(Mono *m)
+inline void MonoDestroy(Mono *m)
 {
   if(m==NULL) return;
   PolyDestroy(&(m->p));
@@ -82,16 +82,15 @@ Poly PolyClone(const Poly *p)
   return (Poly) { .c = p->c, .monos = Lists.deepCopy(&(p->monos), polyCopier) };
 }
 
-static inline Mono MonoClone(const Mono *m)
+inline Mono MonoClone(const Mono *m)
 {
   assert(m!=NULL);
   return (Mono) {.exp = m->exp, .p = PolyClone(&(m->p))};
 }
 
-static inline Mono* MonoClonePtr(const Mono *m)
+inline Mono* MonoClonePtr(const Mono *m)
 {
   Mono* mono = malloc(sizeof(Mono));
-  DBG {printf("MALLOC MonoClonePtr %p\n", mono);fflush(stdout);}
   *mono = MonoClone(m);
   return mono;
 }
@@ -192,7 +191,6 @@ int PolyInsertMono(Poly* p, Mono* newMono)
     listIterator next = Lists.next(i);
     Mono* m = (Mono*) Lists.getValue(i);
     if(m->exp == newMono->exp) {
-      Poly* toDel = &(m->p);
       Poly pom = PolyAdd(&(m->p), &(newMono->p));
       if(PolyIsCoeff(&pom) && PolyGetConstTerm(&pom)==0) {
         Lists.detachElement(&(p->monos), i);

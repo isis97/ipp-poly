@@ -346,7 +346,7 @@ struct vectors {
 * Vectors interface object
 * All functions should be accessed using Vectors object
 */
-const struct vectors Vectors;
+extern const struct vectors Vectors;
 
 
 #endif

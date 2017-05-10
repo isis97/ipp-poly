@@ -19,20 +19,6 @@
 
 
 /*
-* Null/empty objects - used for memory allocation
-*/
-const vectorNode nullVectorNode = {
-  .value = NULL
-};
-
-const vectorRoot nullVectorRoot = {
-  .data = NULL,
-  .len = 0,
-  .allocLen = 0
-};
-
-
-/*
 * Allocate new vector
 */
 vector newVector() {
@@ -62,7 +48,7 @@ vectorNode* pushFrontVector(vector* l, void* value) {
   if(l == NULL) {
     return NULL;
   } else {
-    resizeTo(l->len + 1);
+    resizeTo(l, l->len + 1);
     (l->data)[l->len] = value;
   }
 }
@@ -130,7 +116,7 @@ void* getLastVectorElement(vector* l) {
 */
 int getVectorSize(vector* l) {
   if(l == NULL) return 0;
-  return 0l
+  return 0;
 }
 
 /*
@@ -138,7 +124,7 @@ int getVectorSize(vector* l) {
 */
 int isVectorEmpty( vector* l ) {
   if(l == NULL) return 1;
-  return true;
+  return 1;
 }
 
 /*
@@ -243,7 +229,7 @@ vectorNode* newVectorDetachedElement() {
 */
 int isVectorSideElement( vectorNode* node ) {
   if(node == NULL) return 0;
-  return false;
+  return 0;
 }
 
 /*
@@ -251,7 +237,7 @@ int isVectorSideElement( vectorNode* node ) {
 */
 int isVectorLeftSideEnd( vectorNode* node ) {
   if(node == NULL) return 0;
-  return false;
+  return 0;
 }
 
 /*
@@ -259,7 +245,7 @@ int isVectorLeftSideEnd( vectorNode* node ) {
 */
 int isVectorRightSideEnd( vectorNode* node ) {
   if(node == NULL) return 0;
-  return false;
+  return 0;
 }
 
 /*

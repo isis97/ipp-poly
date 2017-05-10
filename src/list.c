@@ -197,7 +197,7 @@ void freeList(list* l) {
 /*
 * Get first element data pointer or NULL if the list is empty
 */
-void* getFirstListElement(list* l) {
+void* getFirstListElement(const list* l) {
   if(l == NULL) {
     return NULL;
   }
@@ -211,7 +211,7 @@ void* getFirstListElement(list* l) {
 /*
 * Get lst element data pointer or NULL if the list is empty
 */
-void* getLastListElement(list* l) {
+void* getLastListElement(const list* l) {
   if(l == NULL) {
     return NULL;
   }
@@ -225,7 +225,7 @@ void* getLastListElement(list* l) {
 /*
 * Measure list size in O(n) time
 */
-int getListSize(list* l) {
+int getListSize(const list* l) {
   if(l == NULL) return 0;
   int size = 0;
   loop_list(l, it) {
@@ -237,7 +237,7 @@ int getListSize(list* l) {
 /*
 * Check if list is empty
 */
-int isListEmpty( list* l ) {
+int isListEmpty( const list* l ) {
   if(l == NULL) return 1;
   return (l->begin == NULL && l->end == NULL);
 }
@@ -245,7 +245,7 @@ int isListEmpty( list* l ) {
 /*
 * Add all elements of <src> to the <tgt>
 */
-void copyListInto( list* src, list* tgt ) {
+void copyListInto( const list* src, list* tgt ) {
   if(src == NULL) return;
   loop_list(src, it) {
     pushBackList(tgt, it->value);
@@ -255,7 +255,7 @@ void copyListInto( list* src, list* tgt ) {
 /*
 * Make a copy of a list
 */
-list copyList( list* l ) {
+list copyList( const list* l ) {
   if(l == NULL) return newList();
   list ret = newList();
   copyListInto(l, &ret);
@@ -278,7 +278,7 @@ void mapListNodes( listNode* l, listModifierFn mapping, int preserveValue ) {
 /*
 * Iterate (void*)->(void*) function through the given list
 */
-void iterateList(list* l, listModifierFn iterator) {
+void iterateList(const list* l, listModifierFn iterator) {
   if(l == NULL) return;
   if(l->begin == NULL) return;
   mapListNodes(l->begin, iterator, 1);
@@ -296,17 +296,17 @@ void mapList(list* l, listModifierFn mapping) {
 /*
 * Make a deep copy of a list
 */
-list deepCopyList( list* l, listModifierFn assigner ) {
+list deepCopyList( const list* l, listModifierFn assigner ) {
   if(l == NULL) return newList();
   list ret = copyList(l);
-  mapList(l, assigner);
+  mapList(&ret, assigner);
   return ret;
 }
 
 /*
 * Print list nodes starting at <l> and going right
 */
-void printListNodes(listNode* l) {
+void printListNodes(const listNode* l) {
   if(l==NULL) return;
   printf("%p; ", (void*)(l));
   printListNodes(l->right);
@@ -315,7 +315,7 @@ void printListNodes(listNode* l) {
 /*
 * Print list nodes of a given list
 */
-void printList(list* l) {
+void printList(const list* l) {
   printf("[ ");
   printListNodes(l->begin);
   printf("] ");
@@ -324,7 +324,7 @@ void printList(list* l) {
 /*
 * Print list nodes of a given list with trailing newline
 */
-void printlnList(list* l) {
+void printlnList(const list* l) {
   printList(l);
   printf("\n");
 }
@@ -332,7 +332,7 @@ void printlnList(list* l) {
 /*
 * Obtain first list element
 */
-listNode* getListBegin( list* l ) {
+listNode* getListBegin( const list* l ) {
   if(l == NULL) return NULL;
   return l->begin;
 }
@@ -340,7 +340,7 @@ listNode* getListBegin( list* l ) {
 /*
 * Obtain last list element
 */
-listNode* getListEnd( list* l ) {
+listNode* getListEnd( const list* l ) {
   if(l == NULL) return NULL;
   return l->end;
 }

@@ -1,82 +1,4 @@
-/*
-#include "list.h"
-#include "poly.c"
-#include "list.c"
-
-int main() {
-
-  printf("Hello test.\n");
-
-  // 4a + 2a^2 + 4a^2*b + 6a^2*b^2
-  Poly a = PolyAddMonos(2, (Mono[2]) {
-    {
-      .exp = 1,
-      .p = PolyFromCoeff(4)
-    },
-    {
-      .exp = 2,
-      .p = PolyAddMonos(3, (Mono[3]) {
-        {
-          .exp = 0,
-          .p = PolyFromCoeff(2)
-        },
-        {
-          .exp = 1,
-          .p = PolyFromCoeff(4)
-        },
-        {
-          .exp = 2,
-          .p = PolyFromCoeff(6)
-        }
-      })
-    }
-  });
-  PolyPrintln(&a);
-  Poly temp = PolyAt(&a, 3);
-  Poly temp2 = PolyAt(&temp, 0);
-  PolyPrintln(&temp);
-  PolyPrintln(&temp2);
-
-  // 4a^3 + (2b^3 + 4b^4)*a^2 + 2a
-  Poly b = PolyAddMonos(3, (Mono[3]) {
-    {
-      .exp = 3,
-      .p = PolyFromCoeff(4)
-    },
-    {
-      .exp = 2,
-      .p = PolyAddMonos(2, (Mono[2]) {
-        {
-          .exp = 3,
-          .p = PolyFromCoeff(2)
-        },
-        {
-          .exp = 4,
-          .p = PolyFromCoeff(4)
-        }
-      })
-    },
-    {
-      .exp = 1,
-      .p = PolyFromCoeff(2)
-    }
-  });
-  PolyPrintln(&b);
-  Poly c = PolyMul(&a, &b);
-  PolyPrintln(&c);
-  printf(":)\n");
-
-  return 0;
-*/
-//include "poly.h"
-//include "list.h"
-//include "poly.c"
-#include "list.h"
-#include "poly.h"
-#include "poly.c"
-#include "list.c"
-
-
+#include <src/poly.h>
 
 #include "const_arr.h"
 #include <assert.h>
@@ -365,7 +287,7 @@ bool TestOp(Poly *a, Poly *b, Poly res, Poly (*op)(const Poly *, const Poly *))
  */
 bool SimpleArithmeticTest()
 {
-    printf("Welcome -> SimpleArithmeticTest :)\n"); fflush(stderr); fflush(stdout);
+
     for (poly_coeff_t i = -100; i < 100; i++)
     {
         Poly p1 = PolyFromCoeff(i);
@@ -374,32 +296,32 @@ bool SimpleArithmeticTest()
             Poly p2 = PolyFromCoeff(j);
             if (!TestOp(&p1, &p2, PolyFromCoeff(i + j), PolyAdd))
             {
-                fprintf(stderr, "Fail on adding %ld %ld\n", i, j); fflush(stderr); fflush(stdout);
+                fprintf(stderr, "Fail on adding %ld %ld\n", i, j);
                 return false;
             }
             if (!TestOp(&p1, &p2, PolyFromCoeff(i - j), PolySub))
             {
-                fprintf(stderr, "Fail on subbing %ld %ld\n", i, j); fflush(stderr); fflush(stdout);
+                fprintf(stderr, "Fail on subbing %ld %ld\n", i, j);
                 return false;
             }
             if (!TestOp(&p1, &p2, PolyFromCoeff(i * j), PolyMul))
             {
-                fprintf(stderr, "Fail on multiply %ld %ld\n", i, j); fflush(stderr); fflush(stdout);
+                fprintf(stderr, "Fail on multiply %ld %ld\n", i, j);
                 return false;
             }
             if (TestOp(&p1, &p2, PolyFromCoeff(i + j + 1), PolyAdd))
             {
-                fprintf(stderr, "Fail on adding %ld %ld\n", i, j); fflush(stderr); fflush(stdout);
+                fprintf(stderr, "Fail on adding %ld %ld\n", i, j);
                 return false;
             }
             if (TestOp(&p1, &p2, PolyFromCoeff(i - j - 1), PolySub))
             {
-                fprintf(stderr, "Fail on subbing %ld %ld\n", i, j); fflush(stderr); fflush(stdout);
+                fprintf(stderr, "Fail on subbing %ld %ld\n", i, j);
                 return false;
             }
             if (TestOp(&p1, &p2, PolyFromCoeff(i * j + 1), PolyMul))
             {
-                fprintf(stderr, "Fail on multiply %ld %ld\n", i, j); fflush(stderr); fflush(stdout);
+                fprintf(stderr, "Fail on multiply %ld %ld\n", i, j);
                 return false;
             }
             PolyDestroy(&p2);
@@ -418,7 +340,6 @@ bool LongPolynomialTest()
     Poly p = PolyFromCoeff(1);
     for (int poly_deg = 10; poly_deg < 90011 && res; poly_deg += 1000)
     {
-        printf("Next poly_deg = %d\n", poly_deg); fflush(stdout);
         Mono *m =
             calloc((size_t)poly_deg + 1, sizeof(Mono)); // +1 bo wyraz wolny
         for (int i = 0; i <= poly_deg; i++)
@@ -426,12 +347,9 @@ bool LongPolynomialTest()
             Poly tmp = PolyClone(&p);
             m[i] = MonoFromPoly(&tmp, i);
         }
-        printf("Add monos ...\n"); fflush(stdout);
         Poly long_p = PolyAddMonos((unsigned)poly_deg + 1, m);
-        printf("Add monos DONE\n"); fflush(stdout);
         // long_p ma postać 1 + x + x^2 + ...
         free(m);
-        printf("Test deg ...\n"); fflush(stdout);
         if (PolyDeg(&long_p) != poly_deg)
         {
             fprintf(stderr,
@@ -439,40 +357,60 @@ bool LongPolynomialTest()
                     poly_deg);
             res = false;
         }
-        printf("Test at ...\n"); fflush(stdout);
         Poly mono_sum = PolyAt(&long_p, 1);
-        printf("Test isCoeef ...\n"); fflush(stdout);
         if (!PolyIsCoeff(&mono_sum))
         {
-            fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [1]\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [1]\n");
             res = false;
         }
-        printf("Test sum poly #1 ...\n"); fflush(stdout);
         Poly mono_sum_poly = PolyFromCoeff(poly_deg + 1);
-        printf("Test isEq #1 ...\n"); fflush(stdout);
         if (!PolyIsEq(&mono_sum, &mono_sum_poly))
         {
-            fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [2]\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [2]\n");
             res = false;
         }
         PolyDestroy(&mono_sum);
-        printf("Test sum poly #2 ...\n"); fflush(stdout);
         mono_sum = PolyAt(&long_p, -1);
-        printf("Test isEq #2 ...\n"); fflush(stdout);
         if (!PolyIsEq(&mono_sum, &p))
         {
-            fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [3]\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[LongPolynomialTest] fail on PolyAt [3]\n");
             res = false;
         }
-        printf("Destroy ...\n"); fflush(stdout);
         PolyDestroy(&mono_sum);
         PolyDestroy(&long_p);
-        printf("Push next test >\n"); fflush(stdout);
     }
 
     PolyDestroy(&p);
-    printf("Long poly test DONE.\n"); fflush(stdout);
     return res;
+}
+
+/**
+ * Test czy funkcje PolyAddMonos i MonoFromPoly przejmują na własność
+ * jednomiany i monomiany.
+ * Uruchomione pod valgrindem nie powinno dawać wycieków pamięci
+ */
+void MemoryThiefTest()
+{
+    const size_t poly_size = 10;
+    const int poly_depth = 3;
+    Poly p = PolyFromCoeff(1);
+    Mono *m = calloc(poly_size, sizeof(Mono));
+    for (int j = 0; j < poly_depth; j++)
+    {
+        for (int i = 0; i < (int)poly_size; i++)
+        {
+            Poly tmp = PolyClone(&p);
+            m[i] = MonoFromPoly(&tmp, i);
+        }
+        PolyDestroy(&p);
+        p = PolyAddMonos(poly_size, m);
+        // p = p + px + px^2
+    }
+    Poly p2 = PolyClone(&p);
+    Mono m2 = MonoFromPoly(&p2, 5);
+    MonoDestroy(&m2);
+    PolyDestroy(&p);
+    free(m);
 }
 
 /**
@@ -485,7 +423,7 @@ bool DegreeOpChangeTest()
     Poly p_res = PolySub(&p_one, &p_one); // 1 - 1
     if (!PolyIsZero(&p_res))
     {
-        fprintf(stderr, "[DegreeOpChangeTest] simple sub error\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[DegreeOpChangeTest] simple sub error\n");
         return false;
     }
     PolyDestroy(&p_res);
@@ -493,7 +431,7 @@ bool DegreeOpChangeTest()
     p_res = PolyAdd(&p_one, &p2); // 1 + -1
     if (!PolyIsZero(&p_res))
     {
-        fprintf(stderr, "[DegreeOpChangeTest] simple add error\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[DegreeOpChangeTest] simple add error\n");
         return false;
     }
     PolyDestroy(&p_res);
@@ -512,7 +450,7 @@ bool DegreeOpChangeTest()
         p_res = PolySub(&p2, &p3); // (1 + x + ... + x^n) - x^n
         if (PolyDeg(&p_res) != poly_len - 2)
         {
-            fprintf(stderr, "[DegreeOpChangeTest] one var poly sub error\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[DegreeOpChangeTest] one var poly sub error\n");
             return false;
         }
         PolyDestroy(&p2);
@@ -542,7 +480,7 @@ bool DegreeOpChangeTest()
         // (1 + x + ... x^(n - 2) + x^n) - (x^(n-1) + x^n)
         if (PolyDeg(&p_res) != poly_len - 1)
         {
-            fprintf(stderr, "[DegreeOpChangeTest] one var poly sub error\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[DegreeOpChangeTest] one var poly sub error\n");
             return false;
         }
         PolyDestroy(&p2);
@@ -575,7 +513,7 @@ bool SimpleAtTest2()
     p_res = PolyAt(&p, 2);
     if (!PolyIsEq(&p_res, &p_expected_res))
     {
-        fprintf(stderr, "[SimpleAtTest2] error at first eval\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[SimpleAtTest2] error at first eval\n");
         return false;
     }
     PolyDestroy(&p);
@@ -591,7 +529,7 @@ bool SimpleAtTest2()
     p_res = PolyAt(&p, 2);
     if (!PolyIsEq(&p_res, &p_expected_res))
     {
-        fprintf(stderr, "[SimpleAtTest2] error at second eval\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[SimpleAtTest2] error at second eval\n");
         return false;
     }
     PolyDestroy(&p);
@@ -611,7 +549,7 @@ bool SimpleAtTest2()
 bool AtTest()
 {
     const size_t poly_size = 6;
-    const int poly_depth = 1;
+    const int poly_depth = 3;
     const int upper_size = 5;
     bool result = true;
     Poly p = PolyFromCoeff(1);
@@ -629,10 +567,7 @@ bool AtTest()
 
     }
     Poly p_upper_size = PolyFromCoeff(upper_size);
-    printf("#1 p_upper_size = ");PolyPrintlnCard(&p_upper_size); fflush(stderr); fflush(stdout);
-    printf("#2 p = ");PolyPrintlnCard(&p); fflush(stderr); fflush(stdout);
     Poly p2 = PolyMul(&p_upper_size, &p);
-    printf("#3 p2 = ");PolyPrintlnCard(&p2); fflush(stderr); fflush(stdout);
     free(m);
     m = calloc(upper_size, sizeof(Mono));
     for (int i = 0; i < upper_size; i++)
@@ -642,32 +577,26 @@ bool AtTest()
     }
     PolyDestroy(&p);
     p = PolyAddMonos(upper_size, m);
-    printf("#4 p = ");PolyPrintlnCard(&p); fflush(stderr); fflush(stdout);
     Poly p3 = PolyAt(&p, 1);
-
-    printf("AtTest details:\n"); fflush(stderr); fflush(stdout);
-    printf("#5 p3 = ");PolyPrintlnCard(&p3); fflush(stderr); fflush(stdout);
-    printf("#6 p2 = ");PolyPrintlnCard(&p2);fflush(stderr); fflush(stdout);
-
     if (!PolyIsEq(&p3, &p2))
     {
-        fprintf(stderr, "[AtTest] fail\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[AtTest] fail\n");
         result = false;
     }
     if (PolyDeg(&p) !=
         (upper_size - 1) + (poly_depth * ((poly_exp_t)poly_size - 1)))
     {
-        fprintf(stderr, "[AtTest] PolyDeg fail\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[AtTest] PolyDeg fail\n");
         result = false;
     }
     if (PolyDegBy(&p, 0) != upper_size - 1)
     {
-        fprintf(stderr, "[AtTest] PolyDegBy(..., 0) fail\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[AtTest] PolyDegBy(..., 0) fail\n");
         result = false;
     }
     if (PolyDegBy(&p, 1) != (poly_exp_t)poly_size - 1)
     {
-        fprintf(stderr, "[AtTest] PolyDegBy(..., 1) fail\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[AtTest] PolyDegBy(..., 1) fail\n");
         result = false;
     }
     PolyDestroy(&p);
@@ -815,13 +744,13 @@ bool DegByTest()
     {
         if (deg_arr[i] !=  PolyDegBy(&p, i))
         {
-            fprintf(stderr, "[DegByTest] PolyDegBy(..., %d) fail\n", i); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[DegByTest] PolyDegBy(..., %d) fail\n", i);
             result = false;
         }
     }
     if (1639 != PolyDeg(&p))
     {
-        fprintf(stderr, "[DegByTest] PolyDeg fail\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[DegByTest] PolyDeg fail\n");
         result = false;
     }
     PolyDestroy(&p);
@@ -845,7 +774,7 @@ bool MulTest()
         Poly p_res1 = MakePoly(3, res_val, res_exp);
         if (!PolyIsEq(&p2, &p_res1))
         {
-            fprintf(stderr, "[MulTest] PolyMul (1) error\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[MulTest] PolyMul (1) error\n");
             return false;
         }
         PolyDestroy(&p2);
@@ -863,7 +792,7 @@ bool MulTest()
         Poly p_res1 = MakePoly(2, val2, exp_res);
         if (!PolyIsEq(&p3, &p_res1))
         {
-            fprintf(stderr, "[MulTest] PolyMul (2) error\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[MulTest] PolyMul (2) error\n");
             return false;
         }
         PolyDestroy(&p3);
@@ -887,7 +816,7 @@ bool MulTest()
         Poly p_res2 = MakePolyFromPolynomials(3, p_arr2, res_exp);
         if (!PolyIsEq(&p3, &p_res2))
         {
-            fprintf(stderr, "[MulTest] PolyMul (3) error\n"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[MulTest] PolyMul (3) error\n");
             return false;
         }
         PolyDestroy(&p_two);
@@ -1255,12 +1184,12 @@ bool IsEqTest()
         Poly p3 = PolyFromCoeff(2);
         if (!PolyIsEq(&p1, &p2))
         {
-            fprintf(stderr, "[IsEqTest] fail 1"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 1");
             result = false;
         }
         if (PolyIsEq(&p1, &p3))
         {
-            fprintf(stderr, "[IsEqTest] fail 2"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 2");
             result = false;
         }
         PolyDestroy(&p1);
@@ -1274,12 +1203,12 @@ bool IsEqTest()
         Poly p3 = MakePoly(100, coef_copy, exp_arr);
         if (!PolyIsEq(&p1, &p2))
         {
-            fprintf(stderr, "[IsEqTest] fail 3"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 3");
             result = false;
         }
         if (PolyIsEq(&p1, &p3))
         {
-            fprintf(stderr, "[IsEqTest] fail 4"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 4");
             result = false;
         }
         PolyDestroy(&p1);
@@ -1294,12 +1223,12 @@ bool IsEqTest()
         Poly p3 = BuildRecursivePoly(coef_copy, exp_arr, 100);
         if (!PolyIsEq(&p1, &p2))
         {
-            fprintf(stderr, "[IsEqTest] fail 5"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 5");
             result = false;
         }
         if (PolyIsEq(&p1, &p3))
         {
-            fprintf(stderr, "[IsEqTest] fail 6"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 6");
             result = false;
         }
         PolyDestroy(&p1);
@@ -1325,12 +1254,12 @@ bool IsEqTest()
 
         if (!PolyIsEq(&p1, &p2))
         {
-            fprintf(stderr, "[IsEqTest] fail 7"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 7");
             result = false;
         }
         if (PolyIsEq(&p1, &p3))
         {
-            fprintf(stderr, "[IsEqTest] fail 8"); fflush(stderr); fflush(stdout);
+            fprintf(stderr, "[IsEqTest] fail 8");
             result = false;
         }
         PolyDestroy(&p1);
@@ -1365,12 +1294,12 @@ bool RarePolynomialTest()
     Poly res = PolyAt(&p, 1);
     if (!PolyIsEq(&expected_res, &res))
     {
-        fprintf(stderr, "[RarePolynomialTest] fail 1"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[RarePolynomialTest] fail 1");
         result = false;
     }
     if (PolyDeg(&p) != rare_exp_arr[size-1])
     {
-        fprintf(stderr, "[RarePolynomialTest] fail 2"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[RarePolynomialTest] fail 2");
         result = false;
     }
     PolyDestroy(&p);
@@ -1427,7 +1356,7 @@ bool DegTest()
     Poly p = P(P(C(1), 1, C(1), 10), 1, P(C(1), 1, C(1), 2), 2);
     if (PolyDeg(&p) != 11)
     {
-        fprintf(stderr, "[DegTest] PolyDeg error\n"); fflush(stderr); fflush(stdout);
+        fprintf(stderr, "[DegTest] PolyDeg error\n");
         return false;
     }
     PolyDestroy(&p);
@@ -1506,60 +1435,48 @@ bool SimpleAddTest()
 {
     bool res = true;
     // Różne przypadki wielomian/współczynnik
-    printf("Hello SimpleAddTest :)\n"); fflush(stdout);
     res &= TestAdd(
             C(1),
             C(2),
             C(3));
-    printf("SimpleAddTest 1\n"); fflush(stdout);
-    fflush(stdout);
     res &= TestAdd(
             P(C(1), 1),
             C(2),
             P(C(2), 0, C(1), 1));
-    printf("SimpleAddTest 2\n"); fflush(stdout);
     res &= TestAdd(
             C(1),
             P(C(2), 2),
             P(C(1), 0, C(2), 2));
-    printf("SimpleAddTest 3\n"); fflush(stdout);
     res &= TestAdd(
             P(C(1), 1),
             P(C(2), 2),
             P(C(1), 1, C(2), 2));
-    printf("SimpleAddTest 4\n"); fflush(stdout);
     res &= TestAdd(
             C(0),
             P(C(1), 1),
             P(C(1), 1));
     // Upraszczanie się wielomianu
-    printf("SimpleAddTest 5\n"); fflush(stdout);
     res &= TestAdd(
             P(C(1), 1),
             P(C(-1), 1),
             C(0));
-    printf("SimpleAddTest 6\n"); fflush(stdout);
     res &= TestAdd(
             P(C(1), 1, C(2), 2),
             P(C(-1), 1),
             P(C(2), 2));
-    printf("SimpleAddTest 7\n"); fflush(stdout);
     res &= TestAdd(
             P(C(2), 0, C(1), 1),
             P(C(-1), 1),
             C(2));
-    printf("SimpleAddTest 8\n"); fflush(stdout);
     // Dodawanie współczynnika i upraszczanie
     res &= TestAdd(
             C(1),
             P(C(-1), 0, C(1), 1),
             P(C(1), 1));
-    printf("SimpleAddTest 9\n"); fflush(stdout);
     res &= TestAdd(
             C(1),
             P(P(C(-1), 0, C(1), 1), 0),
             P(P(C(1), 1), 0));
-    printf("SimpleAddTest 10\n"); fflush(stdout);
     res &= TestAdd(
             C(1),
             P(C(1), 0, C(2), 2),
@@ -1568,7 +1485,6 @@ bool SimpleAddTest()
             C(1),
             P(P(C(1), 0, C(1), 1), 0, C(2), 2),
             P(P(C(2), 0, C(1), 1), 0, C(2), 2));
-    printf("SimpleAddTest ileśtam\n"); fflush(stdout);
     res &= TestAdd(
             C(1),
             P(P(C(-1), 0, C(1), 1), 0, C(2), 2),
@@ -1578,12 +1494,10 @@ bool SimpleAddTest()
             P(P(C(1), 2), 0, P(C(2), 1), 1, C(1), 2),
             P(P(C(1), 2), 0, P(C(-2), 1), 1, C(1), 2),
             P(P(C(2), 2), 0, C(2), 2));
-
     res &= TestAdd(
             P(P(C(1), 2), 0, P(C(2), 1), 1, C(1), 2),
             P(P(C(-1), 2), 0, P(C(1), 0, C(2), 1, C(1), 2), 1, C(-1), 2),
             P(P(C(1), 0, C(4), 1, C(1), 2), 1));
-    printf("SimpleAddTest cośtam\n"); fflush(stdout);
     // Redukcja do współczynnika
     res &= TestAdd(
             P(P(C(1), 0, C(1), 1), 0, C(1), 1),
@@ -1599,7 +1513,6 @@ bool SimpleAddTest()
         Poly b = PolyAdd(&a, &a);
         Poly c = P(C(2), 1);
         res &= PolyIsEq(&b, &c);
-        printf("Endend\n"); fflush(stdout);
         PolyDestroy(&a);
         PolyDestroy(&b);
         PolyDestroy(&c);
@@ -1760,37 +1673,6 @@ bool OverflowTest()
     res &= TestAt(P(P(C(1), 1), 64), 2, C(0));
     return res;
 }
-
-
-/**
- * Test czy funkcje PolyAddMonos i MonoFromPoly przejmują na własność
- * jednomiany i monomiany.
- * Uruchomione pod valgrindem nie powinno dawać wycieków pamięci
- */
-void MemoryThiefTest()
-{
-    const size_t poly_size = 10;
-    const int poly_depth = 3;
-    Poly p = PolyFromCoeff(1);
-    Mono *m = calloc(poly_size, sizeof(Mono));
-    for (int j = 0; j < poly_depth; j++)
-    {
-        for (int i = 0; i < (int)poly_size; i++)
-        {
-            Poly tmp = PolyClone(&p);
-            m[i] = MonoFromPoly(&tmp, i);
-        }
-        PolyDestroy(&p);
-        p = PolyAddMonos(poly_size, m);
-        // p = p + px + px^2
-    }
-    Poly p2 = PolyClone(&p);
-    Mono m2 = MonoFromPoly(&p2, 5);
-    MonoDestroy(&m2);
-    PolyDestroy(&p);
-    free(m);
-}
-
 
 void MemoryTest()
 {
