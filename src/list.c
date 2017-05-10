@@ -30,15 +30,6 @@ struct listNode {
 };
 
 /*
-* Root element of the list containing pointers
-* to the two ends of a list
-*/
-struct listRoot {
-  listNode* begin;
-  listNode* end;
-};
-
-/*
 * Null/empty objects - used for memory allocation
 */
 const listNode nullListNode = {
@@ -56,6 +47,7 @@ const listRoot nullListRoot = {
 */
 listNode* makeListNode(listNode* left, void* value, listNode* right) {
   listNode* l = malloc(sizeof(nullListNode));
+  DBG {printf("MALLOC Lists.makeListNode %p\n", l);fflush(stdout);}
   l->right = right;
   l->left = left;
   l->value = value;
@@ -66,9 +58,9 @@ listNode* makeListNode(listNode* left, void* value, listNode* right) {
 * Allocate new list
 */
 list newList() {
-  list l = malloc(sizeof(nullListRoot));
-  l->begin = NULL;
-  l->end = NULL;
+  list l = (list){};
+  l.begin = NULL;
+  l.end = NULL;
   return l;
 }
 
@@ -80,13 +72,14 @@ void freeListRecLeft(listNode* l) {
   if(l->left != NULL) {
     freeListRecLeft(l->left);
   }
+  DBG {printf("FREE Lists.freeListRecLeft %p\n", l);fflush(stdout);}
   free(l);
 }
 
 /*
 * Push element to the front of the given list
 */
-listNode* pushFrontList(list l, void* value) {
+listNode* pushFrontList(list* l, void* value) {
   if(l == NULL) {
     return NULL;
   } else {
@@ -105,7 +98,7 @@ listNode* pushFrontList(list l, void* value) {
 /*
 * Push element to the end of the given list
 */
-listNode* pushBackList(list l, void* value) {
+listNode* pushBackList(list* l, void* value) {
   if(l == NULL) {
     return NULL;
   } else {
@@ -126,7 +119,7 @@ listNode* pushBackList(list l, void* value) {
 * Return data pointer held by the removed element.
 * If list is empty return NULL.
 */
-void* popFrontList(list l) {
+void* popFrontList(list* l) {
   if(l == NULL) {
     return NULL;
   } else if (l->begin == NULL) {
@@ -139,6 +132,7 @@ void* popFrontList(list l) {
     } else {
       (l->end) = NULL;
     }
+    DBG {printf("FREE Lists.popFrontList %p\n", l->begin);fflush(stdout);}
     free(l->begin);
     (l->begin) = new_begin;
     return val;
@@ -150,7 +144,7 @@ void* popFrontList(list l) {
 * Return data pointer held by the removed element.
 * If list is empty return NULL.
 */
-void* popBackList(list l) {
+void* popBackList(list* l) {
   if(l == NULL) {
     return NULL;
   } else if (l->end == NULL) {
@@ -163,6 +157,7 @@ void* popBackList(list l) {
     } else {
       (l->begin) = NULL;
     }
+    DBG {printf("MALLOC Lists.popBackList %p\n", l->end);fflush(stdout);}
     free(l->end);
     (l->end) = new_end;
     return val;
@@ -172,7 +167,7 @@ void* popBackList(list l) {
 /*
 * Remove all elements of the given list
 */
-void clearList(list l) {
+void clearList(list* l) {
   if(l == NULL) return;
   if(l->end != NULL) {
     freeListRecLeft(l->end);
@@ -184,23 +179,25 @@ void clearList(list l) {
 /*
 * Deallocate list
 */
-void freeList(list l) {
+void freeList(list* l) {
   if(l == NULL) return;
   //clearList(l);
   listNode* it = l->begin;
   while(it != NULL) {
     listNode* next = it->right;
+    DBG {printf("FREE Lists.freeList %p\n", it);fflush(stdout);}
     free(it);
     it = next;
   }
-
-  free(l);
+  l->begin = NULL;
+  l->end = NULL;
+  //free(l);
 }
 
 /*
 * Get first element data pointer or NULL if the list is empty
 */
-void* getFirstListElement(list l) {
+void* getFirstListElement(list* l) {
   if(l == NULL) {
     return NULL;
   }
@@ -214,7 +211,7 @@ void* getFirstListElement(list l) {
 /*
 * Get lst element data pointer or NULL if the list is empty
 */
-void* getLastListElement(list l) {
+void* getLastListElement(list* l) {
   if(l == NULL) {
     return NULL;
   }
@@ -228,7 +225,7 @@ void* getLastListElement(list l) {
 /*
 * Measure list size in O(n) time
 */
-int getListSize(list l) {
+int getListSize(list* l) {
   if(l == NULL) return 0;
   int size = 0;
   loop_list(l, it) {
@@ -240,7 +237,7 @@ int getListSize(list l) {
 /*
 * Check if list is empty
 */
-int isListEmpty( list l ) {
+int isListEmpty( list* l ) {
   if(l == NULL) return 1;
   return (l->begin == NULL && l->end == NULL);
 }
@@ -248,7 +245,7 @@ int isListEmpty( list l ) {
 /*
 * Add all elements of <src> to the <tgt>
 */
-void copyListInto( list src, list tgt ) {
+void copyListInto( list* src, list* tgt ) {
   if(src == NULL) return;
   loop_list(src, it) {
     pushBackList(tgt, it->value);
@@ -258,10 +255,10 @@ void copyListInto( list src, list tgt ) {
 /*
 * Make a copy of a list
 */
-list copyList( list l ) {
-  if(l == NULL) return NULL;
+list copyList( list* l ) {
+  if(l == NULL) return newList();
   list ret = newList();
-  copyListInto(l, ret);
+  copyListInto(l, &ret);
   return ret;
 }
 
@@ -281,7 +278,7 @@ void mapListNodes( listNode* l, listModifierFn mapping, int preserveValue ) {
 /*
 * Iterate (void*)->(void*) function through the given list
 */
-void iterateList(list l, listModifierFn iterator) {
+void iterateList(list* l, listModifierFn iterator) {
   if(l == NULL) return;
   if(l->begin == NULL) return;
   mapListNodes(l->begin, iterator, 1);
@@ -290,7 +287,7 @@ void iterateList(list l, listModifierFn iterator) {
 /*
 * Maps (void*)->(void*) function on the given list
 */
-void mapList(list l, listModifierFn mapping) {
+void mapList(list* l, listModifierFn mapping) {
   if(l == NULL) return;
   if(l->begin == NULL) return;
   mapListNodes(l->begin, mapping, 0);
@@ -299,7 +296,8 @@ void mapList(list l, listModifierFn mapping) {
 /*
 * Make a deep copy of a list
 */
-list deepCopyList( list l, listModifierFn assigner ) {
+list deepCopyList( list* l, listModifierFn assigner ) {
+  if(l == NULL) return newList();
   list ret = copyList(l);
   mapList(l, assigner);
   return ret;
@@ -317,7 +315,7 @@ void printListNodes(listNode* l) {
 /*
 * Print list nodes of a given list
 */
-void printList(list l) {
+void printList(list* l) {
   printf("[ ");
   printListNodes(l->begin);
   printf("] ");
@@ -326,7 +324,7 @@ void printList(list l) {
 /*
 * Print list nodes of a given list with trailing newline
 */
-void printlnList(list l) {
+void printlnList(list* l) {
   printList(l);
   printf("\n");
 }
@@ -334,7 +332,7 @@ void printlnList(list l) {
 /*
 * Obtain first list element
 */
-listNode* getListBegin( list l ) {
+listNode* getListBegin( list* l ) {
   if(l == NULL) return NULL;
   return l->begin;
 }
@@ -342,7 +340,7 @@ listNode* getListBegin( list l ) {
 /*
 * Obtain last list element
 */
-listNode* getListEnd( list l ) {
+listNode* getListEnd( list* l ) {
   if(l == NULL) return NULL;
   return l->end;
 }
@@ -350,7 +348,7 @@ listNode* getListEnd( list l ) {
 /*
 * Remove given element from the list
 */
-void detachListElement( list l, listNode* node ) {
+void detachListElement( list* l, listNode* node ) {
   if(node == NULL) return;
 
   listNode* left_neighbour = node->left;
@@ -366,6 +364,7 @@ void detachListElement( list l, listNode* node ) {
   } else {
     l->end = left_neighbour;
   }
+  DBG {printf("FREE Lists.detachListElement %p\n", node);fflush(stdout);}
   free(node);
 }
 
@@ -374,6 +373,7 @@ void detachListElement( list l, listNode* node ) {
 */
 listNode* newListDetachedElement() {
   listNode* ret = malloc(sizeof(nullListNode));
+  DBG {printf("MALLOC Lists.newListDetachedElement %p\n", ret);fflush(stdout);}
   ret->left = NULL;
   ret->right = NULL;
   ret->value = NULL;
@@ -410,7 +410,7 @@ int isListRightSideEnd( listNode* node ) {
 * Tgt parameter MUST BE NON-NULL only if <node> is first/last element.
 * Otherwise it may be NULL
 */
-void insertListAt( list tgt, listNode* node, list src ) {
+void insertListAt( list* tgt, listNode* node, list* src ) {
   if(node == NULL) return;
   if(src == NULL) return;
   if((src->begin == NULL) || (src->end == NULL)) {
@@ -451,11 +451,11 @@ void insertListAt( list tgt, listNode* node, list src ) {
 * Tgt parameter MUST BE NON-NULL only if <node> is first/last element.
 * Otherwise it may be NULL
 */
-void insertElementAt( list tgt, listNode* node, void* value ) {
+void insertElementAt( list* tgt, listNode* node, void* value ) {
   list wrapper = newList();
-  pushBackList(wrapper, value);
-  insertListAt(tgt, node, wrapper);
-  freeList(wrapper);
+  pushBackList(&wrapper, value);
+  insertListAt(tgt, node, &wrapper);
+  freeList(&wrapper);
 }
 
 
@@ -463,7 +463,8 @@ void insertElementAt( list tgt, listNode* node, void* value ) {
 * Transfer all right-side neighbours of <splitter> to a new list.
 * Return that new list.
 */
-list splitList( list src, listNode* splitter ) {
+list splitList( list* src, listNode* splitter ) {
+  if(src == NULL) return newList();
   list ret = newList();
   if(splitter == NULL) {
     return ret;
@@ -473,10 +474,10 @@ list splitList( list src, listNode* splitter ) {
   src->end = splitter;
 
   if(splitter->right != NULL) {
-    ret->begin = splitter->right;
-    ret->end = realEnd;
+    ret.begin = splitter->right;
+    ret.end = realEnd;
     splitter->right = NULL;
-    ret->begin->left = NULL;
+    ret.begin->left = NULL;
   }
   return ret;
 }

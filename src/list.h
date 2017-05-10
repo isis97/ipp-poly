@@ -38,7 +38,16 @@ typedef struct listRoot listRoot;
 /*
 * Actual list - syntax sugar for writing pointers everywhere
 */
-typedef listRoot* list;
+typedef listRoot list;
+
+/*
+* Root element of the list containing pointers
+* to the two ends of a list
+*/
+struct listRoot {
+  listNode* begin;
+  listNode* end;
+};
 
 /*
 * List iterator
@@ -69,7 +78,7 @@ struct lists {
   *
   * WARN: Invalidates listIterators
   */
-  void (*free)( list );
+  void (*free)( list* );
 
   /*
   * Push element to the front of a given list.
@@ -78,7 +87,7 @@ struct lists {
   * NOTICE: All listIterators are valid until used operation does not
   *         keep pointers validity.
   */
-  listIterator (*pushFront)( list l, void* element );
+  listIterator (*pushFront)( list* l, void* element );
 
   /*
   * Push element to the end of a given list.
@@ -87,7 +96,7 @@ struct lists {
   * NOTICE: All listIterators are valid until used operation does not
   *         keep pointers validity.
   */
-  listIterator (*pushBack)( list l, void* element );
+  listIterator (*pushBack)( list* l, void* element );
 
   /*
   * Removes first element of the given list or does nothing if it's empty.
@@ -97,7 +106,7 @@ struct lists {
   * WARN: Invalidates listIterators when elment under pointers
   *       will be popped.
   */
-  void* (*popFront)( list l );
+  void* (*popFront)( list* l );
 
   /*
   * Removes last element of the given list or does nothing if it's empty.
@@ -107,14 +116,14 @@ struct lists {
   * WARN: Invalidates listIterators when elment under pointers
   *       will be popped.
   */
-  void* (*popBack)( list l );
+  void* (*popBack)( list* l );
 
   /*
   * Clears the entire list.
   *
   * WARN: Invalidates listIterators for all elements of list
   */
-  void (*clear)( list l );
+  void (*clear)( list* l );
 
   /*
   * Obtain first element of the list.
@@ -122,7 +131,7 @@ struct lists {
   *
   * If the list is empty NULL is returned.
   */
-  void* (*first)( list l );
+  void* (*first)( list* l );
 
   /*
   * Obtain last element of the list.
@@ -130,19 +139,19 @@ struct lists {
   *
   * If the list is empty NULL is returned.
   */
-  void* (*last)( list l );
+  void* (*last)( list* l );
 
   /*
   * Obtain the size of a list.
   *
   * WARN: Works in O(n) time where n is the length of the list
   */
-  int (*size)( list l );
+  int (*size)( list* l );
 
   /*
   * Check's if list is empty
   */
-  int (*empty)( list l );
+  int (*empty)( list* l );
 
   /*
   * Copy the list into a new one.
@@ -152,7 +161,7 @@ struct lists {
   *       memory locations (there're still the same
   *       objects under void* pointers)
   */
-  list (*copy)( list l );
+  list (*copy)( list* l );
 
   /*
   * Performs deep copy of the list returning new one.
@@ -161,7 +170,7 @@ struct lists {
   * the given one and return pointer to this element.
   *
   */
-  list (*deepCopy)( list l, listModifierFn assigner );
+  list (*deepCopy)( list* l, listModifierFn assigner );
 
   /*
   * Copy the list <source> into other list - <target>
@@ -171,7 +180,7 @@ struct lists {
   *       memory locations (there're still the same
   *       objects under void* pointers)
   */
-  void (*copyInto)( list source, list target );
+  void (*copyInto)( list* source, list* target );
 
   /*
   * Iterate through list using given
@@ -180,7 +189,7 @@ struct lists {
   * The return value is ignored.
   *
   */
-  void (*iterate)( list l, listModifierFn iterator );
+  void (*iterate)( list* l, listModifierFn iterator );
 
   /*
   * Map list values using given
@@ -191,20 +200,20 @@ struct lists {
   *
   * NOTE: Mapping is made in place.
   */
-  void (*map)( list l, listModifierFn mapping );
+  void (*map)( list* l, listModifierFn mapping );
 
   /*
   * Print given list to stdout.
   * Prints only adresses of values not exact values.
   */
-  void (*print)( list );
+  void (*print)( list* );
 
   /*
   * Print given list to stdout.
   * Prints only adresses of values not exact values.
   * Variant displaying new line at the end of stringified list.
   */
-  void (*println)( list l );
+  void (*println)( list* l );
 
   /*
   * Get the first element container pointer.
@@ -213,7 +222,7 @@ struct lists {
   * NOTICE: All listIterators are valid until used operation does not
   *         keep pointers validity.
   */
-  listIterator (*begin)( list l );
+  listIterator (*begin)( list* l );
 
   /*
   * Get the last element container pointer.
@@ -222,7 +231,7 @@ struct lists {
   * NOTICE: All listIterators are valid until used operation does not
   *         keep pointers validity.
   */
-  listIterator (*end)( list l );
+  listIterator (*end)( list* l );
 
   /*
   * Removes element from the list using given container pointer.
@@ -232,7 +241,7 @@ struct lists {
   *
   * WARN: Invalidates pointers to the removed elements.
   */
-  void (*detachElement)( list l, listIterator node );
+  void (*detachElement)( list* l, listIterator node );
 
   /*
   * Create node that is not attached to anything.
@@ -257,7 +266,7 @@ struct lists {
   * For all other situations it may be NULL
   *
   */
-  void (*insertListAt)( list target, listIterator node, list source );
+  void (*insertListAt)( list* target, listIterator node, list* source );
 
   /*
   * Inserts value  to the left side of <node> of list <target>
@@ -267,7 +276,7 @@ struct lists {
   * For all other situations it may be NULL
   *
   */
-  void (*insertElementAt)( list target, listIterator node, void* value );
+  void (*insertElementAt)( list* target, listIterator node, void* value );
 
 
   /*
@@ -284,7 +293,7 @@ struct lists {
   * All elements on the right side of <node> are transferred to the new list
   * that is returned.
   */
-  list (*splitList)( list l, listIterator node );
+  list (*splitList)( list* l, listIterator node );
 
   /*
   * Get next element on the list.
