@@ -328,7 +328,7 @@ struct pListsInterface {
 * pLists interface object
 * All functions should be accessed using pLists object
 */
-const struct pListsInterface pLists;
+extern const struct pListsInterface pLists;
 
 
 #endif

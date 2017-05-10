@@ -46,13 +46,13 @@ typedef struct Mono
  * @param[in] c : wartość współczynnika
  * @return wielomian
  */
-static inline Poly PolyFromCoeff(poly_coeff_t c);
+extern inline Poly PolyFromCoeff(poly_coeff_t c);
 
 /**
  * Tworzy wielomian tożsamościowo równy zeru.
  * @return wielomian
  */
-static inline Poly PolyZero();
+extern inline Poly PolyZero();
 
 /**
  * Tworzy jednomian `p * x^e`.
@@ -61,47 +61,47 @@ static inline Poly PolyZero();
  * @param[in] e : wykładnik
  * @return jednomian `p * x^e`
  */
-static inline Mono MonoFromPoly(const Poly *p, poly_exp_t e);
+extern inline Mono MonoFromPoly(const Poly *p, poly_exp_t e);
 
 /**
  * Sprawdza, czy wielomian jest współczynnikiem.
  * @param[in] p : wielomian
  * @return Czy wielomian jest współczynnikiem?
  */
-static inline bool PolyIsCoeff(const Poly *p);
+extern inline bool PolyIsCoeff(const Poly *p);
 
 /**
  * Sprawdza, czy wielomian jest tożsamościowo równy zeru.
  * @param[in] p : wielomian
  * @return Czy wielomian jest równy zero?
  */
-static inline bool PolyIsZero(const Poly *p);
+extern inline bool PolyIsZero(const Poly *p);
 
 /**
  * Usuwa wielomian z pamięci.
  * @param[in] p : wielomian
  */
-void PolyDestroy(Poly *p);
+extern void PolyDestroy(Poly *p);
 
 /**
  * Usuwa jednomian z pamięci.
  * @param[in] m : jednomian
  */
-static inline void MonoDestroy(Mono *m);
+extern inline void MonoDestroy(Mono *m);
 
 /**
  * Robi pełną, głęboką kopię wielomianu.
  * @param[in] p : wielomian
  * @return skopiowany wielomian
  */
-Poly PolyClone(const Poly *p);
+extern Poly PolyClone(const Poly *p);
 
 /**
  * Robi pełną, głęboką kopię jednomianu.
  * @param[in] m : jednomian
  * @return skopiowany jednomian
  */
-static inline Mono MonoClone(const Mono *m);
+extern inline Mono MonoClone(const Mono *m);
 
 /**
  * Dodaje dwa wielomiany.
@@ -109,7 +109,7 @@ static inline Mono MonoClone(const Mono *m);
  * @param[in] q : wielomian
  * @return `p + q`
  */
-Poly PolyAdd(const Poly *p, const Poly *q);
+extern Poly PolyAdd(const Poly *p, const Poly *q);
 
 /**
  * Sumuje listę jednomianów i tworzy z nich wielomian.
@@ -118,7 +118,7 @@ Poly PolyAdd(const Poly *p, const Poly *q);
  * @param[in] monos : tablica jednomianów
  * @return wielomian będący sumą jednomianów
  */
-Poly PolyAddMonos(unsigned count, const Mono monos[]);
+extern Poly PolyAddMonos(unsigned count, const Mono monos[]);
 
 /**
  * Mnoży dwa wielomiany.
@@ -126,14 +126,14 @@ Poly PolyAddMonos(unsigned count, const Mono monos[]);
  * @param[in] q : wielomian
  * @return `p * q`
  */
-Poly PolyMul(const Poly *p, const Poly *q);
+extern Poly PolyMul(const Poly *p, const Poly *q);
 
 /**
  * Zwraca przeciwny wielomian.
  * @param[in] p : wielomian
  * @return `-p`
  */
-Poly PolyNeg(const Poly *p);
+extern Poly PolyNeg(const Poly *p);
 
 /**
  * Odejmuje wielomian od wielomianu.
@@ -141,7 +141,7 @@ Poly PolyNeg(const Poly *p);
  * @param[in] q : wielomian
  * @return `p - q`
  */
-Poly PolySub(const Poly *p, const Poly *q);
+extern Poly PolySub(const Poly *p, const Poly *q);
 
 /**
  * Zwraca stopień wielomianu ze względu na zadaną zmienną (-1 dla wielomianu
@@ -154,14 +154,14 @@ Poly PolySub(const Poly *p, const Poly *q);
  * @param[in] var_idx : indeks zmiennej
  * @return stopień wielomianu @p p z względu na zmienną o indeksie @p var_idx
  */
-poly_exp_t PolyDegBy(const Poly *p, unsigned var_idx);
+extern poly_exp_t PolyDegBy(const Poly *p, unsigned var_idx);
 
 /**
  * Zwraca stopień wielomianu (-1 dla wielomianu tożsamościowo równego zeru).
  * @param[in] p : wielomian
  * @return stopień wielomianu @p p
  */
-poly_exp_t PolyDeg(const Poly *p);
+extern poly_exp_t PolyDeg(const Poly *p);
 
 /**
  * Sprawdza równość dwóch wielomianów.
@@ -169,7 +169,7 @@ poly_exp_t PolyDeg(const Poly *p);
  * @param[in] q : wielomian
  * @return `p = q`
  */
-bool PolyIsEq(const Poly *p, const Poly *q);
+extern bool PolyIsEq(const Poly *p, const Poly *q);
 
 /**
  * Wylicza wartość wielomianu w punkcie @p x.
@@ -182,26 +182,25 @@ bool PolyIsEq(const Poly *p, const Poly *q);
  * @param[in] x
  * @return @f$p(x, x_0, x_1, \ldots)@f$
  */
-Poly PolyAt(const Poly *p, poly_coeff_t x);
+extern Poly PolyAt(const Poly *p, poly_coeff_t x);
 
  /**
   * Wypisuje wielomian p na standardowe wyjście
   * @param[in] p
   */
-void PolyPrint(const Poly* p);
+extern void PolyPrint(const Poly* p);
 
  /**
   * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
   * @param[in] p
   */
-void PolySprintf(char* dest, const Poly *p);
+extern void PolySprintf(char* dest, const Poly *p);
 
 /**
  * Konwertuje wielomian p do postaci czytelnego łańcucha znaków.
  * @param[in] p
  */
-char* PolyToString(const Poly *p);
+extern char* PolyToString(const Poly *p);
 
-void PolyPrintlnCard(const Poly *p);
 
 #endif /* __POLY_H__ */

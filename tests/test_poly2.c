@@ -1,9 +1,10 @@
-#include "list.h"
-#include "poly.h"
-#include "poly.c"
-#include "list.c"
+//include <src/list.h>
+//include <src/poly.h>
+//include <src/poly.c>
+//include <src/list.c>
 #include <stdarg.h>
-
+#include <src/poly.h>
+#include <assert.h>
 
 #define C PolyFromCoeff
 Poly MakePolyHelper(int dummy, ...)
@@ -44,14 +45,19 @@ int main() {
   printf("Hello test.\n");
 
   Poly p = P(C(5), 0, P(C(2), 0, C(5), 2), 1, P(C(6), 0, C(6), 5, C(7), 7), 2);
-  PolyPrintln(&p);
+  PolyPrint(&p);printf("\n");
   Poly p2 = PolyAt(&p, 3);
-  PolyPrintln(&p2);
+  PolyPrint(&p2);printf("\n");
   Poly p3 = PolyAt(&p2, 1);
-  PolyPrintln(&p3);
+  PolyPrint(&p3);printf("\n");
   Poly p4 = PolyAt(&p3, 0);
-  PolyPrintln(&p4);
+  PolyPrint(&p4);printf("\n");
   printf(":)\n");
+
+  PolyDestroy(&p);
+  PolyDestroy(&p2);
+  PolyDestroy(&p3);
+  PolyDestroy(&p4);
 
   return 0;
 }

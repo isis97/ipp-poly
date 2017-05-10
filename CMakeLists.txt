@@ -19,22 +19,16 @@ set(CMAKE_C_FLAGS "-std=c11 -Wall -Wextra")
 # set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
 # set(CMAKE_C_FLAGS_DEBUG "-g")
 
+include_directories(./)
+
 # Wskazujemy pliki źródłowe.
 # src/test_poly.c
-# FILE(GLOB SOURCE_FILES src/**/*.c src/**/*.h)
-#SET(SOURCE_FILES
-#  ./src/test_poly.c
-#  ./src/list.h
-#  ./src/list.c
-#  ./src/poly.h
-#  ./src/poly.c
-#  ./src/utils.h
-#  ./src/utils.c
-#)
+
 # Wskazujemy plik wykonywalny.
 # ./src/list.c ./src/poly.c ./src/utils.c ./src/list.h ./src/poly.h ./src/utils.h
-add_executable(test_poly ./src/test_poly.c)
-add_executable(test_poly_my ./src/test_poly_my.c)
+#add_executable(test_poly ./src/test_poly.c)
+add_executable(test_poly ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly.c)
+add_executable(test_poly2 ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly2.c)
 
 # Dodajemy obsługę Doxygena: sprawdzamy, czy jest zainstalowany i jeśli tak to:
 find_package(Doxygen)

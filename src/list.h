@@ -131,7 +131,7 @@ struct lists {
   *
   * If the list is empty NULL is returned.
   */
-  void* (*first)( list* l );
+  void* (*first)( const list* l );
 
   /*
   * Obtain last element of the list.
@@ -139,19 +139,19 @@ struct lists {
   *
   * If the list is empty NULL is returned.
   */
-  void* (*last)( list* l );
+  void* (*last)( const list* l );
 
   /*
   * Obtain the size of a list.
   *
   * WARN: Works in O(n) time where n is the length of the list
   */
-  int (*size)( list* l );
+  int (*size)( const list* l );
 
   /*
   * Check's if list is empty
   */
-  int (*empty)( list* l );
+  int (*empty)( const list* l );
 
   /*
   * Copy the list into a new one.
@@ -161,7 +161,7 @@ struct lists {
   *       memory locations (there're still the same
   *       objects under void* pointers)
   */
-  list (*copy)( list* l );
+  list (*copy)( const list* l );
 
   /*
   * Performs deep copy of the list returning new one.
@@ -170,7 +170,7 @@ struct lists {
   * the given one and return pointer to this element.
   *
   */
-  list (*deepCopy)( list* l, listModifierFn assigner );
+  list (*deepCopy)( const list* l, listModifierFn assigner );
 
   /*
   * Copy the list <source> into other list - <target>
@@ -180,7 +180,7 @@ struct lists {
   *       memory locations (there're still the same
   *       objects under void* pointers)
   */
-  void (*copyInto)( list* source, list* target );
+  void (*copyInto)( const list* source, list* target );
 
   /*
   * Iterate through list using given
@@ -189,7 +189,7 @@ struct lists {
   * The return value is ignored.
   *
   */
-  void (*iterate)( list* l, listModifierFn iterator );
+  void (*iterate)( const list* l, listModifierFn iterator );
 
   /*
   * Map list values using given
@@ -206,14 +206,14 @@ struct lists {
   * Print given list to stdout.
   * Prints only adresses of values not exact values.
   */
-  void (*print)( list* );
+  void (*print)( const list* );
 
   /*
   * Print given list to stdout.
   * Prints only adresses of values not exact values.
   * Variant displaying new line at the end of stringified list.
   */
-  void (*println)( list* l );
+  void (*println)( const list* l );
 
   /*
   * Get the first element container pointer.
@@ -222,7 +222,7 @@ struct lists {
   * NOTICE: All listIterators are valid until used operation does not
   *         keep pointers validity.
   */
-  listIterator (*begin)( list* l );
+  listIterator (*begin)( const list* l );
 
   /*
   * Get the last element container pointer.
@@ -231,7 +231,7 @@ struct lists {
   * NOTICE: All listIterators are valid until used operation does not
   *         keep pointers validity.
   */
-  listIterator (*end)( list* l );
+  listIterator (*end)( const list* l );
 
   /*
   * Removes element from the list using given container pointer.
@@ -337,7 +337,7 @@ struct lists {
 * Lists interface object
 * All functions should be accessed using Lists object
 */
-const struct lists Lists;
+extern const struct lists Lists;
 
 
 #endif
