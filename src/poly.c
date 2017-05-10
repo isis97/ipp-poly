@@ -146,7 +146,7 @@ Poly PolyAdd(const Poly *p, const Poly *q)
       if(PolyIsCoeff(&polyAddResult) && PolyGetConstTerm(&polyAddResult) == 0) {
         PolyDestroy(&polyAddResult);
       } else {
-        Mono* partialResult = MonoClonePtr(mp);
+        Mono* partialResult = (Mono*) malloc(sizeof(Mono));
         *partialResult = (Mono) { .exp = mp->exp, .p = polyAddResult };
         Lists.pushBack(&result, partialResult);
       }
@@ -213,12 +213,18 @@ int PolyInsertMono(Poly* p, Mono* newMono)
     listIterator next = Lists.next(i);
     Mono* m = (Mono*) Lists.getValue(i);
     if(m->exp == newMono->exp) {
-      m->p = PolyAdd(&(m->p), &(newMono->p));
+      Poly* toDel = &(m->p);
+      Poly pom = PolyAdd(&(m->p), &(newMono->p));
       if(PolyIsCoeff(&(m->p)) && PolyGetConstTerm(&(m->p))==0) {
         Lists.detachElement(&(p->monos), i);
         DBG {printf("FREE PolyInsertMono %p\n", m);fflush(stdout);}
+        PolyDestroy(&pom);
+        MonoDestroy(m);
+        free(m);
+        return 0;
       }
-      //TODO MonoDestroy(m);
+      m->p = pom;
+      PolyDestroy(toDel);
       return 0;
     } else if(newMono->exp > m->exp) {
       if(next == NULL) {
@@ -304,18 +310,19 @@ Poly PolyMul(const Poly *p, const Poly *q)
 
   loop_list(&(p->monos), pIter) {
     loop_list(&(q->monos), qIter) {
-      Mono mp = *((Mono*) Lists.getValue(pIter));
-      Mono mq = *((Mono*) Lists.getValue(qIter));
-      Poly* factPartialResult = malloc(sizeof(Poly));
-      DBG {printf("MALLOC Mul.partialresult %p\n", factPartialResult);fflush(stdout);}
-      *factPartialResult = PolyMul(&(mp.p), &(mq.p));
-      Mono partialResult = MonoFromPoly(factPartialResult, mp.exp + mq.exp);
+      Mono* mp = (Mono*) Lists.getValue(pIter);
+      Mono* mq = (Mono*) Lists.getValue(qIter);
+
+      Poly factPartialResult = PolyMul(&(mp->p), &(mq->p));
+      Mono partialResult = MonoFromPoly(&factPartialResult, mp->exp + mq->exp);
+
       PolyInsertMonoValue(&result, partialResult);
+
       DBG {printf(">3MUL PUSH MUL  TERM : ");PolyPrintlnCard(&(partialResult.p));fflush(stdout);}
       DBG {printf("> AFTER PUSH         = ");PolyPrintlnCard(&result);fflush(stdout);}
-      //MonoDestroy(&mp);
-      //MonoDestroy(&mq);
-      free(factPartialResult);
+      MonoDestroy(mp);
+      MonoDestroy(mq);
+
     }
   }
 
@@ -442,17 +449,19 @@ Poly PolyAt(const Poly *p, poly_coeff_t x)
     Mono* m = (Mono*) Lists.getValue(i);
     poly_coeff_t factValue = expCoeff(x, m->exp);
     Poly partialResult = PolyClone(&(m->p));
+
     PolyScaleConst(&partialResult, factValue);
     result.c += partialResult.c;
     partialResult.c = 0;
     loop_list(&(partialResult.monos), j) {
       Mono* submono = (Mono*) Lists.getValue(j);
+      Mono* submonoCln = MonoClonePtr(submono);
       DBG {printf("AT EVAL PUSH a^%d : ", submono->exp);PolyPrintlnCard(&(submono->p));fflush(stdout);}
-      PolyInsertMono(&result, submono);
+      PolyInsertMonoPtr(&result, submonoCln);
       DBG {printf("AT EVAL ACC       = ");PolyPrintlnCard(&result);fflush(stdout);}
     }
     //printf("FREE invoke list %p\n", &(partialResult.monos));fflush(stdout);
-    Lists.free(&(partialResult.monos));
+    PolyDestroy(&partialResult);
 
   }
 
