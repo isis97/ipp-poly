@@ -202,6 +202,5 @@ void PolySprintf(char* dest, const Poly *p);
  */
 char* PolyToString(const Poly *p);
 
-void PolyPrintlnCard(const Poly *p);
 
 #endif /* __POLY_H__ */
