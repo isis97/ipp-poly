@@ -1,9 +1,17 @@
 /*
-*   Interface of polynomials
+*  Bidirectional list implementation (C99 standard)
+*  Usage:
+*  @code
+*     #include <list.h>
+*      ...
+*     list l = Lists.new();
+*  @endcode
 *
-*   @author Jakub Pawlewicz <pan@mimuw.edu.pl>, Piotr Styczyński <piotrsty1@gmail.com>
-*   @copyright Uniwersytet Warszawski
-*   @date 2017-04-24, 2017-05-13
+*  All interface sould be accessed through Lists constant.
+*
+*  @author Piotr Styczyński <piotrsty1@gmail.com>
+*  @copyright MIT
+*  @date 2017-05-13
 */
 #include "utils.h"
 #include <stdlib.h>
