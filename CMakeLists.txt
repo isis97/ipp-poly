@@ -28,7 +28,7 @@ include_directories(./)
 # ./src/list.c ./src/poly.c ./src/utils.c ./src/list.h ./src/poly.h ./src/utils.h
 #add_executable(test_poly ./src/test_poly.c)
 add_executable(test_poly ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly.c)
-add_executable(test_poly2 ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly2.c)
+#add_executable(test_poly2 ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly2.c)
 
 # Dodajemy obsługę Doxygena: sprawdzamy, czy jest zainstalowany i jeśli tak to:
 find_package(Doxygen)

@@ -1,14 +1,9 @@
 /*
-*  Bidirectional list implementation (C99 standard)
-*  Usage:
-*     #include <list.h>
-*      ...
-*     list l = Lists.new();
+*   Interface of polynomials
 *
-*  All interface sould be accessed through Lists constant.
-*
-*  MIT LICENSE
-*  @Piotr Styczyński 2017
+*   @author Jakub Pawlewicz <pan@mimuw.edu.pl>, Piotr Styczyński <piotrsty1@gmail.com>
+*   @copyright Uniwersytet Warszawski
+*   @date 2017-04-24, 2017-05-13
 */
 #include "utils.h"
 #include <stdlib.h>
@@ -18,15 +13,15 @@
 #include "list.h"
 
 
-/*
+/**
 * Structure representing one element of list
 * It's got two neighbours (may be NULL)
 * Element also contains void* pointer to the actual data.
 */
 struct listNode {
-  listNode* right;
-  void* value;
-  listNode* left;
+  listNode* right; ///< pointer to the right neighbour
+  void* value; ///< pointer to the data held in list element
+  listNode* left; ///< pointer to the right neighbour
 };
 
 /*

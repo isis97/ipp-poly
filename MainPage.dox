@@ -1,15 +1,12 @@
 /**
-@mainpage Dokumentacja zadania wielomiany
+@mainpage Documentation of exercise 'Polynomials'
 
-### Treść zadania
+### Exercise
 
-Uwaga: aktualna treść zadania znajduje się w [Moodle'u](https://moodle.mimuw.edu.pl).
+Most up-to-date description (in Polish) is available at [Moodle'u](https://moodle.mimuw.edu.pl).
 
-### Opis projektu
+### Short description
 
-Tegoroczne duże zadanie polega na zaimplementowaniu operacji na wielomianach
-rzadkich wielu zmiennych.
-
-TODO
+Current year exercise was to create polyonomials math interface.
 
 */
