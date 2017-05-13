@@ -1,42 +1,34 @@
 cmake_minimum_required(VERSION 3.0)
-project(wielomiany C)
+project(Polynomials C)
 
 if (NOT CMAKE_BUILD_TYPE)
     message(STATUS "No build type selected, default to Release")
     set(CMAKE_BUILD_TYPE "Release")
 endif ()
 
-# Nie chcemy oglądać komunikatów o procentowym postępie kompilacji.
+# We dont want to watch compilation progress info
 set_property(GLOBAL PROPERTY RULE_MESSAGES OFF)
 
-# Chcemy zobaczyć polecenia wywołane przez make.
+# We do want to see make calling things
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# Ustawiamy wspólne opcje kompilowania dla wszystkich wariantów projektu.
+# Compilation flags
 set(CMAKE_C_FLAGS "-std=c11 -Wall -Wextra")
-# Domyślne opcje dla wariantów Release i Debug są sensowne.
-# Jeśli to konieczne, ustawiamy tu inne.
-# set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
-# set(CMAKE_C_FLAGS_DEBUG "-g")
+set(CMAKE_C_FLAGS_RELEASE "-std=c11 -Wall -Wextra -O3 -DNDEBUG")
+set(CMAKE_C_FLAGS_DEBUG "-std=c11 -Wall -Wextra -g -O0 ")
 
+# Inclusion directories
 include_directories(./)
 
-# Wskazujemy pliki źródłowe.
-# src/test_poly.c
+# Specify source files
+add_executable(test_poly ./src/memalloc.c ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly.c)
 
-# Wskazujemy plik wykonywalny.
-# ./src/list.c ./src/poly.c ./src/utils.c ./src/list.h ./src/poly.h ./src/utils.h
-#add_executable(test_poly ./src/test_poly.c)
-add_executable(test_poly ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly.c)
-#add_executable(test_poly2 ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly2.c)
-
-# Dodajemy obsługę Doxygena: sprawdzamy, czy jest zainstalowany i jeśli tak to:
+# Check doxygen installation
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
-    # Wskazujemy lokalizacją pliku konfiguracyjnego i podajemy jego docelową lokalizację w folderze, gdzie następuje kompilacja.
+    # Point doxyfile
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-    # Dodajemy cel doc: użycie make doc spowoduje wywołanie doxygena z odpowiednim plikiem konfiguracyjnym w folderze kompilacji.
-    # Na wyjście zostanie wypisany odpowiedni komentarz.
+    # Add "doc" target for generating docuemntation with Doxygen
     add_custom_target(doc
         ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

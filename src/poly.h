@@ -12,6 +12,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include "memalloc.h"
 #include "list.h"
 
 /**
@@ -36,7 +37,7 @@ typedef int poly_exp_t;
  */
 typedef struct Poly {
   int c; ///< Constant (free) term of polynomial
-  list monos; ///< Dynamically allocated list of monomials
+  List monos; ///< Dynamically allocated list of monomials
 } Poly;
 
 /**
@@ -57,7 +58,7 @@ typedef struct Mono
  * @param[in] c : const value of polynomial
  * @return polynomial
  */
-extern inline Poly PolyFromCoeff(poly_coeff_t c);
+extern Poly PolyFromCoeff(poly_coeff_t c);
 
 /**
  * Creates a new zero polynomial.
@@ -65,7 +66,7 @@ extern inline Poly PolyFromCoeff(poly_coeff_t c);
  *
  * @return polynomial
  */
-extern inline Poly PolyZero();
+extern Poly PolyZero();
 
 /**
  * Creates monomial `p * x^e`.
@@ -79,7 +80,7 @@ extern inline Poly PolyZero();
  * @param[in] e : exponent
  * @return monomial `p * x^e`
  */
-extern inline Mono MonoFromPoly(const Poly *p, poly_exp_t e);
+extern Mono MonoFromPoly(const Poly *p, poly_exp_t e);
 
 /**
  * Checks if given polynomial is a coefficient
@@ -88,7 +89,7 @@ extern inline Mono MonoFromPoly(const Poly *p, poly_exp_t e);
  * @param[in] p : polynomial
  * @return If polynomial is const?
  */
-extern inline bool PolyIsCoeff(const Poly *p);
+extern bool PolyIsCoeff(const Poly *p);
 
 /**
  * Checks if a given polynomial is const and equal to 0.
@@ -96,7 +97,7 @@ extern inline bool PolyIsCoeff(const Poly *p);
  * @param[in] p : polynomial
  * @return If polynomial is equal to zero?
  */
-extern inline bool PolyIsZero(const Poly *p);
+extern bool PolyIsZero(const Poly *p);
 
 /**
  * Removes polynomial from memory.
@@ -110,7 +111,7 @@ extern void PolyDestroy(Poly *p);
  *
  * @param[in] m : monomial
  */
-extern inline void MonoDestroy(Mono *m);
+extern void MonoDestroy(Mono *m);
 
 /**
  * Performs deep-copy of a given polynomial.
@@ -126,7 +127,7 @@ extern Poly PolyClone(const Poly *p);
  * @param[in] m : monomial
  * @return copy of a given monomial
  */
-extern inline Mono MonoClone(const Mono *m);
+extern Mono MonoClone(const Mono *m);
 
 /**
  * Adds two polynomials.
@@ -255,7 +256,7 @@ extern void PolyPrint(const Poly* p);
  * @param[in] p : polynomial
  * @return free term of the polynomial
  */
-extern inline poly_coeff_t PolyGetConstTerm(const Poly* p);
+extern poly_coeff_t PolyGetConstTerm(const Poly* p);
 
  /**
   * Converts polynomial @p p to human-readable char sequence.
@@ -263,7 +264,7 @@ extern inline poly_coeff_t PolyGetConstTerm(const Poly* p);
   *
   * Polynomials are converted using the following assumptions:
   * - print only fully simplified terms of polynomial of form
-  *     @f$C*x_0^a_0*x_1^a_1*\ldots*x_n^a_n@f$
+  *     @f$C*x_0^{a_0}*x_1^{a_1}*\ldots*x_n^{a_n}@f$
   * - encode variables using charactes a..z
   *     Variable with index 0 is a, 1 is b etc.
   * - encode math operators in ascii manner e.g `x^a * x^b`
