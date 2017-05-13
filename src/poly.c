@@ -7,6 +7,7 @@
 */
 
 #include "poly.h"
+#include "list.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -14,7 +15,7 @@
 * Creates const polynomial from given coefficient
 */
 inline Poly PolyFromCoeff(poly_coeff_t c) {
-    return (Poly){ .c = c, .monos = Lists.new() };
+    return (Poly){ .c = c, .monos = LISTS.new() };
 }
 
 /*
@@ -43,7 +44,7 @@ inline Mono MonoFromPoly(const Poly *p, poly_exp_t e) {
 */
 inline bool PolyIsCoeff(const Poly *p) {
   assert(p != NULL);
-  return Lists.empty(&(p->monos));
+  return LISTS.empty(&(p->monos));
 }
 
 /*
@@ -67,16 +68,16 @@ inline poly_coeff_t PolyGetConstTerm(const Poly* p) {
 */
 void PolyDestroy(Poly *p) {
   if(p==NULL) return;
-  loop_list(&(p->monos), i) {
-    Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    Mono* m = (Mono*) LISTS.getValue(i);
     MonoDestroy(m);
   }
-  loop_list(&(p->monos), i) {
-    Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    Mono* m = (Mono*) LISTS.getValue(i);
     DBG {printf("FREE PolyDestroy %p\n", m);fflush(stdout);}
     free(m);
   }
-  Lists.free(&(p->monos));
+  LISTS.free(&(p->monos));
 }
 
 /*
@@ -105,7 +106,7 @@ void* polyCopier(void* data) {
 */
 Poly PolyClone(const Poly *p) {
   assert(p!=NULL);
-  return (Poly) { .c = p->c, .monos = Lists.deepCopy(&(p->monos), polyCopier) };
+  return (Poly) { .c = p->c, .monos = LISTS.deepCopy(&(p->monos), polyCopier) };
 }
 
 /*
@@ -132,25 +133,25 @@ inline Mono* MonoClonePtr(const Mono *m) {
 Poly PolyAdd(const Poly *p, const Poly *q) {
   assert(p!=NULL);
   assert(q!=NULL);
-  list result = Lists.new();
+  List result = LISTS.new();
 
-  listIterator iq = Lists.begin(&(q->monos));
-  listIterator ip = Lists.begin(&(p->monos));
+  ListIterator iq = LISTS.begin(&(q->monos));
+  ListIterator ip = LISTS.begin(&(p->monos));
   while(ip != NULL || iq != NULL) {
-    Mono* mp = (Mono*) Lists.getValue(ip);
-    Mono* mq = (Mono*) Lists.getValue(iq);
+    Mono* mp = (Mono*) LISTS.getValue(ip);
+    Mono* mq = (Mono*) LISTS.getValue(iq);
     if(mp == NULL) {
-      Lists.pushBack(&result, MonoClonePtr(mq));
-      iq = Lists.next(iq);
+      LISTS.pushBack(&result, MonoClonePtr(mq));
+      iq = LISTS.next(iq);
     } else if(mq == NULL) {
-      Lists.pushBack(&result, MonoClonePtr(mp));
-      ip = Lists.next(ip);
+      LISTS.pushBack(&result, MonoClonePtr(mp));
+      ip = LISTS.next(ip);
     } else if(mp->exp > mq->exp) {
-      Lists.pushBack(&result, MonoClonePtr(mq));
-      iq = Lists.next(iq);
+      LISTS.pushBack(&result, MonoClonePtr(mq));
+      iq = LISTS.next(iq);
     } else if(mp->exp < mq->exp) {
-      Lists.pushBack(&result, MonoClonePtr(mp));
-      ip = Lists.next(ip);
+      LISTS.pushBack(&result, MonoClonePtr(mp));
+      ip = LISTS.next(ip);
     } else {
       Poly polyAddResult = PolyAdd(&(mp->p), &(mq->p));
 
@@ -159,10 +160,10 @@ Poly PolyAdd(const Poly *p, const Poly *q) {
       } else {
         Mono* partialResult = (Mono*) malloc(sizeof(Mono));
         *partialResult = (Mono) { .exp = mp->exp, .p = polyAddResult };
-        Lists.pushBack(&result, partialResult);
+        LISTS.pushBack(&result, partialResult);
       }
-      ip = Lists.next(ip);
-      iq = Lists.next(iq);
+      ip = LISTS.next(ip);
+      iq = LISTS.next(iq);
     }
   }
   return (Poly) { .c = p->c + q->c, .monos = result };
@@ -173,12 +174,12 @@ Poly PolyAdd(const Poly *p, const Poly *q) {
 * terms c*x^0 to 0.
 */
 int PolyExtractConstTermsRec(Poly* p) {
-  if(Lists.empty(&(p->monos))) {
+  if(LISTS.empty(&(p->monos))) {
     const int result = p->c;
     p->c = 0;
     return result;
   }
-  Mono* fst = (Mono*) Lists.first(&(p->monos));
+  Mono* fst = (Mono*) LISTS.first(&(p->monos));
   if(fst->exp == 0) {
     const int result = p->c;
     p->c = 0;
@@ -223,26 +224,26 @@ int PolyInsertMono(Poly* p, Mono* newMono) {
   }
 
 
-  if(Lists.empty(&(p->monos))) {
-    Lists.pushBack(&(p->monos), newMono);
+  if(LISTS.empty(&(p->monos))) {
+    LISTS.pushBack(&(p->monos), newMono);
     return 1;
   }
-  if(((Mono*)Lists.last(&(p->monos)))->exp < newMono->exp) {
-    Lists.pushBack(&(p->monos), newMono);
+  if(((Mono*)LISTS.last(&(p->monos)))->exp < newMono->exp) {
+    LISTS.pushBack(&(p->monos), newMono);
     return 1;
   }
-  if(((Mono*)Lists.first(&(p->monos)))->exp > newMono->exp) {
-    Lists.pushFront(&(p->monos), newMono);
+  if(((Mono*)LISTS.first(&(p->monos)))->exp > newMono->exp) {
+    LISTS.pushFront(&(p->monos), newMono);
     return 1;
   }
 
-  loop_list(&(p->monos), i) {
-    listIterator next = Lists.next(i);
-    Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    ListIterator next = LISTS.next(i);
+    Mono* m = (Mono*) LISTS.getValue(i);
     if(m->exp == newMono->exp) {
       Poly pom = PolyAdd(&(m->p), &(newMono->p));
       if(PolyIsCoeff(&pom) && PolyGetConstTerm(&pom)==0) {
-        Lists.detachElement(&(p->monos), i);
+        LISTS.detachElement(&(p->monos), i);
         PolyDestroy(&pom);
         MonoDestroy(m);
         free(m);
@@ -254,15 +255,15 @@ int PolyInsertMono(Poly* p, Mono* newMono) {
       return 0;
     } else if(newMono->exp > m->exp) {
       if(next == NULL) {
-        Lists.pushBack(&(p->monos), newMono);
+        LISTS.pushBack(&(p->monos), newMono);
         return 1;
-      } else if(newMono->exp < ((Mono*)Lists.getValue(next))->exp) {
-        Lists.insertElementAt(&(p->monos), next, newMono);
+      } else if(newMono->exp < ((Mono*)LISTS.getValue(next))->exp) {
+        LISTS.insertElementAt(&(p->monos), next, newMono);
         return 1;
       }
     }
   }
-  Lists.pushFront(&(p->monos), newMono);
+  LISTS.pushFront(&(p->monos), newMono);
   return 1;
 }
 
@@ -312,8 +313,8 @@ void PolyScaleConst(Poly *p, const poly_coeff_t c)
   assert(p!=NULL);
   if(c == 1) return;
   (p->c) *= c;
-  loop_list(&(p->monos), iter) {
-    Mono* m = (Mono*) Lists.getValue(iter);
+  LOOP_LIST(&(p->monos), iter) {
+    Mono* m = (Mono*) LISTS.getValue(iter);
     PolyScaleConst(&(m->p), c);
   }
 }
@@ -329,25 +330,25 @@ Poly PolyMul(const Poly *p, const Poly *q) {
   Poly result = PolyFromCoeff(0);
 
 if(q->c != 0) {
-    loop_list(&(p->monos), pIter) {
-      Mono* partialResult = MonoClonePtr( (Mono*)Lists.getValue(pIter) );
+    LOOP_LIST(&(p->monos), pIter) {
+      Mono* partialResult = MonoClonePtr( (Mono*)LISTS.getValue(pIter) );
       PolyScaleConst(&(partialResult->p), q->c);
       PolyInsertMonoPtr(&result, partialResult);
     }
   }
 
   if(p->c != 0) {
-    loop_list(&(q->monos), qIter) {
-      Mono* partialResult = MonoClonePtr( (Mono*)Lists.getValue(qIter) );
+    LOOP_LIST(&(q->monos), qIter) {
+      Mono* partialResult = MonoClonePtr( (Mono*)LISTS.getValue(qIter) );
       PolyScaleConst(&(partialResult->p), p->c);
       PolyInsertMonoPtr(&result, partialResult);
     }
   }
 
-  loop_list(&(p->monos), pIter) {
-    loop_list(&(q->monos), qIter) {
-      Mono* mp = (Mono*) Lists.getValue(pIter);
-      Mono* mq = (Mono*) Lists.getValue(qIter);
+  LOOP_LIST(&(p->monos), pIter) {
+    LOOP_LIST(&(q->monos), qIter) {
+      Mono* mp = (Mono*) LISTS.getValue(pIter);
+      Mono* mq = (Mono*) LISTS.getValue(qIter);
       Poly factPartialResult = PolyMul(&(mp->p), &(mq->p));
       Mono partialResult = MonoFromPoly(&factPartialResult, mp->exp + mq->exp);
       PolyInsertMonoValue(&result, partialResult);
@@ -363,8 +364,8 @@ if(q->c != 0) {
 */
 void PolyNegRec(Poly *p) {
   p->c *= -1;
-  loop_list(&(p->monos), i) {
-    Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    Mono* m = (Mono*) LISTS.getValue(i);
     PolyNegRec(&(m->p));
   }
 }
@@ -395,8 +396,8 @@ Poly PolySub(const Poly *p, const Poly *q) {
 poly_exp_t PolyDegByRec(const Poly *p, unsigned var_idcur, unsigned var_idx, int sum_all) {
   poly_exp_t ret = -1;
   if(p->c != 0) ret = 0;
-  loop_list(&(p->monos), i) {
-    Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    Mono* m = (Mono*) LISTS.getValue(i);
     poly_exp_t temp = PolyDegByRec(&(m->p), var_idcur+1, var_idx, sum_all);
     if(var_idcur == var_idx || sum_all) {
       temp += m->exp;
@@ -430,10 +431,10 @@ bool PolyIsEqRec(const Poly *p, const Poly *q) {
     return false;
   }
   if(p==q) return true;
-  listIterator iq = Lists.begin(&(q->monos));
-  loop_list(&(p->monos), ip) {
-    Mono* mp = (Mono*) Lists.getValue(ip);
-    Mono* mq = (Mono*) Lists.getValue(iq);
+  ListIterator iq = LISTS.begin(&(q->monos));
+  LOOP_LIST(&(p->monos), ip) {
+    Mono* mp = (Mono*) LISTS.getValue(ip);
+    Mono* mq = (Mono*) LISTS.getValue(iq);
     if(mp!=mq) {
       if((ip == NULL && iq != NULL) || (ip != NULL && iq == NULL)) {
         return false;
@@ -445,7 +446,7 @@ bool PolyIsEqRec(const Poly *p, const Poly *q) {
         return false;
       }
     }
-    iq = Lists.next(iq);
+    iq = LISTS.next(iq);
   }
   return true;
 }
@@ -486,16 +487,16 @@ Poly PolyAt(const Poly *p, poly_coeff_t x) {
   Poly result = PolyFromCoeff(0);
   result.c += p->c;
 
-  loop_list(&(p->monos), i) {
-    Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    Mono* m = (Mono*) LISTS.getValue(i);
     poly_coeff_t factValue = expCoeff(x, m->exp);
 
     Poly partialResult = PolyClone(&(m->p));
     PolyScaleConst(&partialResult, factValue);
     result.c += partialResult.c;
     partialResult.c = 0;
-    loop_list(&(partialResult.monos), j) {
-      Mono* submono = (Mono*) Lists.getValue(j);
+    LOOP_LIST(&(partialResult.monos), j) {
+      Mono* submono = (Mono*) LISTS.getValue(j);
       Poly pcln = PolyClone(&(submono->p));
       Mono cln = MonoFromPoly(&pcln, submono->exp);
 
@@ -597,8 +598,8 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator, char** wordAccumula
     *accumulator += sprintf(*accumulator, "%s", *wordAccumulatorBeg);
   }
 
-  loop_list(&(p->monos), i) {
-    const Mono* m = (Mono*) Lists.getValue(i);
+  LOOP_LIST(&(p->monos), i) {
+    const Mono* m = (Mono*) LISTS.getValue(i);
     char* wordAccumulatorCp = (char*) malloc(POLY_TO_STRING_BUF_SIZE*sizeof(char));
     char* wordAccumulatorCpBegin = wordAccumulatorCp;
     for(int i=0;i<POLY_TO_STRING_BUF_SIZE;++i) wordAccumulatorCpBegin[i] = (*wordAccumulatorBeg)[i];

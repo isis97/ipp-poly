@@ -36,7 +36,7 @@ typedef int poly_exp_t;
  */
 typedef struct Poly {
   int c; ///< Constant (free) term of polynomial
-  list monos; ///< Dynamically allocated list of monomials
+  List monos; ///< Dynamically allocated list of monomials
 } Poly;
 
 /**

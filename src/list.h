@@ -1,10 +1,10 @@
 /** @file
-*  Bidirectional list implementation (C99 standard)
+*  Bidirectional List implementation (C99 standard)
 *  Usage:
 *  @code
-*     #include <list.h>
+*     #include <List.h>
 *      ...
-*     list l = Lists.new();
+*     List l = Lists.new();
 *  @endcode
 *
 *  All interface sould be accessed through Lists constant.
@@ -19,353 +19,356 @@
 #define __STY_COMMON_LIST_H__
 
 /**
-* @def loop_list(LIST, VAR_NAME)
-* Macro for interating through list
+* @def LOOP_LIST(LIST, VAR_NAME)
+* Macro for interating through List
 *
 * Usage:
 *
 * @code
-*   loop_list(list_object, i) {
-*         void* element = Lists.value(i);
+*   LOOP_LIST(List_object, i) {
+*         ListData element = Lists.value(i);
 *         printf("void_ptr = %p\n", i);
 *    }
 * @endcode
 *
-* @param[in] LIST : list name to be iterated
+* @param[in] LIST : List name to be iterated
 * @param[in] VAR_NAME : name of iterator variable
 */
-#define loop_list(LIST, VAR_NAME) \
-  for(listIterator VAR_NAME = Lists.begin(LIST); VAR_NAME != NULL; VAR_NAME=Lists.next(VAR_NAME))
+#define LOOP_LIST(LIST, VAR_NAME) \
+  for(ListIterator VAR_NAME = LISTS.begin(LIST); VAR_NAME != NULL; VAR_NAME=LISTS.next(VAR_NAME))
 
 /*
-* Declare data types needed for lists implementation
+* Declare data types needed for Lists implementation
 */
+
+/** Data type held by list */
+typedef void* ListData;
 
 /** Lists interface */
-typedef struct lists lists;
+typedef struct ListsInterface ListsInterface;
 
-/** Type of lists nodes (elements) */
-typedef struct listNode listNode;
+/** Type of Lists nodes (elements) */
+typedef struct ListNode ListNode;
 
-/** Type of list root element */
-typedef struct listRoot listRoot;
-
-/**
-* Actual type of list - syntax sugar for writing pointers everywhere
-*/
-typedef listRoot list;
+/** Type of List root element */
+typedef struct ListRoot ListRoot;
 
 /**
-* Root element of the list containing pointers
-* to the two ends of a list
+* Actual type of List - syntax sugar for writing pointers everywhere
 */
-struct listRoot {
-  listNode* begin; ///< pointer to the begining of the list
-  listNode* end; ///< pointer to the end of the list
+typedef ListRoot List;
+
+/**
+* Root element of the List containing pointers
+* to the two ends of a List
+*/
+struct ListRoot {
+  ListNode* begin; ///< pointer to the begining of the List
+  ListNode* end; ///< pointer to the end of the List
 };
 
 /**
 * List iterator
 */
-typedef listNode* listIterator;
+typedef ListNode* ListIterator;
 
 /**
 * Function of type
-* void* -> void*
-* Used as list data manipulators/iterators
+* ListData -> ListData
+* Used as List data manipulators/iterators
 */
-typedef void* (*listModifierFn)(void*);
+typedef ListData (*ListModifierFn)(ListData);
 
 /**
-* Interface for lists
+* Interface for Lists
 */
-struct lists {
+struct ListsInterface {
 
   /**
-  * Create new list
-  * All lists must be then freed with Lists.free(list).
+  * Create new List
+  * All Lists must be then freed with Lists.free(List).
   *
-  * @return list
+  * @return List
   */
-  list (*new)( );
+  List (*new)( );
 
   /**
-  * Destroy given list freeing up memory.
+  * Destroy given List freeing up memory.
   *
-  * WARN: Invalidates listIterators
+  * WARN: Invalidates ListIterators
   *
-  * @param[in] l : list*
+  * @param[in] l : List*
   */
-  void (*free)( list* );
+  void (*free)( List* );
 
   /**
-  * Push @p element to the front of a given list.
-  * Method returns pointer to the newly created list node.
+  * Push @p element to the front of a given List.
+  * Method returns pointer to the newly created List node.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param[in] l : list*
-  * @param[in] element : void*
-  * @return listIterator
+  * @param[in] l : List*
+  * @param[in] element : ListData
+  * @return ListIterator
   */
-  listIterator (*pushFront)( list* l, void* element );
+  ListIterator (*pushFront)( List* l, ListData element );
 
   /**
-  * Push @p element to the end of a given list.
-  * Method returns pointer to the newly created list node.
+  * Push @p element to the end of a given List.
+  * Method returns pointer to the newly created List node.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param[in] l : list*
-  * @param[in] element : void*
-  * @return listIterator
+  * @param[in] l : List*
+  * @param[in] element : ListData
+  * @return ListIterator
   */
-  listIterator (*pushBack)( list* l, void* element );
+  ListIterator (*pushBack)( List* l, ListData element );
 
   /**
-  * Removes first element of the given list or does nothing if it's empty.
+  * Removes first element of the given List or does nothing if it's empty.
   * Returns data pointer held by the removed element.
-  * If no element was removed (list is empty) NULL is returned.
+  * If no element was removed (List is empty) NULL is returned.
   *
-  * WARN: Invalidates listIterators when elment under pointers
+  * WARN: Invalidates ListIterators when elment under pointers
   *       will be popped.
   *
-  * @param[in] l : list*
-  * @return void* (popped element)
+  * @param[in] l : List*
+  * @return ListData (popped element)
   */
-  void* (*popFront)( list* l );
+  ListData (*popFront)( List* l );
 
   /**
-  * Removes last element of the given list or does nothing if it's empty.
+  * Removes last element of the given List or does nothing if it's empty.
   * Returns data pointer held by the removed element.
-  * If no element was removed (list is empty) NULL is returned.
+  * If no element was removed (List is empty) NULL is returned.
   *
-  * WARN: Invalidates listIterators when elment under pointers
+  * WARN: Invalidates ListIterators when elment under pointers
   *       will be popped.
   *
-  * @param[in] l : list*
-  * @return void* (popped element)
+  * @param[in] l : List*
+  * @return ListData (popped element)
   */
-  void* (*popBack)( list* l );
+  ListData (*popBack)( List* l );
 
   /**
-  * Clears the entire list.
+  * Clears the entire List.
   *
-  * WARN: Invalidates listIterators for all elements of list
+  * WARN: Invalidates ListIterators for all elements of List
   *
-  * @param[in] l : list*
+  * @param[in] l : List*
   */
-  void (*clear)( list* l );
+  void (*clear)( List* l );
 
   /**
-  * Obtain first element of the list.
-  * Function return void* pointer to the data under first element.
+  * Obtain first element of the List.
+  * Function return ListData pointer to the data under first element.
   *
-  * If the list is empty NULL is returned.
+  * If the List is empty NULL is returned.
   *
-  * @param[in] l : const list*
+  * @param[in] l : const List*
   * @return first element if exists
   */
-  void* (*first)( const list* l );
+  ListData (*first)( const List* l );
 
   /**
-  * Obtain last element of the list.
-  * Function return void* pointer to the data under first element.
+  * Obtain last element of the List.
+  * Function return ListData pointer to the data under first element.
   *
-  * If the list is empty NULL is returned.
+  * If the List is empty NULL is returned.
   *
-  * @param[in] l : const list*
+  * @param[in] l : const List*
   * @return last element if exists
   */
-  void* (*last)( const list* l );
+  ListData (*last)( const List* l );
 
   /**
-  * Obtain the size of a list.
+  * Obtain the size of a List.
   *
-  * WARN: Works in O(n) time where n is the length of the list
+  * WARN: Works in O(n) time where n is the length of the List
   *
-  * @param[in] l : const list*
-  * @return size of the list
+  * @param[in] l : const List*
+  * @return size of the List
   */
-  int (*size)( const list* l );
+  int (*size)( const List* l );
 
   /**
-  * Check's if list is empty
+  * Check's if List is empty
   *
-  * @param[in] l : const list*
-  * @return If list is empty?
+  * @param[in] l : const List*
+  * @return If List is empty?
   */
-  int (*empty)( const list* l );
+  int (*empty)( const List* l );
 
   /**
-  * Copy the list into a new one.
+  * Copy the List into a new one.
   *
   * WARN: Each element will be a new one, but the data
   *       pointers will be still pointing to the same
   *       memory locations (there're still the same
-  *       objects under void* pointers)
+  *       objects under ListData pointers)
   *
-  * @param[in] l : const list*
-  * @return shallow copy of a given list
+  * @param[in] l : const List*
+  * @return shallow copy of a given List
   */
-  list (*copy)( const list* l );
+  List (*copy)( const List* l );
 
   /**
-  * Performs deep copy of the list returning new one.
-  * The given (void*)->(void*) function is used as assigner.
+  * Performs deep copy of the List returning new one.
+  * The given (ListData)->(ListData) function is used as assigner.
   * The function should create new element value, copy the value of
   * the given one and return pointer to this element.
   *
-  * @param[in] l : const list*
-  * @param[in] elementAllocator : listModifierFn
-  * @return deep copy of a given list
+  * @param[in] l : const List*
+  * @param[in] elementAllocator : ListModifierFn
+  * @return deep copy of a given List
   */
-  list (*deepCopy)( const list* l, listModifierFn assigner );
+  List (*deepCopy)( const List* l, ListModifierFn assigner );
 
   /**
-  * Copy the list @p source into other list -  @p target
+  * Copy the List @p source into other List -  @p target
   *
   * WARN: Each element will be a new one, but the data
   *       pointers will be still pointing to the same
   *       memory locations (there're still the same
-  *       objects under void* pointers)
+  *       objects under ListData pointers)
   *
-  * @param[in] source : const list*
-  * @param[in] target : list*
+  * @param[in] source : const List*
+  * @param[in] target : List*
   */
-  void (*copyInto)( const list* source, list* target );
+  void (*copyInto)( const List* source, List* target );
 
   /**
-  * Iterate through list using given
-  * (void*)->(void*) function.
-  * Function is executed for every list element value
+  * Iterate through List using given
+  * (ListData)->(ListData) function.
+  * Function is executed for every List element value
   * The return value is ignored.
   *
-  * @param[in] l : const list*
-  * @param[in] mappingFunction : listModifierFn
+  * @param[in] l : const List*
+  * @param[in] mappingFunction : ListModifierFn
   */
-  void (*iterate)( const list* l, listModifierFn iterator );
+  void (*iterate)( const List* l, ListModifierFn iterator );
 
   /**
-  * Map list values using given
-  * (void*)->void function
-  * Function is executed for every list element value
+  * Map List values using given
+  * (ListData)->void function
+  * Function is executed for every List element value
   * Then the result of function is assigned to the
   * element's data pointer.
   *
   * NOTICE: Mapping is made in place.
   *
-  * @param[in] l : const list*
-  * @param[in] mappingFunction : listModifierFn
+  * @param[in] l : const List*
+  * @param[in] mappingFunction : ListModifierFn
   */
-  void (*map)( list* l, listModifierFn mapping );
+  void (*map)( List* l, ListModifierFn mapping );
 
   /**
-  * Print given list to stdout.
+  * Print given List to stdout.
   * Prints only adresses of values not exact values.
   *
-  * @param[in] l : const list*
+  * @param[in] l : const List*
   */
-  void (*print)( const list* );
+  void (*print)( const List* );
 
   /**
-  * Print given list to stdout.
+  * Print given List to stdout.
   * Prints only adresses of values not exact values.
-  * Variant displaying new line at the end of stringified list.
+  * Variant displaying new line at the end of stringified List.
   *
-  * @param[in] l : const list*
+  * @param[in] l : const List*
   */
-  void (*println)( const list* l );
+  void (*println)( const List* l );
 
   /**
   * Get the first element container pointer.
-  * If the list is empty then NULL is returned.
+  * If the List is empty then NULL is returned.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param[in] l : const list*
-  * @return listIterator pointing to the list begining
+  * @param[in] l : const List*
+  * @return ListIterator pointing to the List begining
   */
-  listIterator (*begin)( const list* l );
+  ListIterator (*begin)( const List* l );
 
   /**
   * Get the last element container pointer.
-  * If the list is empty then NULL is returned.
+  * If the List is empty then NULL is returned.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param[in] l : const list*
-  * @return listIterator pointing to the list end
+  * @param[in] l : const List*
+  * @return ListIterator pointing to the List end
   */
-  listIterator (*end)( const list* l );
+  ListIterator (*end)( const List* l );
 
   /**
-  * Removes element from the list using given container pointer.
-  * The list parameter MUST BE NON NULL for nodes that are first or last
+  * Removes element from the List using given container pointer.
+  * The List parameter MUST BE NON NULL for nodes that are first or last
   * (isSideElement return true)
   * For all other situations it may be NULL
   *
   * WARN: Invalidates pointers to the removed elements.
   *
-  * @param[in] l : list*
-  * @param[in] node : listIterator
+  * @param[in] l : List*
+  * @param[in] node : ListIterator
   */
-  void (*detachElement)( list* l, listIterator node );
+  void (*detachElement)( List* l, ListIterator node );
 
   /**
   * Create node that is not attached to anything.
   * This functionality may be used in situations when you need
-  * list nodes outside actual list.
+  * List nodes outside actual List.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @return listIterator to that not-attached node
+  * @return ListIterator to that not-attached node
   */
-  listIterator (*newDetachedElement)( );
+  ListIterator (*newDetachedElement)( );
 
   /**
   * Checks if given node is the last or first element.
   *
   * NOTICE: For detached nodes this function returns true
   *         Formally detached nodes are simultaniously
-  *         on the left and right side of the list as they have no
+  *         on the left and right side of the List as they have no
   *         neightbours on any side.
   *
-  * @param[in] node : listIterator
-  * @return If the node is on the left/side of the list
+  * @param[in] node : ListIterator
+  * @return If the node is on the left/side of the List
   */
-  int (*isSideElement)( listIterator node );
+  int (*isSideElement)( ListIterator node );
 
   /**
-  * Inserts list @p source to the left side of @p node of list @p target
+  * Inserts List @p source to the left side of @p node of List @p target
   * leaving @p source empty.
   * Note that @p target MUST BE NON-NULL only when the @p node is first/last
-  * element of the list (isSideElement return true).
+  * element of the List (isSideElement return true).
   * For all other situations it may be NULL
   *
-  * @param[in] target : list*
-  * @param[in] node : listIterator
-  * @param[in] source : list*
+  * @param[in] target : List*
+  * @param[in] node : ListIterator
+  * @param[in] source : List*
   */
-  void (*insertListAt)( list* target, listIterator node, list* source );
+  void (*insertListAt)( List* target, ListIterator node, List* source );
 
   /**
-  * Inserts value  to the left side of @p node of list @p target
+  * Inserts value  to the left side of @p node of List @p target
   *
   * Note that @p target MUST BE NON-NULL only when the @p node is first/last
-  * element of the list (isSideElement return true).
+  * element of the List (isSideElement return true).
   * For all other situations it may be NULL
   *
-  * @param[in] target : list*
-  * @param[in] node : listIterator
-  * @param[in] value : void*
+  * @param[in] target : List*
+  * @param[in] node : ListIterator
+  * @param[in] value : ListData
   */
-  void (*insertElementAt)( list* target, listIterator node, void* value );
+  void (*insertElementAt)( List* target, ListIterator node, ListData value );
 
 
   /**
@@ -373,84 +376,84 @@ struct lists {
   *
   * NOTICE: For detached nodes this function returns true
   *         Formally detached nodes are simultaniously
-  *         on the left and right side of the list as they have no
+  *         on the left and right side of the List as they have no
   *         neightbours on any side.
   *
-  * @param[in] node : listIterator
-  * @return If the node is on the list's end?
+  * @param[in] node : ListIterator
+  * @return If the node is on the List's end?
   */
-  int (*isListEnd)(listIterator);
+  int (*isListEnd)(ListIterator);
 
   /**
   * Checks if given node is the first element.
   *
   * NOTICE: For detached nodes this function returns true
   *         Formally detached nodes are simultaniously
-  *         on the left and right side of the list as they have no
+  *         on the left and right side of the List as they have no
   *         neightbours on any side.
   *
-  * @param[in] node : listIterator
-  * @return If the node is on the list's begining?
+  * @param[in] node : ListIterator
+  * @return If the node is on the List's begining?
   */
-  int (*isListBegin)(listIterator);
+  int (*isListBegin)(ListIterator);
 
   /**
-  * All elements on the right side of @p node are transferred to the new list
+  * All elements on the right side of @p node are transferred to the new List
   * that is returned.
   *
-  * @param l : list*
-  * @param node : listIterator
-  * @return list
+  * @param l : List*
+  * @param node : ListIterator
+  * @return List
   */
-  list (*splitList)( list* l, listIterator node );
+  List (*splitList)( List* l, ListIterator node );
 
   /**
-  * Get next element on the list.
+  * Get next element on the List.
   * Returns NULL if node is the last element.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param node : listIterator
+  * @param node : ListIterator
   * @return next node (the right neighbour of the current node)
   */
-  listIterator (*next)( listIterator node );
+  ListIterator (*next)( ListIterator node );
 
   /**
-  * Get prevous element on the list.
+  * Get prevous element on the List.
   * Returns NULL if node is the last element.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param node : listIterator
+  * @param node : ListIterator
   * @return previous node (the left neighbour of the current node)
   */
-  listIterator (*previous)( listIterator node );
+  ListIterator (*previous)( ListIterator node );
 
   /**
-  * Get value of the list element. Returns void pointer to underlying data.
+  * Get value of the List element. Returns void pointer to underlying data.
   * Returns NULL if element is NULL.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param node : listIterator
+  * @param node : ListIterator
   * @return value under the given node
   */
-  void* (*getValue)( listIterator node );
+  ListData (*getValue)( ListIterator node );
 
   /**
-  * Sets value of the list element.
+  * Sets value of the List element.
   * Does nothing if element is NULL.
   *
-  * NOTICE: All listIterators are valid until used operation does not
+  * NOTICE: All ListIterators are valid until used operation does not
   *         keep pointers validity.
   *
-  * @param node : listIterator
-  * @param value : void*
+  * @param node : ListIterator
+  * @param value : ListData
   */
-  void (*setValue)( listIterator node, void* value );
+  void (*setValue)( ListIterator node, ListData value );
 };
 
 
@@ -458,7 +461,7 @@ struct lists {
 * Lists interface object
 * All functions should be accessed using Lists object
 */
-extern const struct lists Lists;
+extern const struct ListsInterface LISTS;
 
 
 #endif /* __STY_COMMON_LIST_H__ */
