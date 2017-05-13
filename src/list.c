@@ -236,9 +236,71 @@ int IsListEmpty( const List* l ) {
 */
 void CopyListInto( const List* src, List* tgt ) {
   if(src == NULL) return;
+  if(tgt == NULL) return;
+
   LOOP_LIST(src, it) {
     PushBackList(tgt, it->value);
   }
+  return;
+
+
+  /*if(tgt->end != NULL) {
+    printf("END IS NONULL\n"); fflush(stdout);
+    tgt->end->right = &arr[0];
+  } else {
+    printf("> END IS NULL\n"); fflush(stdout);
+  }
+  if(tgt->begin == NULL) {
+    printf("> BEG IS NULL\n"); fflush(stdout);
+    tgt->begin = &arr[0];
+  }
+  arr[0].left = tgt->end;
+  arr[0].right = &arr[1];
+  arr[src_size-1].right = NULL;
+  arr[src_size-1].left = &arr[src_size-2];
+  tgt->end = &arr[src_size-1];
+
+  arr[0].value = 0x00;
+  arr[src_size-1].value = 0x00;
+
+  for(int i=1;i<src_size-1;++i) {
+    arr[i].left = &arr[i-1];
+    arr[i].right = &arr[i+1];
+    arr[i].value = 0x00;
+  }
+  int i = 0;
+  LOOP_LIST(src, iter) {
+    arr[i].value = iter->value;
+    ++i;
+  }
+  printf("DONE.\n"); fflush(stdout);
+  */
+}
+
+/*
+* Print List nodes starting at <l> and going right
+*/
+void PrintListNodes(const ListNode* l) {
+  if(l==NULL) return;
+  printf("%p; ", (ListData)(l->value));
+  PrintListNodes(l->right);
+}
+
+/*
+* Print List nodes of a given List
+*/
+void PrintList(const List* l) {
+  printf("[ ");
+  PrintListNodes(l->begin);
+  printf("] ");
+}
+
+/*
+* Print List nodes of a given List with trailing newline
+*/
+void PrintlnList(const List* l) {
+  PrintList(l);
+  printf("\n");
 }
 
 /*
@@ -290,32 +352,6 @@ List DeepCopyList( const List* l, ListModifierFn assigner ) {
   List ret = CopyList(l);
   MapList(&ret, assigner);
   return ret;
-}
-
-/*
-* Print List nodes starting at <l> and going right
-*/
-void PrintListNodes(const ListNode* l) {
-  if(l==NULL) return;
-  printf("%p; ", (ListData)(l));
-  PrintListNodes(l->right);
-}
-
-/*
-* Print List nodes of a given List
-*/
-void PrintList(const List* l) {
-  printf("[ ");
-  PrintListNodes(l->begin);
-  printf("] ");
-}
-
-/*
-* Print List nodes of a given List with trailing newline
-*/
-void PrintlnList(const List* l) {
-  PrintList(l);
-  printf("\n");
 }
 
 /*

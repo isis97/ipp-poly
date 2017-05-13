@@ -320,6 +320,7 @@ void PolyInsertMonoPtr(Poly* p, Mono* new_mono_ptr) {
   }
 }
 
+
 /*
 * Adds monos to create new polynomial.
 */
@@ -335,13 +336,12 @@ Poly PolyAddMonos(unsigned count, const Mono monos[]) {
 * Multiply two polynomials
 */
 Poly PolyMul(const Poly *p, const Poly *q) {
-
   assert(p!=NULL);
   assert(q!=NULL);
 
   Poly result = PolyFromCoeff(0);
 
-if(q->c != 0) {
+  if(q->c != 0) {
     LOOP_LIST(&(p->monos), pIter) {
       Mono* partialResult = MonoClonePtr( (Mono*)LISTS.getValue(pIter) );
       PolyScaleConst(&(partialResult->p), q->c);
@@ -438,10 +438,11 @@ poly_exp_t PolyDeg(const Poly *p) {
 * Recursive equality test for polynomials
 */
 bool PolyIsEqRec(const Poly *p, const Poly *q) {
+  if(p == q) return true;
   if(p->c != q->c) {
     return false;
   }
-  if(p==q) return true;
+
   ListIterator iq = LISTS.begin(&(q->monos));
   LOOP_LIST(&(p->monos), ip) {
     Mono* mp = (Mono*) LISTS.getValue(ip);
