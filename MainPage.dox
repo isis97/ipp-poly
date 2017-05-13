@@ -7,6 +7,14 @@ Most up-to-date description (in Polish) is available at [Moodle](https://moodle.
 
 ### Short description
 
-Current year exercise was to create polyonomials math interface.
+Current year exercise was to create polyonomials arithmetics interface.
+Egxample basic interface usage:
+
+@code
+  Poly p = PolyFromCoeff(4);
+  p = PolyAdd(&p, &p);
+
+  PolyDestroy(&p);
+@endcode
 
 */

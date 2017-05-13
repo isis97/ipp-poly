@@ -2,18 +2,19 @@
 *  Bidirectional List implementation (C99 standard)
 *  Usage:
 *  @code
-*     #include <List.h>
+*     #include <list.h>
 *      ...
-*     List l = Lists.new();
+*     List l = LISTS.new();
 *  @endcode
 *
-*  All interface sould be accessed through Lists constant.
+*  All interface sould be accessed through ::LISTS constant.
 *
 *  @author Piotr Styczyński <piotrsty1@gmail.com>
 *  @copyright MIT
 *  @date 2017-05-13
 */
 #include "utils.h"
+#include "memalloc.h"
 
 #ifndef __STY_COMMON_LIST_H__
 #define __STY_COMMON_LIST_H__
@@ -35,7 +36,8 @@
 * @param[in] VAR_NAME : name of iterator variable
 */
 #define LOOP_LIST(LIST, VAR_NAME) \
-  for(ListIterator VAR_NAME = LISTS.begin(LIST); VAR_NAME != NULL; VAR_NAME=LISTS.next(VAR_NAME))
+  for(ListIterator VAR_NAME = LISTS.begin(LIST); \
+  VAR_NAME != NULL; VAR_NAME=LISTS.next(VAR_NAME))
 
 /*
 * Declare data types needed for Lists implementation
@@ -52,6 +54,12 @@ typedef struct ListNode ListNode;
 
 /** Type of List root element */
 typedef struct ListRoot ListRoot;
+
+/**
+* Lists interface object
+* All functions should be accessed using Lists object
+*/
+extern const ListsInterface LISTS;
 
 /**
 * Actual type of List - syntax sugar for writing pointers everywhere
@@ -80,7 +88,15 @@ typedef ListNode* ListIterator;
 typedef ListData (*ListModifierFn)(ListData);
 
 /**
-* Interface for Lists
+* Interface for Lists accessible through ::LISTS
+*
+* All operations involving lists should be done indirectly
+* by this interface.
+* Representant of this interface is object ::LISTS
+*
+* All function pointers can be called by using
+* `LISTS.function( args )`
+*
 */
 struct ListsInterface {
 
@@ -456,12 +472,6 @@ struct ListsInterface {
   void (*setValue)( ListIterator node, ListData value );
 };
 
-
-/**
-* Lists interface object
-* All functions should be accessed using Lists object
-*/
-extern const struct ListsInterface LISTS;
 
 
 #endif /* __STY_COMMON_LIST_H__ */

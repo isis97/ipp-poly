@@ -13,11 +13,12 @@
 *  @copyright MIT
 *  @date 2017-05-13
 */
-#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include "utils.h"
+#include "memalloc.h"
 #include "list.h"
 
 
@@ -36,8 +37,7 @@ struct ListNode {
 * Makes new List from given values
 */
 ListNode* MakeListNode(ListNode* left, ListData value, ListNode* right) {
-  ListNode* l = malloc(sizeof(ListNode));
-  DBG {printf("MALLOC Lists.makeListNode %p\n", l);fflush(stdout);}
+  ListNode* l = MALLOCATE(ListNode);
   l->right = right;
   l->left = left;
   l->value = value;
@@ -62,8 +62,8 @@ void FreeListRecLeft(ListNode* l) {
   if(l->left != NULL) {
     FreeListRecLeft(l->left);
   }
-  DBG {printf("FREE Lists.freeListRecLeft %p\n", l);fflush(stdout);}
-  free(l);
+  DBG {printf("FREE Lists.MFREEListRecLeft %p\n", l);fflush(stdout);}
+  MFREE(l);
 }
 
 /*
@@ -123,7 +123,7 @@ ListData PopFrontList(List* l) {
       (l->end) = NULL;
     }
     DBG {printf("FREE Lists.popFrontList %p\n", l->begin);fflush(stdout);}
-    free(l->begin);
+    MFREE(l->begin);
     (l->begin) = new_begin;
     return val;
   }
@@ -147,8 +147,7 @@ ListData PopBackList(List* l) {
     } else {
       (l->begin) = NULL;
     }
-    DBG {printf("MALLOC Lists.popBackList %p\n", l->end);fflush(stdout);}
-    free(l->end);
+    MFREE(l->end);
     (l->end) = new_end;
     return val;
   }
@@ -175,13 +174,13 @@ void FreeList(List* l) {
   ListNode* it = l->begin;
   while(it != NULL) {
     ListNode* next = it->right;
-    DBG {printf("FREE Lists.freeList %p\n", it);fflush(stdout);}
-    free(it);
+    DBG {printf("FREE Lists.MFREEList %p\n", it);fflush(stdout);}
+    MFREE(it);
     it = next;
   }
   l->begin = NULL;
   l->end = NULL;
-  //free(l);
+  //MFREE(l);
 }
 
 /*
@@ -355,14 +354,14 @@ void DetachListElement( List* l, ListNode* node ) {
     l->end = left_neighbour;
   }
   DBG {printf("FREE Lists.detachListElement %p\n", node);fflush(stdout);}
-  free(node);
+  MFREE(node);
 }
 
 /*
 * Create new element container not attached to any List.
 */
 ListNode* NewListDetachedElement() {
-  ListNode* ret = malloc(sizeof(ListNode));
+  ListNode* ret = MALLOCATE(ListNode);
   DBG {printf("MALLOC Lists.newListDetachedElement %p\n", ret);fflush(stdout);}
   ret->left = NULL;
   ret->right = NULL;
@@ -460,12 +459,12 @@ List SplitList( List* src, ListNode* splitter ) {
     return ret;
   }
 
-  ListNode* realEnd = src->end;
+  ListNode* real_end = src->end;
   src->end = splitter;
 
   if(splitter->right != NULL) {
     ret.begin = splitter->right;
-    ret.end = realEnd;
+    ret.end = real_end;
     splitter->right = NULL;
     ret.begin->left = NULL;
   }
