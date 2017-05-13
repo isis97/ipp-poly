@@ -126,10 +126,25 @@ Mono* MonoClonePtr(const Mono *m) {
   return mono;
 }
 
+
 /*
-* Adding two polynomials
+* Multiplies all coefficients in polynomial by const factor c
 */
-Poly PolyAdd(const Poly *p, const Poly *q) {
+void PolyScaleConst(Poly *p, const poly_coeff_t c) {
+  assert(p!=NULL);
+  if(c == 1) return;
+  (p->c) *= c;
+  LOOP_LIST(&(p->monos), iter) {
+    Mono* m = (Mono*) LISTS.getValue(iter);
+    PolyScaleConst(&(m->p), c);
+  }
+}
+
+
+/*
+* Adding two polynomials with optional scaling of second parameter
+*/
+Poly PolyAddScaled(const Poly *p, const Poly *q, const poly_coeff_t c) {
   assert(p!=NULL);
   assert(q!=NULL);
   List result = LISTS.new();
@@ -140,19 +155,25 @@ Poly PolyAdd(const Poly *p, const Poly *q) {
     Mono* mp = (Mono*) LISTS.getValue(ip);
     Mono* mq = (Mono*) LISTS.getValue(iq);
     if(mp == NULL) {
-      LISTS.pushBack(&result, MonoClonePtr(mq));
+      Mono* new_mono = MonoClonePtr(mq);
+      PolyScaleConst(&(new_mono->p), c);
+      LISTS.pushBack(&result, new_mono);
       iq = LISTS.next(iq);
     } else if(mq == NULL) {
-      LISTS.pushBack(&result, MonoClonePtr(mp));
+      Mono* new_mono = MonoClonePtr(mp);
+      LISTS.pushBack(&result, new_mono);
       ip = LISTS.next(ip);
     } else if(mp->exp > mq->exp) {
-      LISTS.pushBack(&result, MonoClonePtr(mq));
+      Mono* new_mono = MonoClonePtr(mq);
+      PolyScaleConst(&(new_mono->p), c);
+      LISTS.pushBack(&result, new_mono);
       iq = LISTS.next(iq);
     } else if(mp->exp < mq->exp) {
-      LISTS.pushBack(&result, MonoClonePtr(mp));
+      Mono* new_mono = MonoClonePtr(mp);
+      LISTS.pushBack(&result, new_mono);
       ip = LISTS.next(ip);
     } else {
-      Poly polyAddResult = PolyAdd(&(mp->p), &(mq->p));
+      Poly polyAddResult = PolyAddScaled(&(mp->p), &(mq->p), c);
 
       if(PolyIsCoeff(&polyAddResult) && PolyGetConstTerm(&polyAddResult) == 0) {
         PolyDestroy(&polyAddResult);
@@ -165,7 +186,14 @@ Poly PolyAdd(const Poly *p, const Poly *q) {
       iq = LISTS.next(iq);
     }
   }
-  return (Poly) { .c = p->c + q->c, .monos = result };
+  return (Poly) { .c = p->c + (q->c)*c, .monos = result };
+}
+
+/*
+* Adding two polynomials
+*/
+Poly PolyAdd(const Poly *p, const Poly *q) {
+  return PolyAddScaled(p, q, 1);
 }
 
 /*
@@ -304,19 +332,6 @@ Poly PolyAddMonos(unsigned count, const Mono monos[]) {
 }
 
 /*
-* Multiplies all coefficients in polynomial by const factor c
-*/
-void PolyScaleConst(Poly *p, const poly_coeff_t c) {
-  assert(p!=NULL);
-  if(c == 1) return;
-  (p->c) *= c;
-  LOOP_LIST(&(p->monos), iter) {
-    Mono* m = (Mono*) LISTS.getValue(iter);
-    PolyScaleConst(&(m->p), c);
-  }
-}
-
-/*
 * Multiply two polynomials
 */
 Poly PolyMul(const Poly *p, const Poly *q) {
@@ -380,10 +395,7 @@ Poly PolyNeg(const Poly *p) {
 * Substract two polynomials
 */
 Poly PolySub(const Poly *p, const Poly *q) {
-  Poly qNeg = PolyNeg(q);
-  Poly ret = PolyAdd(p, &qNeg);
-  PolyDestroy(&qNeg);
-  return ret;
+  return PolyAddScaled(p, q, -1);
 }
 
 /*
