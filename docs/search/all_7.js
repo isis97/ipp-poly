@@ -6,5 +6,5 @@ var searchData=
   ['islistend',['isListEnd',['../structListsInterface.html#a2a00fa2fe722a3ffa95ebce1d61931ec',1,'ListsInterface']]],
   ['issideelement',['isSideElement',['../structListsInterface.html#a3c89aaf958c73e8402e93d0f2c63d61a',1,'ListsInterface']]],
   ['iterate',['iterate',['../structListsInterface.html#aacb106446c55df7d569af48bd97df941',1,'ListsInterface']]],
-  ['ipp_2dbin_2dtree',['ipp-bin-tree',['../md__home_students_inf_p_ps386038_Dokumenty_ipp_wielomiany_ipp-poly_README.html',1,'']]]
+  ['ipp_2dbin_2dpoly',['ipp-bin-poly',['../md__home_students_inf_p_ps386038_Dokumenty_ipp_wielomiany_ipp-poly_README.html',1,'']]]
 ];
