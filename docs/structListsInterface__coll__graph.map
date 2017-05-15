@@ -1,0 +1,4 @@
+<map id="ListsInterface" name="ListsInterface">
+<area shape="rect" id="node2" href="$structListNode.html" title="Structure representing one element of List It&#39;s got two neighbours (may be NULL) Element also contain..." alt="" coords="61,7,140,33"/>
+<area shape="rect" id="node3" href="$structListRoot.html" title="Root element of the List containing pointers to the two ends of a List. " alt="" coords="207,150,282,177"/>
+</map>

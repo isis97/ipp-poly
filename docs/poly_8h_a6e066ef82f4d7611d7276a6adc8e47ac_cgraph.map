@@ -1,0 +1,4 @@
+<map id="PolyMul" name="PolyMul">
+<area shape="rect" id="node2" href="$poly_8h.html#ab0f1b75fc00db6a314eb81297ac418bd" title="Creates a new const polynomial. " alt="" coords="127,5,243,32"/>
+<area shape="rect" id="node3" href="$poly_8h.html#ab52ba221e57a62ab956ad738d308cf4c" title="Creates monomial p * x^e. " alt="" coords="127,56,244,83"/>
+</map>
