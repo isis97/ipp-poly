@@ -1,6 +1,6 @@
 # ipp-bin-poly
 
-See [Doxygen documentation](http://styczynski.ml/ipp-poly)
+See [Doxygen documentation](http://styczynski.ml/ipp-poly/poly_8h.html)
 
 Written in pure C99
 Student's work (individual programistic project) at Warsaw University
