@@ -1,10 +1,13 @@
-# ipp-bin-tree
+# ipp-bin-poly
+
+See [Doxygen documentation](http://styczynski.ml/ipp-poly)
+
 Written in pure C99
 Student's work (individual programistic project) at Warsaw University
 Project purpose was to implement a polynomials interface based on bidirectional dynamically allocated lists.
 
 ## Building
-Clone the repo using `git clone https://github.com/isis97/ipp-poly` 
+Clone the repo using `git clone https://github.com/isis97/ipp-poly`
 * Build files using    `mkdir release && cd release && cmake .. && make`
 * Run tests using      `./test_poly`
 
