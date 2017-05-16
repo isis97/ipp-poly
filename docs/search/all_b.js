@@ -25,11 +25,11 @@ var searchData=
   ['polysub',['PolySub',['../poly_8h.html#abd180157f87e1da3669356026bbddc5e',1,'poly.c']]],
   ['polytostring',['PolyToString',['../poly_8h.html#a06a8219dcddb2c336ae75feeb982eab1',1,'poly.c']]],
   ['polyzero',['PolyZero',['../poly_8h.html#aa6e25a7385dbece09e93a16943053405',1,'poly.c']]],
-  ['popback',['popBack',['../structListsInterface.html#ac71fc8bd30f9682537218f6bcd90517c',1,'ListsInterface']]],
-  ['popfront',['popFront',['../structListsInterface.html#a68f1eb0c70c4f642aaedc077f0dc94b2',1,'ListsInterface']]],
-  ['previous',['previous',['../structListsInterface.html#a3fa8ffa82b0d039c8e5e6696a7dbfb2c',1,'ListsInterface']]],
-  ['print',['print',['../structListsInterface.html#a9d86025eccd4ad82d9edaa5a93ebde00',1,'ListsInterface']]],
-  ['println',['println',['../structListsInterface.html#ad7fe2b397280806816568b16b8354e48',1,'ListsInterface']]],
-  ['pushback',['pushBack',['../structListsInterface.html#a0ec6a12a86ada94acaf831b557e7df37',1,'ListsInterface']]],
-  ['pushfront',['pushFront',['../structListsInterface.html#ad9cfd6ee30fbcbc5bb0db7fe9b05ee53',1,'ListsInterface']]]
+  ['popback',['popBack',['../structListsInterface.html#a0e209af5e073ba76d27c2a37c57c9841',1,'ListsInterface']]],
+  ['popfront',['popFront',['../structListsInterface.html#a87913a38b3264e32c8907a72192e5b1f',1,'ListsInterface']]],
+  ['previous',['previous',['../structListsInterface.html#a27f81900ce2fc95f67fb3aa1bfae6060',1,'ListsInterface']]],
+  ['print',['print',['../structListsInterface.html#a8b5eab5803a841a92c21770c076f1345',1,'ListsInterface']]],
+  ['println',['println',['../structListsInterface.html#abb7c5948872530b85a748681089c806f',1,'ListsInterface']]],
+  ['pushback',['pushBack',['../structListsInterface.html#ac2ad7f909fb09e0fbd398485bbcda388',1,'ListsInterface']]],
+  ['pushfront',['pushFront',['../structListsInterface.html#a92d9a9a8787b3bcc4134dfb7b85911be',1,'ListsInterface']]]
 ];

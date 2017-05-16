@@ -1,0 +1,6 @@
+<map id="PolyAdd" name="PolyAdd">
+<area shape="rect" id="node2" href="$poly_8h.html#af763a0b4e08a6d76e72e45c770ad0109" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="151,5,247,32"/>
+<area shape="rect" id="node3" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="128,56,271,83"/>
+<area shape="rect" id="node4" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="149,107,249,133"/>
+<area shape="rect" id="node5" href="$poly_8h.html#a4b70a601a1401421abe2332cef3068c3" title="Removes monomial from memory. " alt="" coords="319,107,427,133"/>
+</map>
