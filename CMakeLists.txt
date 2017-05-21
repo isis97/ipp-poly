@@ -10,18 +10,18 @@ endif ()
 set_property(GLOBAL PROPERTY RULE_MESSAGES OFF)
 
 # We do want to see make calling things
-set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 # Compilation flags
 set(CMAKE_C_FLAGS "-std=c11 -Wall -Wextra")
-set(CMAKE_C_FLAGS_RELEASE "-std=c11 -Wall -Wextra -O3 -DNDEBUG")
-set(CMAKE_C_FLAGS_DEBUG "-std=c11 -Wall -Wextra -g -O0 ")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_C_FLAGS_DEBUG "-g -O0 ")
 
 # Inclusion directories
 include_directories(./)
 
 # Specify source files
-add_executable(test_poly ./src/memalloc.c ./src/list.c ./src/poly.c ./src/utils.c ./tests/test_poly.c)
+add_executable(test_poly ./src/dynamic_lists.c ./src/poly.c ./tests/test_poly.c)
 
 # Check doxygen installation
 find_package(Doxygen)

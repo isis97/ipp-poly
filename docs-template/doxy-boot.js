@@ -300,4 +300,16 @@ $( document ).ready(function() {
 
   $("#main-menu").detach().appendTo(".navbar");
 
+  $(".dyncontent").each(function(index){
+  	var thiz = $(this);
+    var innerHtml = thiz.html();
+    var wrapper = ""
+    if(thiz.height() > 299) {
+      wrapper = $("<p><a data-toggle=\"collapse\" href=\"#collapseDyncontent"+index+"\" aria-expanded=\"false\" aria-controls=\"collapseExample\"> See hiden content...</a></p><div class=\"collapse\" id=\"collapseDyncontent"+index+"\"><div class=\"dyncontent-wrapper card card-block\">"+innerHtml+"</div></div>");
+    } else {
+      wrapper = $("<div class=\"dyncontent-wrapper card card-block\">"+innerHtml+"</div>");
+    }
+    thiz.replaceWith(wrapper);
+  });
+
 });

@@ -72,18 +72,19 @@ $(function() {
 
 <p>Interface of polynomials.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="memalloc_8h_source.html">memalloc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="list_8h_source.html">list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for poly.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="poly_8h__incl.png" border="0" usemap="#poly_8h" alt=""/></div>
 <map name="poly_8h" id="poly_8h">
-<area shape="rect" id="node5" href="memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="307,155,402,181"/>
-<area shape="rect" id="node6" href="list_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="361,80,415,107"/>
+<area shape="rect" id="node6" href="memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="282,155,377,181"/>
+<area shape="rect" id="node7" href="dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="236,80,359,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -133,33 +134,33 @@ typedef struct <a class="el" href="structPoly.html">Poly</a>&#160;</td><td class
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab0f1b75fc00db6a314eb81297ac418bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPoly.html">Poly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#ab0f1b75fc00db6a314eb81297ac418bd">PolyFromCoeff</a> (<a class="el" href="poly_8h.html#a912dfe9f745aee73326baa53126fd650">poly_coeff_t</a> c)</td></tr>
-<tr class="memdesc:ab0f1b75fc00db6a314eb81297ac418bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new const polynomial.  <a href="#ab0f1b75fc00db6a314eb81297ac418bd">More...</a><br /></td></tr>
-<tr class="separator:ab0f1b75fc00db6a314eb81297ac418bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6e25a7385dbece09e93a16943053405"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPoly.html">Poly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#aa6e25a7385dbece09e93a16943053405">PolyZero</a> ()</td></tr>
-<tr class="memdesc:aa6e25a7385dbece09e93a16943053405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new zero polynomial.  <a href="#aa6e25a7385dbece09e93a16943053405">More...</a><br /></td></tr>
-<tr class="separator:aa6e25a7385dbece09e93a16943053405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab52ba221e57a62ab956ad738d308cf4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMono.html">Mono</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#ab52ba221e57a62ab956ad738d308cf4c">MonoFromPoly</a> (const <a class="el" href="structPoly.html">Poly</a> *p, <a class="el" href="poly_8h.html#a8aeff364e4fc97a215cfe70e36e14c14">poly_exp_t</a> e)</td></tr>
-<tr class="memdesc:ab52ba221e57a62ab956ad738d308cf4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates monomial <code>p * x^e</code>.  <a href="#ab52ba221e57a62ab956ad738d308cf4c">More...</a><br /></td></tr>
-<tr class="separator:ab52ba221e57a62ab956ad738d308cf4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af763a0b4e08a6d76e72e45c770ad0109"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#af763a0b4e08a6d76e72e45c770ad0109">PolyIsCoeff</a> (const <a class="el" href="structPoly.html">Poly</a> *p)</td></tr>
-<tr class="memdesc:af763a0b4e08a6d76e72e45c770ad0109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given polynomial is a coefficient (i.e.  <a href="#af763a0b4e08a6d76e72e45c770ad0109">More...</a><br /></td></tr>
-<tr class="separator:af763a0b4e08a6d76e72e45c770ad0109"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1423fbce57a30306d7b59746e49357cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a1423fbce57a30306d7b59746e49357cb">PolyIsZero</a> (const <a class="el" href="structPoly.html">Poly</a> *p)</td></tr>
-<tr class="memdesc:a1423fbce57a30306d7b59746e49357cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given polynomial is const and equal to 0.  <a href="#a1423fbce57a30306d7b59746e49357cb">More...</a><br /></td></tr>
-<tr class="separator:a1423fbce57a30306d7b59746e49357cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac5948dc82c3a64c55c60831991f7864"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structPoly.html">Poly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#aac5948dc82c3a64c55c60831991f7864">PolyFromCoeff</a> (<a class="el" href="poly_8h.html#a912dfe9f745aee73326baa53126fd650">poly_coeff_t</a> c)</td></tr>
+<tr class="memdesc:aac5948dc82c3a64c55c60831991f7864"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new const polynomial.  <a href="#aac5948dc82c3a64c55c60831991f7864">More...</a><br /></td></tr>
+<tr class="separator:aac5948dc82c3a64c55c60831991f7864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3322e269841d2c72b02b2ebcb8b025d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structPoly.html">Poly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#ae3322e269841d2c72b02b2ebcb8b025d">PolyZero</a> ()</td></tr>
+<tr class="memdesc:ae3322e269841d2c72b02b2ebcb8b025d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new zero polynomial.  <a href="#ae3322e269841d2c72b02b2ebcb8b025d">More...</a><br /></td></tr>
+<tr class="separator:ae3322e269841d2c72b02b2ebcb8b025d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77afaf1c55c01efef58077d28ba69814"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structMono.html">Mono</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a77afaf1c55c01efef58077d28ba69814">MonoFromPoly</a> (const <a class="el" href="structPoly.html">Poly</a> *p, <a class="el" href="poly_8h.html#a8aeff364e4fc97a215cfe70e36e14c14">poly_exp_t</a> e)</td></tr>
+<tr class="memdesc:a77afaf1c55c01efef58077d28ba69814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates monomial <code>p * x^e</code>.  <a href="#a77afaf1c55c01efef58077d28ba69814">More...</a><br /></td></tr>
+<tr class="separator:a77afaf1c55c01efef58077d28ba69814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98512498bdb4679278532e930b727755"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a98512498bdb4679278532e930b727755">PolyIsCoeff</a> (const <a class="el" href="structPoly.html">Poly</a> *p)</td></tr>
+<tr class="memdesc:a98512498bdb4679278532e930b727755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given polynomial is a coefficient (i.e.  <a href="#a98512498bdb4679278532e930b727755">More...</a><br /></td></tr>
+<tr class="separator:a98512498bdb4679278532e930b727755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf60733ab55efe5130da77928fe941d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#aaaf60733ab55efe5130da77928fe941d">PolyIsZero</a> (const <a class="el" href="structPoly.html">Poly</a> *p)</td></tr>
+<tr class="memdesc:aaaf60733ab55efe5130da77928fe941d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given polynomial is const and equal to 0.  <a href="#aaaf60733ab55efe5130da77928fe941d">More...</a><br /></td></tr>
+<tr class="separator:aaaf60733ab55efe5130da77928fe941d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54faf738d9aa518d1e1d6db6c3142e3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a> (<a class="el" href="structPoly.html">Poly</a> *p)</td></tr>
 <tr class="memdesc:a54faf738d9aa518d1e1d6db6c3142e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes polynomial from memory.  <a href="#a54faf738d9aa518d1e1d6db6c3142e3f">More...</a><br /></td></tr>
 <tr class="separator:a54faf738d9aa518d1e1d6db6c3142e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b70a601a1401421abe2332cef3068c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a4b70a601a1401421abe2332cef3068c3">MonoDestroy</a> (<a class="el" href="structMono.html">Mono</a> *m)</td></tr>
-<tr class="memdesc:a4b70a601a1401421abe2332cef3068c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes monomial from memory.  <a href="#a4b70a601a1401421abe2332cef3068c3">More...</a><br /></td></tr>
-<tr class="separator:a4b70a601a1401421abe2332cef3068c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bcd38ab44736f6e230b04b4eaec000a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a0bcd38ab44736f6e230b04b4eaec000a">MonoDestroy</a> (<a class="el" href="structMono.html">Mono</a> *m)</td></tr>
+<tr class="memdesc:a0bcd38ab44736f6e230b04b4eaec000a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes monomial from memory.  <a href="#a0bcd38ab44736f6e230b04b4eaec000a">More...</a><br /></td></tr>
+<tr class="separator:a0bcd38ab44736f6e230b04b4eaec000a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a295cdeb61c077ea6f408208d331271cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPoly.html">Poly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a295cdeb61c077ea6f408208d331271cd">PolyClone</a> (const <a class="el" href="structPoly.html">Poly</a> *p)</td></tr>
 <tr class="memdesc:a295cdeb61c077ea6f408208d331271cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs deep-copy of a given polynomial.  <a href="#a295cdeb61c077ea6f408208d331271cd">More...</a><br /></td></tr>
 <tr class="separator:a295cdeb61c077ea6f408208d331271cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c92599725440603b91c9ca7bd94b435"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMono.html">Mono</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a0c92599725440603b91c9ca7bd94b435">MonoClone</a> (const <a class="el" href="structMono.html">Mono</a> *m)</td></tr>
-<tr class="memdesc:a0c92599725440603b91c9ca7bd94b435"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs deep-copy of a given monomial.  <a href="#a0c92599725440603b91c9ca7bd94b435">More...</a><br /></td></tr>
-<tr class="separator:a0c92599725440603b91c9ca7bd94b435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f50698912e4cdcf402f7df555f3abad"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structMono.html">Mono</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#a5f50698912e4cdcf402f7df555f3abad">MonoClone</a> (const <a class="el" href="structMono.html">Mono</a> *m)</td></tr>
+<tr class="memdesc:a5f50698912e4cdcf402f7df555f3abad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs deep-copy of a given monomial.  <a href="#a5f50698912e4cdcf402f7df555f3abad">More...</a><br /></td></tr>
+<tr class="separator:a5f50698912e4cdcf402f7df555f3abad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd55434759a46901958eb5ad79b78217"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPoly.html">Poly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="poly_8h.html#afd55434759a46901958eb5ad79b78217">PolyAdd</a> (const <a class="el" href="structPoly.html">Poly</a> *p, const <a class="el" href="structPoly.html">Poly</a> *q)</td></tr>
 <tr class="memdesc:afd55434759a46901958eb5ad79b78217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds two polynomials.  <a href="#afd55434759a46901958eb5ad79b78217">More...</a><br /></td></tr>
 <tr class="separator:afd55434759a46901958eb5ad79b78217"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,20 +225,28 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0c92599725440603b91c9ca7bd94b435"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c92599725440603b91c9ca7bd94b435">&#9670;&nbsp;</a></span>MonoClone()</h2>
+<a id="a5f50698912e4cdcf402f7df555f3abad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f50698912e4cdcf402f7df555f3abad">&#9670;&nbsp;</a></span>MonoClone()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structMono.html">Mono</a> MonoClone </td>
+          <td class="memname">static <a class="el" href="structMono.html">Mono</a> MonoClone </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structMono.html">Mono</a> *&#160;</td>
           <td class="paramname"><em>m</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Performs deep-copy of a given monomial. </p>
@@ -251,31 +260,49 @@ Functions</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="poly_8h_a0c92599725440603b91c9ca7bd94b435_cgraph.png" border="0" usemap="#poly_8h_a0c92599725440603b91c9ca7bd94b435_cgraph" alt=""/></div>
-<map name="poly_8h_a0c92599725440603b91c9ca7bd94b435_cgraph" id="poly_8h_a0c92599725440603b91c9ca7bd94b435_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="175,5,261,32"/>
-<area shape="rect" id="node3" href="poly_8h.html#af763a0b4e08a6d76e72e45c770ad0109" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="170,56,266,83"/>
-<area shape="rect" id="node4" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="147,107,289,133"/>
-<area shape="rect" id="node5" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="168,157,268,184"/>
+<div class="center"><img src="poly_8h_a5f50698912e4cdcf402f7df555f3abad_cgraph.png" border="0" usemap="#poly_8h_a5f50698912e4cdcf402f7df555f3abad_cgraph" alt=""/></div>
+<map name="poly_8h_a5f50698912e4cdcf402f7df555f3abad_cgraph" id="poly_8h_a5f50698912e4cdcf402f7df555f3abad_cgraph">
+<area shape="rect" id="node2" href="poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="321,99,406,126"/>
+<area shape="rect" id="node3" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="464,71,607,98"/>
+<area shape="rect" id="node4" href="poly_8h.html#afd55434759a46901958eb5ad79b78217" title="Adds two polynomials. " alt="" coords="326,42,401,68"/>
+<area shape="rect" id="node5" href="poly_8h.html#a2524e2a4b48bacaa8c9d88775c915766" title="Sums array of monomials of size count. " alt="" coords="147,162,263,188"/>
+<area shape="rect" id="node6" href="poly_8h.html#a6e066ef82f4d7611d7276a6adc8e47ac" title="Multiplicates two polynomials. " alt="" coords="169,212,240,239"/>
+<area shape="rect" id="node7" href="poly_8h.html#a79194d594bd19fae18c7d72a30364b18" title="Returns a polynomial with changes sign. " alt="" coords="167,263,242,290"/>
+<area shape="rect" id="node8" href="poly_8h.html#abd180157f87e1da3669356026bbddc5e" title="Substracts two polynomials. " alt="" coords="167,314,242,340"/>
+<area shape="rect" id="node9" href="poly_8h.html#a9c917ac6b026ba1d799dc61703eff13a" title="Determines the degree of polynomial with respect to the given variable (&#45;1 for zero polynomial)..." alt="" coords="159,364,250,391"/>
+<area shape="rect" id="node10" href="poly_8h.html#a10020aea410f5a07374537dbb431d1fe" title="Returns degree of polynomial (&#45;1 for zero polynomial) " alt="" coords="167,415,242,442"/>
+<area shape="rect" id="node11" href="poly_8h.html#a1183de0891f01c491dca485e284a1e6c" title="Checks equality of two polynomials. " alt="" coords="166,466,243,492"/>
+<area shape="rect" id="node12" href="poly_8h.html#a22d1e18efcb1373fe1f0fae77856f488" title="Calculates value of polynomial in point x. " alt="" coords="173,516,237,543"/>
+<area shape="rect" id="node13" href="poly_8h.html#ae62168124597c49da7285fcb1bde6702" title="Prints polynomial p to standard output (stdout) using PolySprintf format. " alt="" coords="165,567,244,594"/>
+<area shape="rect" id="node14" href="poly_8h.html#a06a8219dcddb2c336ae75feeb982eab1" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="311,618,416,644"/>
+<area shape="rect" id="node15" href="poly_8h.html#af1e4cf81b4fa6c788c3eafa9f8b8aedc" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="489,643,582,670"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a4b70a601a1401421abe2332cef3068c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b70a601a1401421abe2332cef3068c3">&#9670;&nbsp;</a></span>MonoDestroy()</h2>
+<a id="a0bcd38ab44736f6e230b04b4eaec000a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bcd38ab44736f6e230b04b4eaec000a">&#9670;&nbsp;</a></span>MonoDestroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MonoDestroy </td>
+          <td class="memname">static void MonoDestroy </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structMono.html">Mono</a> *&#160;</td>
           <td class="paramname"><em>m</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Removes monomial from memory. </p>
@@ -288,23 +315,26 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="poly_8h_a4b70a601a1401421abe2332cef3068c3_cgraph.png" border="0" usemap="#poly_8h_a4b70a601a1401421abe2332cef3068c3_cgraph" alt=""/></div>
-<map name="poly_8h_a4b70a601a1401421abe2332cef3068c3_cgraph" id="poly_8h_a4b70a601a1401421abe2332cef3068c3_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="303,5,403,32"/>
-<area shape="rect" id="node3" href="poly_8h.html#a0c92599725440603b91c9ca7bd94b435" title="Performs deep&#45;copy of a given monomial. " alt="" coords="161,68,255,95"/>
+<div class="center"><img src="poly_8h_a0bcd38ab44736f6e230b04b4eaec000a_cgraph.png" border="0" usemap="#poly_8h_a0bcd38ab44736f6e230b04b4eaec000a_cgraph" alt=""/></div>
+<map name="poly_8h_a0bcd38ab44736f6e230b04b4eaec000a_cgraph" id="poly_8h_a0bcd38ab44736f6e230b04b4eaec000a_cgraph">
+<area shape="rect" id="node2" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="295,5,395,32"/>
+<area shape="rect" id="node3" href="poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="161,68,247,95"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="ab52ba221e57a62ab956ad738d308cf4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab52ba221e57a62ab956ad738d308cf4c">&#9670;&nbsp;</a></span>MonoFromPoly()</h2>
+<a id="a77afaf1c55c01efef58077d28ba69814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77afaf1c55c01efef58077d28ba69814">&#9670;&nbsp;</a></span>MonoFromPoly()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structMono.html">Mono</a> MonoFromPoly </td>
+          <td class="memname">static <a class="el" href="structMono.html">Mono</a> MonoFromPoly </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structPoly.html">Poly</a> *&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -321,6 +351,11 @@ Here is the call graph for this function:</div>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Creates monomial <code>p * x^e</code>. </p>
@@ -378,10 +413,19 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="poly_8h_afd55434759a46901958eb5ad79b78217_cgraph.png" border="0" usemap="#poly_8h_afd55434759a46901958eb5ad79b78217_cgraph" alt=""/></div>
 <map name="poly_8h_afd55434759a46901958eb5ad79b78217_cgraph" id="poly_8h_afd55434759a46901958eb5ad79b78217_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#af763a0b4e08a6d76e72e45c770ad0109" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="151,5,247,32"/>
-<area shape="rect" id="node3" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="128,56,271,83"/>
-<area shape="rect" id="node4" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="149,107,249,133"/>
-<area shape="rect" id="node5" href="poly_8h.html#a4b70a601a1401421abe2332cef3068c3" title="Removes monomial from memory. " alt="" coords="319,107,427,133"/>
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a9bbefb39991e7b5c7dec668a4ec818cd" title="Check&#39;s if List is empty. " alt="" coords="337,42,424,68"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#abf682ff0fcfd8a2f445e97e2cbef226c" title="Obtain first element of the List. " alt="" coords="166,42,241,68"/>
+<area shape="rect" id="node4" href="poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="155,92,251,119"/>
+<area shape="rect" id="node5" href="dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="150,143,257,170"/>
+<area shape="rect" id="node6" href="dynamic__lists_8h.html#a9193a988ff3901b184d42e4e3e23662f" title="Obtain last element of the List. " alt="" coords="167,194,240,220"/>
+<area shape="rect" id="node7" href="dynamic__lists_8h.html#afc7dc1135f5665f58cf1e6578b280d67" title="Push element to the front of a given List. " alt="" coords="148,244,259,271"/>
+<area shape="rect" id="node8" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1" title="Get next element on the List. " alt="" coords="166,295,241,322"/>
+<area shape="rect" id="node9" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="329,396,433,423"/>
+<area shape="rect" id="node10" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="132,396,275,423"/>
+<area shape="rect" id="node11" href="dynamic__lists_8h.html#a47fcfe41743503915226dc7878ec4a62" title="Removes element from the List using given container pointer. " alt="" coords="131,447,275,474"/>
+<area shape="rect" id="node12" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="153,498,253,524"/>
+<area shape="rect" id="node13" href="poly_8h.html#a0bcd38ab44736f6e230b04b4eaec000a" title="Removes monomial from memory. " alt="" coords="327,498,435,524"/>
+<area shape="rect" id="node14" href="dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6" title="Inserts value to the left side of node of List target. " alt="" coords="128,599,279,626"/>
 </map>
 </div>
 
@@ -429,7 +473,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="poly_8h_a2524e2a4b48bacaa8c9d88775c915766_cgraph.png" border="0" usemap="#poly_8h_a2524e2a4b48bacaa8c9d88775c915766_cgraph" alt=""/></div>
 <map name="poly_8h_a2524e2a4b48bacaa8c9d88775c915766_cgraph" id="poly_8h_a2524e2a4b48bacaa8c9d88775c915766_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#ab0f1b75fc00db6a314eb81297ac418bd" title="Creates a new const polynomial. " alt="" coords="169,5,285,32"/>
+<area shape="rect" id="node2" href="poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="169,5,285,32"/>
 </map>
 </div>
 
@@ -476,11 +520,12 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="poly_8h_a22d1e18efcb1373fe1f0fae77856f488_cgraph.png" border="0" usemap="#poly_8h_a22d1e18efcb1373fe1f0fae77856f488_cgraph" alt=""/></div>
 <map name="poly_8h_a22d1e18efcb1373fe1f0fae77856f488_cgraph" id="poly_8h_a22d1e18efcb1373fe1f0fae77856f488_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#ab0f1b75fc00db6a314eb81297ac418bd" title="Creates a new const polynomial. " alt="" coords="131,5,247,32"/>
-<area shape="rect" id="node3" href="poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="146,56,231,83"/>
-<area shape="rect" id="node4" href="poly_8h.html#ab52ba221e57a62ab956ad738d308cf4c" title="Creates monomial p * x^e. " alt="" coords="131,107,247,133"/>
-<area shape="rect" id="node5" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="139,157,239,184"/>
-<area shape="rect" id="node6" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="117,208,260,235"/>
+<area shape="rect" id="node2" href="poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="117,5,233,32"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="472,107,576,133"/>
+<area shape="rect" id="node4" href="poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="133,157,218,184"/>
+<area shape="rect" id="node5" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="281,208,424,235"/>
+<area shape="rect" id="node6" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="303,107,403,133"/>
+<area shape="rect" id="node7" href="poly_8h.html#a77afaf1c55c01efef58077d28ba69814" title="Creates monomial p * x^e. " alt="" coords="117,259,233,285"/>
 </map>
 </div>
 
@@ -510,6 +555,23 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>copy of a given polynomial </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="poly_8h_a295cdeb61c077ea6f408208d331271cd_cgraph.png" border="0" usemap="#poly_8h_a295cdeb61c077ea6f408208d331271cd_cgraph" alt=""/></div>
+<map name="poly_8h_a295cdeb61c077ea6f408208d331271cd_cgraph" id="poly_8h_a295cdeb61c077ea6f408208d331271cd_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a8384df53d914573338a70025a645ffb0" title="Performs deep copy of the List returning new one. " alt="" coords="139,99,249,126"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="313,48,386,75"/>
+<area shape="rect" id="node4" href="dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="467,23,574,50"/>
+<area shape="rect" id="node5" href="poly_8h.html#a5f50698912e4cdcf402f7df555f3abad" title="Performs deep&#45;copy of a given monomial. " alt="" coords="303,212,396,239"/>
+<area shape="rect" id="node6" href="poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="449,180,592,207"/>
+<area shape="rect" id="node7" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="297,300,401,327"/>
+<area shape="rect" id="node8" href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc" title="Get the first element container pointer. " alt="" coords="154,376,234,403"/>
+<area shape="rect" id="node9" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1" title="Get next element on the List. " alt="" coords="157,427,231,454"/>
+<area shape="rect" id="node10" href="poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="146,478,242,504"/>
+<area shape="rect" id="node11" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="144,275,244,302"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -538,6 +600,16 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>degree if polynomial <code>p</code> </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="poly_8h_a10020aea410f5a07374537dbb431d1fe_cgraph.png" border="0" usemap="#poly_8h_a10020aea410f5a07374537dbb431d1fe_cgraph" alt=""/></div>
+<map name="poly_8h_a10020aea410f5a07374537dbb431d1fe_cgraph" id="poly_8h_a10020aea410f5a07374537dbb431d1fe_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc" title="Get the first element container pointer. " alt="" coords="140,5,220,32"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="128,56,232,83"/>
+<area shape="rect" id="node4" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1" title="Get next element on the List. " alt="" coords="143,107,217,133"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -612,26 +684,37 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="poly_8h_a54faf738d9aa518d1e1d6db6c3142e3f_cgraph.png" border="0" usemap="#poly_8h_a54faf738d9aa518d1e1d6db6c3142e3f_cgraph" alt=""/></div>
 <map name="poly_8h_a54faf738d9aa518d1e1d6db6c3142e3f_cgraph" id="poly_8h_a54faf738d9aa518d1e1d6db6c3142e3f_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#a4b70a601a1401421abe2332cef3068c3" title="Removes monomial from memory. " alt="" coords="153,5,261,32"/>
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="155,5,259,32"/>
+<area shape="rect" id="node3" href="poly_8h.html#a0bcd38ab44736f6e230b04b4eaec000a" title="Removes monomial from memory. " alt="" coords="153,56,261,83"/>
+<area shape="rect" id="node4" href="dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="159,107,255,133"/>
+<area shape="rect" id="node5" href="poly_8h.html#a5f50698912e4cdcf402f7df555f3abad" title="Performs deep&#45;copy of a given monomial. " alt="" coords="161,157,254,184"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="ab0f1b75fc00db6a314eb81297ac418bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0f1b75fc00db6a314eb81297ac418bd">&#9670;&nbsp;</a></span>PolyFromCoeff()</h2>
+<a id="aac5948dc82c3a64c55c60831991f7864"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac5948dc82c3a64c55c60831991f7864">&#9670;&nbsp;</a></span>PolyFromCoeff()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structPoly.html">Poly</a> PolyFromCoeff </td>
+          <td class="memname">static <a class="el" href="structPoly.html">Poly</a> PolyFromCoeff </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="poly_8h.html#a912dfe9f745aee73326baa53126fd650">poly_coeff_t</a>&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Creates a new const polynomial. </p>
@@ -642,6 +725,14 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>polynomial </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="poly_8h_aac5948dc82c3a64c55c60831991f7864_cgraph.png" border="0" usemap="#poly_8h_aac5948dc82c3a64c55c60831991f7864_cgraph" alt=""/></div>
+<map name="poly_8h_aac5948dc82c3a64c55c60831991f7864_cgraph" id="poly_8h_aac5948dc82c3a64c55c60831991f7864_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="169,5,243,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -672,20 +763,28 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="af763a0b4e08a6d76e72e45c770ad0109"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af763a0b4e08a6d76e72e45c770ad0109">&#9670;&nbsp;</a></span>PolyIsCoeff()</h2>
+<a id="a98512498bdb4679278532e930b727755"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98512498bdb4679278532e930b727755">&#9670;&nbsp;</a></span>PolyIsCoeff()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool PolyIsCoeff </td>
+          <td class="memname">static bool PolyIsCoeff </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structPoly.html">Poly</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Checks if given polynomial is a coefficient (i.e. </p>
@@ -697,6 +796,14 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If polynomial is const? </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="poly_8h_a98512498bdb4679278532e930b727755_cgraph.png" border="0" usemap="#poly_8h_a98512498bdb4679278532e930b727755_cgraph" alt=""/></div>
+<map name="poly_8h_a98512498bdb4679278532e930b727755_cgraph" id="poly_8h_a98512498bdb4679278532e930b727755_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a9bbefb39991e7b5c7dec668a4ec818cd" title="Check&#39;s if List is empty. " alt="" coords="149,5,236,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -738,20 +845,28 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a1423fbce57a30306d7b59746e49357cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1423fbce57a30306d7b59746e49357cb">&#9670;&nbsp;</a></span>PolyIsZero()</h2>
+<a id="aaaf60733ab55efe5130da77928fe941d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf60733ab55efe5130da77928fe941d">&#9670;&nbsp;</a></span>PolyIsZero()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool PolyIsZero </td>
+          <td class="memname">static bool PolyIsZero </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structPoly.html">Poly</a> *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Checks if a given polynomial is const and equal to 0. </p>
@@ -765,9 +880,10 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="poly_8h_a1423fbce57a30306d7b59746e49357cb_cgraph.png" border="0" usemap="#poly_8h_a1423fbce57a30306d7b59746e49357cb_cgraph" alt=""/></div>
-<map name="poly_8h_a1423fbce57a30306d7b59746e49357cb_cgraph" id="poly_8h_a1423fbce57a30306d7b59746e49357cb_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#af763a0b4e08a6d76e72e45c770ad0109" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="144,5,240,32"/>
+<div class="center"><img src="poly_8h_aaaf60733ab55efe5130da77928fe941d_cgraph.png" border="0" usemap="#poly_8h_aaaf60733ab55efe5130da77928fe941d_cgraph" alt=""/></div>
+<map name="poly_8h_aaaf60733ab55efe5130da77928fe941d_cgraph" id="poly_8h_aaaf60733ab55efe5130da77928fe941d_cgraph">
+<area shape="rect" id="node2" href="poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="146,5,242,32"/>
+<area shape="rect" id="node3" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="144,56,244,83"/>
 </map>
 </div>
 
@@ -814,8 +930,9 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="poly_8h_a6e066ef82f4d7611d7276a6adc8e47ac_cgraph.png" border="0" usemap="#poly_8h_a6e066ef82f4d7611d7276a6adc8e47ac_cgraph" alt=""/></div>
 <map name="poly_8h_a6e066ef82f4d7611d7276a6adc8e47ac_cgraph" id="poly_8h_a6e066ef82f4d7611d7276a6adc8e47ac_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#ab0f1b75fc00db6a314eb81297ac418bd" title="Creates a new const polynomial. " alt="" coords="124,5,240,32"/>
-<area shape="rect" id="node3" href="poly_8h.html#ab52ba221e57a62ab956ad738d308cf4c" title="Creates monomial p * x^e. " alt="" coords="124,56,240,83"/>
+<area shape="rect" id="node2" href="poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="124,5,240,32"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="130,56,234,83"/>
+<area shape="rect" id="node4" href="poly_8h.html#a77afaf1c55c01efef58077d28ba69814" title="Creates monomial p * x^e. " alt="" coords="124,107,240,133"/>
 </map>
 </div>
 
@@ -973,6 +1090,14 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>p - q</code> </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="poly_8h_abd180157f87e1da3669356026bbddc5e_cgraph.png" border="0" usemap="#poly_8h_abd180157f87e1da3669356026bbddc5e_cgraph" alt=""/></div>
+<map name="poly_8h_abd180157f87e1da3669356026bbddc5e_cgraph" id="poly_8h_abd180157f87e1da3669356026bbddc5e_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="128,5,232,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -1013,19 +1138,27 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="aa6e25a7385dbece09e93a16943053405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6e25a7385dbece09e93a16943053405">&#9670;&nbsp;</a></span>PolyZero()</h2>
+<a id="ae3322e269841d2c72b02b2ebcb8b025d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3322e269841d2c72b02b2ebcb8b025d">&#9670;&nbsp;</a></span>PolyZero()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structPoly.html">Poly</a> PolyZero </td>
+          <td class="memname">static <a class="el" href="structPoly.html">Poly</a> PolyZero </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Creates a new zero polynomial. </p>
@@ -1034,9 +1167,9 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="poly_8h_aa6e25a7385dbece09e93a16943053405_cgraph.png" border="0" usemap="#poly_8h_aa6e25a7385dbece09e93a16943053405_cgraph" alt=""/></div>
-<map name="poly_8h_aa6e25a7385dbece09e93a16943053405_cgraph" id="poly_8h_aa6e25a7385dbece09e93a16943053405_cgraph">
-<area shape="rect" id="node2" href="poly_8h.html#ab0f1b75fc00db6a314eb81297ac418bd" title="Creates a new const polynomial. " alt="" coords="132,5,248,32"/>
+<div class="center"><img src="poly_8h_ae3322e269841d2c72b02b2ebcb8b025d_cgraph.png" border="0" usemap="#poly_8h_ae3322e269841d2c72b02b2ebcb8b025d_cgraph" alt=""/></div>
+<map name="poly_8h_ae3322e269841d2c72b02b2ebcb8b025d_cgraph" id="poly_8h_ae3322e269841d2c72b02b2ebcb8b025d_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="132,5,205,32"/>
 </map>
 </div>
 
@@ -1051,7 +1184,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 16 2017 14:32:01 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 21 2017 19:07:58 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

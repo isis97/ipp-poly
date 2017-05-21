@@ -430,3 +430,10 @@ span.SRScope {
   color: black;
   font-weight: bold;
 }
+
+/* DYNCONTENT WRAPPER */
+
+.dyncontent-wrapper {
+  border-left: darkslateblue solid 5px;
+  margin-left: -15px;
+}

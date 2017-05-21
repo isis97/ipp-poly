@@ -6,6 +6,10 @@
 *  @date 2017-05-13
 */
 
+#include <stdlib.h>
+#include <errno.h>
+#include <assert.h>
+
 #ifndef __STY_COMMON_MEMALLOC_H__
 #define __STY_COMMON_MEMALLOC_H__
 
@@ -49,7 +53,18 @@ FreeMemoryBlock((POINTER));
 * @param[in] size : int
 * @return void* to allocated memory block
 */
-extern void* AllocateMemoryBlock(int size);
+static inline void* AllocateMemoryBlock(int size) {
+  assert(size > 0);
+
+  int old_errno = errno;
+  errno = 0;
+  void* data = malloc(size);
+  assert(errno == 0);
+  assert(data != NULL);
+  errno = old_errno;
+
+  return data;
+}
 
 /**
 * Function allocating @p count block each of size @p size bytes.
@@ -60,7 +75,19 @@ extern void* AllocateMemoryBlock(int size);
 * @param[in] size : int
 * @return void* to allocated memory array
 */
-extern void* AllocateMemoryBlockArray(int count, int size);
+static inline void* AllocateMemoryBlockArray(int count, int size) {
+  assert(count > 0);
+  assert(size > 0);
+
+  int old_errno = errno;
+  errno = 0;
+  void* data = calloc(count, size);
+  assert(errno == 0);
+  assert(data != NULL);
+  errno = old_errno;
+
+  return data;
+}
 
 /**
 * Function deallocating data pointed by @p p
@@ -69,6 +96,13 @@ extern void* AllocateMemoryBlockArray(int count, int size);
 *
 * @param[in] p : void*
 */
-extern void FreeMemoryBlock(void* p);
+static inline void FreeMemoryBlock(void* p) {
+  assert(p != NULL);
+  int old_errno = errno;
+  errno = 0;
+  free(p);
+  assert(errno == 0);
+  errno = old_errno;
+}
 
 #endif /* __STY_COMMON_MEMALLOC_H__ */

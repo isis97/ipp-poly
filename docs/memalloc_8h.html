@@ -70,13 +70,21 @@ $(function() {
 
 <p>Error-detecing memory allocators.  
 <a href="#details">More...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for memalloc.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="memalloc_8h__incl.png" border="0" usemap="#memalloc_8h" alt=""/></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="memalloc_8h__dep__incl.png" border="0" usemap="#memalloc_8hdep" alt=""/></div>
 <map name="memalloc_8hdep" id="memalloc_8hdep">
-<area shape="rect" id="node2" href="list_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="5,80,60,107"/>
-<area shape="rect" id="node3" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="35,155,95,181"/>
+<area shape="rect" id="node2" href="dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node3" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="85,155,147,181"/>
 </map>
 </div>
 </div>
@@ -84,27 +92,27 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a352605fdb4f664499514b710d7fd5e3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a352605fdb4f664499514b710d7fd5e3b">MALLOCATE</a>(STRUCT)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#aa039821e6a69c081cda5c5ae2f6db700">AllocateMemoryBlock</a>(sizeof(STRUCT)) )</td></tr>
+<tr class="memitem:a352605fdb4f664499514b710d7fd5e3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a352605fdb4f664499514b710d7fd5e3b">MALLOCATE</a>(STRUCT)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a8759b7242487020d180b752a073dbbc0">AllocateMemoryBlock</a>(sizeof(STRUCT)) )</td></tr>
 <tr class="memdesc:a352605fdb4f664499514b710d7fd5e3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro giving value of pointer to the allocated structure <code>STRUCT</code>.  <a href="#a352605fdb4f664499514b710d7fd5e3b">More...</a><br /></td></tr>
 <tr class="separator:a352605fdb4f664499514b710d7fd5e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e148a46c005b498cdb38a58dcfa1e91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a7e148a46c005b498cdb38a58dcfa1e91">MALLOCATE_ARRAY</a>(STRUCT,  LEN)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a7801631a1c7a6fcec9fd4aba81c0c8db">AllocateMemoryBlockArray</a>((LEN), sizeof(STRUCT)) )</td></tr>
+<tr class="memitem:a7e148a46c005b498cdb38a58dcfa1e91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a7e148a46c005b498cdb38a58dcfa1e91">MALLOCATE_ARRAY</a>(STRUCT,  LEN)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a>((LEN), sizeof(STRUCT)) )</td></tr>
 <tr class="memdesc:a7e148a46c005b498cdb38a58dcfa1e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro giving value of pointer to the allocated array of size <code>LEN</code> of structures <code>STRUCT</code>.  <a href="#a7e148a46c005b498cdb38a58dcfa1e91">More...</a><br /></td></tr>
 <tr class="separator:a7e148a46c005b498cdb38a58dcfa1e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa411913e9e83211a1c94a468349cd84a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#aa411913e9e83211a1c94a468349cd84a">MFREE</a>(POINTER)&#160;&#160;&#160;<a class="el" href="memalloc_8h.html#ad8ed73c26437fd76f7347ff864bbdbe6">FreeMemoryBlock</a>((POINTER));</td></tr>
+<tr class="memitem:aa411913e9e83211a1c94a468349cd84a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#aa411913e9e83211a1c94a468349cd84a">MFREE</a>(POINTER)&#160;&#160;&#160;<a class="el" href="memalloc_8h.html#ab74ceb0242dcb6e709099ae544f2b5dc">FreeMemoryBlock</a>((POINTER));</td></tr>
 <tr class="memdesc:aa411913e9e83211a1c94a468349cd84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro freeing data pointed by <code>POINTER</code>.  <a href="#aa411913e9e83211a1c94a468349cd84a">More...</a><br /></td></tr>
 <tr class="separator:aa411913e9e83211a1c94a468349cd84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa039821e6a69c081cda5c5ae2f6db700"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#aa039821e6a69c081cda5c5ae2f6db700">AllocateMemoryBlock</a> (int size)</td></tr>
-<tr class="memdesc:aa039821e6a69c081cda5c5ae2f6db700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function allocating <code>size</code> bytes.  <a href="#aa039821e6a69c081cda5c5ae2f6db700">More...</a><br /></td></tr>
-<tr class="separator:aa039821e6a69c081cda5c5ae2f6db700"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7801631a1c7a6fcec9fd4aba81c0c8db"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a7801631a1c7a6fcec9fd4aba81c0c8db">AllocateMemoryBlockArray</a> (int count, int size)</td></tr>
-<tr class="memdesc:a7801631a1c7a6fcec9fd4aba81c0c8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function allocating <code>count</code> block each of size <code>size</code> bytes.  <a href="#a7801631a1c7a6fcec9fd4aba81c0c8db">More...</a><br /></td></tr>
-<tr class="separator:a7801631a1c7a6fcec9fd4aba81c0c8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8ed73c26437fd76f7347ff864bbdbe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#ad8ed73c26437fd76f7347ff864bbdbe6">FreeMemoryBlock</a> (void *p)</td></tr>
-<tr class="memdesc:ad8ed73c26437fd76f7347ff864bbdbe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function deallocating data pointed by <code>p</code>.  <a href="#ad8ed73c26437fd76f7347ff864bbdbe6">More...</a><br /></td></tr>
-<tr class="separator:ad8ed73c26437fd76f7347ff864bbdbe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8759b7242487020d180b752a073dbbc0"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a8759b7242487020d180b752a073dbbc0">AllocateMemoryBlock</a> (int size)</td></tr>
+<tr class="memdesc:a8759b7242487020d180b752a073dbbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function allocating <code>size</code> bytes.  <a href="#a8759b7242487020d180b752a073dbbc0">More...</a><br /></td></tr>
+<tr class="separator:a8759b7242487020d180b752a073dbbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fdcf770f5b7c8ac57a7c41f72e3518d"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a> (int count, int size)</td></tr>
+<tr class="memdesc:a1fdcf770f5b7c8ac57a7c41f72e3518d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function allocating <code>count</code> block each of size <code>size</code> bytes.  <a href="#a1fdcf770f5b7c8ac57a7c41f72e3518d">More...</a><br /></td></tr>
+<tr class="separator:a1fdcf770f5b7c8ac57a7c41f72e3518d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab74ceb0242dcb6e709099ae544f2b5dc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#ab74ceb0242dcb6e709099ae544f2b5dc">FreeMemoryBlock</a> (void *p)</td></tr>
+<tr class="memdesc:ab74ceb0242dcb6e709099ae544f2b5dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function deallocating data pointed by <code>p</code>.  <a href="#ab74ceb0242dcb6e709099ae544f2b5dc">More...</a><br /></td></tr>
+<tr class="separator:ab74ceb0242dcb6e709099ae544f2b5dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Error-detecing memory allocators. </p>
@@ -123,7 +131,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">STRUCT</td><td>)</td>
-          <td>&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#aa039821e6a69c081cda5c5ae2f6db700">AllocateMemoryBlock</a>(sizeof(STRUCT)) )</td>
+          <td>&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a8759b7242487020d180b752a073dbbc0">AllocateMemoryBlock</a>(sizeof(STRUCT)) )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -154,7 +162,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a7801631a1c7a6fcec9fd4aba81c0c8db">AllocateMemoryBlockArray</a>((LEN), sizeof(STRUCT)) )</td>
+          <td></td><td>&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a>((LEN), sizeof(STRUCT)) )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -175,7 +183,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">POINTER</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="memalloc_8h.html#ad8ed73c26437fd76f7347ff864bbdbe6">FreeMemoryBlock</a>((POINTER));</td>
+          <td>&#160;&#160;&#160;<a class="el" href="memalloc_8h.html#ab74ceb0242dcb6e709099ae544f2b5dc">FreeMemoryBlock</a>((POINTER));</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -186,20 +194,28 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aa039821e6a69c081cda5c5ae2f6db700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa039821e6a69c081cda5c5ae2f6db700">&#9670;&nbsp;</a></span>AllocateMemoryBlock()</h2>
+<a id="a8759b7242487020d180b752a073dbbc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8759b7242487020d180b752a073dbbc0">&#9670;&nbsp;</a></span>AllocateMemoryBlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void* AllocateMemoryBlock </td>
+          <td class="memname">static void* AllocateMemoryBlock </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function allocating <code>size</code> bytes. </p>
@@ -214,14 +230,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7801631a1c7a6fcec9fd4aba81c0c8db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7801631a1c7a6fcec9fd4aba81c0c8db">&#9670;&nbsp;</a></span>AllocateMemoryBlockArray()</h2>
+<a id="a1fdcf770f5b7c8ac57a7c41f72e3518d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fdcf770f5b7c8ac57a7c41f72e3518d">&#9670;&nbsp;</a></span>AllocateMemoryBlockArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void* AllocateMemoryBlockArray </td>
+          <td class="memname">static void* AllocateMemoryBlockArray </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>count</em>, </td>
@@ -238,6 +257,11 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function allocating <code>count</code> block each of size <code>size</code> bytes. </p>
@@ -253,20 +277,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad8ed73c26437fd76f7347ff864bbdbe6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8ed73c26437fd76f7347ff864bbdbe6">&#9670;&nbsp;</a></span>FreeMemoryBlock()</h2>
+<a id="ab74ceb0242dcb6e709099ae544f2b5dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab74ceb0242dcb6e709099ae544f2b5dc">&#9670;&nbsp;</a></span>FreeMemoryBlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void FreeMemoryBlock </td>
+          <td class="memname">static void FreeMemoryBlock </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Function deallocating data pointed by <code>p</code>. </p>
@@ -289,7 +321,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 16 2017 14:32:01 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 21 2017 19:07:57 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

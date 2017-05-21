@@ -9,11 +9,12 @@
 #ifndef __STY_COMMON_POLY_H__
 #define __STY_COMMON_POLY_H__
 
+#include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include "memalloc.h"
-#include "list.h"
+#include "dynamic_lists.h"
 
 /**
 * @def POLY_TO_STRING_BUF_SIZE
@@ -58,7 +59,9 @@ typedef struct Mono
  * @param[in] c : const value of polynomial
  * @return polynomial
  */
-extern Poly PolyFromCoeff(poly_coeff_t c);
+static inline Poly PolyFromCoeff(poly_coeff_t c) {
+  return (Poly){ .c = c, .monos = ListNew() };
+}
 
 /**
  * Creates a new zero polynomial.
@@ -66,7 +69,9 @@ extern Poly PolyFromCoeff(poly_coeff_t c);
  *
  * @return polynomial
  */
-extern Poly PolyZero();
+static inline Poly PolyZero() {
+  return (Poly){ .c = 0, .monos = ListNew() };
+}
 
 /**
  * Creates monomial `p * x^e`.
@@ -80,7 +85,9 @@ extern Poly PolyZero();
  * @param[in] e : exponent
  * @return monomial `p * x^e`
  */
-extern Mono MonoFromPoly(const Poly *p, poly_exp_t e);
+static inline Mono MonoFromPoly(const Poly *p, poly_exp_t e) {
+    return (Mono) { .exp = e, .p = *p };
+}
 
 /**
  * Checks if given polynomial is a coefficient
@@ -89,7 +96,10 @@ extern Mono MonoFromPoly(const Poly *p, poly_exp_t e);
  * @param[in] p : polynomial
  * @return If polynomial is const?
  */
-extern bool PolyIsCoeff(const Poly *p);
+static inline bool PolyIsCoeff(const Poly *p) {
+  assert(p != NULL);
+  return ListEmpty(&(p->monos));
+}
 
 /**
  * Checks if a given polynomial is const and equal to 0.
@@ -97,21 +107,29 @@ extern bool PolyIsCoeff(const Poly *p);
  * @param[in] p : polynomial
  * @return If polynomial is equal to zero?
  */
-extern bool PolyIsZero(const Poly *p);
+static inline bool PolyIsZero(const Poly *p) {
+  assert(p!=NULL);
+  if(!PolyIsCoeff(p)) return false;
+  return p->c == 0;
+}
+
 
 /**
  * Removes polynomial from memory.
  *
  * @param[in] p : polynomial
  */
-extern void PolyDestroy(Poly *p);
+void PolyDestroy(Poly *p);
 
 /**
  * Removes monomial from memory.
  *
  * @param[in] m : monomial
  */
-extern void MonoDestroy(Mono *m);
+static inline void MonoDestroy(Mono *m) {
+  if(m==NULL) return;
+  PolyDestroy(&(m->p));
+}
 
 /**
  * Performs deep-copy of a given polynomial.
@@ -119,7 +137,7 @@ extern void MonoDestroy(Mono *m);
  * @param[in] p : polynomial
  * @return copy of a given polynomial
  */
-extern Poly PolyClone(const Poly *p);
+Poly PolyClone(const Poly *p);
 
 /**
  * Performs deep-copy of a given monomial
@@ -127,7 +145,10 @@ extern Poly PolyClone(const Poly *p);
  * @param[in] m : monomial
  * @return copy of a given monomial
  */
-extern Mono MonoClone(const Mono *m);
+static inline Mono MonoClone(const Mono *m) {
+  assert(m!=NULL);
+  return (Mono) {.exp = m->exp, .p = PolyClone(&(m->p))};
+}
 
 /**
  * Adds two polynomials.
@@ -137,7 +158,7 @@ extern Mono MonoClone(const Mono *m);
  * @param[in] q : polynomial
  * @return `p + q`
  */
-extern Poly PolyAdd(const Poly *p, const Poly *q);
+Poly PolyAdd(const Poly *p, const Poly *q);
 
 /**
  * Sums array of monomials of size @p count.
@@ -153,7 +174,7 @@ extern Poly PolyAdd(const Poly *p, const Poly *q);
  * @param[in] monos : array of monomials
  * @return polynomial that is a sum of given monomials
  */
-extern Poly PolyAddMonos(unsigned count, const Mono monos[]);
+Poly PolyAddMonos(unsigned count, const Mono monos[]);
 
 /**
  * Multiplicates two polynomials.
@@ -163,7 +184,7 @@ extern Poly PolyAddMonos(unsigned count, const Mono monos[]);
  * @param[in] q : polynomial
  * @return `p * q`
  */
-extern Poly PolyMul(const Poly *p, const Poly *q);
+Poly PolyMul(const Poly *p, const Poly *q);
 
 /**
  * Returns a polynomial with changes sign.
@@ -172,7 +193,7 @@ extern Poly PolyMul(const Poly *p, const Poly *q);
  * @param[in] p : polynomial
  * @return `-p`
  */
-extern Poly PolyNeg(const Poly *p);
+Poly PolyNeg(const Poly *p);
 
 /**
  * Substracts two polynomials.
@@ -182,7 +203,7 @@ extern Poly PolyNeg(const Poly *p);
  * @param[in] q : polynomial
  * @return `p - q`
  */
-extern Poly PolySub(const Poly *p, const Poly *q);
+Poly PolySub(const Poly *p, const Poly *q);
 
 /**
  * Determines the degree of polynomial with respect to the given variable
@@ -205,7 +226,7 @@ extern Poly PolySub(const Poly *p, const Poly *q);
  * @param[in] var_idx : index of variable
  * @return degree of polynomial @p p with respect to variable with index @p var_idx
  */
-extern poly_exp_t PolyDegBy(const Poly *p, unsigned var_idx);
+poly_exp_t PolyDegBy(const Poly *p, unsigned var_idx);
 
 /**
  * Returns degree of polynomial
@@ -217,7 +238,7 @@ extern poly_exp_t PolyDegBy(const Poly *p, unsigned var_idx);
  * @param[in] p : polynomial
  * @return degree if polynomial @p p
  */
-extern poly_exp_t PolyDeg(const Poly *p);
+poly_exp_t PolyDeg(const Poly *p);
 
 /**
  * Checks equality of two polynomials.
@@ -226,7 +247,7 @@ extern poly_exp_t PolyDeg(const Poly *p);
  * @param[in] q : polynomial
  * @return `p = q`
  */
-extern bool PolyIsEq(const Poly *p, const Poly *q);
+bool PolyIsEq(const Poly *p, const Poly *q);
 
 /**
  * Calculates value of polynomial in point @p x.
@@ -240,7 +261,7 @@ extern bool PolyIsEq(const Poly *p, const Poly *q);
  * @param[in] x
  * @return @f$p(x, x_0, x_1, \ldots)@f$
  */
-extern Poly PolyAt(const Poly *p, poly_coeff_t x);
+Poly PolyAt(const Poly *p, poly_coeff_t x);
 
  /**
   * Prints polynomial @p p to standard output (stdout)
@@ -248,7 +269,7 @@ extern Poly PolyAt(const Poly *p, poly_coeff_t x);
   *
   * @param[in] p : polynomial
   */
-extern void PolyPrint(const Poly* p);
+void PolyPrint(const Poly* p);
 
 /**
  * Gets const (free) term of a given polynomial.
@@ -256,7 +277,7 @@ extern void PolyPrint(const Poly* p);
  * @param[in] p : polynomial
  * @return free term of the polynomial
  */
-extern poly_coeff_t PolyGetConstTerm(const Poly* p);
+poly_coeff_t PolyGetConstTerm(const Poly* p);
 
  /**
   * Converts polynomial @p p to human-readable char sequence.
@@ -275,7 +296,7 @@ extern poly_coeff_t PolyGetConstTerm(const Poly* p);
   * @param[in] dest : char array pointer
   * @param[in] p : polynomial
   */
-extern void PolySprintf(char* dest, const Poly *p);
+void PolySprintf(char* dest, const Poly *p);
 
 /**
  * Converts polynomial @p p to human-readable char sequence.
@@ -288,7 +309,7 @@ extern void PolySprintf(char* dest, const Poly *p);
  * @param[in] p : polynomial
  * @return char* containing generated string
  */
-extern char* PolyToString(const Poly *p);
+char* PolyToString(const Poly *p);
 
 
 #endif /* __POLY_H__ */

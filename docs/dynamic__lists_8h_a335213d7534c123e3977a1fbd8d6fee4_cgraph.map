@@ -1,0 +1,11 @@
+<map id="ListNew" name="ListNew">
+<area shape="rect" id="node2" href="$dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="134,5,230,32"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#afc7dc1135f5665f58cf1e6578b280d67" title="Push element to the front of a given List. " alt="" coords="127,56,237,83"/>
+<area shape="rect" id="node4" href="$dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="129,107,235,133"/>
+<area shape="rect" id="node5" href="$dynamic__lists_8h.html#a4aea6b8a0971416abd16d0a29b6040d1" title="Removes first element of the given List or does nothing if it&#39;s empty. " alt="" coords="130,157,234,184"/>
+<area shape="rect" id="node6" href="$dynamic__lists_8h.html#a41b83ed886c2ecadefc1f24ca7f83ca4" title="Removes last element of the given List or does nothing if it&#39;s empty. " alt="" coords="132,208,232,235"/>
+<area shape="rect" id="node7" href="$dynamic__lists_8h.html#a71578454775037df7bdd9f04ba5c8e0c" title="Clears the entire List. " alt="" coords="143,259,221,285"/>
+<area shape="rect" id="node8" href="$dynamic__lists_8h.html#abf682ff0fcfd8a2f445e97e2cbef226c" title="Obtain first element of the List. " alt="" coords="145,309,219,336"/>
+<area shape="rect" id="node9" href="$dynamic__lists_8h.html#a9193a988ff3901b184d42e4e3e23662f" title="Obtain last element of the List. " alt="" coords="145,360,219,387"/>
+<area shape="rect" id="node10" href="$dynamic__lists_8h.html#adc0388e7fa2cf180aa501fc169e21ee6" title="Obtain the size of a List. " alt="" coords="146,411,218,437"/>
+</map>
