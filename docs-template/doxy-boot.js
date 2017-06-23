@@ -1,4 +1,4 @@
-window.doxySetup = (function() { $( document ).ready(function() {
+window.doxySetup = (function() {
 
     $("div.headertitle").addClass("page-header");
     $("div.title").addClass("h1");
@@ -348,6 +348,8 @@ window.doxySetup = (function() { $( document ).ready(function() {
     $('.sub-arrow').remove();
   }, 50);
 
-}) });
+});
 
-window.doxySetup();
+$( document ).ready(function() {
+  window.doxySetup();
+});
