@@ -2,3 +2,6 @@ release
 .gcc-flags.json
 **.gch
 **.exe
+test_out_temp
+utils
+**.temp

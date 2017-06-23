@@ -2,7 +2,7 @@
 *  Bidirectional List implementation (C99 standard)
 *  Usage:
 *  @code
-*     #include <list.h>
+*     #include <dynamic_lists.h>
 *      ...
 *     List l = ListNew();
 *  @endcode
@@ -12,9 +12,10 @@
 *  @copyright MIT
 *  @date 2017-05-13
 */
-#include <stdio.h>
 #include "utils.h"
+#include <stdio.h>
 #include "memalloc.h"
+#include "generics.h"
 
 #ifndef __STY_COMMON_DYNAMIC_LISTS_H__
 #define __STY_COMMON_DYNAMIC_LISTS_H__
@@ -59,6 +60,17 @@ typedef struct ListRoot ListRoot;
 typedef ListRoot List;
 
 /**
+* Structure representing one element of List
+* It's got two neighbours (may be NULL)
+* Element also contains ListData pointer to the actual data.
+*/
+struct ListNode {
+  ListNode* right; ///< pointer to the right neighbour
+  ListData value; ///< pointer to the data held in List element
+  ListNode* left; ///< pointer to the right neighbour
+};
+
+/**
 * Root element of the List containing pointers
 * to the two ends of a List
 */
@@ -87,10 +99,10 @@ typedef ListData (*ListModifierFn)(ListData);
 * @return List
 */
 static inline List ListNew() {
-  List l = (List){};
-  l.begin = NULL;
-  l.end = NULL;
-  return l;
+  return (List) {
+    .begin = NULL,
+    .end = NULL
+  };
 }
 
 /**
@@ -275,8 +287,36 @@ void ListMap( List* l, ListModifierFn mapping );
 * Prints only adresses of values not exact values.
 *
 * @param[in] l : const List*
+* @param[in] printer : GenericsPrinter
 */
-void ListPrint( const List* l );
+void ListPrint( const List* l, GenericsPrinter printer );
+
+/**
+* Print given List to stdout.
+* Prints only adresses of values not exact values.
+* Variant displaying new line at the end of stringified List.
+*
+* @param[in] l : const List*
+* @param[in] printer : GenericsPrinter
+*/
+static inline void ListPrintln( const List* l, GenericsPrinter printer ) {
+  if(l==NULL) {
+    printf("NULL\n");
+    return;
+  }
+  ListPrint(l, printer);
+  printf("\n");
+}
+
+/**
+* Print given List to stdout.
+* Prints only adresses of values not exact values.
+*
+* @param[in] l : const List*
+*/
+static inline void ListPrintData( const List* l ) {
+  ListPrint(l, GenericsPtrPrinter);
+}
 
 /**
 * Print given List to stdout.
@@ -285,9 +325,8 @@ void ListPrint( const List* l );
 *
 * @param[in] l : const List*
 */
-static inline void ListPrintln( const List* l ) {
-  ListPrint(l);
-  printf("\n");
+static inline void ListPrintlnData( const List* l ) {
+  ListPrintln(l, GenericsPtrPrinter);
 }
 
 /**
@@ -356,7 +395,10 @@ ListIterator ListNewDetachedElement( );
 * @param[in] node : ListIterator
 * @return If the node is on the left/side of the List
 */
-int ListIsSideElement( ListIterator node );
+static inline int ListIsSideElement( ListIterator node ) {
+  if(node == NULL) return 0;
+  return ( (node->left == NULL) || (node->right == NULL) );
+}
 
 /**
 * Inserts List @p source to the left side of @p node of List @p target
@@ -396,7 +438,10 @@ void ListInsertElementAt( List* target, ListIterator node, ListData value );
 * @param[in] node : ListIterator
 * @return If the node is on the List's end?
 */
-int ListIsEnd( ListIterator node );
+static inline int ListIsEnd( ListIterator node ) {
+  if(node == NULL) return 0;
+  return (node->right == NULL);
+}
 
 /**
 * Checks if given node is the first element.
@@ -409,7 +454,10 @@ int ListIsEnd( ListIterator node );
 * @param[in] node : ListIterator
 * @return If the node is on the List's begining?
 */
-int ListIsBegin( ListIterator node );
+static inline int ListIsBegin( ListIterator node ) {
+  if(node == NULL) return 0;
+  return (node->left == NULL);
+}
 
 /**
 * All elements on the right side of @p node are transferred to the new List
@@ -431,7 +479,10 @@ List ListSplitList( List* l, ListIterator node );
 * @param node : ListIterator
 * @return next node (the right neighbour of the current node)
 */
-ListIterator ListNext( ListIterator node );
+static inline ListIterator ListNext( ListIterator node ) {
+  if(node==NULL) return NULL;
+  return node->right;
+}
 
 /**
 * Get prevous element on the List.
@@ -443,7 +494,10 @@ ListIterator ListNext( ListIterator node );
 * @param node : ListIterator
 * @return previous node (the left neighbour of the current node)
 */
-ListIterator ListPrevious( ListIterator node );
+static inline ListIterator ListPrevious( ListIterator node ) {
+  if(node==NULL) return NULL;
+  return node->left;
+}
 
 /**
 * Get value of the List element. Returns void pointer to underlying data.
@@ -455,7 +509,10 @@ ListIterator ListPrevious( ListIterator node );
 * @param node : ListIterator
 * @return value under the given node
 */
-ListData ListGetValue( ListIterator node );
+static inline ListData ListGetValue( ListIterator node ) {
+  if(node==NULL) return NULL;
+  return node->value;
+}
 
 /**
 * Sets value of the List element.
@@ -467,6 +524,25 @@ ListData ListGetValue( ListIterator node );
 * @param node : ListIterator
 * @param value : ListData
 */
-void ListSetValue( ListIterator node, ListData value );
+static inline void ListSetValue( ListIterator node, ListData value ) {
+  if(node==NULL) return;
+  node->value = value;
+}
+
+
+/**
+* Destroy given ArrayList freeing up memory.
+*
+* WARN: Invalidates ArrayListIterators
+*
+* @param[in] l : ArrayList*
+* @param[in] deallocator : ListModifierFn
+*/
+static inline void ListDestroyDeep(List* l, ListModifierFn deallocator) {
+  LOOP_LIST(l, iter) {
+    deallocator(ListGetValue(iter));
+  }
+  ListDestroy(l);
+}
 
 #endif /* __STY_COMMON_DYNAMIC_LISTS_H__ */

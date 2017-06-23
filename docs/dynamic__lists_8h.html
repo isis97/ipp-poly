@@ -72,16 +72,18 @@ $(function() {
 
 <p>Bidirectional List implementation (C99 standard) Usage:  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="memalloc_8h_source.html">memalloc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="generics_8h_source.html">generics.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for dynamic_lists.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="dynamic__lists_8h__incl.png" border="0" usemap="#dynamic__lists_8h" alt=""/></div>
 <map name="dynamic__lists_8h" id="dynamic__lists_8h">
-<area shape="rect" id="node3" href="utils_8h.html" title="Various utilities. " alt="" coords="97,80,159,107"/>
-<area shape="rect" id="node4" href="memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="183,80,278,107"/>
+<area shape="rect" id="node2" href="utils_8h.html" title="Various utilities. " alt="" coords="39,155,102,181"/>
+<area shape="rect" id="node4" href="memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="23,80,118,107"/>
+<area shape="rect" id="node5" href="generics_8h.html" title="Generic collections support and utilities. " alt="" coords="142,80,233,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -89,7 +91,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="dynamic__lists_8h__dep__incl.png" border="0" usemap="#dynamic__lists_8hdep" alt=""/></div>
 <map name="dynamic__lists_8hdep" id="dynamic__lists_8hdep">
-<area shape="rect" id="node2" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="35,80,98,107"/>
+<area shape="rect" id="node2" href="stack_8h.html" title="Stack implementation (C99 standard) Usage: " alt="" coords="5,80,76,107"/>
+<area shape="rect" id="node3" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="100,80,163,107"/>
 </map>
 </div>
 </div>
@@ -97,6 +100,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structListNode.html">ListNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing one element of List It's got two neighbours (may be NULL) Element also contains ListData pointer to the actual data.  <a href="structListNode.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structListRoot.html">ListRoot</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Root element of the List containing pointers to the two ends of a List.  <a href="structListRoot.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,12 +190,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a2c42ace0b1c658be10b14ede4c58cb02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02">ListMap</a> (<a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l, <a class="el" href="dynamic__lists_8h.html#a52393404edf35ee206c9299bb59e0ddf">ListModifierFn</a> mapping)</td></tr>
 <tr class="memdesc:a2c42ace0b1c658be10b14ede4c58cb02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map List values using given (ListData)-&gt;void function Function is executed for every List element value Then the result of function is assigned to the element's data pointer.  <a href="#a2c42ace0b1c658be10b14ede4c58cb02">More...</a><br /></td></tr>
 <tr class="separator:a2c42ace0b1c658be10b14ede4c58cb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7452900c7ad0008a5e15e4f81ba37a64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a7452900c7ad0008a5e15e4f81ba37a64">ListPrint</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l)</td></tr>
-<tr class="memdesc:a7452900c7ad0008a5e15e4f81ba37a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print given List to stdout.  <a href="#a7452900c7ad0008a5e15e4f81ba37a64">More...</a><br /></td></tr>
-<tr class="separator:a7452900c7ad0008a5e15e4f81ba37a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6122a1b48afbb0be2b69e6f0a757c9d8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a6122a1b48afbb0be2b69e6f0a757c9d8">ListPrintln</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l)</td></tr>
-<tr class="memdesc:a6122a1b48afbb0be2b69e6f0a757c9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print given List to stdout.  <a href="#a6122a1b48afbb0be2b69e6f0a757c9d8">More...</a><br /></td></tr>
-<tr class="separator:a6122a1b48afbb0be2b69e6f0a757c9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd91e0f0c414b74f0d66b3c09fe8ff4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a7dd91e0f0c414b74f0d66b3c09fe8ff4">ListPrint</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l, <a class="el" href="generics_8h.html#a3d76675da2fff36515e121b6d565bc95">GenericsPrinter</a> printer)</td></tr>
+<tr class="memdesc:a7dd91e0f0c414b74f0d66b3c09fe8ff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print given List to stdout.  <a href="#a7dd91e0f0c414b74f0d66b3c09fe8ff4">More...</a><br /></td></tr>
+<tr class="separator:a7dd91e0f0c414b74f0d66b3c09fe8ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad38fe80686a4921b905df97eb5076ba0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#ad38fe80686a4921b905df97eb5076ba0">ListPrintln</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l, <a class="el" href="generics_8h.html#a3d76675da2fff36515e121b6d565bc95">GenericsPrinter</a> printer)</td></tr>
+<tr class="memdesc:ad38fe80686a4921b905df97eb5076ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print given List to stdout.  <a href="#ad38fe80686a4921b905df97eb5076ba0">More...</a><br /></td></tr>
+<tr class="separator:ad38fe80686a4921b905df97eb5076ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83dc90b2214622f46783d499173e24fb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a83dc90b2214622f46783d499173e24fb">ListPrintData</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l)</td></tr>
+<tr class="memdesc:a83dc90b2214622f46783d499173e24fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print given List to stdout.  <a href="#a83dc90b2214622f46783d499173e24fb">More...</a><br /></td></tr>
+<tr class="separator:a83dc90b2214622f46783d499173e24fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137bd34595d7cfa7d073d6a5e24ee34f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a137bd34595d7cfa7d073d6a5e24ee34f">ListPrintlnData</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l)</td></tr>
+<tr class="memdesc:a137bd34595d7cfa7d073d6a5e24ee34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print given List to stdout.  <a href="#a137bd34595d7cfa7d073d6a5e24ee34f">More...</a><br /></td></tr>
+<tr class="separator:a137bd34595d7cfa7d073d6a5e24ee34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d3e163fab82d195d850e27d1799ffdc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc">ListBegin</a> (const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l)</td></tr>
 <tr class="memdesc:a7d3e163fab82d195d850e27d1799ffdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first element container pointer.  <a href="#a7d3e163fab82d195d850e27d1799ffdc">More...</a><br /></td></tr>
 <tr class="separator:a7d3e163fab82d195d850e27d1799ffdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,42 +214,47 @@ Functions</h2></td></tr>
 <tr class="memitem:a8dd6cd4858b8efe73fd43fa04825358e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a8dd6cd4858b8efe73fd43fa04825358e">ListNewDetachedElement</a> ()</td></tr>
 <tr class="memdesc:a8dd6cd4858b8efe73fd43fa04825358e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create node that is not attached to anything.  <a href="#a8dd6cd4858b8efe73fd43fa04825358e">More...</a><br /></td></tr>
 <tr class="separator:a8dd6cd4858b8efe73fd43fa04825358e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a761cb70b0a1ed83b7afa19b2987da7a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a761cb70b0a1ed83b7afa19b2987da7a3">ListIsSideElement</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
-<tr class="memdesc:a761cb70b0a1ed83b7afa19b2987da7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given node is the last or first element.  <a href="#a761cb70b0a1ed83b7afa19b2987da7a3">More...</a><br /></td></tr>
-<tr class="separator:a761cb70b0a1ed83b7afa19b2987da7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a437f076858f013f25675a4d8876e1a49"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a437f076858f013f25675a4d8876e1a49">ListIsSideElement</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
+<tr class="memdesc:a437f076858f013f25675a4d8876e1a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given node is the last or first element.  <a href="#a437f076858f013f25675a4d8876e1a49">More...</a><br /></td></tr>
+<tr class="separator:a437f076858f013f25675a4d8876e1a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a411f5a23007ab2200d73451d73b5dd98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a411f5a23007ab2200d73451d73b5dd98">ListInsertListAt</a> (<a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *target, <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node, <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *source)</td></tr>
 <tr class="memdesc:a411f5a23007ab2200d73451d73b5dd98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts List <code>source</code> to the left side of <code>node</code> of List <code>target</code> leaving <code>source</code> empty.  <a href="#a411f5a23007ab2200d73451d73b5dd98">More...</a><br /></td></tr>
 <tr class="separator:a411f5a23007ab2200d73451d73b5dd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac75512175a8dfa0cf58039d586d62eb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6">ListInsertElementAt</a> (<a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *target, <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node, <a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a> value)</td></tr>
 <tr class="memdesc:ac75512175a8dfa0cf58039d586d62eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts value to the left side of <code>node</code> of List <code>target</code>.  <a href="#ac75512175a8dfa0cf58039d586d62eb6">More...</a><br /></td></tr>
 <tr class="separator:ac75512175a8dfa0cf58039d586d62eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3032c918e459082387e596a13ce9abd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#ab3032c918e459082387e596a13ce9abd">ListIsEnd</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
-<tr class="memdesc:ab3032c918e459082387e596a13ce9abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given node is the last element.  <a href="#ab3032c918e459082387e596a13ce9abd">More...</a><br /></td></tr>
-<tr class="separator:ab3032c918e459082387e596a13ce9abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff0c31e818b6eb148c3aae7503e7c636"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#aff0c31e818b6eb148c3aae7503e7c636">ListIsBegin</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
-<tr class="memdesc:aff0c31e818b6eb148c3aae7503e7c636"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given node is the first element.  <a href="#aff0c31e818b6eb148c3aae7503e7c636">More...</a><br /></td></tr>
-<tr class="separator:aff0c31e818b6eb148c3aae7503e7c636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dc3b4c2889e64421f27b0b59e6c1fed"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a8dc3b4c2889e64421f27b0b59e6c1fed">ListIsEnd</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
+<tr class="memdesc:a8dc3b4c2889e64421f27b0b59e6c1fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given node is the last element.  <a href="#a8dc3b4c2889e64421f27b0b59e6c1fed">More...</a><br /></td></tr>
+<tr class="separator:a8dc3b4c2889e64421f27b0b59e6c1fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed20739456f809bb5dfb5de63e67db66"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#aed20739456f809bb5dfb5de63e67db66">ListIsBegin</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
+<tr class="memdesc:aed20739456f809bb5dfb5de63e67db66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given node is the first element.  <a href="#aed20739456f809bb5dfb5de63e67db66">More...</a><br /></td></tr>
+<tr class="separator:aed20739456f809bb5dfb5de63e67db66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32ecb0e7b47ba6ff79cc64a414c27bb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a32ecb0e7b47ba6ff79cc64a414c27bb8">ListSplitList</a> (<a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l, <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
 <tr class="memdesc:a32ecb0e7b47ba6ff79cc64a414c27bb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">All elements on the right side of <code>node</code> are transferred to the new List that is returned.  <a href="#a32ecb0e7b47ba6ff79cc64a414c27bb8">More...</a><br /></td></tr>
 <tr class="separator:a32ecb0e7b47ba6ff79cc64a414c27bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaae2a6283f5fd787a67d1c20bafabfd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1">ListNext</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
-<tr class="memdesc:aaae2a6283f5fd787a67d1c20bafabfd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get next element on the List.  <a href="#aaae2a6283f5fd787a67d1c20bafabfd1">More...</a><br /></td></tr>
-<tr class="separator:aaae2a6283f5fd787a67d1c20bafabfd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af800419d4adf9f29da9258a33d80cc39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#af800419d4adf9f29da9258a33d80cc39">ListPrevious</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
-<tr class="memdesc:af800419d4adf9f29da9258a33d80cc39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get prevous element on the List.  <a href="#af800419d4adf9f29da9258a33d80cc39">More...</a><br /></td></tr>
-<tr class="separator:af800419d4adf9f29da9258a33d80cc39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66e33e747a409a452305e058cc995f2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c">ListGetValue</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
-<tr class="memdesc:a66e33e747a409a452305e058cc995f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get value of the List element.  <a href="#a66e33e747a409a452305e058cc995f2c">More...</a><br /></td></tr>
-<tr class="separator:a66e33e747a409a452305e058cc995f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55403f3a3d19a51d86b020885df72f90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a55403f3a3d19a51d86b020885df72f90">ListSetValue</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node, <a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a> value)</td></tr>
-<tr class="memdesc:a55403f3a3d19a51d86b020885df72f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets value of the List element.  <a href="#a55403f3a3d19a51d86b020885df72f90">More...</a><br /></td></tr>
-<tr class="separator:a55403f3a3d19a51d86b020885df72f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca460ad07bfcc229154a2ec9368c51f8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#aca460ad07bfcc229154a2ec9368c51f8">ListNext</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
+<tr class="memdesc:aca460ad07bfcc229154a2ec9368c51f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get next element on the List.  <a href="#aca460ad07bfcc229154a2ec9368c51f8">More...</a><br /></td></tr>
+<tr class="separator:aca460ad07bfcc229154a2ec9368c51f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be4841ce377083a91f2619650dcda19"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a3be4841ce377083a91f2619650dcda19">ListPrevious</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
+<tr class="memdesc:a3be4841ce377083a91f2619650dcda19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get prevous element on the List.  <a href="#a3be4841ce377083a91f2619650dcda19">More...</a><br /></td></tr>
+<tr class="separator:a3be4841ce377083a91f2619650dcda19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabbb1d8c362e9d8451e2dbb8f68f232b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b">ListGetValue</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node)</td></tr>
+<tr class="memdesc:aabbb1d8c362e9d8451e2dbb8f68f232b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get value of the List element.  <a href="#aabbb1d8c362e9d8451e2dbb8f68f232b">More...</a><br /></td></tr>
+<tr class="separator:aabbb1d8c362e9d8451e2dbb8f68f232b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27faec757f426863c62dc1f6ef127d7e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#a27faec757f426863c62dc1f6ef127d7e">ListSetValue</a> (<a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> node, <a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a> value)</td></tr>
+<tr class="memdesc:a27faec757f426863c62dc1f6ef127d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets value of the List element.  <a href="#a27faec757f426863c62dc1f6ef127d7e">More...</a><br /></td></tr>
+<tr class="separator:a27faec757f426863c62dc1f6ef127d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5634f36f2270c0e7dc19c6c181c8691"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__lists_8h.html#ae5634f36f2270c0e7dc19c6c181c8691">ListDestroyDeep</a> (<a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *l, <a class="el" href="dynamic__lists_8h.html#a52393404edf35ee206c9299bb59e0ddf">ListModifierFn</a> deallocator)</td></tr>
+<tr class="memdesc:ae5634f36f2270c0e7dc19c6c181c8691"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy given <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointers to the two ends of a ArrayList. ...">ArrayList</a> freeing up memory.  <a href="#ae5634f36f2270c0e7dc19c6c181c8691">More...</a><br /></td></tr>
+<tr class="separator:ae5634f36f2270c0e7dc19c6c181c8691"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Bidirectional List implementation (C99 standard) Usage: </p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;list.h&gt;</span></div><div class="line"> ...</div><div class="line">List l = <a class="code" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4">ListNew</a>();</div></div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Piotr Styczyński <a href="#" onclick="location.href='mai'+'lto:'+'pio'+'tr'+'sty'+'1@'+'gma'+'il'+'.co'+'m'; return false;">piotr<span style="display: none;">.nosp@m.</span>sty1<span style="display: none;">.nosp@m.</span>@gmai<span style="display: none;">.nosp@m.</span>l.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__lists_8h.html">dynamic_lists.h</a>&gt;</span></div><div class="line"> ...</div><div class="line">List l = <a class="code" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4">ListNew</a>();</div></div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Piotr Styczyński <a href="#" onclick="location.href='mai'+'lto:'+'pio'+'tr'+'sty'+'1@'+'gma'+'il'+'.co'+'m'; return false;">piotr<span style="display: none;">.nosp@m.</span>sty1<span style="display: none;">.nosp@m.</span>@gmai<span style="display: none;">.nosp@m.</span>l.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017-05-13 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a275e6eb59b1d0263d26416b7c58329e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a275e6eb59b1d0263d26416b7c58329e6">&#9670;&nbsp;</a></span>LOOP_LIST</h2>
@@ -264,9 +281,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<a class="code" href="structListNode.html">ListIterator</a> VAR_NAME = <a class="code" href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc">ListBegin</a>(LIST); \</div><div class="line">  VAR_NAME != NULL; VAR_NAME = <a class="code" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1">ListNext</a>(VAR_NAME))</div><div class="ttc" id="dynamic__lists_8h_html_aaae2a6283f5fd787a67d1c20bafabfd1"><div class="ttname"><a href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1">ListNext</a></div><div class="ttdeci">ListIterator ListNext(ListIterator node)</div><div class="ttdoc">Get next element on the List. </div></div>
-<div class="ttc" id="dynamic__lists_8h_html_a7d3e163fab82d195d850e27d1799ffdc"><div class="ttname"><a href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc">ListBegin</a></div><div class="ttdeci">static ListIterator ListBegin(const List *l)</div><div class="ttdoc">Get the first element container pointer. </div><div class="ttdef"><b>Definition:</b> dynamic_lists.h:303</div></div>
-<div class="ttc" id="structListNode_html"><div class="ttname"><a href="structListNode.html">ListNode</a></div><div class="ttdoc">Structure representing one element of List It&amp;#39;s got two neighbours (may be NULL) Element also contain...</div><div class="ttdef"><b>Definition:</b> dynamic_lists.c:29</div></div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<a class="code" href="structListNode.html">ListIterator</a> VAR_NAME = <a class="code" href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc">ListBegin</a>(LIST); \</div><div class="line">  VAR_NAME != NULL; VAR_NAME = <a class="code" href="dynamic__lists_8h.html#aca460ad07bfcc229154a2ec9368c51f8">ListNext</a>(VAR_NAME))</div><div class="ttc" id="dynamic__lists_8h_html_a7d3e163fab82d195d850e27d1799ffdc"><div class="ttname"><a href="dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc">ListBegin</a></div><div class="ttdeci">static ListIterator ListBegin(const List *l)</div><div class="ttdoc">Get the first element container pointer. </div><div class="ttdef"><b>Definition:</b> <a href="dynamic__lists_8h_source.html#l00342">dynamic_lists.h:342</a></div></div>
+<div class="ttc" id="dynamic__lists_8h_html_aca460ad07bfcc229154a2ec9368c51f8"><div class="ttname"><a href="dynamic__lists_8h.html#aca460ad07bfcc229154a2ec9368c51f8">ListNext</a></div><div class="ttdeci">static ListIterator ListNext(ListIterator node)</div><div class="ttdoc">Get next element on the List. </div><div class="ttdef"><b>Definition:</b> <a href="dynamic__lists_8h_source.html#l00482">dynamic_lists.h:482</a></div></div>
+<div class="ttc" id="structListNode_html"><div class="ttname"><a href="structListNode.html">ListNode</a></div><div class="ttdoc">Structure representing one element of List It&amp;#39;s got two neighbours (may be NULL) Element also contain...</div><div class="ttdef"><b>Definition:</b> <a href="dynamic__lists_8h_source.html#l00067">dynamic_lists.h:67</a></div></div>
 </div><!-- fragment -->
 <p>Macro for interating through List. </p>
 <p>Usage:</p>
@@ -277,6 +294,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00039">39</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 
 </div>
 </div>
@@ -315,6 +334,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ListIterator pointing to the List begining </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00342">342</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 
 </div>
 </div>
@@ -370,15 +391,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>shallow copy of a given List </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="dynamic__lists_8h_ac3929782579bbd53de9fa6f0fd44fcc0_cgraph.png" border="0" usemap="#dynamic__lists_8h_ac3929782579bbd53de9fa6f0fd44fcc0_cgraph" alt=""/></div>
-<map name="dynamic__lists_8h_ac3929782579bbd53de9fa6f0fd44fcc0_cgraph" id="dynamic__lists_8h_ac3929782579bbd53de9fa6f0fd44fcc0_cgraph">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="148,5,221,32"/>
-<area shape="rect" id="node3" href="dynamic__lists_8h.html#a24212ea2d89542bc34376494424c8e1b" title="Copy the List source into other List &#45; target. " alt="" coords="132,56,237,83"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -417,14 +429,6 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="dynamic__lists_8h_a24212ea2d89542bc34376494424c8e1b_cgraph.png" border="0" usemap="#dynamic__lists_8h_a24212ea2d89542bc34376494424c8e1b_cgraph" alt=""/></div>
-<map name="dynamic__lists_8h_a24212ea2d89542bc34376494424c8e1b_cgraph" id="dynamic__lists_8h_a24212ea2d89542bc34376494424c8e1b_cgraph">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="159,5,265,32"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -464,17 +468,6 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>deep copy of a given List </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="dynamic__lists_8h_a8384df53d914573338a70025a645ffb0_cgraph.png" border="0" usemap="#dynamic__lists_8h_a8384df53d914573338a70025a645ffb0_cgraph" alt=""/></div>
-<map name="dynamic__lists_8h_a8384df53d914573338a70025a645ffb0_cgraph" id="dynamic__lists_8h_a8384df53d914573338a70025a645ffb0_cgraph">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="356,5,429,32"/>
-<area shape="rect" id="node3" href="dynamic__lists_8h.html#ac3929782579bbd53de9fa6f0fd44fcc0" title="Copy the List into a new one. " alt="" coords="197,31,275,57"/>
-<area shape="rect" id="node4" href="dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02" title="Map List values using given (ListData)&#45;&gt;void function Function is executed for every List element val..." alt="" coords="200,81,272,108"/>
-<area shape="rect" id="node5" href="dynamic__lists_8h.html#a47fcfe41743503915226dc7878ec4a62" title="Removes element from the List using given container pointer. " alt="" coords="164,132,308,159"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -502,6 +495,63 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ae5634f36f2270c0e7dc19c6c181c8691"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5634f36f2270c0e7dc19c6c181c8691">&#9670;&nbsp;</a></span>ListDestroyDeep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void ListDestroyDeep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a52393404edf35ee206c9299bb59e0ddf">ListModifierFn</a>&#160;</td>
+          <td class="paramname"><em>deallocator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy given <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointers to the two ends of a ArrayList. ...">ArrayList</a> freeing up memory. </p>
+<p>WARN: Invalidates ArrayListIterators</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">l</td><td>: ArrayList* </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deallocator</td><td>: ListModifierFn </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00541">541</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="dynamic__lists_8h_ae5634f36f2270c0e7dc19c6c181c8691_cgraph.png" border="0" usemap="#dynamic__lists_8h_ae5634f36f2270c0e7dc19c6c181c8691_cgraph" alt=""/></div>
+<map name="dynamic__lists_8h_ae5634f36f2270c0e7dc19c6c181c8691_cgraph" id="dynamic__lists_8h_ae5634f36f2270c0e7dc19c6c181c8691_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="183,5,287,32"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="187,56,283,83"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -576,17 +626,19 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If List is empty? </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00217">217</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="dynamic__lists_8h_a9bbefb39991e7b5c7dec668a4ec818cd_cgraph.png" border="0" usemap="#dynamic__lists_8h_a9bbefb39991e7b5c7dec668a4ec818cd_cgraph" alt=""/></div>
 <map name="dynamic__lists_8h_a9bbefb39991e7b5c7dec668a4ec818cd_cgraph" id="dynamic__lists_8h_a9bbefb39991e7b5c7dec668a4ec818cd_cgraph">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html#ac3929782579bbd53de9fa6f0fd44fcc0" title="Copy the List into a new one. " alt="" coords="299,31,377,58"/>
-<area shape="rect" id="node3" href="dynamic__lists_8h.html#a24212ea2d89542bc34376494424c8e1b" title="Copy the List source into other List &#45; target. " alt="" coords="425,6,531,32"/>
-<area shape="rect" id="node4" href="dynamic__lists_8h.html#a8384df53d914573338a70025a645ffb0" title="Performs deep copy of the List returning new one. " alt="" coords="140,82,251,108"/>
-<area shape="rect" id="node5" href="dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02" title="Map List values using given (ListData)&#45;&gt;void function Function is executed for every List element val..." alt="" coords="302,107,374,134"/>
-<area shape="rect" id="node6" href="dynamic__lists_8h.html#a97d2d72dc8a2378ed8754c63138941d5" title="Iterate through List using given (ListData)&#45;&gt;(ListData) function. " alt="" coords="150,183,241,210"/>
-<area shape="rect" id="node7" href="dynamic__lists_8h.html#a7452900c7ad0008a5e15e4f81ba37a64" title="Print given List to stdout. " alt="" coords="158,234,233,260"/>
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#ac3929782579bbd53de9fa6f0fd44fcc0" title="Copy the List into a new one. " alt="" coords="156,5,235,32"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#a8384df53d914573338a70025a645ffb0" title="Performs deep copy of the List returning new one. " alt="" coords="140,56,251,83"/>
+<area shape="rect" id="node4" href="dynamic__lists_8h.html#a24212ea2d89542bc34376494424c8e1b" title="Copy the List source into other List &#45; target. " alt="" coords="143,107,248,133"/>
+<area shape="rect" id="node5" href="dynamic__lists_8h.html#a97d2d72dc8a2378ed8754c63138941d5" title="Iterate through List using given (ListData)&#45;&gt;(ListData) function. " alt="" coords="150,157,241,184"/>
+<area shape="rect" id="node6" href="dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02" title="Map List values using given (ListData)&#45;&gt;void function Function is executed for every List element val..." alt="" coords="159,208,231,235"/>
+<area shape="rect" id="node7" href="dynamic__lists_8h.html#a7dd91e0f0c414b74f0d66b3c09fe8ff4" title="Print given List to stdout. " alt="" coords="158,259,233,285"/>
 </map>
 </div>
 
@@ -626,23 +678,15 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ListIterator pointing to the List end </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00357">357</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="dynamic__lists_8h_ad78d0fbb6da7b3e12944bd2f935c2830_cgraph.png" border="0" usemap="#dynamic__lists_8h_ad78d0fbb6da7b3e12944bd2f935c2830_cgraph" alt=""/></div>
 <map name="dynamic__lists_8h_ad78d0fbb6da7b3e12944bd2f935c2830_cgraph" id="dynamic__lists_8h_ad78d0fbb6da7b3e12944bd2f935c2830_cgraph">
 <area shape="rect" id="node2" href="dynamic__lists_8h.html#a47fcfe41743503915226dc7878ec4a62" title="Removes element from the List using given container pointer. " alt="" coords="145,5,289,32"/>
-<area shape="rect" id="node3" href="dynamic__lists_8h.html#a8dd6cd4858b8efe73fd43fa04825358e" title="Create node that is not attached to anything. " alt="" coords="123,259,311,285"/>
-<area shape="rect" id="node4" href="dynamic__lists_8h.html#a761cb70b0a1ed83b7afa19b2987da7a3" title="Checks if given node is the last or first element. " alt="" coords="365,57,503,84"/>
-<area shape="rect" id="node5" href="dynamic__lists_8h.html#aff0c31e818b6eb148c3aae7503e7c636" title="Checks if given node is the first element. " alt="" coords="388,109,480,136"/>
-<area shape="rect" id="node6" href="dynamic__lists_8h.html#ab3032c918e459082387e596a13ce9abd" title="Checks if given node is the last element. " alt="" coords="393,163,475,189"/>
-<area shape="rect" id="node7" href="dynamic__lists_8h.html#a411f5a23007ab2200d73451d73b5dd98" title="Inserts List source to the left side of node of List target leaving source empty. ..." alt="" coords="373,220,495,247"/>
-<area shape="rect" id="node8" href="dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6" title="Inserts value to the left side of node of List target. " alt="" coords="359,283,509,309"/>
-<area shape="rect" id="node9" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1" title="Get next element on the List. " alt="" coords="397,359,471,385"/>
-<area shape="rect" id="node10" href="dynamic__lists_8h.html#af800419d4adf9f29da9258a33d80cc39" title="Get prevous element on the List. " alt="" coords="384,411,484,437"/>
-<area shape="rect" id="node11" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="382,461,486,488"/>
-<area shape="rect" id="node12" href="dynamic__lists_8h.html#a55403f3a3d19a51d86b020885df72f90" title="Sets value of the List element. " alt="" coords="382,512,486,539"/>
-<area shape="rect" id="node13" href="dynamic__lists_8h.html#a32ecb0e7b47ba6ff79cc64a414c27bb8" title="All elements on the right side of node are transferred to the new List that is returned. " alt="" coords="168,563,265,589"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#a8dd6cd4858b8efe73fd43fa04825358e" title="Create node that is not attached to anything. " alt="" coords="123,56,311,83"/>
 </map>
 </div>
 
@@ -677,20 +721,28 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a66e33e747a409a452305e058cc995f2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66e33e747a409a452305e058cc995f2c">&#9670;&nbsp;</a></span>ListGetValue()</h2>
+<a id="aabbb1d8c362e9d8451e2dbb8f68f232b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabbb1d8c362e9d8451e2dbb8f68f232b">&#9670;&nbsp;</a></span>ListGetValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a> ListGetValue </td>
+          <td class="memname">static <a class="el" href="dynamic__lists_8h.html#a57cb3e23c9b1be9bfde20f6a13403960">ListData</a> ListGetValue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get value of the List element. </p>
@@ -703,6 +755,8 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>value under the given node </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00512">512</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 
 </div>
 </div>
@@ -796,20 +850,28 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="aff0c31e818b6eb148c3aae7503e7c636"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff0c31e818b6eb148c3aae7503e7c636">&#9670;&nbsp;</a></span>ListIsBegin()</h2>
+<a id="aed20739456f809bb5dfb5de63e67db66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed20739456f809bb5dfb5de63e67db66">&#9670;&nbsp;</a></span>ListIsBegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ListIsBegin </td>
+          <td class="memname">static int ListIsBegin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Checks if given node is the first element. </p>
@@ -822,22 +884,40 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If the node is on the List's begining? </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00457">457</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="dynamic__lists_8h_aed20739456f809bb5dfb5de63e67db66_cgraph.png" border="0" usemap="#dynamic__lists_8h_aed20739456f809bb5dfb5de63e67db66_cgraph" alt=""/></div>
+<map name="dynamic__lists_8h_aed20739456f809bb5dfb5de63e67db66_cgraph" id="dynamic__lists_8h_aed20739456f809bb5dfb5de63e67db66_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a32ecb0e7b47ba6ff79cc64a414c27bb8" title="All elements on the right side of node are transferred to the new List that is returned. " alt="" coords="145,5,243,32"/>
+</map>
+</div>
+
 </div>
 </div>
-<a id="ab3032c918e459082387e596a13ce9abd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3032c918e459082387e596a13ce9abd">&#9670;&nbsp;</a></span>ListIsEnd()</h2>
+<a id="a8dc3b4c2889e64421f27b0b59e6c1fed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dc3b4c2889e64421f27b0b59e6c1fed">&#9670;&nbsp;</a></span>ListIsEnd()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ListIsEnd </td>
+          <td class="memname">static int ListIsEnd </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Checks if given node is the last element. </p>
@@ -850,22 +930,32 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If the node is on the List's end? </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00441">441</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+
 </div>
 </div>
-<a id="a761cb70b0a1ed83b7afa19b2987da7a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a761cb70b0a1ed83b7afa19b2987da7a3">&#9670;&nbsp;</a></span>ListIsSideElement()</h2>
+<a id="a437f076858f013f25675a4d8876e1a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a437f076858f013f25675a4d8876e1a49">&#9670;&nbsp;</a></span>ListIsSideElement()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ListIsSideElement </td>
+          <td class="memname">static int ListIsSideElement </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Checks if given node is the last or first element. </p>
@@ -877,6 +967,17 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If the node is on the left/side of the List </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00398">398</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="dynamic__lists_8h_a437f076858f013f25675a4d8876e1a49_cgraph.png" border="0" usemap="#dynamic__lists_8h_a437f076858f013f25675a4d8876e1a49_cgraph" alt=""/></div>
+<map name="dynamic__lists_8h_a437f076858f013f25675a4d8876e1a49_cgraph" id="dynamic__lists_8h_a437f076858f013f25675a4d8876e1a49_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a411f5a23007ab2200d73451d73b5dd98" title="Inserts List source to the left side of node of List target leaving source empty. ..." alt="" coords="205,5,327,32"/>
+<area shape="rect" id="node3" href="dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6" title="Inserts value to the left side of node of List target. " alt="" coords="191,56,341,83"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -1010,6 +1111,8 @@ Here is the call graph for this function:</div>
 
 <p>Create new List All Lists must be then freed with Lists.free(List). </p>
 <dl class="section return"><dt>Returns</dt><dd>List </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00101">101</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1048,42 +1151,31 @@ Here is the call graph for this function:</div>
 <p>This functionality may be used in situations when you need List nodes outside actual List.</p>
 <p>NOTICE: All ListIterators are valid until used operation does not keep pointers validity.</p>
 <dl class="section return"><dt>Returns</dt><dd>ListIterator to that not-attached node </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="dynamic__lists_8h_a8dd6cd4858b8efe73fd43fa04825358e_cgraph.png" border="0" usemap="#dynamic__lists_8h_a8dd6cd4858b8efe73fd43fa04825358e_cgraph" alt=""/></div>
-<map name="dynamic__lists_8h_a8dd6cd4858b8efe73fd43fa04825358e_cgraph" id="dynamic__lists_8h_a8dd6cd4858b8efe73fd43fa04825358e_cgraph">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html#a761cb70b0a1ed83b7afa19b2987da7a3" title="Checks if given node is the last or first element. " alt="" coords="248,5,385,32"/>
-<area shape="rect" id="node3" href="dynamic__lists_8h.html#aff0c31e818b6eb148c3aae7503e7c636" title="Checks if given node is the first element. " alt="" coords="271,56,363,83"/>
-<area shape="rect" id="node4" href="dynamic__lists_8h.html#ab3032c918e459082387e596a13ce9abd" title="Checks if given node is the last element. " alt="" coords="276,107,357,133"/>
-<area shape="rect" id="node5" href="dynamic__lists_8h.html#a411f5a23007ab2200d73451d73b5dd98" title="Inserts List source to the left side of node of List target leaving source empty. ..." alt="" coords="255,157,378,184"/>
-<area shape="rect" id="node6" href="dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6" title="Inserts value to the left side of node of List target. " alt="" coords="241,208,392,235"/>
-<area shape="rect" id="node7" href="dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="280,309,353,336"/>
-<area shape="rect" id="node8" href="dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="445,284,541,311"/>
-<area shape="rect" id="node9" href="dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="440,347,547,373"/>
-<area shape="rect" id="node10" href="dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1" title="Get next element on the List. " alt="" coords="279,411,354,437"/>
-<area shape="rect" id="node11" href="dynamic__lists_8h.html#af800419d4adf9f29da9258a33d80cc39" title="Get prevous element on the List. " alt="" coords="267,461,367,488"/>
-<area shape="rect" id="node12" href="dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="265,512,369,539"/>
-<area shape="rect" id="node13" href="dynamic__lists_8h.html#a55403f3a3d19a51d86b020885df72f90" title="Sets value of the List element. " alt="" coords="265,563,369,589"/>
-</map>
-</div>
 
 </div>
 </div>
-<a id="aaae2a6283f5fd787a67d1c20bafabfd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaae2a6283f5fd787a67d1c20bafabfd1">&#9670;&nbsp;</a></span>ListNext()</h2>
+<a id="aca460ad07bfcc229154a2ec9368c51f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca460ad07bfcc229154a2ec9368c51f8">&#9670;&nbsp;</a></span>ListNext()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> ListNext </td>
+          <td class="memname">static <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> ListNext </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get next element on the List. </p>
@@ -1096,6 +1188,8 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>next node (the right neighbour of the current node) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00482">482</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 
 </div>
 </div>
@@ -1157,20 +1251,28 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="af800419d4adf9f29da9258a33d80cc39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af800419d4adf9f29da9258a33d80cc39">&#9670;&nbsp;</a></span>ListPrevious()</h2>
+<a id="a3be4841ce377083a91f2619650dcda19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3be4841ce377083a91f2619650dcda19">&#9670;&nbsp;</a></span>ListPrevious()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> ListPrevious </td>
+          <td class="memname">static <a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a> ListPrevious </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get prevous element on the List. </p>
@@ -1184,10 +1286,12 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>previous node (the left neighbour of the current node) </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00497">497</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+
 </div>
 </div>
-<a id="a7452900c7ad0008a5e15e4f81ba37a64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7452900c7ad0008a5e15e4f81ba37a64">&#9670;&nbsp;</a></span>ListPrint()</h2>
+<a id="a7dd91e0f0c414b74f0d66b3c09fe8ff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd91e0f0c414b74f0d66b3c09fe8ff4">&#9670;&nbsp;</a></span>ListPrint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1196,10 +1300,56 @@ Here is the call graph for this function:</div>
           <td class="memname">void ListPrint </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="generics_8h.html#a3d76675da2fff36515e121b6d565bc95">GenericsPrinter</a>&#160;</td>
+          <td class="paramname"><em>printer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print given List to stdout. </p>
+<p>Prints only adresses of values not exact values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">l</td><td>: const List* </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">printer</td><td>: GenericsPrinter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a83dc90b2214622f46783d499173e24fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83dc90b2214622f46783d499173e24fb">&#9670;&nbsp;</a></span>ListPrintData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void ListPrintData </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *&#160;</td>
           <td class="paramname"><em>l</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Print given List to stdout. </p>
@@ -1211,10 +1361,21 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00317">317</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="dynamic__lists_8h_a83dc90b2214622f46783d499173e24fb_cgraph.png" border="0" usemap="#dynamic__lists_8h_a83dc90b2214622f46783d499173e24fb_cgraph" alt=""/></div>
+<map name="dynamic__lists_8h_a83dc90b2214622f46783d499173e24fb_cgraph" id="dynamic__lists_8h_a83dc90b2214622f46783d499173e24fb_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a7dd91e0f0c414b74f0d66b3c09fe8ff4" title="Print given List to stdout. " alt="" coords="193,5,267,32"/>
+<area shape="rect" id="node3" href="generics_8h.html#a7a32c73f16e9722b6b6b2f79a8f879ec" title="Printer function for generic collections. " alt="" coords="160,56,300,83"/>
+</map>
+</div>
+
 </div>
 </div>
-<a id="a6122a1b48afbb0be2b69e6f0a757c9d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6122a1b48afbb0be2b69e6f0a757c9d8">&#9670;&nbsp;</a></span>ListPrintln()</h2>
+<a id="ad38fe80686a4921b905df97eb5076ba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad38fe80686a4921b905df97eb5076ba0">&#9670;&nbsp;</a></span>ListPrintln()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1224,6 +1385,62 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">static void ListPrintln </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="generics_8h.html#a3d76675da2fff36515e121b6d565bc95">GenericsPrinter</a>&#160;</td>
+          <td class="paramname"><em>printer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print given List to stdout. </p>
+<p>Prints only adresses of values not exact values. Variant displaying new line at the end of stringified List.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">l</td><td>: const List* </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">printer</td><td>: GenericsPrinter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00302">302</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="dynamic__lists_8h_ad38fe80686a4921b905df97eb5076ba0_cgraph.png" border="0" usemap="#dynamic__lists_8h_ad38fe80686a4921b905df97eb5076ba0_cgraph" alt=""/></div>
+<map name="dynamic__lists_8h_ad38fe80686a4921b905df97eb5076ba0_cgraph" id="dynamic__lists_8h_ad38fe80686a4921b905df97eb5076ba0_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#a7dd91e0f0c414b74f0d66b3c09fe8ff4" title="Print given List to stdout. " alt="" coords="140,5,215,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a137bd34595d7cfa7d073d6a5e24ee34f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a137bd34595d7cfa7d073d6a5e24ee34f">&#9670;&nbsp;</a></span>ListPrintlnData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void ListPrintlnData </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="dynamic__lists_8h.html#a92429990c853bc3793aed43832aae909">List</a> *&#160;</td>
           <td class="paramname"><em>l</em></td><td>)</td>
@@ -1245,12 +1462,15 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00328">328</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="dynamic__lists_8h_a6122a1b48afbb0be2b69e6f0a757c9d8_cgraph.png" border="0" usemap="#dynamic__lists_8h_a6122a1b48afbb0be2b69e6f0a757c9d8_cgraph" alt=""/></div>
-<map name="dynamic__lists_8h_a6122a1b48afbb0be2b69e6f0a757c9d8_cgraph" id="dynamic__lists_8h_a6122a1b48afbb0be2b69e6f0a757c9d8_cgraph">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html#a7452900c7ad0008a5e15e4f81ba37a64" title="Print given List to stdout. " alt="" coords="140,5,215,32"/>
+<div class="center"><img src="dynamic__lists_8h_a137bd34595d7cfa7d073d6a5e24ee34f_cgraph.png" border="0" usemap="#dynamic__lists_8h_a137bd34595d7cfa7d073d6a5e24ee34f_cgraph" alt=""/></div>
+<map name="dynamic__lists_8h_a137bd34595d7cfa7d073d6a5e24ee34f_cgraph" id="dynamic__lists_8h_a137bd34595d7cfa7d073d6a5e24ee34f_cgraph">
+<area shape="rect" id="node2" href="dynamic__lists_8h.html#ad38fe80686a4921b905df97eb5076ba0" title="Print given List to stdout. " alt="" coords="197,5,284,32"/>
+<area shape="rect" id="node3" href="generics_8h.html#a7a32c73f16e9722b6b6b2f79a8f879ec" title="Printer function for generic collections. " alt="" coords="171,56,311,83"/>
 </map>
 </div>
 
@@ -1336,14 +1556,17 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a55403f3a3d19a51d86b020885df72f90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55403f3a3d19a51d86b020885df72f90">&#9670;&nbsp;</a></span>ListSetValue()</h2>
+<a id="a27faec757f426863c62dc1f6ef127d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27faec757f426863c62dc1f6ef127d7e">&#9670;&nbsp;</a></span>ListSetValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ListSetValue </td>
+          <td class="memname">static void ListSetValue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dynamic__lists_8h.html#a5b1d540ae33aec0a3fc12e0e90d2c3b3">ListIterator</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -1360,6 +1583,11 @@ Here is the call graph for this function:</div>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Sets value of the List element. </p>
@@ -1372,6 +1600,8 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__lists_8h_source.html#l00527">527</a> of file <a class="el" href="dynamic__lists_8h_source.html">dynamic_lists.h</a>.</p>
 
 </div>
 </div>
@@ -1449,10 +1679,6 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>
-Generated on Sun May 21 2017 19:07:57 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<hr class="footer"/>
 </body>
 </html>

@@ -70,21 +70,28 @@ $(function() {
 
 <p>Error-detecing memory allocators.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;assert.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for memalloc.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="memalloc_8h__incl.png" border="0" usemap="#memalloc_8h" alt=""/></div>
+<map name="memalloc_8h" id="memalloc_8h">
+<area shape="rect" id="node2" href="utils_8h.html" title="Various utilities. " alt="" coords="5,80,68,107"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="memalloc_8h__dep__incl.png" border="0" usemap="#memalloc_8hdep" alt=""/></div>
 <map name="memalloc_8hdep" id="memalloc_8hdep">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="5,80,128,107"/>
-<area shape="rect" id="node3" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="85,155,147,181"/>
+<area shape="rect" id="node2" href="array__lists_8h.html" title="Unidirectional list implementation based on arrays (C99 standard) Usage: " alt="" coords="29,80,132,107"/>
+<area shape="rect" id="node3" href="stack_8h.html" title="Stack implementation (C99 standard) Usage: " alt="" coords="45,155,116,181"/>
+<area shape="rect" id="node4" href="calc__interpreter_8h.html" title="Calculator code interpreter. " alt="" coords="10,229,150,256"/>
+<area shape="rect" id="node5" href="dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="156,80,279,107"/>
+<area shape="rect" id="node6" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="186,155,249,181"/>
 </map>
 </div>
 </div>
@@ -98,27 +105,38 @@ Macros</h2></td></tr>
 <tr class="memitem:a7e148a46c005b498cdb38a58dcfa1e91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a7e148a46c005b498cdb38a58dcfa1e91">MALLOCATE_ARRAY</a>(STRUCT,  LEN)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a>((LEN), sizeof(STRUCT)) )</td></tr>
 <tr class="memdesc:a7e148a46c005b498cdb38a58dcfa1e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro giving value of pointer to the allocated array of size <code>LEN</code> of structures <code>STRUCT</code>.  <a href="#a7e148a46c005b498cdb38a58dcfa1e91">More...</a><br /></td></tr>
 <tr class="separator:a7e148a46c005b498cdb38a58dcfa1e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa411913e9e83211a1c94a468349cd84a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#aa411913e9e83211a1c94a468349cd84a">MFREE</a>(POINTER)&#160;&#160;&#160;<a class="el" href="memalloc_8h.html#ab74ceb0242dcb6e709099ae544f2b5dc">FreeMemoryBlock</a>((POINTER));</td></tr>
-<tr class="memdesc:aa411913e9e83211a1c94a468349cd84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro freeing data pointed by <code>POINTER</code>.  <a href="#aa411913e9e83211a1c94a468349cd84a">More...</a><br /></td></tr>
-<tr class="separator:aa411913e9e83211a1c94a468349cd84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d016965a1d417fd0ee74ffe5c4bb5f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#ae8d016965a1d417fd0ee74ffe5c4bb5f">MREALLOCATE</a>(STRUCT,  PTR)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a985727f222687b76ed4bfcb8282b5e92">ReallocateMemoryBlock</a>((PTR), sizeof(STRUCT)) )</td></tr>
+<tr class="memdesc:ae8d016965a1d417fd0ee74ffe5c4bb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro giving value of pointer to the reallocated structure <code>STRUCT</code>.  <a href="#ae8d016965a1d417fd0ee74ffe5c4bb5f">More...</a><br /></td></tr>
+<tr class="separator:ae8d016965a1d417fd0ee74ffe5c4bb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1989a091cb40a8725afc386af45b3095"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a1989a091cb40a8725afc386af45b3095">MREALLOCATE_ARRAY</a>(STRUCT,  LEN,  PTR)&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#aa3ead5ec809c7a05d9e539bfeaebf30c">ReallocateMemoryBlockArray</a>((PTR), (LEN), sizeof(STRUCT)) )</td></tr>
+<tr class="memdesc:a1989a091cb40a8725afc386af45b3095"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro giving value of pointer to the reallocated array of size <code>LEN</code> of structures <code>STRUCT</code>.  <a href="#a1989a091cb40a8725afc386af45b3095">More...</a><br /></td></tr>
+<tr class="separator:a1989a091cb40a8725afc386af45b3095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23bcb638863d01a81c08a3c89b5ed3e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a23bcb638863d01a81c08a3c89b5ed3e8">MALLOCATE_BLOCKS</a>(BLOCK_SIZE,  LEN)&#160;&#160;&#160;( (void*) <a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a>((LEN), (BLOCK_SIZE)) )</td></tr>
+<tr class="memdesc:a23bcb638863d01a81c08a3c89b5ed3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro giving value of pointer to the allocated array of size <code>LEN</code> of blocks of size <code>SIZE</code> bytes.  <a href="#a23bcb638863d01a81c08a3c89b5ed3e8">More...</a><br /></td></tr>
+<tr class="separator:a23bcb638863d01a81c08a3c89b5ed3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8759b7242487020d180b752a073dbbc0"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a8759b7242487020d180b752a073dbbc0">AllocateMemoryBlock</a> (int size)</td></tr>
 <tr class="memdesc:a8759b7242487020d180b752a073dbbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function allocating <code>size</code> bytes.  <a href="#a8759b7242487020d180b752a073dbbc0">More...</a><br /></td></tr>
 <tr class="separator:a8759b7242487020d180b752a073dbbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a985727f222687b76ed4bfcb8282b5e92"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a985727f222687b76ed4bfcb8282b5e92">ReallocateMemoryBlock</a> (void *p, int size)</td></tr>
+<tr class="memdesc:a985727f222687b76ed4bfcb8282b5e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function reallocating <code>size</code> bytes.  <a href="#a985727f222687b76ed4bfcb8282b5e92">More...</a><br /></td></tr>
+<tr class="separator:a985727f222687b76ed4bfcb8282b5e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdcf770f5b7c8ac57a7c41f72e3518d"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a> (int count, int size)</td></tr>
 <tr class="memdesc:a1fdcf770f5b7c8ac57a7c41f72e3518d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function allocating <code>count</code> block each of size <code>size</code> bytes.  <a href="#a1fdcf770f5b7c8ac57a7c41f72e3518d">More...</a><br /></td></tr>
 <tr class="separator:a1fdcf770f5b7c8ac57a7c41f72e3518d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab74ceb0242dcb6e709099ae544f2b5dc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#ab74ceb0242dcb6e709099ae544f2b5dc">FreeMemoryBlock</a> (void *p)</td></tr>
-<tr class="memdesc:ab74ceb0242dcb6e709099ae544f2b5dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function deallocating data pointed by <code>p</code>.  <a href="#ab74ceb0242dcb6e709099ae544f2b5dc">More...</a><br /></td></tr>
-<tr class="separator:ab74ceb0242dcb6e709099ae544f2b5dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3ead5ec809c7a05d9e539bfeaebf30c"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="memalloc_8h.html#aa3ead5ec809c7a05d9e539bfeaebf30c">ReallocateMemoryBlockArray</a> (void *p, int count, int size)</td></tr>
+<tr class="memdesc:aa3ead5ec809c7a05d9e539bfeaebf30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function reallocating <code>count</code> block each of size <code>size</code> bytes.  <a href="#aa3ead5ec809c7a05d9e539bfeaebf30c">More...</a><br /></td></tr>
+<tr class="separator:aa3ead5ec809c7a05d9e539bfeaebf30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Error-detecing memory allocators. </p>
 <dl class="section author"><dt>Author</dt><dd>Piotr Styczyński <a href="#" onclick="location.href='mai'+'lto:'+'pio'+'tr'+'sty'+'1@'+'gma'+'il'+'.co'+'m'; return false;">piotr<span style="display: none;">.nosp@m.</span>sty1<span style="display: none;">.nosp@m.</span>@gmai<span style="display: none;">.nosp@m.</span>l.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017-05-13 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a352605fdb4f664499514b710d7fd5e3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a352605fdb4f664499514b710d7fd5e3b">&#9670;&nbsp;</a></span>MALLOCATE</h2>
@@ -137,7 +155,15 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Macro giving value of pointer to the allocated structure <code>STRUCT</code>. </p>
-<p>NOTICE: Assertion checking is done for allocation errors. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">STRUCT</td><td>: Type to be allocated </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00025">25</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
 
 </div>
 </div>
@@ -168,28 +194,143 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Macro giving value of pointer to the allocated array of size <code>LEN</code> of structures <code>STRUCT</code>. </p>
-<p>NOTICE: Assertion checking is done for allocation errors. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">STRUCT</td><td>: Type to be allocated </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">LEN</td><td>: Length of array to be allocated </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00039">39</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
 
 </div>
 </div>
-<a id="aa411913e9e83211a1c94a468349cd84a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa411913e9e83211a1c94a468349cd84a">&#9670;&nbsp;</a></span>MFREE</h2>
+<a id="a23bcb638863d01a81c08a3c89b5ed3e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23bcb638863d01a81c08a3c89b5ed3e8">&#9670;&nbsp;</a></span>MALLOCATE_BLOCKS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MFREE</td>
+          <td class="memname">#define MALLOCATE_BLOCKS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">POINTER</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="memalloc_8h.html#ab74ceb0242dcb6e709099ae544f2b5dc">FreeMemoryBlock</a>((POINTER));</td>
+          <td class="paramname">BLOCK_SIZE, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LEN&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;( (void*) <a class="el" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d">AllocateMemoryBlockArray</a>((LEN), (BLOCK_SIZE)) )</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Macro freeing data pointed by <code>POINTER</code>. </p>
-<p>NOTICE: Assertion checking is done for deallocation errors. </p>
+<p>Macro giving value of pointer to the allocated array of size <code>LEN</code> of blocks of size <code>SIZE</code> bytes. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">BLOCK_SIZE</td><td>: Length of single block in bytes </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">LEN</td><td>: Length of array to be allocated </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00081">81</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
+
+</div>
+</div>
+<a id="ae8d016965a1d417fd0ee74ffe5c4bb5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d016965a1d417fd0ee74ffe5c4bb5f">&#9670;&nbsp;</a></span>MREALLOCATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MREALLOCATE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">STRUCT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PTR&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#a985727f222687b76ed4bfcb8282b5e92">ReallocateMemoryBlock</a>((PTR), sizeof(STRUCT)) )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Macro giving value of pointer to the reallocated structure <code>STRUCT</code>. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">STRUCT</td><td>: Type to be allocated </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">PTR</td><td>: Pointer to currently allocated structure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00052">52</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
+
+</div>
+</div>
+<a id="a1989a091cb40a8725afc386af45b3095"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1989a091cb40a8725afc386af45b3095">&#9670;&nbsp;</a></span>MREALLOCATE_ARRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MREALLOCATE_ARRAY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">STRUCT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LEN, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PTR&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;( (STRUCT*) <a class="el" href="memalloc_8h.html#aa3ead5ec809c7a05d9e539bfeaebf30c">ReallocateMemoryBlockArray</a>((PTR), (LEN), sizeof(STRUCT)) )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Macro giving value of pointer to the reallocated array of size <code>LEN</code> of structures <code>STRUCT</code>. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">STRUCT</td><td>: Type to be allocated </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">LEN</td><td>: Length of new array </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">PTR</td><td>: Pointer to currently allocated structure array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00067">67</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
 
 </div>
 </div>
@@ -227,6 +368,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void* to allocated memory block </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00092">92</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
 
 </div>
 </div>
@@ -275,10 +418,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void* to allocated memory array </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00128">128</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
+
 </div>
 </div>
-<a id="ab74ceb0242dcb6e709099ae544f2b5dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab74ceb0242dcb6e709099ae544f2b5dc">&#9670;&nbsp;</a></span>FreeMemoryBlock()</h2>
+<a id="a985727f222687b76ed4bfcb8282b5e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a985727f222687b76ed4bfcb8282b5e92">&#9670;&nbsp;</a></span>ReallocateMemoryBlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,11 +432,21 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void FreeMemoryBlock </td>
+          <td class="memname">static void* ReallocateMemoryBlock </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -301,14 +456,90 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function deallocating data pointed by <code>p</code>. </p>
-<p>NOTICE: Assertion checking is done for deallocation errors.</p>
+<p>Function reallocating <code>size</code> bytes. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: void* </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: reused void* pointer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>: int </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>void* to allocated memory block </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00110">110</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="memalloc_8h_a985727f222687b76ed4bfcb8282b5e92_cgraph.png" border="0" usemap="#memalloc_8h_a985727f222687b76ed4bfcb8282b5e92_cgraph" alt=""/></div>
+<map name="memalloc_8h_a985727f222687b76ed4bfcb8282b5e92_cgraph" id="memalloc_8h_a985727f222687b76ed4bfcb8282b5e92_cgraph">
+<area shape="rect" id="node2" href="memalloc_8h.html#a8759b7242487020d180b752a073dbbc0" title="Function allocating size bytes. " alt="" coords="228,5,388,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa3ead5ec809c7a05d9e539bfeaebf30c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3ead5ec809c7a05d9e539bfeaebf30c">&#9670;&nbsp;</a></span>ReallocateMemoryBlockArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void* ReallocateMemoryBlockArray </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function reallocating <code>count</code> block each of size <code>size</code> bytes. </p>
+<p>NOTICE: Assertion checking is done for allocation errors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: reused void* pointer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>: int </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>: int </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* to allocated memory array </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="memalloc_8h_source.html#l00149">149</a> of file <a class="el" href="memalloc_8h_source.html">memalloc.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="memalloc_8h_aa3ead5ec809c7a05d9e539bfeaebf30c_cgraph.png" border="0" usemap="#memalloc_8h_aa3ead5ec809c7a05d9e539bfeaebf30c_cgraph" alt=""/></div>
+<map name="memalloc_8h_aa3ead5ec809c7a05d9e539bfeaebf30c_cgraph" id="memalloc_8h_aa3ead5ec809c7a05d9e539bfeaebf30c_cgraph">
+<area shape="rect" id="node2" href="memalloc_8h.html#a1fdcf770f5b7c8ac57a7c41f72e3518d" title="Function allocating count block each of size size bytes. " alt="" coords="264,5,459,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -320,10 +551,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>
-Generated on Sun May 21 2017 19:07:57 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<hr class="footer"/>
 </body>
 </html>

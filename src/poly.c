@@ -5,25 +5,20 @@
 *   @copyright MIT
 *   @date 2017-05-13
 */
-
+#include "utils.h"
 #include <assert.h>
 #include <stdio.h>
 #include "memalloc.h"
 #include "dynamic_lists.h"
+#include "generics.h"
 #include "poly.h"
+#include "math_utils.h"
 
 /*
 * Creates monomial from given exponent and coefficient
 */
-Mono MonoFromCoeff(poly_coeff_t c, poly_exp_t e) {
+static inline Mono MonoFromCoeff(poly_coeff_t c, poly_exp_t e) {
     return (Mono) { .exp = e, .p = PolyFromCoeff(c) };
-}
-
-/*
-* Extracts polynomial const (MFREE) term
-*/
-poly_coeff_t PolyGetConstTerm(const Poly* p) {
-  return p->c;
 }
 
 /*
@@ -37,7 +32,7 @@ void PolyDestroy(Poly *p) {
   }
   LOOP_LIST(&(p->monos), i) {
     Mono* m = (Mono*) ListGetValue(i);
-    MFREE(m);
+    free(m);
   }
   ListDestroy(&(p->monos));
 }
@@ -48,7 +43,7 @@ void PolyDestroy(Poly *p) {
 * Deep-copies given monomial pointed by ListData pointer.
 * Then returns pointer to the newly copied monomial.
 */
-ListData polyCopier(ListData data) {
+static inline ListData polyCopier(ListData data) {
   Mono* mono = (Mono*) data;
   Mono* mono_new = MALLOCATE(Mono);
   *mono_new = MonoClone(mono);
@@ -88,6 +83,67 @@ void PolyScaleConst(Poly *p, const poly_coeff_t c) {
   }
 }
 
+Poly PolyAddScaled(const Poly *p, const Poly *q, const poly_coeff_t c);
+
+/*
+* Adding two polynomials with optional scaling of second parameter
+*/
+void PolyAddScaledInPlace(Poly *p, const Poly *q, const poly_coeff_t c) {
+  assert(p!=NULL);
+  assert(q!=NULL);
+  List result = ListNew();
+
+  ListIterator iq = ListBegin(&(q->monos));
+  ListIterator ip = ListBegin(&(p->monos));
+  while(ip != NULL || iq != NULL) {
+    Mono* mp = (Mono*) ListGetValue(ip);
+    Mono* mq = (Mono*) ListGetValue(iq);
+    if(mp == NULL) {
+      Mono* new_mono = MonoClonePtr(mq);
+      PolyScaleConst(&(new_mono->p), c);
+      ListPushBack(&result, new_mono);
+      iq = ListNext(iq);
+    } else if(mq == NULL) {
+      //Skip clone
+      Mono* new_mono = mp;
+      ListPushBack(&result, new_mono);
+      ip = ListNext(ip);
+    } else if(mp->exp > mq->exp) {
+      Mono* new_mono = MonoClonePtr(mq);
+      PolyScaleConst(&(new_mono->p), c);
+      ListPushBack(&result, new_mono);
+      iq = ListNext(iq);
+    } else if(mp->exp < mq->exp) {
+      //Skip clone
+      Mono* new_mono = mp;
+      ListPushBack(&result, new_mono);
+      ip = ListNext(ip);
+    } else {
+      PolyAddScaledInPlace(&(mp->p), &(mq->p), c);
+
+      if(PolyIsCoeff(&(mp->p)) && PolyGetConstTerm(&(mp->p)) == 0) {
+        MonoDestroy(mp);
+        free(mp);
+      } else {
+        ListPushBack(&result, mp);
+      }
+
+      /*PolyAddScaledInPlace(&(mp->p), &(mq->p), c);
+
+      if(PolyIsCoeff(&(mp->p)) && PolyGetConstTerm(&(mp->p)) == 0) {
+        PolyDestroy(&(mp->p));
+      } else {
+        Mono* partial_result = MALLOCATE(Mono);
+        *partial_result = (Mono) { .exp = mp->exp, .p = mp->p };
+        ListPushBack(&result, partial_result);
+      }*/
+      ip = ListNext(ip);
+      iq = ListNext(iq);
+    }
+  }
+  ListDestroy(&(p->monos));
+  *p = (Poly) { .c = p->c + (q->c)*c, .monos = result };
+}
 
 /*
 * Adding two polynomials with optional scaling of second parameter
@@ -186,12 +242,17 @@ void PolyNormalizeConstTerms(Poly* p) {
 *
 * the monomial is not used and SHOULD BE DESTROYED.
 */
-int PolyInsertMono(Poly* p, Mono* new_mono) {
+static inline int PolyTryInsertMono(Poly* p, Mono* new_mono) {
+
+  if(PolyIsCoeff(&(new_mono->p)) && PolyGetConstTerm(&(new_mono->p))==0) {
+    return 0;
+  }
+
 
   if(new_mono->exp == 0) {
 
-    const poly_coeff_t term = PolyExtractConstTermsRec(&(new_mono->p));
-    p->c += term;
+    //const poly_coeff_t term = PolyExtractConstTermsRec(&(new_mono->p));
+    p->c += new_mono->p.c;
     new_mono->p.c = 0;
     if(PolyIsCoeff(&(new_mono->p))) {
       return 0;
@@ -215,16 +276,34 @@ int PolyInsertMono(Poly* p, Mono* new_mono) {
     ListIterator next = ListNext(i);
     Mono* m = (Mono*) ListGetValue(i);
     if(m->exp == new_mono->exp) {
-      Poly pom = PolyAdd(&(m->p), &(new_mono->p));
+
+      //printf("@");fflush(stdout);
+
+
+
+      //TODO: Potential performance issue
+      /*Poly pom = PolyAdd(&(m->p), &(new_mono->p));
       if(PolyIsCoeff(&pom) && PolyGetConstTerm(&pom)==0) {
         ListDetachElement(&(p->monos), i);
         PolyDestroy(&pom);
         MonoDestroy(m);
-        MFREE(m);
+        free(m);
         return 0;
       }
+      //Here: destroy poly
       PolyDestroy(&(m->p));
-      m->p = pom;
+      m->p = pom;*/
+
+
+
+      //printf("#"); fflush(stdout);
+      PolyAddScaledInPlace(&(m->p), &(new_mono->p), 1);
+      if(PolyIsCoeff(&(m->p)) && PolyGetConstTerm(&(m->p))==0) {
+        ListDetachElement(&(p->monos), i);
+        MonoDestroy(m);
+        free(m);
+        return 0;
+      }
 
       return 0;
     } else if(new_mono->exp > m->exp) {
@@ -246,14 +325,14 @@ int PolyInsertMono(Poly* p, Mono* new_mono) {
 * using PolyInsertMono if the function fails
 * then memory is automatically freed.
 */
-void PolyInsertMonoValue(Poly* p, Mono new_mono) {
+static inline void PolyInsertMonoValue(Poly* p, Mono new_mono) {
   Mono* new_mono_ptr = MALLOCATE(Mono);
-
   *new_mono_ptr = new_mono;
-  if(!PolyInsertMono(p, new_mono_ptr)) {
+  if(!PolyTryInsertMono(p, new_mono_ptr)) {
     MonoDestroy(new_mono_ptr);
-    MFREE(new_mono_ptr);
+    free(new_mono_ptr);
   }
+
 }
 
 /*
@@ -261,13 +340,24 @@ void PolyInsertMonoValue(Poly* p, Mono new_mono) {
 * using PolyInsertMono if the function fails
 * then memory is automatically freed.
 */
-void PolyInsertMonoPtr(Poly* p, Mono* new_mono_ptr) {
-  if(!PolyInsertMono(p, new_mono_ptr)) {
+static inline void PolyInsertMonoPtr(Poly* p, Mono* new_mono_ptr) {
+  if(!PolyTryInsertMono(p, new_mono_ptr)) {
     MonoDestroy(new_mono_ptr);
-    MFREE(new_mono_ptr);
+    free(new_mono_ptr);
   }
 }
 
+void PolyInsertMono(Poly* p, Mono mono) {
+  PolyInsertMonoValue(p, mono);
+}
+
+int MonoHelperSorter(const void * p1, const void * p2) {
+    Mono e1 = *((Mono*)p1);
+    Mono e2 = *((Mono*)p2);
+    if (e1.exp > e2.exp) return  1;
+    if (e1.exp < e2.exp) return -1;
+    return 0;
+}
 
 /*
 * Adds monos to create new polynomial.
@@ -418,22 +508,35 @@ bool PolyIsEq(const Poly *p, const Poly *q) {
   return PolyIsEqRec(p, q);
 }
 
-/*
-* Calculate precisely coeff ^ exp
-*/
-poly_coeff_t expCoeff(poly_coeff_t coeff, poly_exp_t exp) {
-  if(exp == 0) return 1;
-  if(exp == 1) return coeff;
-  if(coeff == 0) return 0;
-  if(coeff == 1) return 1;
-  if(coeff == -1) {
-    if(exp % 2 == 0) return 1;
-    return -1;
+
+
+Poly PolyPow(const Poly* p, poly_exp_t exp) {
+  printf("Pow to : %ld\n", exp);
+
+  if(exp == 0) return PolyFromCoeff(1);
+  if(exp == 1) return PolyClone(p);
+
+  if(PolyIsCoeff(p)) {
+    if(p->c == 0) return PolyZero();
+    if(p->c == 1) return PolyFromCoeff(1);
+    if(p->c == -1) {
+      if(exp % 2 == 0) return PolyFromCoeff(1);
+      return PolyFromCoeff(-1);
+    }
   }
-  poly_coeff_t result = 1;
-  for(poly_exp_t i = 0; i < exp; ++i) {
-    result *= coeff;
+
+  Poly result = PolyFromCoeff(1);
+  Poly base = PolyClone(p);
+
+  while (exp) {
+    if (exp & 1) {
+      PolyReplace(&result, PolyMul(&result, &base));
+    }
+    exp >>= 1;
+    PolyReplace(&base, PolyMul(&base, &base));
   }
+  PolyDestroy(&base);
+
   return result;
 }
 
@@ -449,7 +552,7 @@ Poly PolyAt(const Poly *p, poly_coeff_t x) {
 
   LOOP_LIST(&(p->monos), i) {
     Mono* m = (Mono*) ListGetValue(i);
-    poly_coeff_t factValue = expCoeff(x, m->exp);
+    poly_coeff_t factValue = MathFastPowLong(x, m->exp);
 
     Poly partialResult = PolyClone(&(m->p));
     PolyScaleConst(&partialResult, factValue);
@@ -505,7 +608,7 @@ void PolyPrintSingleExp(char** wordAccumulatorBeg, char** wordAccumulator,
     }
     *wordAccumulator += sprintf(*wordAccumulator, "%s^%d", varname, (int)exp);
   }
-  MFREE(varname);
+  free(varname);
 }
 
 /*
@@ -529,7 +632,7 @@ void PolyPrintSingleWord(char** wordAccumulatorBeg, char** wordAccumulator,
       *wordAccumulator += sprintf(*wordAccumulator, "-");
     }
     if(coeffAccumulator != -1) {
-      *wordAccumulator += sprintf(*wordAccumulator, "%d", -coeffAccumulator);
+      *wordAccumulator += sprintf(*wordAccumulator, "%ld", -coeffAccumulator);
     } else if(wordBufferEmpty) {
       *wordAccumulator += sprintf(*wordAccumulator, "1");
     }
@@ -540,7 +643,7 @@ void PolyPrintSingleWord(char** wordAccumulatorBeg, char** wordAccumulator,
       *wordAccumulator += sprintf(*wordAccumulator, " + ");
     }
     if(coeffAccumulator != 1) {
-      *wordAccumulator += sprintf(*wordAccumulator, "%d", coeffAccumulator);
+      *wordAccumulator += sprintf(*wordAccumulator, "%ld", coeffAccumulator);
     } else if(wordBufferEmpty) {
       *wordAccumulator += sprintf(*wordAccumulator, "1");
     }
@@ -579,7 +682,7 @@ void PolyPrintRec(char** accumulatorBeg, char** accumulator,
     PolyPrintRec(accumulatorBeg, accumulator, &wordAccumulatorCpBegin,
       &wordAccumulatorCp, coeffAccumulator, &(m->p), varid+1);
 
-    MFREE(wordAccumulatorCpBegin);
+    free(wordAccumulatorCpBegin);
   }
 }
 
@@ -601,7 +704,7 @@ void PolySprintf(char* dest, const Poly *p) {
    if(accumulatorBegin == accumulator) {
      sprintf(accumulatorBegin, "0");
    }
-   MFREE(wordAccumulatorBegin);
+   free(wordAccumulatorBegin);
 }
 
 /*
@@ -620,5 +723,59 @@ char* PolyToString(const Poly* p) {
 void PolyPrint(const Poly* p) {
   char* str = PolyToString(p);
   printf("%s", str);
-  MFREE(str);
+  free(str);
+}
+
+/**
+ * Recursively composes polynomial.
+ * Accepts one more paramter compared to the default compose function - index.
+ * The index is number of currently substituted variable
+ * (index in list x which is considered)
+ * as the list is parsed from left to right (indexing from 0).
+ */
+Poly PolyComposeRec(const Poly *p, unsigned count, unsigned index, const Poly x[]) {
+
+  if(PolyIsCoeff(p)) return PolyClone(p);
+  if(count == 0) return PolyClone(p);
+  if(index>=count) return PolyZero();
+
+  Poly result = PolyZero();
+
+  printf("> Compose index = %d: ", index);
+  PolyPrint(&x[index]);
+  printf("\nIn: ");
+  PolyPrint(p);
+  printf("\n");
+
+  LOOP_LIST(&(p->monos), i) {
+    Mono* m = (Mono*) ListGetValue(i);
+
+    Poly partial_result = PolyComposeRec(&(m->p), count, index+1, x);
+    Poly pow_result = PolyPow(&x[index], m->exp);
+    PolyReplace(&partial_result, PolyMul(&partial_result, &pow_result));
+    PolyDestroy(&pow_result);
+
+    printf("--> Partial result: ");
+    PolyPrint(&partial_result);
+    printf("\n");
+
+    PolyReplace(&result, PolyAdd(&result, &partial_result));
+    PolyDestroy(&partial_result);
+  }
+
+  result.c += p->c;
+
+  printf("> Result: ");
+  PolyPrint(&result);
+  printf("\n");
+
+  return result;
+}
+
+
+/**
+ * Compose given polynomials to one polynomial.
+ */
+Poly PolyCompose(const Poly *p, unsigned count, const Poly x[]) {
+  return PolyComposeRec(p, count, 0, x);
 }

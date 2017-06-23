@@ -69,12 +69,29 @@ $(function() {
 
 <p>Various utilities.  
 <a href="#details">More...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for utils.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="utils_8h__incl.png" border="0" usemap="#utils_8h" alt=""/></div>
+<map name="utils_8h" id="utils_8h">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="utils_8h__dep__incl.png" border="0" usemap="#utils_8hdep" alt=""/></div>
 <map name="utils_8hdep" id="utils_8hdep">
-<area shape="rect" id="node2" href="dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node2" href="array__lists_8h.html" title="Unidirectional list implementation based on arrays (C99 standard) Usage: " alt="" coords="37,155,140,181"/>
+<area shape="rect" id="node3" href="stack_8h.html" title="Stack implementation (C99 standard) Usage: " alt="" coords="190,229,261,256"/>
+<area shape="rect" id="node4" href="calc__interpreter_8h.html" title="Calculator code interpreter. " alt="" coords="214,304,354,331"/>
+<area shape="rect" id="node5" href="memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="284,80,378,107"/>
+<area shape="rect" id="node6" href="dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="164,155,287,181"/>
+<area shape="rect" id="node7" href="poly_8h.html" title="Interface of polynomials. " alt="" coords="413,229,476,256"/>
+<area shape="rect" id="node8" href="test__utils_8h.html" title="Utilities for unit tests. " alt="" coords="437,304,534,331"/>
+<area shape="rect" id="node9" href="generics_8h.html" title="Generic collections support and utilities. " alt="" coords="118,80,208,107"/>
+<area shape="rect" id="node10" href="math__utils_8h.html" title="Collection of useful mathematical utilities. " alt="" coords="565,80,668,107"/>
 </map>
 </div>
 </div>
@@ -92,9 +109,15 @@ Macros</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Various utilities. </p>
 <p>(C99 standard)</p>
+<p>THIS FILE SHOULD BE ALWAYS INCLUDED AS FIRST ONE! This is only in case of compilation with UNIT_TESTING Because then all important definitions are replaced with a traps used for testing.</p>
+<p>The unit tests for the library take advantage of UNIT_TESTING macro.</p>
+<p>If you DO NOT WANT the traps to be emmited then define DISABLE_TRAPS macro before including this file :)</p>
+<p>Unit tests should also define UNIT_TEST it marks the file no as part of libary to be tested but rater an external code. It works just as DISABLE_TRAPS macro. :)</p>
 <dl class="section author"><dt>Author</dt><dd>Piotr Styczyński <a href="#" onclick="location.href='mai'+'lto:'+'pio'+'tr'+'sty'+'1@'+'gma'+'il'+'.co'+'m'; return false;">piotr<span style="display: none;">.nosp@m.</span>sty1<span style="display: none;">.nosp@m.</span>@gmai<span style="display: none;">.nosp@m.</span>l.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017-05-13 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a49606be7356624568932ec81c0d429f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49606be7356624568932ec81c0d429f4">&#9670;&nbsp;</a></span>DBG</h2>
@@ -110,6 +133,8 @@ Macros</h2></td></tr>
 
 <p>Macro used for debug purposes The code block after it will be executed only if DEBUG macro was set to 1. </p>
 <p>Works as if clause e.g. </p><div class="fragment"><div class="line"><a class="code" href="utils_8h.html#a49606be7356624568932ec81c0d429f4">DBG</a> {</div><div class="line">  printf(<span class="stringliteral">&quot;Hello&quot;</span>);</div><div class="line">}</div></div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00050">50</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
 </div>
 </div>
 <a id="ad72dbcf6d0153db1b8d8a58001feed83"></a>
@@ -127,6 +152,8 @@ Macros</h2></td></tr>
 <p>Debug symbol definitions. </p>
 <p>Use DEBUG 0 to disable debug macro DBG Use DEBUG 1 to enable debug macro DBG </p>
 
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00033">33</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -137,10 +164,6 @@ Macros</h2></td></tr>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>
-Generated on Sun May 21 2017 19:07:58 for Polynomials by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<hr class="footer"/>
 </body>
 </html>

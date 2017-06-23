@@ -1,0 +1,4 @@
+<map id="ListDestroyDeep" name="ListDestroyDeep">
+<area shape="rect" id="node2" href="$dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="183,5,287,32"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="187,56,283,83"/>
+</map>

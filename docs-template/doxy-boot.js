@@ -94,6 +94,12 @@ $( document ).ready(function() {
 	});
 
 
+  $("#main-nav").appendTo(".navbar");
+
+  $('span.icondoc').replaceWith("<span class=\"glyphicon glyphicon-file\" style=\"padding-right:20px;\" aria-hidden=\"true\"></span>");
+  $('span.icon:contains(\'C\')').replaceWith("<span class=\"glyphicon glyphicon-cog\" style=\"color: #1f8dd6; padding-right:20px;\" aria-hidden=\"true\"></span>");
+
+
   /* responsive search box */
   /*$('#MSearchBox').parent().remove();
 
@@ -311,5 +317,33 @@ $( document ).ready(function() {
     }
     thiz.replaceWith(wrapper);
   });
+
+  var pagesCache = {};
+
+  setInterval(function(){
+    if($('.has-submenu').parent().find('ul').remove().length > 0) {
+      $('#main-menu>li>a').hover(function(){
+        $('#main-menu>li>a').removeClass('active');
+        $(this).addClass('active');
+
+        var thiz = $(this);
+        var url = thiz.attr('href');
+
+        if(1) {
+          console.log('hover');
+          $.ajax({
+            url: url
+          }).done(function(text) {
+            pagesCache[url] = $(text).find('#content').first();
+            $('#content').replaceWith(pagesCache[url]);
+          });
+        } else {
+          console.log(pagesCache[url]);
+          $('#content').replaceWith(pagesCache[url]);
+        }
+      });
+    }
+    $('.sub-arrow').remove();
+  }, 50);
 
 });

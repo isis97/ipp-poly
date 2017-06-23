@@ -1,3 +1,11 @@
 <map id="utils.h" name="utils.h">
-<area shape="rect" id="node2" href="$dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node2" href="$array__lists_8h.html" title="Unidirectional list implementation based on arrays (C99 standard) Usage: " alt="" coords="37,155,140,181"/>
+<area shape="rect" id="node3" href="$stack_8h.html" title="Stack implementation (C99 standard) Usage: " alt="" coords="190,229,261,256"/>
+<area shape="rect" id="node4" href="$calc__interpreter_8h.html" title="Calculator code interpreter. " alt="" coords="214,304,354,331"/>
+<area shape="rect" id="node5" href="$memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="284,80,378,107"/>
+<area shape="rect" id="node6" href="$dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="164,155,287,181"/>
+<area shape="rect" id="node7" href="$poly_8h.html" title="Interface of polynomials. " alt="" coords="413,229,476,256"/>
+<area shape="rect" id="node8" href="$test__utils_8h.html" title="Utilities for unit tests. " alt="" coords="437,304,534,331"/>
+<area shape="rect" id="node9" href="$generics_8h.html" title="Generic collections support and utilities. " alt="" coords="118,80,208,107"/>
+<area shape="rect" id="node10" href="$math__utils_8h.html" title="Collection of useful mathematical utilities. " alt="" coords="565,80,668,107"/>
 </map>

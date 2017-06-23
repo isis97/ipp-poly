@@ -2,7 +2,7 @@
 *  Bidirectional List implementation (C99 standard)
 *  Usage:
 *  @code
-*     #include <list.h>
+*     #include <dynamic_lists.h>
 *      ...
 *     List l = ListNew();
 *  @endcode
@@ -12,25 +12,14 @@
 *  @copyright MIT
 *  @date 2017-05-13
 */
+#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
-#include "utils.h"
 #include "memalloc.h"
 #include "dynamic_lists.h"
 
-
-/**
-* Structure representing one element of List
-* It's got two neighbours (may be NULL)
-* Element also contains ListData pointer to the actual data.
-*/
-struct ListNode {
-  ListNode* right; ///< pointer to the right neighbour
-  ListData value; ///< pointer to the data held in List element
-  ListNode* left; ///< pointer to the right neighbour
-};
 
 /*
 * Makes new List from given values
@@ -52,7 +41,7 @@ static void ListDestroyRecLeft(ListNode* l) {
     ListDestroyRecLeft(l->left);
   }
   DBG {printf("FREE Lists.MListDestroyRecLeft %p\n", l);fflush(stdout);}
-  MFREE(l);
+  free(l);
 }
 
 /*
@@ -112,7 +101,7 @@ ListData ListPopFront(List* l) {
       (l->end) = NULL;
     }
     DBG {printf("FREE Lists.ListPopFront %p\n", l->begin);fflush(stdout);}
-    MFREE(l->begin);
+    free(l->begin);
     (l->begin) = new_begin;
     return val;
   }
@@ -136,7 +125,7 @@ ListData ListPopBack(List* l) {
     } else {
       (l->begin) = NULL;
     }
-    MFREE(l->end);
+    free(l->end);
     (l->end) = new_end;
     return val;
   }
@@ -164,12 +153,12 @@ void ListDestroy(List* l) {
   while(it != NULL) {
     ListNode* next = it->right;
     DBG {printf("FREE Lists.MListDestroy %p\n", it);fflush(stdout);}
-    MFREE(it);
+    free(it);
     it = next;
   }
   l->begin = NULL;
   l->end = NULL;
-  //MFREE(l);
+  //free(l);
 }
 
 /*
@@ -203,7 +192,7 @@ ListData ListLast(const List* l) {
 /*
 * Measure List size in O(n) time
 */
-int ListGetSize(const List* l) {
+int ListSize(const List* l) {
   if(l == NULL) return 0;
   int size = 0;
   LOOP_LIST(l, it) {
@@ -227,18 +216,18 @@ void ListCopyInto( const List* src, List* tgt ) {
 /*
 * Print List nodes starting at <l> and going right
 */
-static void ListPrintNodes(const ListNode* l) {
+static void ListPrintNodes(const ListNode* l, GenericsPrinter printer) {
   if(l==NULL) return;
-  printf("%p; ", (ListData)(l->value));
-  ListPrintNodes(l->right);
+  printf("%p; ", printer(l->value));
+  ListPrintNodes(l->right, printer);
 }
 
 /*
 * Print List nodes of a given List
 */
-void ListPrint(const List* l) {
+void ListPrint(const List* l, GenericsPrinter printer) {
   printf("[ ");
-  ListPrintNodes(l->begin);
+  ListPrintNodes(l->begin, printer);
   printf("] ");
 }
 
@@ -248,7 +237,7 @@ void ListPrint(const List* l) {
 List ListCopy( const List* l ) {
   if(l == NULL) return ListNew();
 
-  const int size = ListGetSize(l);
+  const int size = ListSize(l);
 
   if(size == 0) return ListNew();
   if(size < 5) {
@@ -354,7 +343,7 @@ void ListDetachElement( List* l, ListNode* node ) {
     l->end = left_neighbour;
   }
   DBG {printf("FREE Lists.ListDetachElement %p\n", node);fflush(stdout);}
-  MFREE(node);
+  free(node);
 }
 
 /*
@@ -367,30 +356,6 @@ ListNode* ListNewDetachedElement() {
   ret->right = NULL;
   ret->value = NULL;
   return ret;
-}
-
-/*
-* Check if is first/last element
-*/
-int ListIsSideElement( ListNode* node ) {
-  if(node == NULL) return 0;
-  return ( (node->left == NULL) || (node->right == NULL) );
-}
-
-/*
-* Check if is first element
-*/
-int ListIsBegin( ListNode* node ) {
-  if(node == NULL) return 0;
-  return (node->left == NULL);
-}
-
-/*
-* Check if is last element
-*/
-int ListIsEnd( ListNode* node ) {
-  if(node == NULL) return 0;
-  return (node->right == NULL);
 }
 
 /*
@@ -469,40 +434,4 @@ List ListSplit( List* src, ListNode* splitter ) {
     ret.begin->left = NULL;
   }
   return ret;
-}
-
-/*
-* Get next element on the List.
-* Returns NULL if node is the last element.
-*/
-ListNode* ListNext( ListNode* node ) {
-  if(node==NULL) return NULL;
-  return node->right;
-}
-
-/*
-* Get previous element on the List.
-* Returns NULL if node is the last element.
-*/
-ListNode* ListPrevious( ListNode* node ) {
-  if(node==NULL) return NULL;
-  return node->left;
-}
-
-/*
-* Get value of the List element. Returns void pointer to underlying data.
-* Returns NULL if node is NULL.
-*/
-ListData ListGetValue( ListNode* node ) {
-  if(node==NULL) return NULL;
-  return node->value;
-}
-
-/*
-* Sets value of the List element.
-* Does nothing if element is NULL.
-*/
-void ListSetValue( ListNode* node, ListData value ) {
-  if(node==NULL) return;
-  node->value = value;
 }

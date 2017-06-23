@@ -1,6 +1,0 @@
-<map id="PolyDestroy" name="PolyDestroy">
-<area shape="rect" id="node2" href="$dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="155,5,259,32"/>
-<area shape="rect" id="node3" href="$poly_8h.html#a0bcd38ab44736f6e230b04b4eaec000a" title="Removes monomial from memory. " alt="" coords="153,56,261,83"/>
-<area shape="rect" id="node4" href="$dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="159,107,255,133"/>
-<area shape="rect" id="node5" href="$poly_8h.html#a5f50698912e4cdcf402f7df555f3abad" title="Performs deep&#45;copy of a given monomial. " alt="" coords="161,157,254,184"/>
-</map>

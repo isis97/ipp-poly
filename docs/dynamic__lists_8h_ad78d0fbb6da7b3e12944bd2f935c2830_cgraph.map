@@ -1,14 +1,4 @@
 <map id="ListEnd" name="ListEnd">
 <area shape="rect" id="node2" href="$dynamic__lists_8h.html#a47fcfe41743503915226dc7878ec4a62" title="Removes element from the List using given container pointer. " alt="" coords="145,5,289,32"/>
-<area shape="rect" id="node3" href="$dynamic__lists_8h.html#a8dd6cd4858b8efe73fd43fa04825358e" title="Create node that is not attached to anything. " alt="" coords="123,259,311,285"/>
-<area shape="rect" id="node4" href="$dynamic__lists_8h.html#a761cb70b0a1ed83b7afa19b2987da7a3" title="Checks if given node is the last or first element. " alt="" coords="365,57,503,84"/>
-<area shape="rect" id="node5" href="$dynamic__lists_8h.html#aff0c31e818b6eb148c3aae7503e7c636" title="Checks if given node is the first element. " alt="" coords="388,109,480,136"/>
-<area shape="rect" id="node6" href="$dynamic__lists_8h.html#ab3032c918e459082387e596a13ce9abd" title="Checks if given node is the last element. " alt="" coords="393,163,475,189"/>
-<area shape="rect" id="node7" href="$dynamic__lists_8h.html#a411f5a23007ab2200d73451d73b5dd98" title="Inserts List source to the left side of node of List target leaving source empty. ..." alt="" coords="373,220,495,247"/>
-<area shape="rect" id="node8" href="$dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6" title="Inserts value to the left side of node of List target. " alt="" coords="359,283,509,309"/>
-<area shape="rect" id="node9" href="$dynamic__lists_8h.html#aaae2a6283f5fd787a67d1c20bafabfd1" title="Get next element on the List. " alt="" coords="397,359,471,385"/>
-<area shape="rect" id="node10" href="$dynamic__lists_8h.html#af800419d4adf9f29da9258a33d80cc39" title="Get prevous element on the List. " alt="" coords="384,411,484,437"/>
-<area shape="rect" id="node11" href="$dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="382,461,486,488"/>
-<area shape="rect" id="node12" href="$dynamic__lists_8h.html#a55403f3a3d19a51d86b020885df72f90" title="Sets value of the List element. " alt="" coords="382,512,486,539"/>
-<area shape="rect" id="node13" href="$dynamic__lists_8h.html#a32ecb0e7b47ba6ff79cc64a414c27bb8" title="All elements on the right side of node are transferred to the new List that is returned. " alt="" coords="168,563,265,589"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#a8dd6cd4858b8efe73fd43fa04825358e" title="Create node that is not attached to anything. " alt="" coords="123,56,311,83"/>
 </map>

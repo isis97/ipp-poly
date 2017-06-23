@@ -1,0 +1,6 @@
+<map id="stack.h" name="stack.h">
+<area shape="rect" id="node2" href="$utils_8h.html" title="Various utilities. " alt="" coords="149,229,212,256"/>
+<area shape="rect" id="node4" href="$memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="180,155,275,181"/>
+<area shape="rect" id="node5" href="$array__lists_8h.html" title="Unidirectional list implementation based on arrays (C99 standard) Usage: " alt="" coords="269,80,372,107"/>
+<area shape="rect" id="node6" href="$dynamic__lists_8h.html" title="Bidirectional List implementation (C99 standard) Usage: " alt="" coords="71,80,194,107"/>
+</map>

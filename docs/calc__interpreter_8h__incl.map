@@ -1,0 +1,6 @@
+<map id="calc_interpreter.h" name="calc_interpreter.h">
+<area shape="rect" id="node2" href="$utils_8h.html" title="Various utilities. " alt="" coords="136,229,198,256"/>
+<area shape="rect" id="node8" href="$stack_8h.html" title="Stack implementation (C99 standard) Usage: " alt="" coords="108,80,178,107"/>
+<area shape="rect" id="node9" href="$memalloc_8h.html" title="Error&#45;detecing memory allocators. " alt="" coords="162,155,257,181"/>
+<area shape="rect" id="node10" href="$poly_8h.html" title="Interface of polynomials. " alt="" coords="278,80,341,107"/>
+</map>

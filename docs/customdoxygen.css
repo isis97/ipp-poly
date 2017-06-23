@@ -437,3 +437,39 @@ span.SRScope {
   border-left: darkslateblue solid 5px;
   margin-left: -15px;
 }
+
+
+.container {
+  background-color: #1f8dd6;
+  width: 100%;
+}
+
+#main-menu {
+  background-color: white;
+}
+
+a.navbar-brand {
+  color: white !important;
+}
+
+#main-menu > li > a {
+  color: black !important;
+  text-shadow: none !important;
+}
+
+#main-menu > li > a.active {
+  color: white !important;
+  text-shadow: none !important;
+  background-color: #1f8dd6;
+}
+
+#main-menu > li > ul {
+  box-shadow: none;
+  border: none;
+  background-color: white;
+}
+
+span.sub-arrow: {
+  display: none;
+  opacity: 0;
+}

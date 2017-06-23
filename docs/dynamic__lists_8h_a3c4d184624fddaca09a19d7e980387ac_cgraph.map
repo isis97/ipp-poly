@@ -1,6 +1,0 @@
-<map id="ListDeepCopy" name="ListDeepCopy">
-<area shape="rect" id="node2" href="$dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="356,5,429,32"/>
-<area shape="rect" id="node3" href="$dynamic__lists_8h.html#ac3929782579bbd53de9fa6f0fd44fcc0" title="Copy the List into a new one. " alt="" coords="197,31,275,57"/>
-<area shape="rect" id="node4" href="$dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02" title="Map List values using given (ListData)&#45;&gt;void function Function is executed for every List element val..." alt="" coords="200,81,272,108"/>
-<area shape="rect" id="node5" href="$dynamic__lists_8h.html#a47fcfe41743503915226dc7878ec4a62" title="Removes element from the List using given container pointer. " alt="" coords="164,132,308,159"/>
-</map>

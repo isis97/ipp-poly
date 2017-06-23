@@ -1,16 +1,19 @@
 <map id="MonoClone" name="MonoClone">
-<area shape="rect" id="node2" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="321,99,406,126"/>
-<area shape="rect" id="node3" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="464,71,607,98"/>
-<area shape="rect" id="node4" href="$poly_8h.html#afd55434759a46901958eb5ad79b78217" title="Adds two polynomials. " alt="" coords="326,42,401,68"/>
-<area shape="rect" id="node5" href="$poly_8h.html#a2524e2a4b48bacaa8c9d88775c915766" title="Sums array of monomials of size count. " alt="" coords="147,162,263,188"/>
-<area shape="rect" id="node6" href="$poly_8h.html#a6e066ef82f4d7611d7276a6adc8e47ac" title="Multiplicates two polynomials. " alt="" coords="169,212,240,239"/>
-<area shape="rect" id="node7" href="$poly_8h.html#a79194d594bd19fae18c7d72a30364b18" title="Returns a polynomial with changes sign. " alt="" coords="167,263,242,290"/>
-<area shape="rect" id="node8" href="$poly_8h.html#abd180157f87e1da3669356026bbddc5e" title="Substracts two polynomials. " alt="" coords="167,314,242,340"/>
-<area shape="rect" id="node9" href="$poly_8h.html#a9c917ac6b026ba1d799dc61703eff13a" title="Determines the degree of polynomial with respect to the given variable (&#45;1 for zero polynomial)..." alt="" coords="159,364,250,391"/>
-<area shape="rect" id="node10" href="$poly_8h.html#a10020aea410f5a07374537dbb431d1fe" title="Returns degree of polynomial (&#45;1 for zero polynomial) " alt="" coords="167,415,242,442"/>
-<area shape="rect" id="node11" href="$poly_8h.html#a1183de0891f01c491dca485e284a1e6c" title="Checks equality of two polynomials. " alt="" coords="166,466,243,492"/>
-<area shape="rect" id="node12" href="$poly_8h.html#a22d1e18efcb1373fe1f0fae77856f488" title="Calculates value of polynomial in point x. " alt="" coords="173,516,237,543"/>
-<area shape="rect" id="node13" href="$poly_8h.html#ae62168124597c49da7285fcb1bde6702" title="Prints polynomial p to standard output (stdout) using PolySprintf format. " alt="" coords="165,567,244,594"/>
-<area shape="rect" id="node14" href="$poly_8h.html#a06a8219dcddb2c336ae75feeb982eab1" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="311,618,416,644"/>
-<area shape="rect" id="node15" href="$poly_8h.html#af1e4cf81b4fa6c788c3eafa9f8b8aedc" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="489,643,582,670"/>
+<area shape="rect" id="node2" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="175,5,261,32"/>
+<area shape="rect" id="node3" href="$poly_8h.html#afd55434759a46901958eb5ad79b78217" title="Adds two polynomials. " alt="" coords="181,56,255,83"/>
+<area shape="rect" id="node4" href="$poly_8h.html#a2524e2a4b48bacaa8c9d88775c915766" title="Sums array of monomials of size count. " alt="" coords="160,107,276,133"/>
+<area shape="rect" id="node5" href="$poly_8h.html#a6e066ef82f4d7611d7276a6adc8e47ac" title="Multiplicates two polynomials. " alt="" coords="183,157,253,184"/>
+<area shape="rect" id="node6" href="$poly_8h.html#a79194d594bd19fae18c7d72a30364b18" title="Returns a polynomial with changes sign. " alt="" coords="181,208,255,235"/>
+<area shape="rect" id="node7" href="$poly_8h.html#abd180157f87e1da3669356026bbddc5e" title="Substracts two polynomials. " alt="" coords="181,259,255,285"/>
+<area shape="rect" id="node8" href="$poly_8h.html#a9c917ac6b026ba1d799dc61703eff13a" title="Determines the degree of polynomial with respect to the given variable (&#45;1 for zero polynomial)..." alt="" coords="173,309,263,336"/>
+<area shape="rect" id="node9" href="$poly_8h.html#a10020aea410f5a07374537dbb431d1fe" title="Returns degree of polynomial (&#45;1 for zero polynomial) " alt="" coords="181,360,255,387"/>
+<area shape="rect" id="node10" href="$poly_8h.html#a1183de0891f01c491dca485e284a1e6c" title="Checks equality of two polynomials. " alt="" coords="179,411,257,437"/>
+<area shape="rect" id="node11" href="$poly_8h.html#a22d1e18efcb1373fe1f0fae77856f488" title="Calculates value of polynomial in point x. " alt="" coords="186,461,250,488"/>
+<area shape="rect" id="node12" href="$poly_8h.html#ae62168124597c49da7285fcb1bde6702" title="Prints polynomial p to standard output (stdout) using PolySprintf format. " alt="" coords="179,512,257,539"/>
+<area shape="rect" id="node13" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Extract polynomial free term. " alt="" coords="147,563,289,589"/>
+<area shape="rect" id="node14" href="$poly_8h.html#af1e4cf81b4fa6c788c3eafa9f8b8aedc" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="171,613,265,640"/>
+<area shape="rect" id="node15" href="$poly_8h.html#a06a8219dcddb2c336ae75feeb982eab1" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="165,664,271,691"/>
+<area shape="rect" id="node16" href="$poly_8h.html#a5e5c85ec2fc5885c9da4295ac2c8b2c5" title="Add one monomial to the given polynomial. " alt="" coords="157,715,279,741"/>
+<area shape="rect" id="node17" href="$poly_8h.html#a53f505a70ef0f0c9ef1ed0315d24007e" title="Calculate polynomial exponent. " alt="" coords="180,765,256,792"/>
+<area shape="rect" id="node18" href="$poly_8h.html#a247b32844e2d31b5d6ec43b163be1abe" title="Compose given polynomials to one polynomial. " alt="" coords="164,816,272,843"/>
 </map>

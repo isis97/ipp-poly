@@ -1,8 +1,0 @@
-<map id="PolyAt" name="PolyAt">
-<area shape="rect" id="node2" href="$poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="117,5,233,32"/>
-<area shape="rect" id="node3" href="$dynamic__lists_8h.html#a66e33e747a409a452305e058cc995f2c" title="Get value of the List element. " alt="" coords="472,107,576,133"/>
-<area shape="rect" id="node4" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="133,157,218,184"/>
-<area shape="rect" id="node5" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Gets const (free) term of a given polynomial. " alt="" coords="281,208,424,235"/>
-<area shape="rect" id="node6" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="303,107,403,133"/>
-<area shape="rect" id="node7" href="$poly_8h.html#a77afaf1c55c01efef58077d28ba69814" title="Creates monomial p * x^e. " alt="" coords="117,259,233,285"/>
-</map>

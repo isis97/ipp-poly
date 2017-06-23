@@ -1,4 +1,3 @@
 <map id="MonoDestroy" name="MonoDestroy">
-<area shape="rect" id="node2" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="295,5,395,32"/>
-<area shape="rect" id="node3" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="161,68,247,95"/>
+<area shape="rect" id="node2" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="161,5,261,32"/>
 </map>
