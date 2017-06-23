@@ -8,11 +8,15 @@
 *     // Create new interpreter instance
 *     InterpreterState calc = InterpreterNew(NULL); // Report no errors
 *
-*     //
-*     // Parse continously code from stdin
-*     // This is a blocking function
-*     //
-*     int exit_code = InterpreterReadInput(calc);
+*     // Parse polynomial from input
+*     Poly* p = MALLOCATE(Poly);
+*     p = InterpreterParsePoly(state);
+*
+*     // Print loaded polynomial
+*     PolyPrint(&p);
+*
+*     // Cleanup
+*     PolyDestroy(&p);
 *
 *  @endcode
 *

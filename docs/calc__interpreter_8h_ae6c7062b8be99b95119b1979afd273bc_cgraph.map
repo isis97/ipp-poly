@@ -1,0 +1,26 @@
+<map id="InterpreterParseNumber" name="InterpreterParseNumber">
+<area shape="rect" id="node2" href="$calc__interpreter_8h.html#a182a439e9410bf5c620e017625a19adb" title="Read next character from input. " alt="" coords="239,5,393,32"/>
+<area shape="rect" id="node3" href="$calc__interpreter_8h.html#afb294203d7378c6d16615c215daa6e9d" title="Reports an error to the interpreter. " alt="" coords="232,56,400,83"/>
+<area shape="rect" id="node4" href="$poly_8h.html#ae3322e269841d2c72b02b2ebcb8b025d" title="Creates a new zero polynomial. " alt="" coords="454,309,533,336"/>
+<area shape="rect" id="node5" href="$stack_8h.html#abe4e28c9f3656e9f8448071161dc62fd" title="Push element to the end of a given Stack. " alt="" coords="271,816,361,843"/>
+<area shape="rect" id="node6" href="$poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="610,360,706,387"/>
+<area shape="rect" id="node7" href="$stack_8h.html#a9599a381463fd3c76469e3766e45a4b1" title="Obtain last element of the Stack. " alt="" coords="271,867,361,893"/>
+<area shape="rect" id="node8" href="$poly_8h.html#aaaf60733ab55efe5130da77928fe941d" title="Checks if a given polynomial is const and equal to 0. " alt="" coords="448,259,539,285"/>
+<area shape="rect" id="node9" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="608,461,708,488"/>
+<area shape="rect" id="node10" href="$dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="777,537,881,564"/>
+<area shape="rect" id="node11" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="451,461,536,488"/>
+<area shape="rect" id="node12" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Extract polynomial free term. " alt="" coords="587,727,729,753"/>
+<area shape="rect" id="node13" href="$stack_8h.html#a493abef7c97783f5686fc713e3934090" title="Removes last element of the given Stack or does nothing if it&#39;s empty. " alt="" coords="274,917,358,944"/>
+<area shape="rect" id="node14" href="$poly_8h.html#afd55434759a46901958eb5ad79b78217" title="Adds two polynomials. " alt="" coords="456,816,531,843"/>
+<area shape="rect" id="node15" href="$poly_8h.html#a6e066ef82f4d7611d7276a6adc8e47ac" title="Multiplicates two polynomials. " alt="" coords="458,563,529,589"/>
+<area shape="rect" id="node16" href="$calc__interpreter_8h.html#ad5846e2b6fd51302ab1d9be6778ef0c7" title="Check if interpreter reported an error. " alt="" coords="239,968,393,995"/>
+<area shape="rect" id="node17" href="$poly_8h.html#a53f505a70ef0f0c9ef1ed0315d24007e" title="Calculate polynomial exponent. " alt="" coords="278,360,354,387"/>
+<area shape="rect" id="node18" href="$stack_8h.html#a1a2786e2f9b241915179d56f2e2c396f" title="Obtain the size of a Stack. " alt="" coords="273,1019,359,1045"/>
+<area shape="rect" id="node19" href="$poly_8h.html#a247b32844e2d31b5d6ec43b163be1abe" title="Compose given polynomials to one polynomial. " alt="" coords="262,1069,370,1096"/>
+<area shape="rect" id="node20" href="$poly_8h.html#a79194d594bd19fae18c7d72a30364b18" title="Returns a polynomial with changes sign. " alt="" coords="279,411,353,437"/>
+<area shape="rect" id="node21" href="$poly_8h.html#abd180157f87e1da3669356026bbddc5e" title="Substracts two polynomials. " alt="" coords="621,145,695,172"/>
+<area shape="rect" id="node22" href="$poly_8h.html#a1183de0891f01c491dca485e284a1e6c" title="Checks equality of two polynomials. " alt="" coords="277,1120,355,1147"/>
+<area shape="rect" id="node23" href="$poly_8h.html#a10020aea410f5a07374537dbb431d1fe" title="Returns degree of polynomial (&#45;1 for zero polynomial) " alt="" coords="621,233,695,260"/>
+<area shape="rect" id="node24" href="$poly_8h.html#a9c917ac6b026ba1d799dc61703eff13a" title="Determines the degree of polynomial with respect to the given variable (&#45;1 for zero polynomial)..." alt="" coords="271,1171,361,1197"/>
+<area shape="rect" id="node25" href="$poly_8h.html#a22d1e18efcb1373fe1f0fae77856f488" title="Calculates value of polynomial in point x. " alt="" coords="284,613,348,640"/>
+</map>

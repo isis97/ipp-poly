@@ -1,0 +1,14 @@
+<map id="PolyClone" name="PolyClone">
+<area shape="rect" id="node2" href="$dynamic__lists_8h.html#a8384df53d914573338a70025a645ffb0" title="Performs deep copy of the List returning new one. " alt="" coords="139,96,249,122"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="311,70,384,97"/>
+<area shape="rect" id="node4" href="$dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="451,146,547,173"/>
+<area shape="rect" id="node5" href="$dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="445,20,552,46"/>
+<area shape="rect" id="node6" href="$poly_8h.html#a5f50698912e4cdcf402f7df555f3abad" title="Performs deep&#45;copy of a given monomial. " alt="" coords="452,241,545,268"/>
+<area shape="rect" id="node7" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Extract polynomial free term. " alt="" coords="600,409,743,436"/>
+<area shape="rect" id="node8" href="$dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="447,409,551,436"/>
+<area shape="rect" id="node9" href="$dynamic__lists_8h.html#a7d3e163fab82d195d850e27d1799ffdc" title="Get the first element container pointer. " alt="" coords="154,373,234,400"/>
+<area shape="rect" id="node10" href="$dynamic__lists_8h.html#aca460ad07bfcc229154a2ec9368c51f8" title="Get next element on the List. " alt="" coords="157,424,231,450"/>
+<area shape="rect" id="node11" href="$poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="146,474,242,501"/>
+<area shape="rect" id="node12" href="$poly_8h.html#a0bcd38ab44736f6e230b04b4eaec000a" title="Removes monomial from memory. " alt="" coords="140,272,248,298"/>
+<area shape="rect" id="node13" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="297,272,397,298"/>
+</map>

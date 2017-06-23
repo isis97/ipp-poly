@@ -99,8 +99,6 @@ window.doxySetup = (function() {
   $('span.icondoc').replaceWith("<span class=\"glyphicon glyphicon-file\" style=\"padding-right:20px;\" aria-hidden=\"true\"></span>");
   $('span.icon:contains(\'C\')').replaceWith("<span class=\"glyphicon glyphicon-cog\" style=\"color: #1f8dd6; padding-right:20px;\" aria-hidden=\"true\"></span>");
 
-  $(".navbar-header").append("<canvas id=\"golcanvas\"></canvas>");
-  window.installGol();
 
   //$("tr.active > td").prepend("<span class=\"glyphicon glyphicon-expand\" style=\"color:#1f8dd6;padding-right:10px;\" aria-hidden=\"true\"></span>");
 
@@ -364,4 +362,6 @@ window.doxySetup = (function() {
 
 $( document ).ready(function() {
   window.doxySetup();
+  $(".navbar-header").append("<canvas id=\"golcanvas\"></canvas>");
+  window.installGol();
 });

@@ -1,0 +1,9 @@
+<map id="PolyAt" name="PolyAt">
+<area shape="rect" id="node2" href="$poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="131,5,247,32"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="499,157,603,184"/>
+<area shape="rect" id="node4" href="$math__utils_8h.html#a4b1b4e45d63add8501370bd78f8de748" title="Fast exponentiation for long values. " alt="" coords="117,107,260,133"/>
+<area shape="rect" id="node5" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="146,208,231,235"/>
+<area shape="rect" id="node6" href="$poly_8h.html#afc8368f7a80ba869b567a71600156bd1" title="Extract polynomial free term. " alt="" coords="308,259,451,285"/>
+<area shape="rect" id="node7" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="329,157,429,184"/>
+<area shape="rect" id="node8" href="$poly_8h.html#a77afaf1c55c01efef58077d28ba69814" title="Creates monomial p * x^e. " alt="" coords="131,309,247,336"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ArrayListDeepCopy" name="ArrayListDeepCopy">
+<area shape="rect" id="node2" href="$array__lists_8h.html#a4c9e199b2f5ce7a8edce508fb65758db" title="Create new ArrayList All ArrayLists must be then freed with ArrayLists.free(ArrayList). " alt="" coords="361,5,469,32"/>
+<area shape="rect" id="node3" href="$array__lists_8h.html#a3a3515963a20e063dadaa4faf05827e5" title="Shallow&#45;copy the ArrayList into a new one. " alt="" coords="200,31,313,57"/>
+<area shape="rect" id="node4" href="$array__lists_8h.html#a998481df9da5518c359a2d353dab2ee2" title="Map ArrayList values using given (ArrayListData)&#45;&gt;void function Function is executed for every ArrayL..." alt="" coords="203,81,310,108"/>
+</map>

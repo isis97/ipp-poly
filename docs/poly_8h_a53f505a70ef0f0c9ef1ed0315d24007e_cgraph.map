@@ -1,0 +1,9 @@
+<map id="PolyPow" name="PolyPow">
+<area shape="rect" id="node2" href="$poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="277,53,393,80"/>
+<area shape="rect" id="node3" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="293,167,378,193"/>
+<area shape="rect" id="node4" href="$poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="443,155,539,181"/>
+<area shape="rect" id="node5" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="441,231,541,257"/>
+<area shape="rect" id="node6" href="$poly_8h.html#ae3322e269841d2c72b02b2ebcb8b025d" title="Creates a new zero polynomial. " alt="" coords="140,180,219,207"/>
+<area shape="rect" id="node7" href="$poly_8h.html#abc449a9e1c916d0d9fde823061007608" title="Shallow&#45;copy value to the given polynomial pointer freeing old one. " alt="" coords="129,231,229,257"/>
+<area shape="rect" id="node8" href="$poly_8h.html#a6e066ef82f4d7611d7276a6adc8e47ac" title="Multiplicates two polynomials. " alt="" coords="144,28,215,55"/>
+</map>

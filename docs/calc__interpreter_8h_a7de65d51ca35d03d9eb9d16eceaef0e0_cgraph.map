@@ -1,0 +1,10 @@
+<map id="InterpreterPrintPoly" name="InterpreterPrintPoly">
+<area shape="rect" id="node2" href="$calc__interpreter_8h.html#afb294203d7378c6d16615c215daa6e9d" title="Reports an error to the interpreter. " alt="" coords="229,5,397,32"/>
+<area shape="rect" id="node3" href="$stack_8h.html#a9599a381463fd3c76469e3766e45a4b1" title="Obtain last element of the Stack. " alt="" coords="268,56,357,83"/>
+<area shape="rect" id="node4" href="$poly_8h.html#ae62168124597c49da7285fcb1bde6702" title="Prints polynomial p to standard output (stdout) using PolySprintf format. " alt="" coords="273,107,352,133"/>
+<area shape="rect" id="node5" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="469,132,569,159"/>
+<area shape="rect" id="node6" href="$stack_8h.html#a73193d9dac9a002a4f39861df994f158" title="Print given ArrayList to stdout. " alt="" coords="267,208,358,235"/>
+<area shape="rect" id="node7" href="$stack_8h.html#a40375151418b793e26442458a14851df" title="Check&#39;s if Stack is empty. " alt="" coords="262,259,363,285"/>
+<area shape="rect" id="node8" href="$stack_8h.html#a493abef7c97783f5686fc713e3934090" title="Removes last element of the given Stack or does nothing if it&#39;s empty. " alt="" coords="271,309,355,336"/>
+<area shape="rect" id="node9" href="$calc__interpreter_8h.html#a7d1847ff9a681452cad406489f4427b9" title="Report force return request to the parser. " alt="" coords="204,360,421,387"/>
+</map>

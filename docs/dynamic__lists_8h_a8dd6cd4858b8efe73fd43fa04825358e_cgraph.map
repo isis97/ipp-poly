@@ -1,0 +1,7 @@
+<map id="ListNewDetachedElement" name="ListNewDetachedElement">
+<area shape="rect" id="node2" href="$dynamic__lists_8h.html#a411f5a23007ab2200d73451d73b5dd98" title="Inserts List source to the left side of node of List target leaving source empty. ..." alt="" coords="255,5,378,32"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#ac75512175a8dfa0cf58039d586d62eb6" title="Inserts value to the left side of node of List target. " alt="" coords="241,56,392,83"/>
+<area shape="rect" id="node4" href="$dynamic__lists_8h.html#a335213d7534c123e3977a1fbd8d6fee4" title="Create new List All Lists must be then freed with Lists.free(List). " alt="" coords="280,157,353,184"/>
+<area shape="rect" id="node5" href="$dynamic__lists_8h.html#aa4935c125b86d71cab73ec5eb6440c37" title="Destroy given List freeing up memory. " alt="" coords="445,132,541,159"/>
+<area shape="rect" id="node6" href="$dynamic__lists_8h.html#a3957ca1977031debd61e5eed71a87dcf" title="Push element to the end of a given List. " alt="" coords="440,195,547,221"/>
+</map>

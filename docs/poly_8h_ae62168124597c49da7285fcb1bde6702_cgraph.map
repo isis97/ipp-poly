@@ -1,0 +1,12 @@
+<map id="PolyPrint" name="PolyPrint">
+<area shape="rect" id="node2" href="$poly_8h.html#a06a8219dcddb2c336ae75feeb982eab1" title="Converts polynomial p to human&#45;readable char sequence. " alt="" coords="132,5,237,32"/>
+<area shape="rect" id="node3" href="$poly_8h.html#a98512498bdb4679278532e930b727755" title="Checks if given polynomial is a coefficient (i.e. " alt="" coords="569,233,665,260"/>
+<area shape="rect" id="node4" href="$poly_8h.html#a295cdeb61c077ea6f408208d331271cd" title="Performs deep&#45;copy of a given polynomial. " alt="" coords="433,360,519,387"/>
+<area shape="rect" id="node5" href="$dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="715,360,819,387"/>
+<area shape="rect" id="node6" href="$poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f" title="Removes polynomial from memory. " alt="" coords="567,411,667,437"/>
+<area shape="rect" id="node7" href="$poly_8h.html#ae3322e269841d2c72b02b2ebcb8b025d" title="Creates a new zero polynomial. " alt="" coords="296,259,375,285"/>
+<area shape="rect" id="node8" href="$poly_8h.html#a53f505a70ef0f0c9ef1ed0315d24007e" title="Calculate polynomial exponent. " alt="" coords="147,360,223,387"/>
+<area shape="rect" id="node9" href="$poly_8h.html#abc449a9e1c916d0d9fde823061007608" title="Shallow&#45;copy value to the given polynomial pointer freeing old one. " alt="" coords="285,461,385,488"/>
+<area shape="rect" id="node10" href="$poly_8h.html#a6e066ef82f4d7611d7276a6adc8e47ac" title="Multiplicates two polynomials. " alt="" coords="300,563,371,589"/>
+<area shape="rect" id="node11" href="$poly_8h.html#afd55434759a46901958eb5ad79b78217" title="Adds two polynomials. " alt="" coords="439,56,513,83"/>
+</map>

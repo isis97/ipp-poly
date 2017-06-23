@@ -1,0 +1,5 @@
+<map id="PolyMul" name="PolyMul">
+<area shape="rect" id="node2" href="$poly_8h.html#aac5948dc82c3a64c55c60831991f7864" title="Creates a new const polynomial. " alt="" coords="124,5,240,32"/>
+<area shape="rect" id="node3" href="$dynamic__lists_8h.html#aabbb1d8c362e9d8451e2dbb8f68f232b" title="Get value of the List element. " alt="" coords="130,56,234,83"/>
+<area shape="rect" id="node4" href="$poly_8h.html#a77afaf1c55c01efef58077d28ba69814" title="Creates monomial p * x^e. " alt="" coords="124,107,240,133"/>
+</map>

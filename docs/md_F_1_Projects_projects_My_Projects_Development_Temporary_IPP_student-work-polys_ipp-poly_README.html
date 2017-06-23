@@ -61,17 +61,38 @@ $(function() {
 <div class="title">ipp-bin-poly </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>See <a href="http://styczynski.ml/ipp-poly/poly_8h.html">Doxygen documentation</a></p>
-<p>Written in pure C99 Student's work (individual programistic project) at Warsaw University Project purpose was to implement a polynomials interface based on bidirectional dynamically allocated lists.</p>
-<h2>Building</h2>
-<p>Clone the repo using <code>git clone <a href="https://github.com/isis97/ipp-poly">https://github.com/isis97/ipp-poly</a></code></p><ul>
-<li>Build files using <code>mkdir release &amp;&amp; cd release &amp;&amp; cmake .. &amp;&amp; make</code></li>
-<li>Run tests using <code>./test_poly</code></li>
+<div class="textblock"><p>See <a href="http://styczynski.ml/ipp-poly">Doxygen documentation</a></p>
+<h1>Exercise</h1>
+<p>This project is based on exercise we had to do on <b>Warsaw University, Poland</b> on the <b>Individual Programistic Project</b> subject.</p>
+<h3>Task</h3>
+<p>The exercise was to design and implement:</p><ul>
+<li>Provide dynamically-allocated lists implementation - <em>pre-exercise</em></li>
+<li>Polynomial handling library in pure C99 - <em>part no. 1</em></li>
+<li>Interactive calculator for that library - <em>part no. 2</em></li>
+<li>Implement additional functionality and provide basic unit tests - <em>part no. 3</em></li>
 </ul>
-<p>This project is using general-purpose makefile scripts designed by me.</p>
-<h2>Usage</h2>
-<p>Polynomial interface is well documented in <code><a class="el" href="poly_8h.html" title="Interface of polynomials. ">poly.h</a></code>. </p>
-</div></div><!-- contents -->
+<h3>Project structure</h3>
+<p>The project provides:</p><ul>
+<li>library <code><a class="el" href="poly_8h.html" title="Interface of polynomials. ">src/poly.h</a></code> for handling polynomials</li>
+<li>additional helper libraries like dynamically allocated arrays etc.</li>
+<li>interactive calculator <code>src/calc_poly.c</code></li>
+<li>unit tests in <code>tests/</code></li>
+</ul>
+<h1>Building</h1>
+<p>To build do the following:</p>
+<ul>
+<li>Create release folder - <code>mkdir release</code></li>
+<li>Go to that folder - <code>cd release</code></li>
+<li>Generate makefiles - <code>cmake ..</code></li>
+<li>Build everything - <code>make</code></li>
+<li>Optionally run tests - <code>make test</code></li>
+<li>Optionally generate documentation (needs Doxygen to be installed) - <code>make doc</code></li>
+<li>Optionally clean everything - <code>make clean</code></li>
+</ul>
+<h1>Polynomial library</h1>
+<p>All the documentation is provided in header files.</p>
+<p>There you've got example usage of the library:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="poly_8h.html">poly.h</a>&quot;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>) {</div><div class="line"></div><div class="line">  <a class="code" href="structPoly.html">Poly</a> p = <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(4);</div><div class="line">  <span class="comment">// Create constant polynomial</span></div><div class="line">  <span class="comment">// p(x) = 4</span></div><div class="line"></div><div class="line">  <a class="code" href="structPoly.html">Poly</a> q = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(1), 2 );</div><div class="line">  <span class="comment">// Create polynomial that consists of</span></div><div class="line">  <span class="comment">// variable square multiplied by</span></div><div class="line">  <span class="comment">// coefficient 1</span></div><div class="line">  <span class="comment">// q(x) = 1*x^2</span></div><div class="line"></div><div class="line">  <span class="comment">// As you may see the coefficients that are placed</span></div><div class="line">  <span class="comment">// next to variables may be other polynomials</span></div><div class="line">  <span class="comment">// (polynomials from other variable)</span></div><div class="line"></div><div class="line">  <a class="code" href="structPoly.html">Poly</a> r = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(1), 2 ), 3 );</div><div class="line">  <span class="comment">// In this example</span></div><div class="line">  <span class="comment">// r(x,y) = (1*y^2)*(x^3)</span></div><div class="line"></div><div class="line">  <span class="comment">// Now you can do arithemtic operations on them</span></div><div class="line">  <span class="comment">// for example addition:</span></div><div class="line">  <a class="code" href="structPoly.html">Poly</a> sum = <a class="code" href="poly_8h.html#afd55434759a46901958eb5ad79b78217">PolyAdd</a>(&amp;p, &amp;q);</div><div class="line">  <span class="comment">// sum(x) = 4 + x^2</span></div><div class="line">  <span class="comment">// If you are not sure what would happen if we sum</span></div><div class="line">  <span class="comment">// q and r then we say that the result is</span></div><div class="line">  <span class="comment">//</span></div><div class="line">  <span class="comment">// q(x) + r(x,y) = 1*x^2 + (1*y^2)*(x^3)</span></div><div class="line">  <span class="comment">// that is:</span></div><div class="line">  <span class="comment">//   x^2 + (y^2)(x^3)</span></div><div class="line">  <span class="comment">//</span></div><div class="line"></div><div class="line">  <span class="comment">// Or evalue at specific point:</span></div><div class="line">  <a class="code" href="structPoly.html">Poly</a> rAtTwo = <a class="code" href="poly_8h.html#a22d1e18efcb1373fe1f0fae77856f488">PolyAt</a>(&amp;r, 2);</div><div class="line">  <span class="comment">// Now we assume the first variable is equal to 2</span></div><div class="line">  <span class="comment">// So we calculate r(x,y) for x-&gt;2</span></div><div class="line">  <span class="comment">// rAtTwo = r(2,y) = (2^3)*y^2 = 8*y^2</span></div><div class="line"></div><div class="line">  <span class="comment">// You can print them nicely:</span></div><div class="line">  <a class="code" href="poly_8h.html#ae62168124597c49da7285fcb1bde6702">PolyPrint</a>(&amp;rAtTwo);</div><div class="line">  <span class="comment">// ^ Do it yourself and see what the output is</span></div><div class="line"></div><div class="line">  <span class="comment">// After everything we must free them all</span></div><div class="line">  <a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p);</div><div class="line">  <a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;q);</div><div class="line">  <a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;r);</div><div class="line">  <a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;sum);</div><div class="line">  <a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;rAtTwo);</div><div class="line"></div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 </div>
