@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+window.doxySetup = (function() { $( document ).ready(function() {
 
     $("div.headertitle").addClass("page-header");
     $("div.title").addClass("h1");
@@ -336,14 +336,18 @@ $( document ).ready(function() {
           }).done(function(text) {
             pagesCache[url] = $(text).find('#content').first();
             $('#content').replaceWith(pagesCache[url]);
+            window.doxySetup();
           });
         } else {
           console.log(pagesCache[url]);
           $('#content').replaceWith(pagesCache[url]);
+          window.doxySetup();
         }
       });
     }
     $('.sub-arrow').remove();
   }, 50);
 
-});
+}) });
+
+window.doxySetup();
