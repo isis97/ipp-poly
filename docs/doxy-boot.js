@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+window.doxySetup = (function() {
 
     $("div.headertitle").addClass("page-header");
     $("div.title").addClass("h1");
@@ -99,6 +99,10 @@ $( document ).ready(function() {
   $('span.icondoc').replaceWith("<span class=\"glyphicon glyphicon-file\" style=\"padding-right:20px;\" aria-hidden=\"true\"></span>");
   $('span.icon:contains(\'C\')').replaceWith("<span class=\"glyphicon glyphicon-cog\" style=\"color: #1f8dd6; padding-right:20px;\" aria-hidden=\"true\"></span>");
 
+  $(".navbar-header").append("<canvas id=\"golcanvas\"></canvas>");
+  window.installGol();
+
+  //$("tr.active > td").prepend("<span class=\"glyphicon glyphicon-expand\" style=\"color:#1f8dd6;padding-right:10px;\" aria-hidden=\"true\"></span>");
 
   /* responsive search box */
   /*$('#MSearchBox').parent().remove();
@@ -322,6 +326,14 @@ $( document ).ready(function() {
 
   setInterval(function(){
     if($('.has-submenu').parent().find('ul').remove().length > 0) {
+      $('#main-menu>li>a').each(function(){
+        var thiz = $(this);
+        var url = thiz.attr('href');
+        if(url == "undefined") {
+          thiz.parent().remove();
+          return;
+        }
+      });
       $('#main-menu>li>a').hover(function(){
         $('#main-menu>li>a').removeClass('active');
         $(this).addClass('active');
@@ -336,14 +348,20 @@ $( document ).ready(function() {
           }).done(function(text) {
             pagesCache[url] = $(text).find('#content').first();
             $('#content').replaceWith(pagesCache[url]);
+            window.doxySetup();
           });
         } else {
           console.log(pagesCache[url]);
           $('#content').replaceWith(pagesCache[url]);
+          window.doxySetup();
         }
       });
     }
     $('.sub-arrow').remove();
   }, 50);
 
+});
+
+$( document ).ready(function() {
+  window.doxySetup();
 });
