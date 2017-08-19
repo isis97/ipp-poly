@@ -511,8 +511,7 @@ bool PolyIsEq(const Poly *p, const Poly *q) {
 
 
 Poly PolyPow(const Poly* p, poly_exp_t exp) {
-  printf("Pow to : %ld\n", exp);
-
+  
   if(exp == 0) return PolyFromCoeff(1);
   if(exp == 1) return PolyClone(p);
 
@@ -741,12 +740,6 @@ Poly PolyComposeRec(const Poly *p, unsigned count, unsigned index, const Poly x[
 
   Poly result = PolyZero();
 
-  printf("> Compose index = %d: ", index);
-  PolyPrint(&x[index]);
-  printf("\nIn: ");
-  PolyPrint(p);
-  printf("\n");
-
   LOOP_LIST(&(p->monos), i) {
     Mono* m = (Mono*) ListGetValue(i);
 
@@ -755,20 +748,11 @@ Poly PolyComposeRec(const Poly *p, unsigned count, unsigned index, const Poly x[
     PolyReplace(&partial_result, PolyMul(&partial_result, &pow_result));
     PolyDestroy(&pow_result);
 
-    printf("--> Partial result: ");
-    PolyPrint(&partial_result);
-    printf("\n");
-
     PolyReplace(&result, PolyAdd(&result, &partial_result));
     PolyDestroy(&partial_result);
   }
 
   result.c += p->c;
-
-  printf("> Result: ");
-  PolyPrint(&result);
-  printf("\n");
-
   return result;
 }
 

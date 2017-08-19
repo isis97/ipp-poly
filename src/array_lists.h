@@ -30,10 +30,6 @@
 #include "memalloc.h"
 #include "generics.h"
 
-/**
-* @def __STY_COMMON_ARRAY_LISTS_H__
-* Header file once-inclusion macro
-*/
 #ifndef __STY_COMMON_ARRAY_LISTS_H__
 #define __STY_COMMON_ARRAY_LISTS_H__
 

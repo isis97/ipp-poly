@@ -30,11 +30,13 @@ static inline long MathFastPowLong(long value, long exp) {
     return -1;                 // (-1)^y = -1 (not 2|y)
   }
   // Fast exponentiation implementation
-  long result = value;
+  long result = 1;
   long base = value;
   while (exp) {
-    if (exp & 1)
+    if (exp & 1) {
       result = result * base;
+      exp -= 1;
+    }
     exp >>= 1;
     base = base * base;
   }

@@ -36,10 +36,6 @@
 #include "memalloc.h"
 #include "poly.h"
 
-/**
-* @def __STY_COMMON_INTERPRETER_H__
-* Header file once-inclusion macro
-*/
 #ifndef __STY_COMMON_INTERPRETER_H__
 #define __STY_COMMON_INTERPRETER_H__
 
