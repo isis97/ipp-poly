@@ -271,7 +271,7 @@ Functions</h2></td></tr>
 
 <p>Macro for creating constant zero poly. </p>
 <p>It's for use with PolyP and PolyC - the calls looks much cleaner. Example usage: </p><div class="fragment"><div class="line"><span class="comment">// Constant zero polynomial</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p1 = <a class="code" href="poly_8h.html#a153921784df816bfadbe4e6d06f12e6f">Poly0</a>;</div><div class="line"></div><div class="line"><span class="comment">// One variable polynomials</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p2 = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 2, <a class="code" href="poly_8h.html#a153921784df816bfadbe4e6d06f12e6f">Poly0</a>, 4 ); <span class="comment">// 5a^2 + 5a^4</span></div><div class="line"></div><div class="line"><span class="comment">// Nested polynomials</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p3 = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 2, <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), 2 ), 4 ); <span class="comment">// 5a^2 + (2b^2)*a^4</span></div><div class="line"></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p1); <span class="comment">//</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p2); <span class="comment">// Cleanup</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p3); <span class="comment">//</span></div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00119">119</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00120">120</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +290,7 @@ Functions</h2></td></tr>
 <p>Macro for creating constant poly from given value. </p>
 <p>It's sugar syntax for writing <code>PolyFromCoeff</code> (yeah I made it, I saved 8 bytes!) :))</p>
 <p>It's for use with PolyP - the calls looks much cleaner. Example usage: </p><div class="fragment"><div class="line"><span class="comment">// Constant polynomial</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p1 = <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(12);</div><div class="line"></div><div class="line"><span class="comment">// One variable polynomials</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p2 = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 2, <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 4 ); <span class="comment">// 5a^2 + 5a^4</span></div><div class="line"></div><div class="line"><span class="comment">// Nested polynomials</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p3 = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 2, <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), 2 ), 4 ); <span class="comment">// 5a^2 + (2b^2)*a^4</span></div><div class="line"></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p1); <span class="comment">//</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p2); <span class="comment">// Cleanup</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p3); <span class="comment">//</span></div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00054">54</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00055">55</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -312,7 +312,7 @@ Functions</h2></td></tr>
 
 <p>Macro for creating array of polynomials using list initializer. </p>
 <p>It's for use with PolyP and PolyC family - the calls looks much cleaner. Example usage: </p><div class="fragment"><div class="line"><a class="code" href="structPoly.html">Poly</a> parr[] = <a class="code" href="poly_8h.html#aa271da170abbb0dd0e8ff9df731118dd">PolyL</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), 2 ) );</div><div class="line"><span class="comment">// Array containing 2 and 2a^2</span></div><div class="line"></div><div class="line"><span class="comment">// Cleanup the array contents</span></div><div class="line"><a class="code" href="poly_8h.html#afeb8ae954f3e5002f14a90c8a3103de0">PolyDestroyArray</a>(&amp;parr);</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00138">138</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00139">139</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -340,7 +340,7 @@ Functions</h2></td></tr>
 <p>The function utilizes PolyAddMonos functionality.</p>
 <p>The resulting poly has the form of: <code>(POLY1)t^(EXP1) + (POLY2)t^(EXP2) ...</code></p>
 <p>It's for use with PolyC and Poly0 - the calls looks much cleaner. Example usage: </p><div class="fragment"><div class="line"><span class="comment">// Constant polynomial</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p1 = <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(12);</div><div class="line"></div><div class="line"><span class="comment">// One variable polynomials</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p2 = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 2, <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 4 ); <span class="comment">// 5a^2 + 5a^4</span></div><div class="line"></div><div class="line"><span class="comment">// Nested polynomials</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> p3 = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(5), 2, <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), 2 ), 4 ); <span class="comment">// 5a^2 + (2b^2)*a^4</span></div><div class="line"></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p1); <span class="comment">//</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p2); <span class="comment">// Cleanup</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p3); <span class="comment">//</span></div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00093">93</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00094">94</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00184">184</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00185">185</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>copy of a given monomial </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00369">369</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00370">370</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -483,7 +483,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00304">304</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00305">305</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -541,7 +541,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>monomial <code>p * x^e</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00228">228</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00229">229</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -571,7 +571,7 @@ Here is the call graph for this function:</div>
 <p>Creates a new zero monomial 0*x^0. </p>
 <dl class="section return"><dt>Returns</dt><dd>zero monomial </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00212">212</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00213">213</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -693,8 +693,8 @@ Here is the call graph for this function:</div>
 <p>Returned value is standalone polynomial (deep-copied).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: polynomial </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: single value </td></tr>
   </table>
   </dd>
 </dl>
@@ -744,13 +744,13 @@ Here is the call graph for this function:</div>
 <p>The resulting poly has the form of: <code>(POLY1)t^(EXP1) + (POLY2)t^(EXP2) ...</code></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dummy</td><td>Dummy int parameter (for variadic compatibility) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dummy</td><td>: Dummy int parameter (for variadic compatibility) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structPoly.html" title="Representation of polynomial All polynomials are build from their constant term and list of monomials...">Poly</a> build from the provided input </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00645">645</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00646">646</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -830,9 +830,9 @@ Here is the call graph for this function:</div>
 </ul>
 <p>Example: </p><div class="fragment"><div class="line"><a class="code" href="structPoly.html">Poly</a> p = <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), 1, <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(4), 2, <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(1), 2 ), 3 );</div><div class="line"><span class="comment">// p = 2*a + 4*a^2 + (b^2)*a^3</span></div><div class="line"></div><div class="line"><a class="code" href="structPoly.html">Poly</a> list[] = { <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(1), <a class="code" href="poly_8h.html#acf62ef1fc8d75a2b27bf9dee607d1ca8">PolyP</a>( <a class="code" href="poly_8h.html#ac36c054066134101c64cb1f14e25198a">PolyC</a>(2), 1 ) };</div><div class="line"><span class="comment">// list[0] = 1</span></div><div class="line"><span class="comment">// list[1] = 2a</span></div><div class="line"></div><div class="line"><span class="comment">// Call compose</span></div><div class="line"><a class="code" href="structPoly.html">Poly</a> composed = <a class="code" href="poly_8h.html#a247b32844e2d31b5d6ec43b163be1abe">PolyCompose</a>(p, 1, list);</div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// p = 2*a + 4*a^2 + (b^2)*a^3</span></div><div class="line"><span class="comment">// \/</span></div><div class="line"><span class="comment">// p = 2*(a_1) + 4*(a_2)^2 + (b^2)*(a_3)^3</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// compose do the following substitutions:</span></div><div class="line"><span class="comment">//   a_1 -&gt; list[0] Present</span></div><div class="line"><span class="comment">//   a_2 -&gt; list[1] Present</span></div><div class="line"><span class="comment">//   a_3 -&gt; list[2] Not available so assume = 0</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// So:</span></div><div class="line"><span class="comment">//   a_1 -&gt; 1</span></div><div class="line"><span class="comment">//   a_2 -&gt; 2a</span></div><div class="line"><span class="comment">//   a_3 -&gt; 0</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Then the resulting polynomial is:</span></div><div class="line"><span class="comment">//   composed =  2*(1) + 4*(2a)^2 + (b^2)*(0)^3</span></div><div class="line"><span class="comment">//   composed =  2 + 16a^2</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="comment">// Now we must free the list</span></div><div class="line"><a class="code" href="poly_8h.html#afeb8ae954f3e5002f14a90c8a3103de0">PolyDestroyArray</a>(list);</div><div class="line"></div><div class="line"><span class="comment">// And the polynomials</span></div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;p);</div><div class="line"><a class="code" href="poly_8h.html#a54faf738d9aa518d1e1d6db6c3142e3f">PolyDestroy</a>(&amp;composed);</div></div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>Input polynomial </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>Length of substitution list </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Substitution list </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: Input polynomial </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>: Length of substitution list </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: Substitution list </td></tr>
   </table>
   </dd>
 </dl>
@@ -975,13 +975,13 @@ Here is the call graph for this function:</div>
 <p>It DOES NOT free the array itself, but destroy its all polynomial elements.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">length</td><td>Length of array to be destroyed </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">parr</td><td>Array of polynomials </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">length</td><td>: Length of array to be destroyed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parr</td><td>: Array of polynomials </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00677">677</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00678">678</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1026,7 +1026,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>polynomial </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00193">193</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00194">194</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1079,7 +1079,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>free term of the polynomial </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00275">275</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00276">276</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 
 </div>
 </div>
@@ -1115,8 +1115,8 @@ Here is the call graph for this function:</div>
 <p>It's because this function DOES NOT PERFORM DEEP-COPY of monomial.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>Input polynomial </td></tr>
-    <tr><td class="paramname">mono</td><td>Monomial to be inserted </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: Input polynomial </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mono</td><td>: Monomial to be inserted </td></tr>
   </table>
   </dd>
 </dl>
@@ -1157,7 +1157,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If polynomial is const? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00264">264</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00265">265</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1240,7 +1240,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If polynomial is equal to zero? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00285">285</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00286">286</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1298,7 +1298,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00244">244</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00245">245</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1409,8 +1409,8 @@ Here is the call graph for this function:</div>
 <p>Returned value is standalone polynomial (deep-copied).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>Input polynomial </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">exp</td><td>Exponent value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: Input polynomial </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exp</td><td>: Exponent value </td></tr>
   </table>
   </dd>
 </dl>
@@ -1493,7 +1493,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00350">350</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00351">351</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1647,7 +1647,7 @@ Here is the call graph for this function:</div>
 <p>(const polynomial that is equal to 0)</p>
 <dl class="section return"><dt>Returns</dt><dd>zero polynomial </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00203">203</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poly_8h_source.html#l00204">204</a> of file <a class="el" href="poly_8h_source.html">poly.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

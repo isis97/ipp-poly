@@ -51,9 +51,9 @@
 #endif /* DBG */
 
 /*
- * This part of code emit traps to replace ordinary functions with
- * some other code (diagnostic).
- */
+* This part of code emit traps to replace ordinary functions with
+* some other code (diagnostic).
+*/
 
 
 /* Disable all traps */
@@ -96,6 +96,10 @@
 #undef free
 #endif /* free */
 
+#ifdef main
+#undef main
+#endif /* main */
+
 #endif
 
 
@@ -108,8 +112,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Redirect printf to a function in the test application so it's possible to
- * test the standard output. */
+/*
+* Redirect printf to a function in
+* the test application so it's possible to
+* test the standard output.
+*/
 #define printf(...) mock_printf(__VA_ARGS__)
 extern int mock_printf(const char *format, ...);
 
@@ -119,20 +126,28 @@ extern int mock_getchar();
 #define scanf(...) mock_scanf(__VA_ARGS__)
 extern int mock_scanf(const char *format, ...);
 
-/* Redirect fprintf to a function in the test application so it's possible to
- * test error messages. */
+/*
+* Redirect fprintf to
+* a function in the test application so it's possible to
+* test error messages.
+*/
 #define fprintf(...) mock_fprintf(__VA_ARGS__)
 extern int mock_fprintf(FILE * const file, const char *format, ...);
 
-/* Redirect assert to mock_assert() so assertions can be caught by cmocka. */
+/*
+* Redirect assert to mock_assert() so
+* assertions can be caught by cmocka.
+*/
 #define assert(expression) \
     mock_assert((int)(expression), #expression, __FILE__, __LINE__)
 void mock_assert(const int result, const char* expression, const char *file,
                  const int line);
 
- /* Redirect calloc, malloc, realloc and free to _test_malloc, _test_calloc,
-  * _test_realloc and _test_free, respectively, so cmocka can check for memory
-  * leaks. */
+ /*
+ * Redirect calloc, malloc, realloc and free to _test_malloc, _test_calloc,
+ * _test_realloc and _test_free, respectively, so cmocka can check for memory
+ * leaks. 
+ */
  #define calloc(num, size) _test_calloc(num, size, __FILE__, __LINE__)
 
  #define malloc(size) _test_malloc(size, __FILE__, __LINE__)
@@ -147,14 +162,18 @@ void mock_assert(const int result, const char* expression, const char *file,
  void _test_free(void* ptr, const char* file, const int line);
 
 
-/* All functions in this object need to be exposed to the test application,
- * so redefine static to nothing. Do not do it - it dangerous! */
+/*
+* All functions in this object need to be exposed to the test application,
+* so redefine static to nothing. Do not do it - it dangerous!
+*/
 //#define static
 
 
 #ifndef UNIT_TEST
-/* Function main is defined in the unit test so redefine name of the main
- * function here. */
+/*
+* Function main is defined in the unit test so redefine name of the main
+* function here.
+*/
 #define main(...) calculator_main(__VA_ARGS__)
 int calculator_main(int argc, char *argv[]);
 #endif /* UNIT_TEST */

@@ -1,8 +1,8 @@
 <map id="ListEmpty" name="ListEmpty">
 <area shape="rect" id="node2" href="$dynamic__lists_8h.html#ac3929782579bbd53de9fa6f0fd44fcc0" title="Copy the List into a new one. " alt="" coords="156,5,235,32"/>
 <area shape="rect" id="node3" href="$dynamic__lists_8h.html#a8384df53d914573338a70025a645ffb0" title="Performs deep copy of the List returning new one. " alt="" coords="140,56,251,83"/>
-<area shape="rect" id="node4" href="$dynamic__lists_8h.html#a24212ea2d89542bc34376494424c8e1b" title="Copy the List source into other List &#45; target. " alt="" coords="143,107,248,133"/>
+<area shape="rect" id="node4" href="$dynamic__lists_8h.html#a24212ea2d89542bc34376494424c8e1b" title="Copy the List source into other List &#45; target (shallow copy) " alt="" coords="143,107,248,133"/>
 <area shape="rect" id="node5" href="$dynamic__lists_8h.html#a97d2d72dc8a2378ed8754c63138941d5" title="Iterate through List using given (ListData)&#45;&gt;(ListData) function. " alt="" coords="150,157,241,184"/>
-<area shape="rect" id="node6" href="$dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02" title="Map List values using given (ListData)&#45;&gt;void function Function is executed for every List element val..." alt="" coords="159,208,231,235"/>
+<area shape="rect" id="node6" href="$dynamic__lists_8h.html#a2c42ace0b1c658be10b14ede4c58cb02" title="Map List values using given (ListData)&#45;&gt;(ListData) function Function is executed for every List eleme..." alt="" coords="159,208,231,235"/>
 <area shape="rect" id="node7" href="$dynamic__lists_8h.html#a7dd91e0f0c414b74f0d66b3c09fe8ff4" title="Print given List to stdout. " alt="" coords="158,259,233,285"/>
 </map>

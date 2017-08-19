@@ -18,7 +18,6 @@
 #include "array_lists.h"
 #include "dynamic_lists.h"
 
-
 #ifndef __STY_COMMON_STACK_H__
 #define __STY_COMMON_STACK_H__
 
@@ -58,25 +57,25 @@
 typedef struct Stack Stack;
 
 /**
- * Data holder for stack
- * @return StackData extracted from the datatype of implementation
- */
+* Data holder for stack
+* @return StackData extracted from the datatype of implementation
+*/
 typedef STACK_IMPL_ARRAY(Data) StackData;
 
 /**
- * Function allocating/deallocating space for stack elements
- *
- * If the function is called as deallocator then it should
- * free given @p data.
- * Then should return NULL.
- *
- * If as allocator then it should allocate new StackData.
- * Assign a value of @p data to it.
- * And return it.
- *
- * @param[in] data : the data prototype
- * @return Allocated stack data
- */
+* Function allocating/deallocating space for stack elements
+*
+* If the function is called as deallocator then it should
+* free given @p data.
+* Then should return NULL.
+*
+* If as allocator then it should allocate new StackData.
+* Assign a value of @p data to it.
+* And return it.
+*
+* @param[in] data : the data prototype
+* @return Allocated stack data
+*/
 typedef StackData (*StackAllocator)(StackData data);
 
 /**
@@ -113,7 +112,7 @@ static inline void StackDestroy(Stack* s) {
 * Destroy given Stack freeing up memory.
 *
 *
-* @param[in] s : Stack*
+* @param[in] s           : Stack*
 * @param[in] deallocator : StackAllocator
 */
 static inline void StackDestroyDeep(Stack* s, StackAllocator deallocator) {
@@ -126,7 +125,7 @@ static inline void StackDestroyDeep(Stack* s, StackAllocator deallocator) {
 * Push @p element to the end of a given Stack.
 * Method returns pointer to the newly created Stack node.
 *
-* @param[in] s : Stack*
+* @param[in] s       : Stack*
 * @param[in] element : StackData
 * @return StackIterator
 */
@@ -220,7 +219,7 @@ static inline Stack StackCopy( const Stack* s ) {
 * The function should create new element value, copy the value of
 * the given one and return pointer to this element.
 *
-* @param[in] s : const Stack*
+* @param[in] s                : const Stack*
 * @param[in] elementAllocator : StackModifierFn
 * @return deep copy of a given Stack
 */
@@ -252,7 +251,7 @@ static inline void StackCopyInto( const Stack* source, Stack* target ) {
 * Print given ArrayList to stdout.
 * Prints only adresses of values not exact values.
 *
-* @param[in] s : const ArrayList*
+* @param[in] s       : const ArrayList*
 * @param[in] printer : ArrayListModifierFn
 */
 static inline void StackPrint( const Stack* s, GenericsPrinter printer ) {
@@ -268,7 +267,7 @@ static inline void StackPrint( const Stack* s, GenericsPrinter printer ) {
 * Prints only adresses of values not exact values.
 * Variant displaying new line at the end of stringified ArrayList.
 *
-* @param[in] s : const ArrayList*
+* @param[in] s       : const ArrayList*
 * @param[in] printer : ArrayListModifierFn
 */
 static inline void StackPrintln( const Stack* s, GenericsPrinter printer ) {

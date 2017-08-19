@@ -12,35 +12,35 @@
 #define __STY_COMMON_GENERICS_H__
 
 /**
- * Generic type printer.
- * Function that accept generic (void*) data.
- * And return (may return NULL) some generic data.
- * It's the most generic unary operation.
- *
- * @param[in] data input
- * @return some data or NULL
- */
+* Generic type printer.
+* Function that accept generic (void*) data.
+* And return (may return NULL) some generic data.
+* It's the most generic unary operation.
+*
+* @param[in] : data input
+* @return some data or NULL
+*/
 typedef void* (*GenericsPrinter)(void* data);
 
 /**
- * Printer function for generic collections.
- * Converts void* to int* and prints its value.
- *
- * @param[in] data input
- * @return NULL
- */
+* Printer function for generic collections.
+* Converts void* to int* and prints its value.
+*
+* @param[in] data : data input
+* @return NULL
+*/
 static inline void* GenericsIntPrinter(void* data) {
   printf("%d", *((int*)data));
   return NULL;
 }
 
 /**
- * Printer function for generic collections.
- * Prints void* pointer address.
- *
- * @param[in] data input
- * @return NULL
- */
+* Printer function for generic collections.
+* Prints void* pointer address.
+*
+* @param[in] data : data input
+* @return NULL
+*/
 static inline void* GenericsPtrPrinter(void* data) {
   printf("%p", data);
   return NULL;

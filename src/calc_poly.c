@@ -1,9 +1,18 @@
+/** @file
+* This is fully functional usage of calc interpreter
+* working like specification in README says.
+*
+* @author Piotr Styczyński <piotrsty1@gmail.com>
+* @copyright MIT
+* @date 2017-05-13
+*/
 #include "utils.h"
 #include "calc_interpreter.h"
 
 
-/*
- Try to parse one line of input
+/**
+* Try to parse one line of input
+* @param[in] state : InterpreterState
 */
 void ReadInputLine(InterpreterState* state) {
   InterpreterNextChar(state);
@@ -52,6 +61,13 @@ void ReadInputLine(InterpreterState* state) {
   }
 }
 
+/**
+* Entrypoint to the wroking calc application
+*
+* @param[in] argc : main argc
+* @param[in] argv : main argv
+* @return exit code
+*/
 int main(int argc, char* argv[]) {
   (void)argc;
   (void)argv;

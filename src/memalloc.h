@@ -103,7 +103,7 @@ static inline void* AllocateMemoryBlock(int size) {
 *
 * NOTICE: Assertion checking is done for allocation errors.
 *
-* @param[in] p : reused void* pointer
+* @param[in] p    : reused void* pointer
 * @param[in] size : int
 * @return void* to allocated memory block
 */
@@ -122,7 +122,7 @@ static inline void* ReallocateMemoryBlock(void *p, int size) {
 * NOTICE: Assertion checking is done for allocation errors.
 *
 * @param[in] count : int
-* @param[in] size : int
+* @param[in] size  : int
 * @return void* to allocated memory array
 */
 static inline void* AllocateMemoryBlockArray(int count, int size) {
@@ -141,9 +141,9 @@ static inline void* AllocateMemoryBlockArray(int count, int size) {
 *
 * NOTICE: Assertion checking is done for allocation errors.
 *
-* @param[in] p : reused void* pointer
+* @param[in] p     : reused void* pointer
 * @param[in] count : int
-* @param[in] size : int
+* @param[in] size  : int
 * @return void* to allocated memory array
 */
 static inline void* ReallocateMemoryBlockArray(void* p, int count, int size) {

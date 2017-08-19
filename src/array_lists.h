@@ -30,6 +30,10 @@
 #include "memalloc.h"
 #include "generics.h"
 
+/**
+* @def __STY_COMMON_ARRAY_LISTS_H__
+* Header file once-inclusion macro
+*/
 #ifndef __STY_COMMON_ARRAY_LISTS_H__
 #define __STY_COMMON_ARRAY_LISTS_H__
 
@@ -64,7 +68,7 @@
 *    }
 * @endcode
 *
-* @param[in] LIST : ArrayList name to be iterated
+* @param[in] LIST     : ArrayList name to be iterated
 * @param[in] VAR_NAME : name of iterator variable
 */
 #define LOOP_ARRAY_LIST(LIST, VAR_NAME) \
@@ -78,7 +82,7 @@
 /** Data type held by array list */
 typedef void* ArrayListData;
 
-/** Type of array list**/
+/** Type of array list */
 typedef struct ArrayList ArrayList;
 
 /**
@@ -88,8 +92,9 @@ typedef struct ArrayListIterator ArrayListIterator;
 
 
 /**
-* Root element of the ArrayList containing pointers
-* to the two ends of a ArrayList
+* Root element of the ArrayList containing pointer
+* to the first element and needed metadata like
+* size and capacity
 */
 struct ArrayList {
   ArrayListData* data; ///< Pointer to the begining of the ArrayList
@@ -104,19 +109,19 @@ struct ArrayListIterator {
 };
 
 /**
- * Function of type
- * ArrayListData -> ArrayListData
- * Used as ArrayList data manipulators/iterators
- *
- * @param[in]  ArrayListData modified data
- * @return ArrayListData
- */
+* Function of type
+* ArrayListData -> ArrayListData
+* Used as ArrayList data manipulators/iterators
+*
+* @param[in] ArrayListData : modified data
+* @return ArrayListData
+*/
 typedef ArrayListData (*ArrayListModifierFn)(ArrayListData);
 
 
 /**
 * Create new ArrayList
-* All ArrayLists must be then freed with ArrayLists.free(ArrayList).
+* All ArrayLists must be then freed with ArrayListDestroy(ArrayList).
 *
 * @return ArrayList
 */
@@ -144,7 +149,7 @@ static inline ArrayList ArrayListNew() {
 *   No functionality should depend on the size of allocated array list
 *   as this function provides only list at least the size of @p min_size.
 *
-* @param[in] l : ArrayList*
+* @param[in] l        : ArrayList*
 * @param[in] min_size : const int
 */
 void ArrayListResize(ArrayList* l, const int min_size);
@@ -167,7 +172,7 @@ void ArrayListDestroy(ArrayList* l);
 * NOTICE: All ArrayListIterators are valid until used operations do
 *         keep pointers validity.
 *
-* @param[in] l : ArrayList*
+* @param[in] l       : ArrayList*
 * @param[in] element : ArrayListData
 * @return ArrayListIterator
 */
@@ -225,8 +230,6 @@ ArrayListData ArrayListLast( const ArrayList* l );
 /**
 * Obtain the size of a ArrayList.
 *
-* WARN: Works in O(n) time where n is the length of the ArrayList
-*
 * @param[in] l : const ArrayList*
 * @return size of the ArrayList
 */
@@ -267,21 +270,28 @@ ArrayList ArrayListCopy( const ArrayList* l );
 * Example correct data allocator for list of integers:
 * @code
 *    ArrayListData allocator(ArrayListData data) {
+*       // Obtain int* out of given element's data
 *       int* elem = (int*) data;
+*
+*       // Allocate new copy of element
 *       int* elem_copy = (int*) malloc(sizeof(int));
+*
+*       // Copy underlying data into the copy
 *       *elem_copy = *elem;
+*
+*       // Return new standalone copy
 *       return (ArrayListData) elem_copy;
 *    }
 * @endcode
 *
-* @param[in] l : const ArrayList*
+* @param[in] l                : const ArrayList*
 * @param[in] elementAllocator : ArrayListModifierFn
 * @return deep copy of a given ArrayList
 */
 ArrayList ArrayListDeepCopy( const ArrayList* l, ArrayListModifierFn elementAllocator );
 
 /**
-* Copy the ArrayList into other ArrayList.
+* Copy the ArrayList into other ArrayList (shallow-copy into target).
 *
 * WARN: Each element will be a new one, but the data
 *       pointers will be still pointing to the same
@@ -299,27 +309,30 @@ void ArrayListCopyInto( const ArrayList* source, ArrayList* target );
 * Function is executed for every ArrayList element value
 * The return value is ignored.
 *
-* @param[in] l : const ArrayList*
+* @param[in] l        : const ArrayList*
 * @param[in] iterator : ArrayListModifierFn
 */
 void ArrayListIterate( const ArrayList* l, ArrayListModifierFn iterator );
 
 /**
 * Map ArrayList values using given
-* (ArrayListData)->void function
+* (ArrayListData)->(ArrayListData) function
 * Function is executed for every ArrayList element value
 * Then the result of function is assigned to the
 * element's data pointer.
 *
 * NOTICE: Mapping is made in place.
+*         There's no additional list created.
+*         If you want to swap values you must remember to
+*         deallocate needed resources!
 *
-* @param[in] l : const ArrayList*
+* @param[in] l       : const ArrayList*
 * @param[in] mapping : ArrayListModifierFn
 */
 void ArrayListMap( ArrayList* l, ArrayListModifierFn mapping );
 
 /**
-* Get the first element container pointer.
+* Get the first element iterator.
 * If the ArrayList is empty then NULL is returned.
 *
 * NOTICE: All ArrayListIterators are valid until used operation does not
@@ -344,7 +357,7 @@ static inline ArrayListIterator ArrayListBegin( const ArrayList* l ) {
 }
 
 /**
-* Get the last element container pointer.
+* Get the last element interator.
 * If the ArrayList is empty then NULL is returned.
 *
 * NOTICE: All ArrayListIterators are valid until used operation does not
@@ -372,11 +385,6 @@ static inline ArrayListIterator ArrayListEnd( const ArrayList* l ) {
 /**
 * Checks if given iterator is the last element
 *
-* NOTICE: For detached iterators this function returns true
-*         Formally detached iterators are simultaniously
-*         on the left and right side of the ArrayList as they have no
-*         neightbours on any side.
-*
 * @param[in] iterator : ArrayListIterator
 * @return If the iterator is on the ArrayList's end?
 */
@@ -388,11 +396,6 @@ static inline int ArrayListIsEnd( ArrayListIterator iterator ) {
 /**
 * Checks if given iterator is the first element.
 *
-* NOTICE: For detached iterators this function returns true
-*         Formally detached iterators are simultaniously
-*         on the left and right side of the ArrayList as they have no
-*         neightbours on any side.
-*
 * @param[in] iterator : ArrayListIterator
 * @return If the iterator is on the ArrayList's begining?
 */
@@ -403,11 +406,6 @@ static inline int ArrayListIsBegin( ArrayListIterator iterator ) {
 
 /**
 * Checks if given iterator is the last or first element.
-*
-* NOTICE: For detached iterators this function returns true
-*         Formally detached iterators are simultaniously
-*         on the left and right side of the ArrayList as they have no
-*         neightbours on any side.
 *
 * @param[in] iterator : ArrayListIterator
 * @return If the iterator is on the left/side of the ArrayList
@@ -423,7 +421,7 @@ static inline int ArrayListIsSideElement( ArrayListIterator iterator ) {
 * NOTICE: All ArrayListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param iterator : ArrayListIterator
+* @param[in] iterator : ArrayListIterator
 * @return next iterator (the right neighbour of the current iterator)
 */
 static inline ArrayListIterator ArrayListNext( ArrayListIterator iterator ) {
@@ -438,7 +436,7 @@ static inline ArrayListIterator ArrayListNext( ArrayListIterator iterator ) {
 * NOTICE: All ArrayListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param iterator : ArrayListIterator
+* @param[in] iterator : ArrayListIterator
 * @return previous iterator (the left neighbour of the current iterator)
 */
 static inline ArrayListIterator ArrayListPrevious( ArrayListIterator iterator ) {
@@ -447,13 +445,13 @@ static inline ArrayListIterator ArrayListPrevious( ArrayListIterator iterator ) 
 }
 
 /**
-* Get value of the ArrayList element. Returns void pointer to underlying data.
+* Get value of the ArrayList element. Returns underlying data.
 * Returns NULL if element is NULL.
 *
 * NOTICE: All ArrayListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param iterator : ArrayListIterator
+* @param[in] iterator : ArrayListIterator
 * @return value under the given iterator
 */
 static inline ArrayListData ArrayListGetValue( ArrayListIterator iterator ) {
@@ -469,8 +467,8 @@ static inline ArrayListData ArrayListGetValue( ArrayListIterator iterator ) {
 * NOTICE: All ArrayListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param iterator : ArrayListIterator
-* @param value : ArrayListData
+* @param[in] iterator : ArrayListIterator
+* @param[in] value    : ArrayListData
 */
 static inline void ArrayListSetValue( ArrayListIterator iterator, ArrayListData value ) {
   if(iterator.target == NULL) return;
@@ -483,7 +481,7 @@ static inline void ArrayListSetValue( ArrayListIterator iterator, ArrayListData 
 *
 * WARN: Invalidates ArrayListIterators
 *
-* @param[in] l : ArrayList*
+* @param[in] l           : ArrayList*
 * @param[in] deallocator : ArrayListModifierFn
 */
 static inline void ArrayListDestroyDeep(ArrayList* l, ArrayListModifierFn deallocator) {
@@ -497,7 +495,7 @@ static inline void ArrayListDestroyDeep(ArrayList* l, ArrayListModifierFn deallo
 * Print given ArrayList to stdout.
 * Prints only adresses of values not exact values.
 *
-* @param[in] l : const ArrayList*
+* @param[in] l       : const ArrayList*
 * @param[in] printer : ArrayListModifierFn
 */
 void ArrayListPrint( const ArrayList* l, GenericsPrinter printer );
@@ -507,7 +505,7 @@ void ArrayListPrint( const ArrayList* l, GenericsPrinter printer );
 * Prints only adresses of values not exact values.
 * Variant displaying new line at the end of stringified ArrayList.
 *
-* @param[in] l : const ArrayList*
+* @param[in] l       : const ArrayList*
 * @param[in] printer : ArrayListModifierFn
 */
 static inline void ArrayListPrintln( const ArrayList* l, GenericsPrinter printer ) {

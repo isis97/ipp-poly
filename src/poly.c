@@ -1,9 +1,9 @@
 /*
-*   Interface of polynomials
+*  Interface of polynomials
 *
-*   @author Piotr Styczyński <piotrsty1@gmail.com>
-*   @copyright MIT
-*   @date 2017-05-13
+*  @author Piotr Styczyński <piotrsty1@gmail.com>
+*  @copyright MIT
+*  @date 2017-05-13
 */
 #include "utils.h"
 #include <assert.h>
@@ -726,13 +726,13 @@ void PolyPrint(const Poly* p) {
   free(str);
 }
 
-/**
- * Recursively composes polynomial.
- * Accepts one more paramter compared to the default compose function - index.
- * The index is number of currently substituted variable
- * (index in list x which is considered)
- * as the list is parsed from left to right (indexing from 0).
- */
+/*
+* Recursively composes polynomial.
+* Accepts one more paramter compared to the default compose function - index.
+* The index is number of currently substituted variable
+* (index in list x which is considered)
+* as the list is parsed from left to right (indexing from 0).
+*/
 Poly PolyComposeRec(const Poly *p, unsigned count, unsigned index, const Poly x[]) {
 
   if(PolyIsCoeff(p)) return PolyClone(p);
@@ -773,9 +773,9 @@ Poly PolyComposeRec(const Poly *p, unsigned count, unsigned index, const Poly x[
 }
 
 
-/**
- * Compose given polynomials to one polynomial.
- */
+/*
+* Compose given polynomials to one polynomial.
+*/
 Poly PolyCompose(const Poly *p, unsigned count, const Poly x[]) {
   return PolyComposeRec(p, count, 0, x);
 }

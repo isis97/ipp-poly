@@ -1,3 +1,31 @@
+/*
+*  Calculator code interpreter.
+*  Operations specification is available in README file.
+*
+*  Usage:
+*  @code 
+*     #include <calc_interpreter.h>
+*      ...
+*     // Create new interpreter instance
+*     InterpreterState calc = InterpreterNew(NULL); // Report no errors
+*
+*     // Parse polynomial from input
+*     Poly* p = MALLOCATE(Poly);
+*     p = InterpreterParsePoly(state);
+*
+*     // Print loaded polynomial
+*     PolyPrint(&p);
+*
+*     // Cleanup
+*     PolyDestroy(&p);
+*
+*  @endcode
+*
+*
+*  @author Piotr Styczyński <piotrsty1@gmail.com>
+*  @copyright MIT
+*  @date 2017-05-13
+*/
 #include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +61,7 @@ InterpreterState InterpreterNew(FILE* err_out) {
 }
 
 /*
- Report an error to the interpreter
+* Report an error to the interpreter
 */
 void InterpreterReportError(InterpreterState* state, InterpreterErrorType error_type) {
   if(state->error_type != NO_ERROR) return;
@@ -48,7 +76,7 @@ void InterpreterReportError(InterpreterState* state, InterpreterErrorType error_
 }
 
 /*
- Report a critical error to the interpreter
+* Report a critical error to the interpreter
 */
 void InterpreterReportCriticalError(InterpreterState* state, InterpreterErrorType error_type) {
   InterpreterReportError(state, error_type);
@@ -56,14 +84,14 @@ void InterpreterReportCriticalError(InterpreterState* state, InterpreterErrorTyp
 }
 
 /*
- Report force return event
+* Report force return event
 */
 void InterpreterReportForceReturn(InterpreterState* state) {
   InterpreterReportCriticalError(state, PROCESS_FORCE_RETURN);
 }
 
 /*
- Remove all errors flags
+* Remove all errors flags
 */
 void InterpreterClearError(InterpreterState* state) {
   state->error_type = NO_ERROR;
@@ -73,21 +101,21 @@ void InterpreterClearError(InterpreterState* state) {
 }
 
 /*
- Check for interpreter errors
+* Check for interpreter errors
 */
 bool InterpreterWasError(InterpreterState* state) {
   return (state->error_type != NO_ERROR);
 }
 
 /*
- Check for interpreter critical errors
+* Check for interpreter critical errors
 */
 bool InterpreterWasCriticalError(InterpreterState* state) {
   return (state->critical_error_flag && state->error_type != NO_ERROR);
 }
 
 /*
- Request some parameters to be on stack
+* Request some parameters to be on stack
 */
 void InterpreterRequestStackParams(InterpreterState* state, const int number_of_params) {
   if(StackSize(&(state->poly_stack)) < number_of_params) {
@@ -97,21 +125,21 @@ void InterpreterRequestStackParams(InterpreterState* state, const int number_of_
 }
 
 /*
- Check if a function is command begin
+* Check if a function is command begin
 */
 bool InterpreterIsCommandBegin(const char c) {
   return (c>='a' && c<='z') || (c>='A' && c<='Z');
 }
 
 /*
- Check if currently parsed character is a digit
+* Check if currently parsed character is a digit
 */
 bool InterpreterCurrentIsDigit(InterpreterState* state) {
     return (state->char_buffer >= '0') && (state->char_buffer <= '9');
 }
 
 /*
- Read input until new line is reached
+* Read input until new line is reached
 */
 void InterpreterReadUntilNewLine(InterpreterState* state) {
   do {
@@ -120,7 +148,7 @@ void InterpreterReadUntilNewLine(InterpreterState* state) {
 }
 
 /*
- Read next character from input
+* Read next character from input
 */
 char InterpreterNextChar(InterpreterState* state) {
   state->char_buffer = getchar();
@@ -136,7 +164,7 @@ char InterpreterNextChar(InterpreterState* state) {
 }
 
 /*
- Try to parse a number at current location with set numerical limits
+* Try to parse a number at current location with set numerical limits
 */
 long long InterpreterParseNumber(InterpreterState* state, InterpreterErrorType error_when_failed, long long maximum, long long minimum) {
   bool neg_flag = false;
@@ -190,7 +218,7 @@ long long InterpreterParseNumber(InterpreterState* state, InterpreterErrorType e
 
 
 /*
- ZERO stack operation impl
+* ZERO stack operation impl
 */
 void InterpreterOpZero(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -203,7 +231,7 @@ void InterpreterOpZero(InterpreterState* state) {
 }
 
 /*
- IS_COEFF stack operation impl
+* IS_COEFF stack operation impl
 */
 void InterpreterOpIsCoeff(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -218,7 +246,7 @@ void InterpreterOpIsCoeff(InterpreterState* state) {
 }
 
 /*
- IS_ZERO stack operation impl
+* IS_ZERO stack operation impl
 */
 void InterpreterOpIsZero(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -233,7 +261,7 @@ void InterpreterOpIsZero(InterpreterState* state) {
 }
 
 /*
- CLONE stack operation impl
+* CLONE stack operation impl
 */
 void InterpreterOpClone(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -246,7 +274,7 @@ void InterpreterOpClone(InterpreterState* state) {
 }
 
 /*
- ADD stack operation impl
+* ADD stack operation impl
 */
 void InterpreterOpAdd(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -268,7 +296,7 @@ void InterpreterOpAdd(InterpreterState* state) {
 }
 
 /*
- MUL stack operation impl
+* MUL stack operation impl
 */
 void InterpreterOpMul(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -290,7 +318,7 @@ void InterpreterOpMul(InterpreterState* state) {
 }
 
 /*
- POW stack operation impl
+* POW stack operation impl
 */
 void InterpreterOpPow(InterpreterState* state) {
   long long x = InterpreterParseNumber(state, WRONG_VALUE, NUMBER_MAX, NUMBER_MIN);
@@ -313,7 +341,7 @@ void InterpreterOpPow(InterpreterState* state) {
 
 
 /*
- COMPOSE stack operation impl
+* COMPOSE stack operation impl
 */
 void InterpreterOpCompose(InterpreterState* state) {
   long long count = InterpreterParseNumber(state, WRONG_COUNT, (long long)UINT_MAX, 0);
@@ -357,7 +385,7 @@ void InterpreterOpCompose(InterpreterState* state) {
 }
 
 /*
- NEG stack operation impl
+* NEG stack operation impl
 */
 void InterpreterOpNeg(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -376,7 +404,7 @@ void InterpreterOpNeg(InterpreterState* state) {
 }
 
 /*
- SUB stack operation impl
+* SUB stack operation impl
 */
 void InterpreterOpSub(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -398,7 +426,7 @@ void InterpreterOpSub(InterpreterState* state) {
 }
 
 /*
- IS_EQ stack operation impl
+* IS_EQ stack operation impl
 */
 void InterpreterOpIsEq(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -418,7 +446,7 @@ void InterpreterOpIsEq(InterpreterState* state) {
 }
 
 /*
- DEG stack operation impl
+* DEG stack operation impl
 */
 void InterpreterOpDeg(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -429,7 +457,7 @@ void InterpreterOpDeg(InterpreterState* state) {
 }
 
 /*
- DEG_BY stack operation impl
+* DEG_BY stack operation impl
 */
 void InterpreterOpDegBy(InterpreterState* state) {
   long long x = InterpreterParseNumber(state, WRONG_VARIABLE, NUMBER_MAX, NUMBER_MIN);
@@ -447,7 +475,7 @@ void InterpreterOpDegBy(InterpreterState* state) {
 }
 
 /*
- AT stack operation impl
+* AT stack operation impl
 */
 void InterpreterOpAt(InterpreterState* state) {
   long long x = InterpreterParseNumber(state, WRONG_VALUE, NUMBER_MAX, NUMBER_MIN);
@@ -469,7 +497,7 @@ void InterpreterOpAt(InterpreterState* state) {
 
 
 /*
- Print poly in interpreter manner
+* Print poly in interpreter manner
 */
 void InterpreterPrintPolyRec(Poly* p, poly_coeff_t freeTerm) {
   if(PolyIsCoeff(p)) {
@@ -510,15 +538,14 @@ void InterpreterPrintPolyRec(Poly* p, poly_coeff_t freeTerm) {
 }
 
 /*
- Print poly in interpreter manner
+* Print poly in interpreter manner
 */
 void InterpreterPrintPoly(Poly* p) {
   InterpreterPrintPolyRec(p, 0);
 }
 
-
 /*
- PRINT stack operation impl
+* PRINT stack operation impl
 */
 void InterpreterOpPrint(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -529,13 +556,16 @@ void InterpreterOpPrint(InterpreterState* state) {
   printf("\n");
 }
 
+/*
+* Printer function used by DUMP command
+*/
 static inline void* InterpreterPolyStackPrinter(void* data) {
   PolyPrint((Poly*)data);
   return NULL;
 }
 
 /*
- DUMP stack operation impl
+* DUMP stack operation impl
 */
 void InterpreterOpDump(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -547,7 +577,7 @@ void InterpreterOpDump(InterpreterState* state) {
 }
 
 /*
-  CLEAN stack operation impl
+* CLEAN stack operation impl
 */
 void InterpreterOpClean(InterpreterState* state) {
   if(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -562,7 +592,7 @@ void InterpreterOpClean(InterpreterState* state) {
 }
 
 /*
- POP stack operation impl
+* POP stack operation impl
 */
 void InterpreterOpPop(InterpreterState* state) {
   Poly* a = (Poly*)StackPop(&(state->poly_stack));
@@ -571,16 +601,20 @@ void InterpreterOpPop(InterpreterState* state) {
 }
 
 /*
- EXIT stack operation impl
+* EXIT stack operation impl
 */
 void InterpreterOpForceReturn(InterpreterState* state) {
   InterpreterReportForceReturn(state);
 }
 
 /*
- Number of all valid commands
+* Number of all valid commands
 */
 #define INTERPRETER_COMMANDS_COUNT 19
+
+/*
+* All command bindings
+*/
 static const InterpreterCommandBinding INTERPRETER_COMMANDS[INTERPRETER_COMMANDS_COUNT] = {
   { .required_params = 0, .command = "ZERO",     .action = InterpreterOpZero        },
   { .required_params = 1, .command = "IS_COEFF", .action = InterpreterOpIsCoeff     },
@@ -604,7 +638,7 @@ static const InterpreterCommandBinding INTERPRETER_COMMANDS[INTERPRETER_COMMANDS
 };
 
 /*
- Try to parse mono at current character
+* Try to parse mono at current character
 */
 Mono InterpreterParseMono(InterpreterState* state) {
   Poly fact = PolyZero();
@@ -639,7 +673,7 @@ Mono InterpreterParseMono(InterpreterState* state) {
 
 
 /*
- Try to parse poly at current character
+* Try to parse poly at current character
 */
 Poly InterpreterParsePoly(InterpreterState* state) {
   Poly p = PolyZero();
@@ -691,7 +725,7 @@ Poly InterpreterParsePoly(InterpreterState* state) {
 
 
 /*
- Try to parse a command at current character
+* Try to parse a command at current character
 */
 void InterpreterParseCommand(InterpreterState* state) {
 
@@ -730,7 +764,7 @@ void InterpreterParseCommand(InterpreterState* state) {
 
 
 /*
- Read characters until EOF or new line is reached
+* Read characters until EOF or new line is reached
 */
 void InterpreterSeekLineEnd(InterpreterState* state) {
   while(state->char_buffer != '\n' && state->char_buffer != EOF) {
@@ -739,7 +773,7 @@ void InterpreterSeekLineEnd(InterpreterState* state) {
 }
 
 /*
- Print human readable representation of an interpreter error
+* Print human readable representation of an interpreter error
 */
 void InterpreterPrintError(InterpreterState* state) {
   if(state->error_type == PROCESS_FORCE_RETURN) {
@@ -778,7 +812,7 @@ void InterpreterPrintError(InterpreterState* state) {
 }
 
 /*
- Deallocator for polynomials in the stack
+* Deallocator for polynomials in the stack
 */
 void* InterpreterStackDeallocator(void* element) {
   Poly* p = (Poly*) element;
@@ -788,8 +822,8 @@ void* InterpreterStackDeallocator(void* element) {
 }
 
 /*
- * Cleanup interpreter before terminating.
- */
+* Cleanup interpreter before terminating.
+*/
 void InterpreterCleanup(InterpreterState* state) {
   StackDestroyDeep(&(state->poly_stack), InterpreterStackDeallocator);
 }

@@ -33,7 +33,7 @@
 *    }
 * @endcode
 *
-* @param[in] LIST : List name to be iterated
+* @param[in] LIST     : List name to be iterated
 * @param[in] VAR_NAME : name of iterator variable
 */
 #define LOOP_LIST(LIST, VAR_NAME) \
@@ -55,7 +55,7 @@ typedef struct ListRoot ListRoot;
 
 
 /**
-* Actual type of List - syntax sugar for writing pointers everywhere
+* Actual type of List - syntax sugar
 */
 typedef ListRoot List;
 
@@ -86,7 +86,7 @@ typedef ListNode* ListIterator;
 
 /**
 * Function of type
-* ListData -> ListData
+* (ListData) -> (ListData)
 * Used as List data manipulators/iterators
 */
 typedef ListData (*ListModifierFn)(ListData);
@@ -121,7 +121,7 @@ void ListDestroy(List* l);
 * NOTICE: All ListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param[in] l : List*
+* @param[in] l       : List*
 * @param[in] element : ListData
 * @return ListIterator
 */
@@ -135,7 +135,7 @@ ListIterator ListPushFront( List* l, ListData element );
 * NOTICE: All ListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param[in] l : List*
+* @param[in] l       : List*
 * @param[in] element : ListData
 * @return ListIterator
 */
@@ -238,14 +238,14 @@ List ListCopy( const List* l );
 * The function should create new element value, copy the value of
 * the given one and return pointer to this element.
 *
-* @param[in] l : const List*
+* @param[in] l                : const List*
 * @param[in] elementAllocator : ListModifierFn
 * @return deep copy of a given List
 */
 List ListDeepCopy( const List* l, ListModifierFn elementAllocator );
 
 /**
-* Copy the List @p source into other List -  @p target
+* Copy the List @p source into other List -  @p target (shallow copy)
 *
 * WARN: Each element will be a new one, but the data
 *       pointers will be still pointing to the same
@@ -263,21 +263,21 @@ void ListCopyInto( const List* source, List* target );
 * Function is executed for every List element value
 * The return value is ignored.
 *
-* @param[in] l : const List*
+* @param[in] l        : const List*
 * @param[in] iterator : ListModifierFn
 */
 void ListIterate( const List* l, ListModifierFn iterator );
 
 /**
 * Map List values using given
-* (ListData)->void function
+* (ListData)->(ListData) function
 * Function is executed for every List element value
 * Then the result of function is assigned to the
 * element's data pointer.
 *
 * NOTICE: Mapping is made in place.
 *
-* @param[in] l : const List*
+* @param[in] l       : const List*
 * @param[in] mapping : ListModifierFn
 */
 void ListMap( List* l, ListModifierFn mapping );
@@ -286,7 +286,7 @@ void ListMap( List* l, ListModifierFn mapping );
 * Print given List to stdout.
 * Prints only adresses of values not exact values.
 *
-* @param[in] l : const List*
+* @param[in] l       : const List*
 * @param[in] printer : GenericsPrinter
 */
 void ListPrint( const List* l, GenericsPrinter printer );
@@ -296,7 +296,7 @@ void ListPrint( const List* l, GenericsPrinter printer );
 * Prints only adresses of values not exact values.
 * Variant displaying new line at the end of stringified List.
 *
-* @param[in] l : const List*
+* @param[in] l       : const List*
 * @param[in] printer : GenericsPrinter
 */
 static inline void ListPrintln( const List* l, GenericsPrinter printer ) {
@@ -367,7 +367,7 @@ static inline ListIterator ListEnd( const List* l ) {
 *
 * WARN: Invalidates pointers to the removed elements.
 *
-* @param[in] l : List*
+* @param[in] l    : List*
 * @param[in] node : ListIterator
 */
 void ListDetachElement( List* l, ListIterator node );
@@ -408,7 +408,7 @@ static inline int ListIsSideElement( ListIterator node ) {
 * For all other situations it may be NULL
 *
 * @param[in] target : List*
-* @param[in] node : ListIterator
+* @param[in] node   : ListIterator
 * @param[in] source : List*
 */
 void ListInsertListAt( List* target, ListIterator node, List* source );
@@ -421,8 +421,8 @@ void ListInsertListAt( List* target, ListIterator node, List* source );
 * For all other situations it may be NULL
 *
 * @param[in] target : List*
-* @param[in] node : ListIterator
-* @param[in] value : ListData
+* @param[in] node   : ListIterator
+* @param[in] value  : ListData
 */
 void ListInsertElementAt( List* target, ListIterator node, ListData value );
 
@@ -463,8 +463,8 @@ static inline int ListIsBegin( ListIterator node ) {
 * All elements on the right side of @p node are transferred to the new List
 * that is returned.
 *
-* @param l : List*
-* @param node : ListIterator
+* @param[in] l    : List*
+* @param[in] node : ListIterator
 * @return List
 */
 List ListSplitList( List* l, ListIterator node );
@@ -476,7 +476,7 @@ List ListSplitList( List* l, ListIterator node );
 * NOTICE: All ListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param node : ListIterator
+* @param[in] node : ListIterator
 * @return next node (the right neighbour of the current node)
 */
 static inline ListIterator ListNext( ListIterator node ) {
@@ -491,7 +491,7 @@ static inline ListIterator ListNext( ListIterator node ) {
 * NOTICE: All ListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param node : ListIterator
+* @param[in] node : ListIterator
 * @return previous node (the left neighbour of the current node)
 */
 static inline ListIterator ListPrevious( ListIterator node ) {
@@ -506,7 +506,7 @@ static inline ListIterator ListPrevious( ListIterator node ) {
 * NOTICE: All ListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param node : ListIterator
+* @param[in] node : ListIterator
 * @return value under the given node
 */
 static inline ListData ListGetValue( ListIterator node ) {
@@ -521,8 +521,8 @@ static inline ListData ListGetValue( ListIterator node ) {
 * NOTICE: All ListIterators are valid until used operation does not
 *         keep pointers validity.
 *
-* @param node : ListIterator
-* @param value : ListData
+* @param[in] node  : ListIterator
+* @param[in] value : ListData
 */
 static inline void ListSetValue( ListIterator node, ListData value ) {
   if(node==NULL) return;
@@ -535,7 +535,7 @@ static inline void ListSetValue( ListIterator node, ListData value ) {
 *
 * WARN: Invalidates ArrayListIterators
 *
-* @param[in] l : ArrayList*
+* @param[in] l           : ArrayList*
 * @param[in] deallocator : ListModifierFn
 */
 static inline void ListDestroyDeep(List* l, ListModifierFn deallocator) {

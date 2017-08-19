@@ -12,7 +12,7 @@
 *     ArrayListPushBack(&l, &b);
 *
 *     printf("%d", *((int*)ArrayListPopBack(&l))); //Output: 64
-*     printf("%d", ArrayListSize(&l)); //Output: 1
+*     printf("%d", ArrayListSize(&l));             //Output: 1
 *
 *     ArrayListDestroy(&l);
 *  @endcode
@@ -123,7 +123,7 @@ ArrayListData ArrayListLast(const ArrayList* l) {
 }
 
 /*
-* Measure ArrayList size in O(n) time
+* Measure ArrayList size in constant time
 */
 int ArrayListSize(const ArrayList* l) {
   if(l == NULL) return 0;
