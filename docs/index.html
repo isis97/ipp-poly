@@ -14,7 +14,7 @@
         -->
         <link href="tabs.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="jquery.js"></script>
-        <title>Polynomials: Documentation of exercise &#39;Polynomials&#39;</title>
+        <title>Polynomials: ipp-bin-poly</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <script type="text/x-mathjax-config">
@@ -58,30 +58,37 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Documentation of exercise 'Polynomials' </div>  </div>
+<div class="title">ipp-bin-poly </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1>Exercise</h1>
-<p>This project is based on exercise we had to do on <b>Warsaw University, Poland</b> on the <b>Individual Programistic Project</b> subject.</p>
+<div class="textblock"><p>See <a href="http://styczynski.ml/ipp-poly">Doxygen documentation</a></p>
+<h1>Exercise</h1>
+<p>This project is based on exercise we had to do on <code>Warsaw University, Poland</code> on the <code>Individual Programistic Project</code> subject.</p>
 <h3>Task</h3>
-<p>The exercise was to design and implement: Provide dynamically-allocated lists implementation - <em>pre-exercise</em></p>
-<p>Polynomial handling library in pure C99 - <em>part no. 1</em></p>
-<p>Interactive calculator for that library - <em>part no. 2</em></p>
-<p>Implement additional functionality and provide basic unit tests - <em>part no. 3</em></p>
+<p>The exercise was to design and implement:</p><ul>
+<li>Provide dynamically-allocated lists implementation - <em>pre-exercise</em></li>
+<li>Polynomial handling library in pure C99 - <em>part no. 1</em></li>
+<li>Interactive calculator for that library - <em>part no. 2</em></li>
+<li>Implement additional functionality and provide basic unit tests - <em>part no. 3</em></li>
+</ul>
 <h3>Project structure</h3>
-<p>The project provides: library <code><a class="el" href="poly_8h.html" title="Interface of polynomials. ">src/poly.h</a></code> for handling polynomials</p>
-<p>additional helper libraries like dynamically allocated arrays etc.</p>
-<p>interactive calculator <code>src/calc_poly.c</code></p>
-<p>unit tests in <code>tests/</code></p>
+<p>The project provides:</p><ul>
+<li>library <code><a class="el" href="poly_8h.html" title="Interface of polynomials. ">src/poly.h</a></code> for handling polynomials</li>
+<li>additional helper libraries like dynamically allocated arrays etc.</li>
+<li>interactive calculator <code>src/calc_poly.c</code></li>
+<li>unit tests in <code>tests/</code></li>
+</ul>
 <h1>Building</h1>
 <p>To build do the following:</p>
-<p>Create release folder - <code>mkdir release</code></p>
-<p>Go to that folder - <code>cd release</code></p>
-<p>Generate makefiles - <code>cmake ..</code></p>
-<p>Build everything - <code>make</code></p>
-<p>Optionally run tests - <code>make test</code></p>
-<p>Optionally generate documentation (needs Doxygen to be installed) - <code>make doc</code></p>
-<p>Optionally clean everything - <code>make clean</code></p>
+<ul>
+<li>Create release folder - <code>mkdir release</code></li>
+<li>Go to that folder - <code>cd release</code></li>
+<li>Generate makefiles - <code>cmake ..</code></li>
+<li>Build everything - <code>make</code></li>
+<li>Optionally run tests - <code>make test</code></li>
+<li>Optionally generate documentation (needs Doxygen to be installed) - <code>make doc</code></li>
+<li>Optionally clean everything - <code>make clean</code></li>
+</ul>
 <h1>Polynomial library</h1>
 <p>All the documentation is provided in header files.</p>
 <p>There you've got example usage of the library:</p>
@@ -89,83 +96,99 @@ $(function() {
 <p>The calulator resides in <code>src/calc_poly.c</code>.</p>
 <p>It reads data from stdin line by line and:</p>
 <ol type="1">
-<li><p class="startli">If the line starts with lower/upper case letter then it's assumed</p>
-<p class="startli">to be an input command.</p>
-</li>
-<li><p class="startli">Otherwise the input is parsed as a polynomial</p>
-<p class="startli">The format of the polynomial is</p>
-<p class="startli"><code>(COEFF_1,EXP_1)+(COEFF_2,EXP_2)+...+(COEFF_N,EXP_N)</code></p>
-<p class="startli">Where pair <code>(COEFF_N,EXP_N)</code> represents single monomial <code>(COEFF_N)*x^(EXP_N)</code></p>
-<p class="startli">The coefficients can be numbers:</p>
-<p class="startli"><code>(1,3)+(2,4)</code> -&gt; x^3 + 2x^4</p>
-<p class="startli">Or polynomials (in this case they depend on other variable):</p>
-<p class="startli"><code>((1,3)+(2,4),2)+(1,3)</code> -&gt; (x^3 + 2x^4)*y^2 + y^3</p>
-<p class="startli">can also contain monomials with the same exponent:</p>
-<p class="startli"><code>(1,2)+(1,2)</code> -&gt; 2x^2</p>
-<p class="startli">Or can be just numbers:</p>
-<p class="startli"><code>42</code> -&gt; constant polynomial 42</p>
-</li>
+<li>If the line starts with lower/upper case letter then it's assumed<br />
+to be an input command.</li>
+<li>Otherwise the input is parsed as a polynomial<br />
+The format of the polynomial is<br />
+<code>(COEFF_1,EXP_1)+(COEFF_2,EXP_2)+...+(COEFF_N,EXP_N)</code><br />
+Where pair <code>(COEFF_N,EXP_N)</code> represents single monomial <code>(COEFF_N)*x^(EXP_N)</code><br />
+The coefficients can be numbers:<br />
+<code>(1,3)+(2,4)</code> -&gt; <code>x^3 + 2x^4</code><br />
+Or polynomials (in this case they depend on other variable):<br />
+<code>((1,3)+(2,4),2)+(1,3)</code> -&gt; <code>(x^3 + 2x^4)*y^2 + y^3</code><br />
+can also contain monomials with the same exponent:<br />
+<code>(1,2)+(1,2)</code> -&gt; 2x^2<br />
+Or can be just numbers:<br />
+<code>42</code> -&gt; constant polynomial 42</li>
 </ol>
 <p>All the polynomials are parsed and placed on top of the stack. Then you can call one or more of the given operations</p>
 <p>to modify the stack contents:</p>
-<ol type="1">
-<li><code>ZERO</code> - pushes zero const polynomial onto stack</li>
-<li><code>IS_COEFF</code> - check if the stack top is a constant polynomial?</li>
-<li><code>IS_ZERO</code> - check if the stack top is a polynomial equal to 0?</li>
-<li><code>CLONE</code> - Copy the polynomial on top of the stack and place it on the top.</li>
-<li><p class="startli"><code>ADD</code> - Adds two polynomials from the top of the stack.</p>
-<p class="startli">Then puts the result on the stack top.</p>
-</li>
-<li><p class="startli"><code>MUL</code> - Multiplies two polynomials from the top of the stack.</p>
-<p class="startli">Then puts the result on the stack top.</p>
-</li>
-<li><code>NEG</code> - Changes the sign of the polynomial on the top of the stack.</li>
-<li><p class="startli"><code>SUB</code> - Substracts two polynomials from the top of the stack.</p>
-<p class="startli">Then puts the result on the stack top.</p>
-</li>
-<li><code>IS_EQ</code> - Checks if two top-most polynomials are equal.</li>
-<li><p class="startli"><code>DEG</code> - Checks the degree of the top-most polynomial.</p>
-<p class="startli">Degree of the polynomial is a highest exponent of variable</p>
-<p class="startli">encountered in the polynomial (assuming all variables are the</p>
-<p class="startli">same one).</p>
-<p class="startli">E.g. degree(x^2 + yx^2) = 3</p>
-</li>
-<li><p class="startli"><code>DEG_BY [index]</code> - Checks the degree of the top-most polynomial</p>
-<p class="startli">with respect to the given variable. Variables are indexed from 0</p>
-<p class="startli">(0 means the main variable of polynomial).</p>
-<p class="startli">E.g.</p>
-<p class="startli">DegBy( ((1,2),3), 0 ) = DegBy( x^2*y^3, 0 ) = DegByY( x^2*y^3 ) = 3</p>
-<p class="startli">DegBy( ((1,2),3), 1 ) = DegBy( x^2*y^3, 1 ) = DegByX( x^2*y^3 ) = 2</p>
-</li>
-<li><p class="startli"><code>AT [value]</code> Evaluate the top-most polynomial in specified point</p>
-<p class="startli">and put it into stack.</p>
-<p class="startli">The polynomial is evalued for <code>MAIN_VARIABLE=[value]</code> where</p>
-<p class="startli"><code>MAIN_VARIABLE</code> is variable with index 0.</p>
-<p class="startli">E.g.</p>
-<p class="startli">At( ((1,2),3), 0 ) = At( x^2*y^3, 0 ) = AtY( x^2*y^3, 0 ) = 0</p>
-<p class="startli">At( (1,2), 2 ) = At( x^2, 2 ) = AtX( x^2, 2 ) = 4</p>
-<p class="startli">The result of this command is always a polynomial of degree one smaller</p>
-<p class="startli">than the polynomial given.</p>
-</li>
-<li><code>PRINT</code> - Print the top-most polynomial.</li>
-<li><code>POP</code> - Pop the top-most polynomial from the stack.</li>
-<li><p class="startli"><code>POW [exp]</code> - Calculate the top-most polynomial power and push into the</p>
-<p class="startli">stack. Obviously <code>[exp]</code> can be only a number!</p>
-</li>
-<li><p class="startli"><code>COMPOSE [count]</code> - take top-most polynomail from the stack.</p>
-<p class="startli">(We will call it P)</p>
-<p class="startli">Then take <code>[count]</code> polynomials from the stack (let's call them Q1, Q2 ...).</p>
-<p class="startli">Then we know that <code>P = C_1*x_1^E_1 + C_2*x_2^E_2 + ...</code></p>
-<p class="startli">so we substitute</p>
-<p class="startli"><code>x_1 -&gt; Q1</code></p>
-<p class="startli"><code>x_2 -&gt; Q2</code></p>
-<p class="startli">etc.</p>
-<p class="startli">if the <code>x_n</code> has got no matching <code>QN</code> then we assume <code>x_n -&gt; 0</code> Then we put result of such substitution onto the stack.</p>
-</li>
-<li><code>DUMP</code> - Print the stack contents.</li>
-<li><code>CLEAN</code> - Clear the stack entinerely.</li>
-<li><code>EXIT</code> - Force exit calculator. </li>
-</ol>
+<table class="doxtable">
+<tr>
+<th>Command </th><th>Parameters </th><th>Required stack size </th><th>Description  </th></tr>
+<tr>
+<td><code>ZERO</code> </td><td></td><td>0 </td><td>Pushes zero const polynomial onto stack </td></tr>
+<tr>
+<td><code>IS_COEFF</code></td><td></td><td>1 </td><td>Checks if the stack top is a constant polynomial? </td></tr>
+<tr>
+<td><code>IS_ZERO</code> </td><td></td><td>1 </td><td>Checks if the stack top is a polynomial equal to 0? </td></tr>
+<tr>
+<td><code>CLONE</code> </td><td></td><td>1 </td><td>Copies the polynomial on top of the stack and places it on the top. </td></tr>
+<tr>
+<td><code>ADD</code> </td><td></td><td>2 </td><td>Adds two polynomials from the top of the stack.<br />
+Then puts the result on the stack top. </td></tr>
+<tr>
+<td><code>MUL</code> </td><td></td><td>2 </td><td>Multiplies two polynomials from the top of the stack.<br />
+Then puts the result on the stack top. </td></tr>
+<tr>
+<td><code>NEG</code> </td><td></td><td>1 </td><td>Changes the sign of the polynomial on the top of the stack. </td></tr>
+<tr>
+<td><code>SUB</code> </td><td></td><td>2 </td><td>Substracts two polynomials from the top of the stack.<br />
+Then puts the result on the stack top. </td></tr>
+<tr>
+<td><code>IS_EQ</code> </td><td></td><td>2 </td><td>Checks if two top-most polynomials are equal. </td></tr>
+<tr>
+<td><code>DEG</code> </td><td></td><td>1 </td><td>Checks the degree of the top-most polynomial.<br />
+Degree of the polynomial is a highest exponent of variable<br />
+encountered in the polynomial (assuming all variables are the<br />
+same one).<br />
+E.g. degree(x^2 + yx^2) = 3 </td></tr>
+<tr>
+<td><code>DEG_BY</code> </td><td><em>index</em> </td><td>1 </td><td>Checks the degree of the top-most polynomial<br />
+with respect to the given variable. Variables are indexed from 0<br />
+(0 means the main variable of polynomial).<br />
+<br />
+E.g.<br />
+<code>DegBy( ((1,2),3), 0 ) = DegBy( x^2 * y^3, 0 ) = 3</code><br />
+<code>DegBy( ((1,2),3), 1 ) = DegBy( x^2 * y^3, 1 ) = 2</code> </td></tr>
+<tr>
+<td><code>AT</code> </td><td><em>value</em> </td><td>1 </td><td>Evaluates the top-most polynomial in specified point<br />
+and put it into stack.<br />
+The polynomial is evalued for <code>MAIN_VARIABLE=[value]</code> where<br />
+<code>MAIN_VARIABLE</code> is variable with index 0.<br />
+<br />
+E.g.<br />
+<code>At( ((1,2),3), 0 ) = At( x^2 * y^3, 0 ) = 0</code><br />
+<code>At( (1,2), 2 ) = At( x^2, 2 ) = 4</code><br />
+<br />
+The result of this command is always a polynomial of degree one smaller<br />
+than the polynomial given. </td></tr>
+<tr>
+<td><code>PRINT</code> </td><td></td><td>1 </td><td>Prints the top-most polynomial. </td></tr>
+<tr>
+<td><code>POP</code> </td><td></td><td>1 </td><td>Pops the top-most polynomial from the stack. </td></tr>
+<tr>
+<td><code>POW</code> </td><td><em>exp</em> </td><td>1 </td><td>Calculates the top-most polynomial power and push into the<br />
+stack. Obviously <em>exp</em> can be only a number! </td></tr>
+<tr>
+<td><code>COMPOSE</code> </td><td><em>count</em> </td><td><em>count</em>+1 </td><td>Takes top-most polynomail from the stack.<br />
+(We will call it P)<br />
+Then take <em>count</em> polynomials from the stack (let's call them Q1, Q2 ...).<br />
+Then we know that <code>P = C_1*x_1^E_1 + C_2*x_2^E_2 + ...</code><br />
+so we substitute<br />
+<code>x_1 -&gt; Q1</code><br />
+<code>x_2 -&gt; Q2</code><br />
+etc.<br />
+if the <code>x_n</code> has got no matching <code>QN</code> then we assume <code>x_n -&gt; 0</code><br />
+<br />
+Then we put result of such substitution onto the stack. </td></tr>
+<tr>
+<td><code>DUMP</code> </td><td></td><td>0 </td><td>Prints the stack contents. </td></tr>
+<tr>
+<td><code>CLEAN</code> </td><td></td><td>0 </td><td>Clears the stack entinerely. </td></tr>
+<tr>
+<td><code>EXIT</code> </td><td></td><td>0 </td><td>Force exits the calculator. </td></tr>
+</table>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

@@ -112,8 +112,7 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a9e5990e82e153f28c228b3ef872a0b36"><td class="memItemLeft" align="right" valign="top"><a id="a9e5990e82e153f28c228b3ef872a0b36"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array__lists_8h.html#a9e5990e82e153f28c228b3ef872a0b36">__STY_COMMON_ARRAY_LISTS_H__</a></td></tr>
-<tr class="memdesc:a9e5990e82e153f28c228b3ef872a0b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header file once-inclusion macro. <br /></td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>__STY_COMMON_ARRAY_LISTS_H__</b></td></tr>
 <tr class="separator:a9e5990e82e153f28c228b3ef872a0b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f4cea33b924414108ef8df97b621786"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="array__lists_8h.html#a5f4cea33b924414108ef8df97b621786">ARRAY_LIST_AUTORESIZE_FACTOR</a>&#160;&#160;&#160;2</td></tr>
 <tr class="memdesc:a5f4cea33b924414108ef8df97b621786"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list is always resized to its current size * resize factor when theres no place for elements.  <a href="#a5f4cea33b924414108ef8df97b621786">More...</a><br /></td></tr>
@@ -253,7 +252,7 @@ Functions</h2></td></tr>
 <p>The list is always resized to its current size * resize factor when theres no place for elements. </p>
 <p>This take place only through ArrayListResize calls. See ArrayListResize for further details. </p>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00049">49</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00045">45</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -282,10 +281,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<a class="code" href="structArrayListIterator.html">ArrayListIterator</a> VAR_NAME = <a class="code" href="array__lists_8h.html#a29005b3e13afc1f125f0cc0486c44636">ArrayListBegin</a>(LIST); \</div><div class="line">  !<a class="code" href="array__lists_8h.html#a4e5f96a87709a82c3a090a0d37b8d318">ArrayListIsEnd</a>(VAR_NAME); VAR_NAME = <a class="code" href="array__lists_8h.html#ae024e0413c65c81ee1eff0f290830bad">ArrayListNext</a>(VAR_NAME))</div><div class="ttc" id="array__lists_8h_html_a4e5f96a87709a82c3a090a0d37b8d318"><div class="ttname"><a href="array__lists_8h.html#a4e5f96a87709a82c3a090a0d37b8d318">ArrayListIsEnd</a></div><div class="ttdeci">static int ArrayListIsEnd(ArrayListIterator iterator)</div><div class="ttdoc">Checks if given iterator is the last element. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00391">array_lists.h:391</a></div></div>
-<div class="ttc" id="array__lists_8h_html_a29005b3e13afc1f125f0cc0486c44636"><div class="ttname"><a href="array__lists_8h.html#a29005b3e13afc1f125f0cc0486c44636">ArrayListBegin</a></div><div class="ttdeci">static ArrayListIterator ArrayListBegin(const ArrayList *l)</div><div class="ttdoc">Get the first element iterator. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00344">array_lists.h:344</a></div></div>
-<div class="ttc" id="structArrayListIterator_html"><div class="ttname"><a href="structArrayListIterator.html">ArrayListIterator</a></div><div class="ttdoc">Iterator type for array lists. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00106">array_lists.h:106</a></div></div>
-<div class="ttc" id="array__lists_8h_html_ae024e0413c65c81ee1eff0f290830bad"><div class="ttname"><a href="array__lists_8h.html#ae024e0413c65c81ee1eff0f290830bad">ArrayListNext</a></div><div class="ttdeci">static ArrayListIterator ArrayListNext(ArrayListIterator iterator)</div><div class="ttdoc">Get next element on the ArrayList. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00427">array_lists.h:427</a></div></div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<a class="code" href="structArrayListIterator.html">ArrayListIterator</a> VAR_NAME = <a class="code" href="array__lists_8h.html#a29005b3e13afc1f125f0cc0486c44636">ArrayListBegin</a>(LIST); \</div><div class="line">  !<a class="code" href="array__lists_8h.html#a4e5f96a87709a82c3a090a0d37b8d318">ArrayListIsEnd</a>(VAR_NAME); VAR_NAME = <a class="code" href="array__lists_8h.html#ae024e0413c65c81ee1eff0f290830bad">ArrayListNext</a>(VAR_NAME))</div><div class="ttc" id="array__lists_8h_html_a4e5f96a87709a82c3a090a0d37b8d318"><div class="ttname"><a href="array__lists_8h.html#a4e5f96a87709a82c3a090a0d37b8d318">ArrayListIsEnd</a></div><div class="ttdeci">static int ArrayListIsEnd(ArrayListIterator iterator)</div><div class="ttdoc">Checks if given iterator is the last element. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00387">array_lists.h:387</a></div></div>
+<div class="ttc" id="array__lists_8h_html_a29005b3e13afc1f125f0cc0486c44636"><div class="ttname"><a href="array__lists_8h.html#a29005b3e13afc1f125f0cc0486c44636">ArrayListBegin</a></div><div class="ttdeci">static ArrayListIterator ArrayListBegin(const ArrayList *l)</div><div class="ttdoc">Get the first element iterator. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00340">array_lists.h:340</a></div></div>
+<div class="ttc" id="structArrayListIterator_html"><div class="ttname"><a href="structArrayListIterator.html">ArrayListIterator</a></div><div class="ttdoc">Iterator type for array lists. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00102">array_lists.h:102</a></div></div>
+<div class="ttc" id="array__lists_8h_html_ae024e0413c65c81ee1eff0f290830bad"><div class="ttname"><a href="array__lists_8h.html#ae024e0413c65c81ee1eff0f290830bad">ArrayListNext</a></div><div class="ttdeci">static ArrayListIterator ArrayListNext(ArrayListIterator iterator)</div><div class="ttdoc">Get next element on the ArrayList. </div><div class="ttdef"><b>Definition:</b> <a href="array__lists_8h_source.html#l00423">array_lists.h:423</a></div></div>
 </div><!-- fragment -->
 <p>Macro for interating through <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a>. </p>
 <p>Usage:</p>
@@ -297,7 +296,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00074">74</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00070">70</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -323,7 +322,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ArrayListData </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00119">119</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00115">115</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -363,7 +362,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structArrayListIterator.html" title="Iterator type for array lists. ">ArrayListIterator</a> pointing to the <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a> begining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00344">344</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00340">340</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -572,7 +571,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00487">487</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00483">483</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -619,7 +618,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a> is empty? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00244">244</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00240">240</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -670,7 +669,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structArrayListIterator.html" title="Iterator type for array lists. ">ArrayListIterator</a> pointing to the <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a> end </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00369">369</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00365">365</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -738,7 +737,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>value under the given iterator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00457">457</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00453">453</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -775,7 +774,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If the iterator is on the <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a>'s begining? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00402">402</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00398">398</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -812,7 +811,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If the iterator is on the <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a>'s end? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00391">391</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00387">387</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>
@@ -849,7 +848,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If the iterator is on the left/side of the <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00413">413</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00409">409</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -993,7 +992,7 @@ Here is the call graph for this function:</div>
 <p>Create new <a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a> All ArrayLists must be then freed with ArrayListDestroy(ArrayList). </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structArrayList.html" title="Root element of the ArrayList containing pointer to the first element and needed metadata like size a...">ArrayList</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00128">128</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00124">124</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1047,7 +1046,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>next iterator (the right neighbour of the current iterator) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00427">427</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00423">423</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1123,7 +1122,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>previous iterator (the left neighbour of the current iterator) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00442">442</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00438">438</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1206,7 +1205,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00522">522</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00518">518</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1263,7 +1262,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00511">511</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00507">507</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1308,7 +1307,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00533">533</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00529">529</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1445,7 +1444,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00473">473</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="array__lists_8h_source.html#l00469">469</a> of file <a class="el" href="array__lists_8h_source.html">array_lists.h</a>.</p>
 
 </div>
 </div>

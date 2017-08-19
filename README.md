@@ -5,8 +5,8 @@ See [Doxygen documentation](http://styczynski.ml/ipp-poly)
 
 # Exercise
 
-This project is based on exercise we had to do on **Warsaw University, Poland**
-on the **Individual Programistic Project** subject.
+This project is based on exercise we had to do on `Warsaw University, Poland`
+on the `Individual Programistic Project` subject.
 
 ### Task
 
@@ -127,25 +127,25 @@ to modify the stack contents:
 
 | Command    | Parameters | Required stack size | Description |
 |------------|------------|---------------------|-------------|
-|**ZERO**    |            |          0          | Pushes zero const polynomial onto stack  |
-|**IS_COEFF**|            |          1          | Checks if the stack top is a constant polynomial?  |
-|**IS_ZERO** |            |          1          | Checks if the stack top is a polynomial equal to 0?  |
-|**CLONE**   |            |          1          | Copies the polynomial on top of the stack and places it on the top. |
-|**ADD**     |            |          2          | Adds two polynomials from the top of the stack.<br>Then puts the result on the stack top. |
-|**MUL**     |            |          2          | Multiplies two polynomials from the top of the stack.<br>Then puts the result on the stack top.  |
-|**NEG**     |            |          1          | Changes the sign of the polynomial on the top of the stack.  |
-|**SUB**     |            |          2          | Substracts two polynomials from the top of the stack.<br>Then puts the result on the stack top. |
-|**IS_EQ**   |            |          2          | Checks if two top-most polynomials are equal.  |
-|**DEG**     |            |          1          | Checks the degree of the top-most polynomial.<br>Degree of the polynomial is a highest exponent of variable<br>encountered in the polynomial (assuming all variables are the<br>same one).<br>E.g. degree(x^2 + yx^2) = 3  |
-|**DEG_BY**  |   *index*  |          1          | Checks the degree of the top-most polynomial<br>with respect to the given variable. Variables are indexed from 0<br>(0 means the main variable of polynomial).<br><br>E.g.<br>`DegBy( ((1,2),3), 0 ) = DegBy( x^2 * y^3, 0 ) = 3`<br>`DegBy( ((1,2),3), 1 ) = DegBy( x^2 * y^3, 1 ) = 2` |
-|**AT**      |   *value*  |          1          | Evaluates the top-most polynomial in specified point<br>and put it into stack.<br>The polynomial is evalued for `MAIN_VARIABLE=[value]` where<br>`MAIN_VARIABLE` is variable with index 0.<br><br>E.g.<br>`At( ((1,2),3), 0 ) = At( x^2 * y^3, 0 ) = 0`<br>`At( (1,2), 2 ) = At( x^2, 2 ) = 4`<br><br>The result of this command is always a polynomial of degree one smaller<br>than the polynomial given. |
-|**PRINT**   |            |          1          | Prints the top-most polynomial. |
-|**POP**     |            |          1          | Pops the top-most polynomial from the stack. |
-|**POW**     |   *exp*    |          1          | Calculates the top-most polynomial power and push into the<br>stack. Obviously *exp* can be only a number! |
-|**COMPOSE** |  *count*   |       *count*+1     | Takes top-most polynomail from the stack.<br>(We will call it P)<br>Then take *count* polynomials from the stack (let's call them Q1, Q2 ...).<br>Then we know that `P = C_1*x_1^E_1 + C_2*x_2^E_2 + ...`<br>so we substitute<br>`x_1 -> Q1`<br>`x_2 -> Q2`<br>etc.<br>if the `x_n` has got no matching `QN` then we assume `x_n -> 0`<br><br>Then we put result of such substitution onto the stack. |
-|**DUMP**    |            |          0          | Prints the stack contents. |
-|**CLEAN**   |            |          0          | Clears the stack entinerely.  |
-|**EXIT**    |            |          0          | Force exits the calculator. |
+|`ZERO`    |            |          0          | Pushes zero const polynomial onto stack  |
+|`IS_COEFF`|            |          1          | Checks if the stack top is a constant polynomial?  |
+|`IS_ZERO` |            |          1          | Checks if the stack top is a polynomial equal to 0?  |
+|`CLONE`   |            |          1          | Copies the polynomial on top of the stack and places it on the top. |
+|`ADD`     |            |          2          | Adds two polynomials from the top of the stack.<br>Then puts the result on the stack top. |
+|`MUL`     |            |          2          | Multiplies two polynomials from the top of the stack.<br>Then puts the result on the stack top.  |
+|`NEG`     |            |          1          | Changes the sign of the polynomial on the top of the stack.  |
+|`SUB`     |            |          2          | Substracts two polynomials from the top of the stack.<br>Then puts the result on the stack top. |
+|`IS_EQ`   |            |          2          | Checks if two top-most polynomials are equal.  |
+|`DEG`     |            |          1          | Checks the degree of the top-most polynomial.<br>Degree of the polynomial is a highest exponent of variable<br>encountered in the polynomial (assuming all variables are the<br>same one).<br>E.g. degree(x^2 + yx^2) = 3  |
+|`DEG_BY`  |   *index*  |          1          | Checks the degree of the top-most polynomial<br>with respect to the given variable. Variables are indexed from 0<br>(0 means the main variable of polynomial).<br><br>E.g.<br>`DegBy( ((1,2),3), 0 ) = DegBy( x^2 * y^3, 0 ) = 3`<br>`DegBy( ((1,2),3), 1 ) = DegBy( x^2 * y^3, 1 ) = 2` |
+|`AT`      |   *value*  |          1          | Evaluates the top-most polynomial in specified point<br>and put it into stack.<br>The polynomial is evalued for `MAIN_VARIABLE=[value]` where<br>`MAIN_VARIABLE` is variable with index 0.<br><br>E.g.<br>`At( ((1,2),3), 0 ) = At( x^2 * y^3, 0 ) = 0`<br>`At( (1,2), 2 ) = At( x^2, 2 ) = 4`<br><br>The result of this command is always a polynomial of degree one smaller<br>than the polynomial given. |
+|`PRINT`   |            |          1          | Prints the top-most polynomial. |
+|`POP`     |            |          1          | Pops the top-most polynomial from the stack. |
+|`POW`     |   *exp*    |          1          | Calculates the top-most polynomial power and push into the<br>stack. Obviously *exp* can be only a number! |
+|`COMPOSE` |  *count*   |       *count*+1     | Takes top-most polynomail from the stack.<br>(We will call it P)<br>Then take *count* polynomials from the stack (let's call them Q1, Q2 ...).<br>Then we know that `P = C_1*x_1^E_1 + C_2*x_2^E_2 + ...`<br>so we substitute<br>`x_1 -> Q1`<br>`x_2 -> Q2`<br>etc.<br>if the `x_n` has got no matching `QN` then we assume `x_n -> 0`<br><br>Then we put result of such substitution onto the stack. |
+|`DUMP`    |            |          0          | Prints the stack contents. |
+|`CLEAN`   |            |          0          | Clears the stack entinerely.  |
+|`EXIT`    |            |          0          | Force exits the calculator. |
 
 
 
