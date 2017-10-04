@@ -21,7 +21,7 @@ script:
 - cp ./release/calc_poly ./ipp-poly-release
 - cp ./README.md ./ipp-poly-release
 - ls ./ipp-poly-release
-- zip -r ./$TRAVIS_BUILD_DIR/ipp-poly.zip ./ipp-poly-release
+- zip -r $TRAVIS_BUILD_DIR/ipp-poly.zip ./ipp-poly-release
 deploy:
   provider: releases
   api_key:
