@@ -1,4 +1,6 @@
 [![Made by Styczynsky Digital Systems][badge sts]][link isis97]
+[![Travis](https://img.shields.io/travis/styczynski/ipp-poly.svg?style=flat-square)](https://travis-ci.org/styczynski/ipp-poly/builds)
+[![GitHub tag](https://img.shields.io/github/tag/styczynski/ipp-poly.svg?style=flat-square)](https://github.com/styczynski/ipp-poly)
 
 # :heavy_division_sign: ipp-poly &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Download][badge download]][link download latest]
 
