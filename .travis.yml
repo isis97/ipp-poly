@@ -28,10 +28,4 @@ script:
 - ls ./ipp-poly-release
 - zip -r $TRAVIS_BUILD_DIR/ipp-poly.zip ./ipp-poly-release
 - rm -r -f -d ./ipp-poly-release
-- git checkout release
-- git add .
-- git commit -m "Prepare new release :tada:"
-- git config --global user.email "travis@travis-ci.org"
-- git config --global user.name "Travis CI"
-- git push
-- git checkout release
+- git checkout release & git add . & git commit -m "Prepare new release :tada:" & git config --global user.email "travis@travis-ci.org" & git config --global user.name "Travis CI" & git push & git checkout release
