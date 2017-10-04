@@ -15,11 +15,23 @@ addons:
     packages:
     - cmake
     
+install:
+    - wget https://cmocka.org/files/1.0/cmocka-1.0.0.tar.xz
+    - tar -xvf cmocka-1.0.0.tar.xz
+    - cd cmocka-1.0.0
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug ..
+    - make
+    - sudo make install
+    - cd ../..
+    - rm -rf cmocka-1.0.0
+    
 script:
-- gcc -v && g++ -v && cmake --version
-- mkdir release
-- cd release
-- cmake ..
-- make all
-- make test
-- cd ..
+    - gcc -v && g++ -v && cmake --version
+    - mkdir release
+    - cd release
+    - cmake ..
+    - make all
+    - make test
+    - cd ..
