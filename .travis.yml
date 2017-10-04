@@ -21,4 +21,5 @@ script:
 - cd release
 - cmake ..
 - make
+- make test
 - cd ..
