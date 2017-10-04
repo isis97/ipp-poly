@@ -1,29 +1,30 @@
 dist: trusty
 sudo: required
 language:
-  - cpp
+- cpp
 compiler:
-  - gcc
+- gcc
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - gcc-6
-      - g++-6
-      - cmake
+    - cmake
 script:
-  # Link gcc-6 and g++-6 to their standard commands
-  - ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-  - ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  # Export CC and CXX to tell cmake which compiler to use
-  - export CC=/usr/bin/gcc-6
-  - export CXX=/usr/bin/g++-6
-  # Check versions of gcc, g++ and cmake
-  - gcc -v && g++ -v && cmake --version
-  # Run your build commands next
-  - mkdir release
-  - cd release
-  - cmake ..
-  - make
-  - cd ..
+- gcc -v && g++ -v && cmake --version
+- mkdir release
+- cd release
+- cmake ..
+- make
+- cd ..
+- mkdir release-sources
+- cp ./release/calc_poly ./release-sources
+- cp ./README.md ./release-sources
+- zip -r ./$TRAVIS_BUILD_DIR/ipp-poly.zip ./release-sources/**/*
+deploy:
+  provider: releases
+  api_key:
+    secure: aPW5bINeh5ZWSiyypsVftaTIxd/yyNYY/FV+yu+lDEPJNllJRbGyNGEea0qzFXjtYXHveiDFRy0BcexOwz8MU+JlC6M+kt8VB9r3cCLVbR/9y6nLnxSDoS9T6FQCWFXu/nCvz/ed6rXhH16vSL7SvPFxojTICsLrR6nJbkIsdMhPdcLGiyKJ+5xH0jGtXYPnZ09C9AsNFmqIfNUULS7cDW+DX/cJVw8fN4puX9dBWrafrxIs6F77re5q6EuK1XIlO7pGOzng1QEAl7hxSR2ir40+73lG5uiw3bzL6izrzmL8PcHZ4GztLEm7/vGhyosZNpRfS3yhTtU70S8Uv3SUZO5toPZq8mx80BFL9L0xqHrlIdTtoYDF+34Hxk6DZ9ixQYnQvHTiGm5TvvxzHg/HRX+8RXvixe2MKYx2ozWYJ6tfkTAfAloNUhcirB9nljqAxkndVAuxuKEW15g0f5qJE4sji0Y7dEaLW5VHg/ivOYfdmmq9/T6bgjY9oJ8DEzoGmhkU5ze5MJ0ZUOtygCxUfeyClZCLKB23QHo529wSKLRxaihsHnYenj2B7c2R/CfnZ6iaySGl67TAjjBCZjvDBhs46riuKmfF4NySoOPcitw4OGaIqbBzHaZrA8yCXeKbcUzx3xv0J7vIfCVvxJ2Hrf0FNTLdJZxiwh+Oj5ov4Sg=
+  file: ipp-poly.zip
+  on:
+    repo: styczynski/ipp-poly
