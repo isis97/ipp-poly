@@ -23,6 +23,7 @@ script:
 - ls ./ipp-poly-release
 - zip -r $TRAVIS_BUILD_DIR/ipp-poly.zip ./ipp-poly-release
 - rm -r -f -d ./ipp-poly-release
+- git add .
 deploy:
   provider: releases
   api_key:
