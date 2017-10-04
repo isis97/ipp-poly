@@ -17,10 +17,11 @@ script:
 - cmake ..
 - make
 - cd ..
-- mkdir release-sources
-- cp ./release/calc_poly ./release-sources
-- cp ./README.md ./release-sources
-- zip -r ./$TRAVIS_BUILD_DIR/ipp-poly.zip ./release-sources/**/*
+- mkdir ipp-poly-release
+- cp ./release/calc_poly ./ipp-poly-release
+- cp ./README.md ./ipp-poly-release
+- ls ./ipp-poly-release
+- zip -r ./$TRAVIS_BUILD_DIR/ipp-poly.zip ./ipp-poly-release
 deploy:
   provider: releases
   api_key:
