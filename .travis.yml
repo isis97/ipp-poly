@@ -20,6 +20,6 @@ script:
 - mkdir release
 - cd release
 - cmake ..
-- make
+- make all
 - make test
 - cd ..
