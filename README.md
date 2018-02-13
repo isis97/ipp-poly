@@ -1,10 +1,10 @@
-[![Made by Styczynsky Digital Systems][badge sts]][link isis97]
+[![Made by Styczynsky Digital Systems][badge sts]][link styczynski]
 [![Travis](https://img.shields.io/travis/styczynski/ipp-poly.svg?style=flat-square)](https://travis-ci.org/styczynski/ipp-poly/builds)
 [![GitHub tag](https://img.shields.io/github/tag/styczynski/ipp-poly.svg?style=flat-square)](https://github.com/styczynski/ipp-poly)
 
 # :heavy_division_sign: ipp-poly &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Download][badge download]][link download latest]
 
-See [Doxygen documentation](http://styczynski.ml/ipp-poly)
+See [Doxygen documentation](http://styczynski.in/ipp-poly)
 
 ![Screenshot 1][screenshot 1]
 
@@ -162,6 +162,6 @@ to modify the stack contents:
 [badge download]: https://img.shields.io/badge/-download_me!-green.svg?style=flat-square&logoWidth=10&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABkAAAArCAYAAACNWyPFAAAABmJLR0QA%2FwD%2FAP%2BgvaeTAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAB3RJTUUH4AgTDjEFFOXcpQAAAM1JREFUWMPt2EsOgzAMBFDPJHD%2F80Jid1G1KpR8SqKu7C2QJzwWsoCZSWedb0Tvg5Q%2FlCOOOOKII4444ogjjvxW8bTjYtK57zNTSoCdNm5VBcmRhdua7SJpKaXhN2hmEmO0fd%2BnANXgl2WxbduGAVUFVbUY9rquPVARyDmDpJCktKBK66pACOE5Ia%2FhUlUhaTPm9xM4ZEJScs6YDXwFH0IYgq6Ay%2Bm6C5WAQyYXo9edUQ2oIr1Q5TPUh4iImJkAsMI1AO3O4u4fiV5AROQBGVB7Fu2akxMAAAAASUVORK5CYII%3D
 
 
-[link isis97]: http://styczynski.ml
-[link sts]: http://styczynski.ml
+[link styczynski]: http://styczynski.in
+[link sts]: http://styczynski.in
 [link download latest]: https://github.com/styczynski/ipp-poly/archive/master.zip
